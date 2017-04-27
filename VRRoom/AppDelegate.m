@@ -8,6 +8,16 @@
 
 #import "AppDelegate.h"
 
+#import "CommonsDefines.h"
+#import "ViewController.h"
+#import "LoginViewController.h"
+#import "SlideNavigationController.h"
+#import "MenuViewController.h"
+#import <IQKeyboardManager.h>
+#import <UIImage-Helpers.h>
+
+#define ROOTCONTROLLER [UIApplication sharedApplication].keyWindow.rootViewController
+
 @interface AppDelegate ()
 
 @end
@@ -17,9 +27,36 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    IQKeyboardManager *keyboardManager = [IQKeyboardManager sharedManager];
+    keyboardManager.enable = YES;
+    keyboardManager.enableAutoToolbar = NO;
+    keyboardManager.shouldResignOnTouchOutside = YES;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkUserState:) name:@"LoginStateDidChanged" object:nil];
+    ViewController *mainController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MainView"];
+    SlideNavigationController *navigationController = [[SlideNavigationController alloc] initWithRootViewController:mainController];
+    MenuViewController *leftViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"Menu"];
+    [SlideNavigationController sharedInstance].leftMenu = leftViewController;
+    [SlideNavigationController sharedInstance].menuRevealAnimationDuration = 0.25;
+    [SlideNavigationController sharedInstance].enableShadow = YES;
+    [SlideNavigationController sharedInstance].enableSwipeGesture = YES;
+    [SlideNavigationController sharedInstance].avoidSwitchingToSameClassViewController = YES;
+    [SlideNavigationController sharedInstance].portraitSlideOffset = CGRectGetWidth([UIScreen mainScreen].bounds) * 0.3;
+    self.window.rootViewController = navigationController;
+    
+    [self.window makeKeyAndVisible];
+    
+    [self checkUserState:nil];
+    [self initAppearance];
+    
     return YES;
+    
 }
-
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LoginStateDidChanged" object:nil];
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -46,6 +83,25 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+- (void)checkUserState:(NSNotification *)notification {
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:USERTOKEN]) {
+        LoginViewController *loginViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"Login"];
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+        [ROOTCONTROLLER presentViewController:navigationController animated:NO completion:nil];
+    }
+    
+}
+- (void)initAppearance {
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : TABBAR_TITLE_COLOR} forState:UIControlStateNormal];
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : NAVIGATIONBAR_COLOR} forState:UIControlStateSelected];
+    
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor],
+                                                           NSFontAttributeName : kBoldSystemFont(18)}];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageWithColor:NAVIGATIONBAR_COLOR] forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setShadowImage:[UIImage new]];
+}
+
 
 
 @end
