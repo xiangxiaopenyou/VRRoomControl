@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3D0E5F151EAEEE0C00B41F9E /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0E5F141EAEEE0C00B41F9E /* SearchViewController.m */; };
 		3D0E5F291EAF447700B41F9E /* SlideNavigationContorllerAnimatorFade.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0E5F1B1EAF447700B41F9E /* SlideNavigationContorllerAnimatorFade.m */; };
 		3D0E5F2A1EAF447700B41F9E /* SlideNavigationContorllerAnimatorScale.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0E5F1D1EAF447700B41F9E /* SlideNavigationContorllerAnimatorScale.m */; };
 		3D0E5F2B1EAF447700B41F9E /* SlideNavigationContorllerAnimatorScaleAndFade.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0E5F1F1EAF447700B41F9E /* SlideNavigationContorllerAnimatorScaleAndFade.m */; };
@@ -16,18 +15,20 @@
 		3D0E5F2E1EAF447700B41F9E /* menu-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D0E5F251EAF447700B41F9E /* menu-button.png */; };
 		3D0E5F2F1EAF447700B41F9E /* menu-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D0E5F261EAF447700B41F9E /* menu-button@2x.png */; };
 		3D0E5F301EAF447700B41F9E /* SlideNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0E5F281EAF447700B41F9E /* SlideNavigationController.m */; };
-		3D0E5F331EAF4ED100B41F9E /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0E5F321EAF4ED100B41F9E /* MenuViewController.m */; };
-		3D0E5F361EB1809F00B41F9E /* ChangePasswordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0E5F351EB1809F00B41F9E /* ChangePasswordTableViewController.m */; };
 		3D0E5F391EB181D800B41F9E /* ChangePasswordRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0E5F381EB181D800B41F9E /* ChangePasswordRequest.m */; };
+		3D22B4701F10B47800C9D459 /* ChangePasswordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D22B46D1F10B47800C9D459 /* ChangePasswordTableViewController.m */; };
+		3D22B4711F10B47800C9D459 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D22B46F1F10B47800C9D459 /* LoginViewController.m */; };
+		3D22B4761F10B48600C9D459 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D22B4731F10B48600C9D459 /* MenuViewController.m */; };
+		3D22B4771F10B48600C9D459 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D22B4751F10B48600C9D459 /* ViewController.m */; };
+		3D22B47C1F10B49100C9D459 /* PrescriptionContentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D22B4791F10B49100C9D459 /* PrescriptionContentsTableViewController.m */; };
+		3D22B47D1F10B49100C9D459 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D22B47B1F10B49100C9D459 /* SearchViewController.m */; };
 		3D4FC1CE1EA0629C00E9CE5E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4FC1CD1EA0629C00E9CE5E /* main.m */; };
 		3D4FC1D11EA0629C00E9CE5E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4FC1D01EA0629C00E9CE5E /* AppDelegate.m */; };
-		3D4FC1D41EA0629C00E9CE5E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4FC1D31EA0629C00E9CE5E /* ViewController.m */; };
 		3D4FC1D71EA0629C00E9CE5E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D4FC1D51EA0629C00E9CE5E /* Main.storyboard */; };
 		3D4FC1D91EA0629C00E9CE5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D4FC1D81EA0629C00E9CE5E /* Assets.xcassets */; };
 		3D4FC1DC1EA0629C00E9CE5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D4FC1DA1EA0629C00E9CE5E /* LaunchScreen.storyboard */; };
 		3D4FC1E71EA0629C00E9CE5E /* VRRoomTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4FC1E61EA0629C00E9CE5E /* VRRoomTests.m */; };
 		3D4FC1F21EA0629C00E9CE5E /* VRRoomUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4FC1F11EA0629C00E9CE5E /* VRRoomUITests.m */; };
-		3D4FC2031EA0658100E9CE5E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4FC2021EA0658100E9CE5E /* LoginViewController.m */; };
 		3D4FC2061EA06A2D00E9CE5E /* BaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4FC2051EA06A2D00E9CE5E /* BaseRequest.m */; };
 		3D4FC2091EA06A3F00E9CE5E /* RequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4FC2081EA06A3F00E9CE5E /* RequestManager.m */; };
 		3D4FC20C1EA06A8900E9CE5E /* RequestCacher.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4FC20B1EA06A8900E9CE5E /* RequestCacher.m */; };
@@ -44,7 +45,6 @@
 		3D4FC2321EA0A11900E9CE5E /* PatientModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4FC2311EA0A11900E9CE5E /* PatientModel.m */; };
 		3D4FC2351EA0AB9200E9CE5E /* FetchPrescriptionsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4FC2341EA0AB9200E9CE5E /* FetchPrescriptionsRequest.m */; };
 		3D4FC2381EA0ACF600E9CE5E /* PrescriptionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4FC2371EA0ACF600E9CE5E /* PrescriptionModel.m */; };
-		3D4FC23B1EA0BE4E00E9CE5E /* PrescriptionContentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4FC23A1EA0BE4E00E9CE5E /* PrescriptionContentsTableViewController.m */; };
 		3D4FC23E1EA0BEB400E9CE5E /* PrescriptionContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4FC23D1EA0BEB400E9CE5E /* PrescriptionContentCell.m */; };
 		3D4FC2411EA0BF5100E9CE5E /* FetchContentsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4FC2401EA0BF5100E9CE5E /* FetchContentsRequest.m */; };
 		3D4FC2441EA0C14B00E9CE5E /* PrescriptionContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4FC2431EA0C14B00E9CE5E /* PrescriptionContentModel.m */; };
@@ -75,8 +75,6 @@
 /* Begin PBXFileReference section */
 		0A0CA25E01ACA0F80E379214 /* libPods-VRRoom.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VRRoom.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C315177F6B265873C3DEF94 /* Pods-VRRoom.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VRRoom.release.xcconfig"; path = "Pods/Target Support Files/Pods-VRRoom/Pods-VRRoom.release.xcconfig"; sourceTree = "<group>"; };
-		3D0E5F131EAEEE0C00B41F9E /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
-		3D0E5F141EAEEE0C00B41F9E /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		3D0E5F191EAF447700B41F9E /* SlideNavigationContorllerAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideNavigationContorllerAnimator.h; sourceTree = "<group>"; };
 		3D0E5F1A1EAF447700B41F9E /* SlideNavigationContorllerAnimatorFade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideNavigationContorllerAnimatorFade.h; sourceTree = "<group>"; };
 		3D0E5F1B1EAF447700B41F9E /* SlideNavigationContorllerAnimatorFade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideNavigationContorllerAnimatorFade.m; sourceTree = "<group>"; };
@@ -92,18 +90,24 @@
 		3D0E5F261EAF447700B41F9E /* menu-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-button@2x.png"; sourceTree = "<group>"; };
 		3D0E5F271EAF447700B41F9E /* SlideNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideNavigationController.h; sourceTree = "<group>"; };
 		3D0E5F281EAF447700B41F9E /* SlideNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideNavigationController.m; sourceTree = "<group>"; };
-		3D0E5F311EAF4ED100B41F9E /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
-		3D0E5F321EAF4ED100B41F9E /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
-		3D0E5F341EB1809F00B41F9E /* ChangePasswordTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordTableViewController.h; sourceTree = "<group>"; };
-		3D0E5F351EB1809F00B41F9E /* ChangePasswordTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordTableViewController.m; sourceTree = "<group>"; };
 		3D0E5F371EB181D800B41F9E /* ChangePasswordRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordRequest.h; sourceTree = "<group>"; };
 		3D0E5F381EB181D800B41F9E /* ChangePasswordRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordRequest.m; sourceTree = "<group>"; };
+		3D22B46C1F10B47800C9D459 /* ChangePasswordTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordTableViewController.h; sourceTree = "<group>"; };
+		3D22B46D1F10B47800C9D459 /* ChangePasswordTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordTableViewController.m; sourceTree = "<group>"; };
+		3D22B46E1F10B47800C9D459 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		3D22B46F1F10B47800C9D459 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		3D22B4721F10B48600C9D459 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		3D22B4731F10B48600C9D459 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		3D22B4741F10B48600C9D459 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		3D22B4751F10B48600C9D459 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		3D22B4781F10B49100C9D459 /* PrescriptionContentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrescriptionContentsTableViewController.h; sourceTree = "<group>"; };
+		3D22B4791F10B49100C9D459 /* PrescriptionContentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrescriptionContentsTableViewController.m; sourceTree = "<group>"; };
+		3D22B47A1F10B49100C9D459 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		3D22B47B1F10B49100C9D459 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		3D4FC1C91EA0629C00E9CE5E /* VRRoom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VRRoom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D4FC1CD1EA0629C00E9CE5E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3D4FC1CF1EA0629C00E9CE5E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3D4FC1D01EA0629C00E9CE5E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		3D4FC1D21EA0629C00E9CE5E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = ../ViewController.h; sourceTree = "<group>"; };
-		3D4FC1D31EA0629C00E9CE5E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ViewController.m; path = ../ViewController.m; sourceTree = "<group>"; };
 		3D4FC1D61EA0629C00E9CE5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3D4FC1D81EA0629C00E9CE5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3D4FC1DB1EA0629C00E9CE5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -114,8 +118,6 @@
 		3D4FC1ED1EA0629C00E9CE5E /* VRRoomUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VRRoomUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D4FC1F11EA0629C00E9CE5E /* VRRoomUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VRRoomUITests.m; sourceTree = "<group>"; };
 		3D4FC1F31EA0629C00E9CE5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3D4FC2011EA0658100E9CE5E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		3D4FC2021EA0658100E9CE5E /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		3D4FC2041EA06A2D00E9CE5E /* BaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRequest.h; sourceTree = "<group>"; };
 		3D4FC2051EA06A2D00E9CE5E /* BaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseRequest.m; sourceTree = "<group>"; };
 		3D4FC2071EA06A3F00E9CE5E /* RequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestManager.h; sourceTree = "<group>"; };
@@ -149,8 +151,6 @@
 		3D4FC2341EA0AB9200E9CE5E /* FetchPrescriptionsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchPrescriptionsRequest.m; sourceTree = "<group>"; };
 		3D4FC2361EA0ACF600E9CE5E /* PrescriptionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrescriptionModel.h; sourceTree = "<group>"; };
 		3D4FC2371EA0ACF600E9CE5E /* PrescriptionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrescriptionModel.m; sourceTree = "<group>"; };
-		3D4FC2391EA0BE4E00E9CE5E /* PrescriptionContentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrescriptionContentsTableViewController.h; sourceTree = "<group>"; };
-		3D4FC23A1EA0BE4E00E9CE5E /* PrescriptionContentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrescriptionContentsTableViewController.m; sourceTree = "<group>"; };
 		3D4FC23C1EA0BEB400E9CE5E /* PrescriptionContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrescriptionContentCell.h; sourceTree = "<group>"; };
 		3D4FC23D1EA0BEB400E9CE5E /* PrescriptionContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrescriptionContentCell.m; sourceTree = "<group>"; };
 		3D4FC23F1EA0BF5100E9CE5E /* FetchContentsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchContentsRequest.h; sourceTree = "<group>"; };
@@ -240,6 +240,39 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
+		3D22B4691F10B39200C9D459 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				3D22B46C1F10B47800C9D459 /* ChangePasswordTableViewController.h */,
+				3D22B46D1F10B47800C9D459 /* ChangePasswordTableViewController.m */,
+				3D22B46E1F10B47800C9D459 /* LoginViewController.h */,
+				3D22B46F1F10B47800C9D459 /* LoginViewController.m */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		3D22B46A1F10B3AE00C9D459 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				3D22B4721F10B48600C9D459 /* MenuViewController.h */,
+				3D22B4731F10B48600C9D459 /* MenuViewController.m */,
+				3D22B4741F10B48600C9D459 /* ViewController.h */,
+				3D22B4751F10B48600C9D459 /* ViewController.m */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		3D22B46B1F10B3EB00C9D459 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				3D22B4781F10B49100C9D459 /* PrescriptionContentsTableViewController.h */,
+				3D22B4791F10B49100C9D459 /* PrescriptionContentsTableViewController.m */,
+				3D22B47A1F10B49100C9D459 /* SearchViewController.h */,
+				3D22B47B1F10B49100C9D459 /* SearchViewController.m */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		3D4FC1C01EA0629C00E9CE5E = {
 			isa = PBXGroup;
 			children = (
@@ -310,19 +343,10 @@
 		3D4FC1FF1EA0635600E9CE5E /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				3D22B46B1F10B3EB00C9D459 /* Search */,
+				3D22B46A1F10B3AE00C9D459 /* Main */,
+				3D22B4691F10B39200C9D459 /* Login */,
 				3D4FC21B1EA0764500E9CE5E /* Views */,
-				3D4FC2011EA0658100E9CE5E /* LoginViewController.h */,
-				3D4FC2021EA0658100E9CE5E /* LoginViewController.m */,
-				3D4FC1D21EA0629C00E9CE5E /* ViewController.h */,
-				3D4FC1D31EA0629C00E9CE5E /* ViewController.m */,
-				3D0E5F131EAEEE0C00B41F9E /* SearchViewController.h */,
-				3D0E5F141EAEEE0C00B41F9E /* SearchViewController.m */,
-				3D4FC2391EA0BE4E00E9CE5E /* PrescriptionContentsTableViewController.h */,
-				3D4FC23A1EA0BE4E00E9CE5E /* PrescriptionContentsTableViewController.m */,
-				3D0E5F311EAF4ED100B41F9E /* MenuViewController.h */,
-				3D0E5F321EAF4ED100B41F9E /* MenuViewController.m */,
-				3D0E5F341EB1809F00B41F9E /* ChangePasswordTableViewController.h */,
-				3D0E5F351EB1809F00B41F9E /* ChangePasswordTableViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -619,29 +643,27 @@
 				3D4FC2531EA45EF800E9CE5E /* AddTaskRequest.m in Sources */,
 				3D4FC2351EA0AB9200E9CE5E /* FetchPrescriptionsRequest.m in Sources */,
 				3D4FC2381EA0ACF600E9CE5E /* PrescriptionModel.m in Sources */,
-				3D4FC2031EA0658100E9CE5E /* LoginViewController.m in Sources */,
-				3D0E5F151EAEEE0C00B41F9E /* SearchViewController.m in Sources */,
 				3D4FC2441EA0C14B00E9CE5E /* PrescriptionContentModel.m in Sources */,
 				3D0E5F391EB181D800B41F9E /* ChangePasswordRequest.m in Sources */,
 				3D4FC2321EA0A11900E9CE5E /* PatientModel.m in Sources */,
+				3D22B47D1F10B49100C9D459 /* SearchViewController.m in Sources */,
+				3D22B4761F10B48600C9D459 /* MenuViewController.m in Sources */,
+				3D22B4771F10B48600C9D459 /* ViewController.m in Sources */,
 				3D4FC2271EA092D400E9CE5E /* MBProgressHUD+Add.m in Sources */,
 				3D4FC24A1EA454C500E9CE5E /* FetchDevicesRequest.m in Sources */,
 				3D4FC21E1EA0764B00E9CE5E /* LoginContentCell.m in Sources */,
 				3D4FC22F1EA09DBB00E9CE5E /* SearchPatientsRequest.m in Sources */,
 				3D4FC2501EA45A1300E9CE5E /* TitlesPickerView.m in Sources */,
-				3D4FC23B1EA0BE4E00E9CE5E /* PrescriptionContentsTableViewController.m in Sources */,
-				3D4FC1D41EA0629C00E9CE5E /* ViewController.m in Sources */,
 				3D4FC2061EA06A2D00E9CE5E /* BaseRequest.m in Sources */,
 				3D4FC2091EA06A3F00E9CE5E /* RequestManager.m in Sources */,
 				3D4FC21A1EA06CBA00E9CE5E /* LoginRequest.m in Sources */,
 				3D0E5F2C1EAF447700B41F9E /* SlideNavigationContorllerAnimatorSlide.m in Sources */,
 				3D4FC2281EA092D400E9CE5E /* MBProgressHUD.m in Sources */,
-				3D0E5F331EAF4ED100B41F9E /* MenuViewController.m in Sources */,
 				3D4FC23E1EA0BEB400E9CE5E /* PrescriptionContentCell.m in Sources */,
 				3D4FC1D11EA0629C00E9CE5E /* AppDelegate.m in Sources */,
 				3D4FC2211EA0835400E9CE5E /* PrescriptionCell.m in Sources */,
 				3D0E5F2B1EAF447700B41F9E /* SlideNavigationContorllerAnimatorScaleAndFade.m in Sources */,
-				3D0E5F361EB1809F00B41F9E /* ChangePasswordTableViewController.m in Sources */,
+				3D22B4701F10B47800C9D459 /* ChangePasswordTableViewController.m in Sources */,
 				3D4FC2111EA06AC200E9CE5E /* CommonsDefines.m in Sources */,
 				3D4FC2171EA06C3A00E9CE5E /* UserModel.m in Sources */,
 				3D4FC1CE1EA0629C00E9CE5E /* main.m in Sources */,
@@ -650,7 +672,9 @@
 				3D4FC2141EA06BD100E9CE5E /* XLModel.m in Sources */,
 				3D4FC20C1EA06A8900E9CE5E /* RequestCacher.m in Sources */,
 				3D4FC2411EA0BF5100E9CE5E /* FetchContentsRequest.m in Sources */,
+				3D22B47C1F10B49100C9D459 /* PrescriptionContentsTableViewController.m in Sources */,
 				3D4FC22C1EA0948800E9CE5E /* Util.m in Sources */,
+				3D22B4711F10B47800C9D459 /* LoginViewController.m in Sources */,
 				3D0E5F2D1EAF447700B41F9E /* SlideNavigationContorllerAnimatorSlideAndFade.m in Sources */,
 				3D0E5F2A1EAF447700B41F9E /* SlideNavigationContorllerAnimatorScale.m in Sources */,
 				3D0E5F301EAF447700B41F9E /* SlideNavigationController.m in Sources */,
