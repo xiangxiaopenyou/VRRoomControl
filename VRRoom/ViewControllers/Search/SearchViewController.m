@@ -14,6 +14,7 @@
 
 #import "PatientModel.h"
 #import "PrescriptionModel.h"
+#import "PrescriptionContentModel.h"
 
 #import <Masonry.h>
 
@@ -35,6 +36,8 @@
 @property (strong, nonatomic) NSMutableArray *historyArray;
 @property (strong, nonatomic) NSMutableArray *selectedHistoryArray;
 @property (copy, nonatomic) NSString *selectedKeyword;
+@property (assign, nonatomic) NSInteger paging;
+@property (strong, nonatomic) NSMutableArray *usersContentsArray;
 @end
 
 @implementation SearchViewController
@@ -50,6 +53,7 @@
     self.historyTableView.tableFooterView = [UIView new];
     self.historyArray = [[[NSUserDefaults standardUserDefaults] arrayForKey:SEARCHHISTORY] mutableCopy];
     self.selectedHistoryArray = [self.historyArray mutableCopy];
+    _paging = 1;
 }
 - (void)viewWillDisappear:(BOOL)animated {
     [self.searchTextField resignFirstResponder];
@@ -78,11 +82,21 @@
 - (void)fetchPrescriptions {
     [PrescriptionModel fetchPrescriptionsList:self.patientModel.userId handler:^(id object, NSString *msg) {
         if (object) {
-            XLDismissHUD(self.view, NO, YES, nil);
+//            XLDismissHUD(self.view, NO, YES, nil);
             self.prescriptionsArray = [object copy];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
-            });
+            [self fetchUsersContents];
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [self.tableView reloadData];
+//            });
+        } else {
+            XLDismissHUD(self.view, YES, NO, msg);
+        }
+    }];
+}
+- (void)fetchUsersContents {
+    [PrescriptionContentModel fetchUsersContents:self.patientModel.userId paging:@(_paging) handler:^(id object, NSString *msg) {
+        if (object) {
+            XLDismissHUD(self.view, NO, YES, nil);
         } else {
             XLDismissHUD(self.view, YES, NO, msg);
         }
@@ -138,6 +152,12 @@
             [self.view layoutIfNeeded];
         }];
         [self fetchPrescriptions];
+    } else {
+        self.informationViewHeightConstraint.constant = 0;
+        self.prescriptionsArray = nil;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
     }
 }
 - (void)turnLogin {
@@ -200,6 +220,10 @@
                  [self refreshView];
             });
         } else {
+            self.patientModel = nil;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self refreshView];
+            });
             if ([msg integerValue] >= 95 && [msg integerValue] < 100) {
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:USERTOKEN];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:ROOMID];
@@ -357,6 +381,12 @@
         _selectedHistoryArray = [[NSMutableArray alloc] init];
     }
     return _selectedHistoryArray;
+}
+- (NSMutableArray *)usersContentsArray {
+    if (!_usersContentsArray) {
+        _usersContentsArray = [[NSMutableArray alloc] init];
+    }
+    return _usersContentsArray;
 }
 
 @end

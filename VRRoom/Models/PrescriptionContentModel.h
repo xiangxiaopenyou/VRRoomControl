@@ -26,5 +26,6 @@
 @property (copy, nonatomic) NSString *content_coverPic;
 
 + (void)fetchContents:(NSString *)prescriptionId handler:(RequestResultHandler)handler;
++ (void)fetchUsersContents:(NSString *)userId paging:(NSNumber *)paging handler:(RequestResultHandler)handler;
 
 @end

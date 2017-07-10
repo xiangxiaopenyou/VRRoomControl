@@ -52,6 +52,8 @@
 		3D4FC24D1EA4572000E9CE5E /* ManagerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4FC24C1EA4572000E9CE5E /* ManagerModel.m */; };
 		3D4FC2501EA45A1300E9CE5E /* TitlesPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4FC24F1EA45A1300E9CE5E /* TitlesPickerView.m */; };
 		3D4FC2531EA45EF800E9CE5E /* AddTaskRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4FC2521EA45EF800E9CE5E /* AddTaskRequest.m */; };
+		3D7C41501F132D400072083C /* XJMainItemsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C414F1F132D400072083C /* XJMainItemsCell.m */; };
+		3D7C41531F1349270072083C /* XJFetchPatientsContentsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C41521F1349270072083C /* XJFetchPatientsContentsRequest.m */; };
 		72BDD747A3B70ED92F60C61C /* libPods-VRRoom.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A0CA25E01ACA0F80E379214 /* libPods-VRRoom.a */; };
 /* End PBXBuildFile section */
 
@@ -165,6 +167,10 @@
 		3D4FC24F1EA45A1300E9CE5E /* TitlesPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitlesPickerView.m; sourceTree = "<group>"; };
 		3D4FC2511EA45EF800E9CE5E /* AddTaskRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTaskRequest.h; sourceTree = "<group>"; };
 		3D4FC2521EA45EF800E9CE5E /* AddTaskRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTaskRequest.m; sourceTree = "<group>"; };
+		3D7C414E1F132D400072083C /* XJMainItemsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XJMainItemsCell.h; sourceTree = "<group>"; };
+		3D7C414F1F132D400072083C /* XJMainItemsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XJMainItemsCell.m; sourceTree = "<group>"; };
+		3D7C41511F1349270072083C /* XJFetchPatientsContentsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XJFetchPatientsContentsRequest.h; sourceTree = "<group>"; };
+		3D7C41521F1349270072083C /* XJFetchPatientsContentsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XJFetchPatientsContentsRequest.m; sourceTree = "<group>"; };
 		5CAD686E8BACBEBDD597818B /* Pods-VRRoom.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VRRoom.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VRRoom/Pods-VRRoom.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -374,6 +380,8 @@
 				3D4FC2521EA45EF800E9CE5E /* AddTaskRequest.m */,
 				3D0E5F371EB181D800B41F9E /* ChangePasswordRequest.h */,
 				3D0E5F381EB181D800B41F9E /* ChangePasswordRequest.m */,
+				3D7C41511F1349270072083C /* XJFetchPatientsContentsRequest.h */,
+				3D7C41521F1349270072083C /* XJFetchPatientsContentsRequest.m */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -421,6 +429,8 @@
 				3D4FC23D1EA0BEB400E9CE5E /* PrescriptionContentCell.m */,
 				3D4FC24E1EA45A1300E9CE5E /* TitlesPickerView.h */,
 				3D4FC24F1EA45A1300E9CE5E /* TitlesPickerView.m */,
+				3D7C414E1F132D400072083C /* XJMainItemsCell.h */,
+				3D7C414F1F132D400072083C /* XJMainItemsCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -644,6 +654,7 @@
 				3D4FC2351EA0AB9200E9CE5E /* FetchPrescriptionsRequest.m in Sources */,
 				3D4FC2381EA0ACF600E9CE5E /* PrescriptionModel.m in Sources */,
 				3D4FC2441EA0C14B00E9CE5E /* PrescriptionContentModel.m in Sources */,
+				3D7C41531F1349270072083C /* XJFetchPatientsContentsRequest.m in Sources */,
 				3D0E5F391EB181D800B41F9E /* ChangePasswordRequest.m in Sources */,
 				3D4FC2321EA0A11900E9CE5E /* PatientModel.m in Sources */,
 				3D22B47D1F10B49100C9D459 /* SearchViewController.m in Sources */,
@@ -676,6 +687,7 @@
 				3D4FC22C1EA0948800E9CE5E /* Util.m in Sources */,
 				3D22B4711F10B47800C9D459 /* LoginViewController.m in Sources */,
 				3D0E5F2D1EAF447700B41F9E /* SlideNavigationContorllerAnimatorSlideAndFade.m in Sources */,
+				3D7C41501F132D400072083C /* XJMainItemsCell.m in Sources */,
 				3D0E5F2A1EAF447700B41F9E /* SlideNavigationContorllerAnimatorScale.m in Sources */,
 				3D0E5F301EAF447700B41F9E /* SlideNavigationController.m in Sources */,
 			);
