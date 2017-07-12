@@ -19,5 +19,8 @@ CGFloat const NAVIGATIONBARHEIGHT = 64.0;
 
 //NSString * const BASEAPIURL = @"http://support.med-vision.cn/api/v1/";
 NSString * const BASEAPIURL = @"http://test.med-vision.cn/api/v1/";
+NSString * const ADVICEBASEURL = @"http://test.med-vision.cn/h5/help/";
+
+NSString * const XJNetworkError = @"网络错误";
 
 

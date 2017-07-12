@@ -9,10 +9,6 @@
 #import "TitlesPickerView.h"
 #import "ManagerModel.h"
 
-#import "UtilDefine.h"
-
-#import <Masonry.h>
-
 @interface TitlesPickerView ()<UIPickerViewDataSource, UIPickerViewDelegate>
 @property (strong, nonatomic) UIView *bottomView;
 @property (strong, nonatomic) UIPickerView *pickerView;

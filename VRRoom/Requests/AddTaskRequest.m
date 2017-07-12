@@ -15,7 +15,9 @@
     }
     [self.params setObject:self.userId forKey:@"userId"];
     [self.params setObject:self.type forKey:@"type"];
-    [self.params setObject:self.prescriptionContentId forKey:@"prescriptionContentId"];
+    if (self.prescriptionContentId) {
+        [self.params setObject:self.prescriptionContentId forKey:@"prescriptionContentId"];
+    }
     [self.params setObject:self.content forKey:@"content"];
     [[RequestManager sharedInstance] POST:@"appControlVrRoom/task/add" parameters:self.params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject[@"success"] boolValue]) {

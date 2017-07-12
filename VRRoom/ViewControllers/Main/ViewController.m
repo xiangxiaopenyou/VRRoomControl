@@ -9,15 +9,11 @@
 #import "ViewController.h"
 #import "SearchViewController.h"
 #import "ChangePasswordTableViewController.h"
+#import "XJAddPatientViewController.h"
 #import "XJMainItemsCell.h"
-
-#import "CommonsDefines.h"
-#import "UtilDefine.h"
 
 #import "PatientModel.h"
 #import "PrescriptionModel.h"
-
-#import <Masonry.h>
 
 #define XLAppVersion [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"]
 
@@ -57,6 +53,8 @@
 
 #pragma mark - IBAction
 - (IBAction)addAction:(id)sender {
+    XJAddPatientViewController *addController = [[UIStoryboard storyboardWithName:@"AddUser" bundle:nil] instantiateViewControllerWithIdentifier:@"AddPatient"];
+    [self.navigationController pushViewController:addController animated:YES];
 }
 - (IBAction)searchPatientAction:(id)sender {
     SearchViewController *searchController = [self.storyboard instantiateViewControllerWithIdentifier:@"Search"];

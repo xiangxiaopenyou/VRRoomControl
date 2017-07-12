@@ -97,7 +97,7 @@
     
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor],
-                                                           NSFontAttributeName : kBoldSystemFont(18)}];
+                                                           NSFontAttributeName : XJBoldSystemFont(18)}];
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageWithColor:NAVIGATIONBAR_COLOR] forBarMetrics:UIBarMetricsDefault];
     [[UINavigationBar appearance] setShadowImage:[UIImage new]];
 }

@@ -6,5 +6,7 @@ pod 'IQKeyboardManager'
 pod 'YYModel'
 pod 'Masonry'
 pod 'UIImage-Helpers'
+pod 'MJRefresh'
+pod 'GJCFUitils'
 end 
 

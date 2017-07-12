@@ -54,6 +54,34 @@
 		3D4FC2531EA45EF800E9CE5E /* AddTaskRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4FC2521EA45EF800E9CE5E /* AddTaskRequest.m */; };
 		3D7C41501F132D400072083C /* XJMainItemsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C414F1F132D400072083C /* XJMainItemsCell.m */; };
 		3D7C41531F1349270072083C /* XJFetchPatientsContentsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C41521F1349270072083C /* XJFetchPatientsContentsRequest.m */; };
+		3D7C41561F14636E0072083C /* AddUser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D7C41551F14636E0072083C /* AddUser.storyboard */; };
+		3D7C415D1F1464560072083C /* XJPatientsInformationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C415C1F1464560072083C /* XJPatientsInformationCell.m */; };
+		3D7C41631F147C6D0072083C /* WritePrescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C41621F147C6D0072083C /* WritePrescriptionViewController.m */; };
+		3D7C416A1F147D900072083C /* PrescriptionContentsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C41651F147D900072083C /* PrescriptionContentsCell.m */; };
+		3D7C416B1F147D900072083C /* PrescriptionPriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C41671F147D900072083C /* PrescriptionPriceCell.m */; };
+		3D7C416C1F147D900072083C /* ContentsItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C41691F147D900072083C /* ContentsItemCell.m */; };
+		3D7C416F1F147DCC0072083C /* AdjustCycleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C416E1F147DCC0072083C /* AdjustCycleView.m */; };
+		3D7C41721F147DF50072083C /* ContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C41711F147DF50072083C /* ContentModel.m */; };
+		3D7C41751F1498B40072083C /* SceneContentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C41741F1498B40072083C /* SceneContentsViewController.m */; };
+		3D7C41781F1498C70072083C /* SceneContentsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C41771F1498C70072083C /* SceneContentsListViewController.m */; };
+		3D7C41841F14990C0072083C /* XLBlockActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C417B1F14990C0072083C /* XLBlockActionSheet.m */; };
+		3D7C41851F14990C0072083C /* XLBlockAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C417D1F14990C0072083C /* XLBlockAlertView.m */; };
+		3D7C41861F14990C0072083C /* XLBlockedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C417F1F14990C0072083C /* XLBlockedButton.m */; };
+		3D7C41871F14990C0072083C /* XLCommonPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C41811F14990C0072083C /* XLCommonPickerView.m */; };
+		3D7C41881F14990C0072083C /* XLHyperLinkButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C41831F14990C0072083C /* XLHyperLinkButton.m */; };
+		3D7C418B1F14A1570072083C /* AdviceWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C418A1F14A1570072083C /* AdviceWebViewController.m */; };
+		3D7C418E1F14A1E00072083C /* DepartmentSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C418D1F14A1E00072083C /* DepartmentSelectCell.m */; };
+		3D7C41911F14A2010072083C /* TherapyItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C41901F14A2010072083C /* TherapyItemCell.m */; };
+		3D7C41941F14A2170072083C /* TherapyCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C41931F14A2170072083C /* TherapyCollectionCell.m */; };
+		3D7C419A1F14A2740072083C /* DiseaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C41971F14A2740072083C /* DiseaseModel.m */; };
+		3D7C419B1F14A2740072083C /* TherapyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C41991F14A2740072083C /* TherapyModel.m */; };
+		3D7C419E1F14A3B30072083C /* SortButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C419D1F14A3B30072083C /* SortButton.m */; };
+		3D7C41A11F14A3D30072083C /* SceneContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C41A01F14A3D30072083C /* SceneContentCell.m */; };
+		3D7C41A41F14A8B30072083C /* XJAddPatientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C41A31F14A8B30072083C /* XJAddPatientViewController.m */; };
+		3D7C41A71F14AA730072083C /* XJDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C41A61F14AA730072083C /* XJDatePickerView.m */; };
+		3D7C41AB1F14C78E0072083C /* XJFetchDiseasesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C41AA1F14C78E0072083C /* XJFetchDiseasesRequest.m */; };
+		3D7C41AF1F14CB430072083C /* XJAddPatientRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C41AE1F14CB430072083C /* XJAddPatientRequest.m */; };
+		3D7C41B21F14CC390072083C /* XJDiseasePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C41B11F14CC390072083C /* XJDiseasePickerView.m */; };
 		72BDD747A3B70ED92F60C61C /* libPods-VRRoom.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A0CA25E01ACA0F80E379214 /* libPods-VRRoom.a */; };
 /* End PBXBuildFile section */
 
@@ -151,14 +179,14 @@
 		3D4FC2311EA0A11900E9CE5E /* PatientModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatientModel.m; sourceTree = "<group>"; };
 		3D4FC2331EA0AB9200E9CE5E /* FetchPrescriptionsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchPrescriptionsRequest.h; sourceTree = "<group>"; };
 		3D4FC2341EA0AB9200E9CE5E /* FetchPrescriptionsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchPrescriptionsRequest.m; sourceTree = "<group>"; };
-		3D4FC2361EA0ACF600E9CE5E /* PrescriptionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrescriptionModel.h; sourceTree = "<group>"; };
-		3D4FC2371EA0ACF600E9CE5E /* PrescriptionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrescriptionModel.m; sourceTree = "<group>"; };
+		3D4FC2361EA0ACF600E9CE5E /* PrescriptionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrescriptionModel.h; path = VRRoom/Models/PrescriptionModel.h; sourceTree = SOURCE_ROOT; };
+		3D4FC2371EA0ACF600E9CE5E /* PrescriptionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrescriptionModel.m; path = VRRoom/Models/PrescriptionModel.m; sourceTree = SOURCE_ROOT; };
 		3D4FC23C1EA0BEB400E9CE5E /* PrescriptionContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrescriptionContentCell.h; sourceTree = "<group>"; };
 		3D4FC23D1EA0BEB400E9CE5E /* PrescriptionContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrescriptionContentCell.m; sourceTree = "<group>"; };
 		3D4FC23F1EA0BF5100E9CE5E /* FetchContentsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchContentsRequest.h; sourceTree = "<group>"; };
 		3D4FC2401EA0BF5100E9CE5E /* FetchContentsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchContentsRequest.m; sourceTree = "<group>"; };
-		3D4FC2421EA0C14B00E9CE5E /* PrescriptionContentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrescriptionContentModel.h; sourceTree = "<group>"; };
-		3D4FC2431EA0C14B00E9CE5E /* PrescriptionContentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrescriptionContentModel.m; sourceTree = "<group>"; };
+		3D4FC2421EA0C14B00E9CE5E /* PrescriptionContentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrescriptionContentModel.h; path = VRRoom/Models/PrescriptionContentModel.h; sourceTree = SOURCE_ROOT; };
+		3D4FC2431EA0C14B00E9CE5E /* PrescriptionContentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrescriptionContentModel.m; path = VRRoom/Models/PrescriptionContentModel.m; sourceTree = SOURCE_ROOT; };
 		3D4FC2481EA454C500E9CE5E /* FetchDevicesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchDevicesRequest.h; sourceTree = "<group>"; };
 		3D4FC2491EA454C500E9CE5E /* FetchDevicesRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchDevicesRequest.m; sourceTree = "<group>"; };
 		3D4FC24B1EA4572000E9CE5E /* ManagerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManagerModel.h; sourceTree = "<group>"; };
@@ -171,6 +199,62 @@
 		3D7C414F1F132D400072083C /* XJMainItemsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XJMainItemsCell.m; sourceTree = "<group>"; };
 		3D7C41511F1349270072083C /* XJFetchPatientsContentsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XJFetchPatientsContentsRequest.h; sourceTree = "<group>"; };
 		3D7C41521F1349270072083C /* XJFetchPatientsContentsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XJFetchPatientsContentsRequest.m; sourceTree = "<group>"; };
+		3D7C41551F14636E0072083C /* AddUser.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddUser.storyboard; sourceTree = "<group>"; };
+		3D7C415B1F1464560072083C /* XJPatientsInformationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XJPatientsInformationCell.h; sourceTree = "<group>"; };
+		3D7C415C1F1464560072083C /* XJPatientsInformationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XJPatientsInformationCell.m; sourceTree = "<group>"; };
+		3D7C41611F147C6D0072083C /* WritePrescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WritePrescriptionViewController.h; sourceTree = "<group>"; };
+		3D7C41621F147C6D0072083C /* WritePrescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WritePrescriptionViewController.m; sourceTree = "<group>"; };
+		3D7C41641F147D900072083C /* PrescriptionContentsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrescriptionContentsCell.h; sourceTree = "<group>"; };
+		3D7C41651F147D900072083C /* PrescriptionContentsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrescriptionContentsCell.m; sourceTree = "<group>"; };
+		3D7C41661F147D900072083C /* PrescriptionPriceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrescriptionPriceCell.h; sourceTree = "<group>"; };
+		3D7C41671F147D900072083C /* PrescriptionPriceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrescriptionPriceCell.m; sourceTree = "<group>"; };
+		3D7C41681F147D900072083C /* ContentsItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentsItemCell.h; sourceTree = "<group>"; };
+		3D7C41691F147D900072083C /* ContentsItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentsItemCell.m; sourceTree = "<group>"; };
+		3D7C416D1F147DCC0072083C /* AdjustCycleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdjustCycleView.h; sourceTree = "<group>"; };
+		3D7C416E1F147DCC0072083C /* AdjustCycleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdjustCycleView.m; sourceTree = "<group>"; };
+		3D7C41701F147DF50072083C /* ContentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContentModel.h; path = ../ContentModel.h; sourceTree = "<group>"; };
+		3D7C41711F147DF50072083C /* ContentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContentModel.m; path = ../ContentModel.m; sourceTree = "<group>"; };
+		3D7C41731F1498B40072083C /* SceneContentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneContentsViewController.h; sourceTree = "<group>"; };
+		3D7C41741F1498B40072083C /* SceneContentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneContentsViewController.m; sourceTree = "<group>"; };
+		3D7C41761F1498C70072083C /* SceneContentsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneContentsListViewController.h; sourceTree = "<group>"; };
+		3D7C41771F1498C70072083C /* SceneContentsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneContentsListViewController.m; sourceTree = "<group>"; };
+		3D7C417A1F14990C0072083C /* XLBlockActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLBlockActionSheet.h; sourceTree = "<group>"; };
+		3D7C417B1F14990C0072083C /* XLBlockActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLBlockActionSheet.m; sourceTree = "<group>"; };
+		3D7C417C1F14990C0072083C /* XLBlockAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLBlockAlertView.h; sourceTree = "<group>"; };
+		3D7C417D1F14990C0072083C /* XLBlockAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLBlockAlertView.m; sourceTree = "<group>"; };
+		3D7C417E1F14990C0072083C /* XLBlockedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLBlockedButton.h; sourceTree = "<group>"; };
+		3D7C417F1F14990C0072083C /* XLBlockedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLBlockedButton.m; sourceTree = "<group>"; };
+		3D7C41801F14990C0072083C /* XLCommonPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLCommonPickerView.h; sourceTree = "<group>"; };
+		3D7C41811F14990C0072083C /* XLCommonPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLCommonPickerView.m; sourceTree = "<group>"; };
+		3D7C41821F14990C0072083C /* XLHyperLinkButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLHyperLinkButton.h; sourceTree = "<group>"; };
+		3D7C41831F14990C0072083C /* XLHyperLinkButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLHyperLinkButton.m; sourceTree = "<group>"; };
+		3D7C41891F14A1570072083C /* AdviceWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdviceWebViewController.h; sourceTree = "<group>"; };
+		3D7C418A1F14A1570072083C /* AdviceWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdviceWebViewController.m; sourceTree = "<group>"; };
+		3D7C418C1F14A1E00072083C /* DepartmentSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DepartmentSelectCell.h; sourceTree = "<group>"; };
+		3D7C418D1F14A1E00072083C /* DepartmentSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DepartmentSelectCell.m; sourceTree = "<group>"; };
+		3D7C418F1F14A2010072083C /* TherapyItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TherapyItemCell.h; sourceTree = "<group>"; };
+		3D7C41901F14A2010072083C /* TherapyItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TherapyItemCell.m; sourceTree = "<group>"; };
+		3D7C41921F14A2170072083C /* TherapyCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TherapyCollectionCell.h; sourceTree = "<group>"; };
+		3D7C41931F14A2170072083C /* TherapyCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TherapyCollectionCell.m; sourceTree = "<group>"; };
+		3D7C41961F14A2740072083C /* DiseaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiseaseModel.h; sourceTree = "<group>"; };
+		3D7C41971F14A2740072083C /* DiseaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiseaseModel.m; sourceTree = "<group>"; };
+		3D7C41981F14A2740072083C /* TherapyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TherapyModel.h; sourceTree = "<group>"; };
+		3D7C41991F14A2740072083C /* TherapyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TherapyModel.m; sourceTree = "<group>"; };
+		3D7C419C1F14A3B30072083C /* SortButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SortButton.h; sourceTree = "<group>"; };
+		3D7C419D1F14A3B30072083C /* SortButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SortButton.m; sourceTree = "<group>"; };
+		3D7C419F1F14A3D30072083C /* SceneContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneContentCell.h; sourceTree = "<group>"; };
+		3D7C41A01F14A3D30072083C /* SceneContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneContentCell.m; sourceTree = "<group>"; };
+		3D7C41A21F14A8B30072083C /* XJAddPatientViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XJAddPatientViewController.h; sourceTree = "<group>"; };
+		3D7C41A31F14A8B30072083C /* XJAddPatientViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XJAddPatientViewController.m; sourceTree = "<group>"; };
+		3D7C41A51F14AA730072083C /* XJDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XJDatePickerView.h; sourceTree = "<group>"; };
+		3D7C41A61F14AA730072083C /* XJDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XJDatePickerView.m; sourceTree = "<group>"; };
+		3D7C41A91F14C78E0072083C /* XJFetchDiseasesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XJFetchDiseasesRequest.h; sourceTree = "<group>"; };
+		3D7C41AA1F14C78E0072083C /* XJFetchDiseasesRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XJFetchDiseasesRequest.m; sourceTree = "<group>"; };
+		3D7C41AC1F14C8010072083C /* VRRoom-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VRRoom-Prefix.pch"; sourceTree = "<group>"; };
+		3D7C41AD1F14CB430072083C /* XJAddPatientRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XJAddPatientRequest.h; sourceTree = "<group>"; };
+		3D7C41AE1F14CB430072083C /* XJAddPatientRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XJAddPatientRequest.m; sourceTree = "<group>"; };
+		3D7C41B01F14CC390072083C /* XJDiseasePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XJDiseasePickerView.h; sourceTree = "<group>"; };
+		3D7C41B11F14CC390072083C /* XJDiseasePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XJDiseasePickerView.m; sourceTree = "<group>"; };
 		5CAD686E8BACBEBDD597818B /* Pods-VRRoom.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VRRoom.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VRRoom/Pods-VRRoom.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -203,6 +287,7 @@
 		3D0E5F161EAF446B00B41F9E /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				3D4FC2221EA092D400E9CE5E /* MBProgressHUD */,
 				3D0E5F171EAF447700B41F9E /* Source */,
 			);
 			path = Vendor;
@@ -324,6 +409,7 @@
 			isa = PBXGroup;
 			children = (
 				3D4FC1CD1EA0629C00E9CE5E /* main.m */,
+				3D7C41AC1F14C8010072083C /* VRRoom-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -349,9 +435,10 @@
 		3D4FC1FF1EA0635600E9CE5E /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				3D22B46B1F10B3EB00C9D459 /* Search */,
 				3D22B46A1F10B3AE00C9D459 /* Main */,
 				3D22B4691F10B39200C9D459 /* Login */,
+				3D22B46B1F10B3EB00C9D459 /* Search */,
+				3D7C41541F14634B0072083C /* AddUser */,
 				3D4FC21B1EA0764500E9CE5E /* Views */,
 			);
 			path = ViewControllers;
@@ -360,6 +447,7 @@
 		3D4FC2001EA0638F00E9CE5E /* Requests */ = {
 			isa = PBXGroup;
 			children = (
+				3D7C41A81F14C7610072083C /* AddPatient */,
 				3D4FC2181EA06CBA00E9CE5E /* LoginRequest.h */,
 				3D4FC2191EA06CBA00E9CE5E /* LoginRequest.m */,
 				3D4FC2041EA06A2D00E9CE5E /* BaseRequest.h */,
@@ -389,16 +477,13 @@
 		3D4FC20D1EA06AB100E9CE5E /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3D7C41951F14A24D0072083C /* Prescription */,
 				3D4FC2121EA06BD100E9CE5E /* XLModel.h */,
 				3D4FC2131EA06BD100E9CE5E /* XLModel.m */,
 				3D4FC2151EA06C3A00E9CE5E /* UserModel.h */,
 				3D4FC2161EA06C3A00E9CE5E /* UserModel.m */,
 				3D4FC2301EA0A11900E9CE5E /* PatientModel.h */,
 				3D4FC2311EA0A11900E9CE5E /* PatientModel.m */,
-				3D4FC2361EA0ACF600E9CE5E /* PrescriptionModel.h */,
-				3D4FC2371EA0ACF600E9CE5E /* PrescriptionModel.m */,
-				3D4FC2421EA0C14B00E9CE5E /* PrescriptionContentModel.h */,
-				3D4FC2431EA0C14B00E9CE5E /* PrescriptionContentModel.m */,
 				3D4FC24B1EA4572000E9CE5E /* ManagerModel.h */,
 				3D4FC24C1EA4572000E9CE5E /* ManagerModel.m */,
 			);
@@ -408,7 +493,7 @@
 		3D4FC20E1EA06ABB00E9CE5E /* Commons */ = {
 			isa = PBXGroup;
 			children = (
-				3D4FC2221EA092D400E9CE5E /* MBProgressHUD */,
+				3D7C41791F14990C0072083C /* XLKit */,
 				3D4FC20F1EA06AC200E9CE5E /* CommonsDefines.h */,
 				3D4FC2101EA06AC200E9CE5E /* CommonsDefines.m */,
 				3D4FC2291EA0948800E9CE5E /* Util.h */,
@@ -443,7 +528,103 @@
 				3D4FC2251EA092D400E9CE5E /* MBProgressHUD.h */,
 				3D4FC2261EA092D400E9CE5E /* MBProgressHUD.m */,
 			);
-			path = MBProgressHUD;
+			name = MBProgressHUD;
+			path = ../Commons/MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		3D7C41541F14634B0072083C /* AddUser */ = {
+			isa = PBXGroup;
+			children = (
+				3D7C415A1F1464360072083C /* Views */,
+				3D7C41551F14636E0072083C /* AddUser.storyboard */,
+				3D7C41A21F14A8B30072083C /* XJAddPatientViewController.h */,
+				3D7C41A31F14A8B30072083C /* XJAddPatientViewController.m */,
+				3D7C41611F147C6D0072083C /* WritePrescriptionViewController.h */,
+				3D7C41621F147C6D0072083C /* WritePrescriptionViewController.m */,
+				3D7C41731F1498B40072083C /* SceneContentsViewController.h */,
+				3D7C41741F1498B40072083C /* SceneContentsViewController.m */,
+				3D7C41761F1498C70072083C /* SceneContentsListViewController.h */,
+				3D7C41771F1498C70072083C /* SceneContentsListViewController.m */,
+				3D7C41891F14A1570072083C /* AdviceWebViewController.h */,
+				3D7C418A1F14A1570072083C /* AdviceWebViewController.m */,
+			);
+			path = AddUser;
+			sourceTree = "<group>";
+		};
+		3D7C415A1F1464360072083C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3D7C415B1F1464560072083C /* XJPatientsInformationCell.h */,
+				3D7C415C1F1464560072083C /* XJPatientsInformationCell.m */,
+				3D7C41641F147D900072083C /* PrescriptionContentsCell.h */,
+				3D7C41651F147D900072083C /* PrescriptionContentsCell.m */,
+				3D7C41661F147D900072083C /* PrescriptionPriceCell.h */,
+				3D7C41671F147D900072083C /* PrescriptionPriceCell.m */,
+				3D7C41681F147D900072083C /* ContentsItemCell.h */,
+				3D7C41691F147D900072083C /* ContentsItemCell.m */,
+				3D7C416D1F147DCC0072083C /* AdjustCycleView.h */,
+				3D7C416E1F147DCC0072083C /* AdjustCycleView.m */,
+				3D7C418F1F14A2010072083C /* TherapyItemCell.h */,
+				3D7C41901F14A2010072083C /* TherapyItemCell.m */,
+				3D7C418C1F14A1E00072083C /* DepartmentSelectCell.h */,
+				3D7C418D1F14A1E00072083C /* DepartmentSelectCell.m */,
+				3D7C41921F14A2170072083C /* TherapyCollectionCell.h */,
+				3D7C41931F14A2170072083C /* TherapyCollectionCell.m */,
+				3D7C419C1F14A3B30072083C /* SortButton.h */,
+				3D7C419D1F14A3B30072083C /* SortButton.m */,
+				3D7C419F1F14A3D30072083C /* SceneContentCell.h */,
+				3D7C41A01F14A3D30072083C /* SceneContentCell.m */,
+				3D7C41A51F14AA730072083C /* XJDatePickerView.h */,
+				3D7C41A61F14AA730072083C /* XJDatePickerView.m */,
+				3D7C41B01F14CC390072083C /* XJDiseasePickerView.h */,
+				3D7C41B11F14CC390072083C /* XJDiseasePickerView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3D7C41791F14990C0072083C /* XLKit */ = {
+			isa = PBXGroup;
+			children = (
+				3D7C417A1F14990C0072083C /* XLBlockActionSheet.h */,
+				3D7C417B1F14990C0072083C /* XLBlockActionSheet.m */,
+				3D7C417C1F14990C0072083C /* XLBlockAlertView.h */,
+				3D7C417D1F14990C0072083C /* XLBlockAlertView.m */,
+				3D7C417E1F14990C0072083C /* XLBlockedButton.h */,
+				3D7C417F1F14990C0072083C /* XLBlockedButton.m */,
+				3D7C41801F14990C0072083C /* XLCommonPickerView.h */,
+				3D7C41811F14990C0072083C /* XLCommonPickerView.m */,
+				3D7C41821F14990C0072083C /* XLHyperLinkButton.h */,
+				3D7C41831F14990C0072083C /* XLHyperLinkButton.m */,
+			);
+			path = XLKit;
+			sourceTree = "<group>";
+		};
+		3D7C41951F14A24D0072083C /* Prescription */ = {
+			isa = PBXGroup;
+			children = (
+				3D4FC2361EA0ACF600E9CE5E /* PrescriptionModel.h */,
+				3D4FC2371EA0ACF600E9CE5E /* PrescriptionModel.m */,
+				3D4FC2421EA0C14B00E9CE5E /* PrescriptionContentModel.h */,
+				3D4FC2431EA0C14B00E9CE5E /* PrescriptionContentModel.m */,
+				3D7C41701F147DF50072083C /* ContentModel.h */,
+				3D7C41711F147DF50072083C /* ContentModel.m */,
+				3D7C41961F14A2740072083C /* DiseaseModel.h */,
+				3D7C41971F14A2740072083C /* DiseaseModel.m */,
+				3D7C41981F14A2740072083C /* TherapyModel.h */,
+				3D7C41991F14A2740072083C /* TherapyModel.m */,
+			);
+			path = Prescription;
+			sourceTree = "<group>";
+		};
+		3D7C41A81F14C7610072083C /* AddPatient */ = {
+			isa = PBXGroup;
+			children = (
+				3D7C41A91F14C78E0072083C /* XJFetchDiseasesRequest.h */,
+				3D7C41AA1F14C78E0072083C /* XJFetchDiseasesRequest.m */,
+				3D7C41AD1F14CB430072083C /* XJAddPatientRequest.h */,
+				3D7C41AE1F14CB430072083C /* XJAddPatientRequest.m */,
+			);
+			path = AddPatient;
 			sourceTree = "<group>";
 		};
 		B224848AA36CAC80B13F3A78 /* Pods */ = {
@@ -578,6 +759,7 @@
 				3D4FC1D91EA0629C00E9CE5E /* Assets.xcassets in Resources */,
 				3D0E5F2F1EAF447700B41F9E /* menu-button@2x.png in Resources */,
 				3D4FC1D71EA0629C00E9CE5E /* Main.storyboard in Resources */,
+				3D7C41561F14636E0072083C /* AddUser.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -650,10 +832,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D7C416F1F147DCC0072083C /* AdjustCycleView.m in Sources */,
+				3D7C415D1F1464560072083C /* XJPatientsInformationCell.m in Sources */,
+				3D7C41631F147C6D0072083C /* WritePrescriptionViewController.m in Sources */,
 				3D4FC2531EA45EF800E9CE5E /* AddTaskRequest.m in Sources */,
 				3D4FC2351EA0AB9200E9CE5E /* FetchPrescriptionsRequest.m in Sources */,
+				3D7C41721F147DF50072083C /* ContentModel.m in Sources */,
+				3D7C41A71F14AA730072083C /* XJDatePickerView.m in Sources */,
+				3D7C416B1F147D900072083C /* PrescriptionPriceCell.m in Sources */,
 				3D4FC2381EA0ACF600E9CE5E /* PrescriptionModel.m in Sources */,
 				3D4FC2441EA0C14B00E9CE5E /* PrescriptionContentModel.m in Sources */,
+				3D7C41A11F14A3D30072083C /* SceneContentCell.m in Sources */,
 				3D7C41531F1349270072083C /* XJFetchPatientsContentsRequest.m in Sources */,
 				3D0E5F391EB181D800B41F9E /* ChangePasswordRequest.m in Sources */,
 				3D4FC2321EA0A11900E9CE5E /* PatientModel.m in Sources */,
@@ -664,29 +853,49 @@
 				3D4FC24A1EA454C500E9CE5E /* FetchDevicesRequest.m in Sources */,
 				3D4FC21E1EA0764B00E9CE5E /* LoginContentCell.m in Sources */,
 				3D4FC22F1EA09DBB00E9CE5E /* SearchPatientsRequest.m in Sources */,
+				3D7C41B21F14CC390072083C /* XJDiseasePickerView.m in Sources */,
 				3D4FC2501EA45A1300E9CE5E /* TitlesPickerView.m in Sources */,
 				3D4FC2061EA06A2D00E9CE5E /* BaseRequest.m in Sources */,
+				3D7C419E1F14A3B30072083C /* SortButton.m in Sources */,
 				3D4FC2091EA06A3F00E9CE5E /* RequestManager.m in Sources */,
 				3D4FC21A1EA06CBA00E9CE5E /* LoginRequest.m in Sources */,
 				3D0E5F2C1EAF447700B41F9E /* SlideNavigationContorllerAnimatorSlide.m in Sources */,
 				3D4FC2281EA092D400E9CE5E /* MBProgressHUD.m in Sources */,
+				3D7C419B1F14A2740072083C /* TherapyModel.m in Sources */,
+				3D7C41751F1498B40072083C /* SceneContentsViewController.m in Sources */,
 				3D4FC23E1EA0BEB400E9CE5E /* PrescriptionContentCell.m in Sources */,
+				3D7C41851F14990C0072083C /* XLBlockAlertView.m in Sources */,
+				3D7C418E1F14A1E00072083C /* DepartmentSelectCell.m in Sources */,
 				3D4FC1D11EA0629C00E9CE5E /* AppDelegate.m in Sources */,
+				3D7C418B1F14A1570072083C /* AdviceWebViewController.m in Sources */,
+				3D7C41861F14990C0072083C /* XLBlockedButton.m in Sources */,
+				3D7C41AB1F14C78E0072083C /* XJFetchDiseasesRequest.m in Sources */,
+				3D7C41AF1F14CB430072083C /* XJAddPatientRequest.m in Sources */,
+				3D7C41911F14A2010072083C /* TherapyItemCell.m in Sources */,
 				3D4FC2211EA0835400E9CE5E /* PrescriptionCell.m in Sources */,
 				3D0E5F2B1EAF447700B41F9E /* SlideNavigationContorllerAnimatorScaleAndFade.m in Sources */,
+				3D7C41781F1498C70072083C /* SceneContentsListViewController.m in Sources */,
 				3D22B4701F10B47800C9D459 /* ChangePasswordTableViewController.m in Sources */,
+				3D7C41941F14A2170072083C /* TherapyCollectionCell.m in Sources */,
 				3D4FC2111EA06AC200E9CE5E /* CommonsDefines.m in Sources */,
 				3D4FC2171EA06C3A00E9CE5E /* UserModel.m in Sources */,
 				3D4FC1CE1EA0629C00E9CE5E /* main.m in Sources */,
+				3D7C416C1F147D900072083C /* ContentsItemCell.m in Sources */,
 				3D0E5F291EAF447700B41F9E /* SlideNavigationContorllerAnimatorFade.m in Sources */,
 				3D4FC24D1EA4572000E9CE5E /* ManagerModel.m in Sources */,
 				3D4FC2141EA06BD100E9CE5E /* XLModel.m in Sources */,
 				3D4FC20C1EA06A8900E9CE5E /* RequestCacher.m in Sources */,
 				3D4FC2411EA0BF5100E9CE5E /* FetchContentsRequest.m in Sources */,
+				3D7C41881F14990C0072083C /* XLHyperLinkButton.m in Sources */,
 				3D22B47C1F10B49100C9D459 /* PrescriptionContentsTableViewController.m in Sources */,
+				3D7C416A1F147D900072083C /* PrescriptionContentsCell.m in Sources */,
+				3D7C41A41F14A8B30072083C /* XJAddPatientViewController.m in Sources */,
 				3D4FC22C1EA0948800E9CE5E /* Util.m in Sources */,
+				3D7C419A1F14A2740072083C /* DiseaseModel.m in Sources */,
 				3D22B4711F10B47800C9D459 /* LoginViewController.m in Sources */,
 				3D0E5F2D1EAF447700B41F9E /* SlideNavigationContorllerAnimatorSlideAndFade.m in Sources */,
+				3D7C41871F14990C0072083C /* XLCommonPickerView.m in Sources */,
+				3D7C41841F14990C0072083C /* XLBlockActionSheet.m in Sources */,
 				3D7C41501F132D400072083C /* XJMainItemsCell.m in Sources */,
 				3D0E5F2A1EAF447700B41F9E /* SlideNavigationContorllerAnimatorScale.m in Sources */,
 				3D0E5F301EAF447700B41F9E /* SlideNavigationController.m in Sources */,
@@ -842,6 +1051,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = TC6ARYK6RK;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/VRRoom/VRRoom-Prefix.pch";
 				INFOPLIST_FILE = VRRoom/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -856,6 +1067,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = TC6ARYK6RK;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/VRRoom/VRRoom-Prefix.pch";
 				INFOPLIST_FILE = VRRoom/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

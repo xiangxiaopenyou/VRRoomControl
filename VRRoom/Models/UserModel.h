@@ -7,6 +7,7 @@
 //
 
 #import "XLModel.h"
+@class PrescriptionModel;
 
 @interface UserModel : XLModel
 @property (copy, nonatomic) NSString *userId;
@@ -17,4 +18,6 @@
 @property (copy, nonatomic) NSString *vrRoomName;
 + (void)userLogin:(NSString *)username password:(NSString *)password hanlder:(RequestResultHandler)handler;
 + (void)changePassword:(NSString *)oldPassword password:(NSString *)password hanlder:(RequestResultHandler)hanlder;
++ (void)addPatient:(NSString *)roomId informations:(NSDictionary *)informations handler:(RequestResultHandler)handler;
++ (void)sendPrescription:(PrescriptionModel *)model handler:(RequestResultHandler)handler;
 @end

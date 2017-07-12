@@ -9,6 +9,8 @@
 #import "UserModel.h"
 #import "LoginRequest.h"
 #import "ChangePasswordRequest.h"
+#import "XJAddPatientRequest.h"
+#import "PrescriptionModel.h"
 
 @implementation UserModel
 + (void)userLogin:(NSString *)username password:(NSString *)password hanlder:(RequestResultHandler)handler {
@@ -31,6 +33,21 @@
         request.oldPassword = oldPassword;
         return YES;
     } result:hanlder];
+}
++ (void)addPatient:(NSString *)roomId informations:(NSDictionary *)informations handler:(RequestResultHandler)handler {
+    [[XJAddPatientRequest new] request:^BOOL(XJAddPatientRequest *request) {
+        request.roomId = roomId;
+        request.informations = informations;
+        return YES;
+    } result:^(id object, NSString *msg) {
+        if (msg) {
+            !handler ?: handler(nil, msg);
+        } else {
+            !handler ?: handler (object, nil);
+        }
+    }];
+}
++ (void)sendPrescription:(PrescriptionModel *)model handler:(RequestResultHandler)handler {
 }
 
 @end

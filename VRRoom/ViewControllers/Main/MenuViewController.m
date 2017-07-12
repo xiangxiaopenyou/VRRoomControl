@@ -8,8 +8,6 @@
 
 #import "MenuViewController.h"
 #import "ChangePasswordTableViewController.h"
-#import "CommonsDefines.h"
-#import <Masonry.h>
 #import <UIImage-Helpers.h>
 
 #define ROOTCONTROLLER [UIApplication sharedApplication].keyWindow.rootViewController
@@ -70,10 +68,10 @@
             break;
     }
     cell.textLabel.text = title;
-    cell.textLabel.font = kSystemFont(16);
+    cell.textLabel.font = XJSystemFont(16);
     cell.textLabel.textColor = MAIN_TEXT_COLOR;
     UIImageView *line = [[UIImageView alloc] init];
-    line.backgroundColor = kHexRGBColorWithAlpha(0xe5e5e5, 1);
+    line.backgroundColor = XJHexRGBColorWithAlpha(0xe5e5e5, 1);
     [cell.contentView addSubview:line];
     [line mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.bottom.equalTo(cell.contentView);

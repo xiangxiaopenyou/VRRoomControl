@@ -8,11 +8,7 @@
 
 #import "LoginViewController.h"
 #import "LoginContentCell.h"
-#import "CommonsDefines.h"
-#import "UtilDefine.h"
 #import "UserModel.h"
-
-#import <Masonry.h>
 
 @interface LoginViewController ()<UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 @property (strong, nonatomic) UITextField *phoneTextField;

@@ -9,27 +9,40 @@
 #import "SearchViewController.h"
 #import "PrescriptionContentsTableViewController.h"
 #import "PrescriptionCell.h"
-#import "CommonsDefines.h"
-#import "UtilDefine.h"
+#import "PrescriptionContentCell.h"
+#import "TitlesPickerView.h"
 
 #import "PatientModel.h"
 #import "PrescriptionModel.h"
 #import "PrescriptionContentModel.h"
+#import "ManagerModel.h"
 
-#import <Masonry.h>
+#import <MJRefresh.h>
+#import <UIImageView+AFNetworking.h>
+#import <UIImage-Helpers.h>
 
 @interface SearchViewController ()<UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *informationViewHeightConstraint;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *phoneLabel;
+@property (weak, nonatomic) IBOutlet UILabel *sexLabel;
+@property (weak, nonatomic) IBOutlet UILabel *clinichistoryNoLabel;
+@property (weak, nonatomic) IBOutlet UILabel *diseaseLabel;
+@property (weak, nonatomic) IBOutlet UIButton *addPrescriptionButton;
+@property (weak, nonatomic) IBOutlet UIButton *prescriptionButton;
+@property (weak, nonatomic) IBOutlet UIButton *contentButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITableView *historyTableView;
+@property (weak, nonatomic) IBOutlet UITableView *contentsTableView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UILabel *tipLabel1;
+@property (weak, nonatomic) IBOutlet UILabel *tipLabel2;
 
 @property (strong, nonatomic) UIView *titleView;
 @property (strong, nonatomic) UIView *titleContentView;
 @property (strong, nonatomic) UITextField *searchTextField;
 @property (strong, nonatomic) UIButton *backButton;
 @property (strong, nonatomic) UIButton *searchButton;
+@property (strong, nonatomic) TitlesPickerView *titlesPickerView;
 
 @property (copy, nonatomic) NSArray *prescriptionsArray;
 @property (strong, nonatomic) PatientModel *patientModel;
@@ -38,6 +51,9 @@
 @property (copy, nonatomic) NSString *selectedKeyword;
 @property (assign, nonatomic) NSInteger paging;
 @property (strong, nonatomic) NSMutableArray *usersContentsArray;
+@property (copy, nonatomic) NSArray *devicesArray;
+@property (strong, nonatomic) ManagerModel *selectedManagerModel;
+@property (strong, nonatomic) PrescriptionContentModel *operationModel;
 @end
 
 @implementation SearchViewController
@@ -54,9 +70,32 @@
     self.historyArray = [[[NSUserDefaults standardUserDefaults] arrayForKey:SEARCHHISTORY] mutableCopy];
     self.selectedHistoryArray = [self.historyArray mutableCopy];
     _paging = 1;
+    [self.contentsTableView setMj_footer:[MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [self fetchUsersContents];
+    }]];
+    self.contentsTableView.mj_footer.hidden = YES;
+    [self fetchDevices];
+    
+    [self.prescriptionButton setBackgroundImage:[UIImage imageWithColor:NAVIGATIONBAR_COLOR] forState:UIControlStateSelected];
+    [self.prescriptionButton setBackgroundImage:[UIImage imageWithColor:XJHexRGBColorWithAlpha(0xe5e5e5, 1)] forState:UIControlStateNormal];
+    [self.contentButton setBackgroundImage:[UIImage imageWithColor:NAVIGATIONBAR_COLOR] forState:UIControlStateSelected];
+    [self.contentButton setBackgroundImage:[UIImage imageWithColor:XJHexRGBColorWithAlpha(0xe5e5e5, 1)] forState:UIControlStateNormal];
 }
 - (void)viewWillDisappear:(BOOL)animated {
     [self.searchTextField resignFirstResponder];
+}
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.view addSubview:self.titlesPickerView];
+    __weak typeof (self) weakSelf = self;
+    self.titlesPickerView.block = ^(ManagerModel *model) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (model) {
+            strongSelf.selectedManagerModel = model;
+            [strongSelf alertTip];
+        }
+    };
+    
 }
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:self.searchTextField];
@@ -77,17 +116,31 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self.historyTableView reloadData];
 }
+- (IBAction)prescriptionAction:(id)sender {
+    if (!self.prescriptionButton.selected) {
+        self.prescriptionButton.selected = YES;
+        self.contentButton.selected = NO;
+//        self.prescriptionButton.enabled = NO;
+//        self.contentButton.enabled = YES;
+        [self.scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    }
+}
+- (IBAction)contentAction:(id)sender {
+    if (!self.contentButton.selected) {
+        self.prescriptionButton.selected = NO;
+        self.contentButton.selected = YES;
+//        self.prescriptionButton.enabled = YES;
+//        self.contentButton.enabled = NO;
+        [self.scrollView setContentOffset:CGPointMake(SCREEN_WIDTH, 0) animated:YES];
+    }
+}
 
 #pragma mark - Request
 - (void)fetchPrescriptions {
     [PrescriptionModel fetchPrescriptionsList:self.patientModel.userId handler:^(id object, NSString *msg) {
         if (object) {
-//            XLDismissHUD(self.view, NO, YES, nil);
             self.prescriptionsArray = [object copy];
             [self fetchUsersContents];
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [self.tableView reloadData];
-//            });
         } else {
             XLDismissHUD(self.view, YES, NO, msg);
         }
@@ -97,11 +150,54 @@
     [PrescriptionContentModel fetchUsersContents:self.patientModel.userId paging:@(_paging) handler:^(id object, NSString *msg) {
         if (object) {
             XLDismissHUD(self.view, NO, YES, nil);
+            NSArray *resultArray = [object copy];
+            if (_paging == 1) {
+                self.usersContentsArray = [resultArray mutableCopy];
+            } else {
+                NSMutableArray *tempArray = [self.usersContentsArray mutableCopy];
+                [tempArray addObjectsFromArray:resultArray];
+                self.usersContentsArray = [tempArray mutableCopy];
+            }
+            if (resultArray.count < 10) {
+                [self.contentsTableView.mj_footer endRefreshingWithNoMoreData];
+                self.contentsTableView.mj_footer.hidden = YES;
+            } else {
+                _paging += 1;
+                self.contentsTableView.mj_footer.hidden = NO;
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self refreshTableViews];
+            });
         } else {
             XLDismissHUD(self.view, YES, NO, msg);
         }
     }];
 }
+//获取VR室设备request
+- (void)fetchDevices {
+    NSString *roomId = [[NSUserDefaults standardUserDefaults] stringForKey:ROOMID];
+    [ManagerModel fetchManagers:roomId handler:^(id object, NSString *msg) {
+        self.devicesArray = [(NSArray *)object copy];
+        if (self.devicesArray.count > 0) {
+            self.selectedManagerModel = self.devicesArray[0];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.titlesPickerView resetContents:self.devicesArray selected:self.selectedManagerModel];
+        });
+    }];
+}
+//发送播放指令
+- (void)addTask {
+    XLShowHUDWithMessage(nil, self.view);
+    [ManagerModel addTask:self.operationModel.contentId prescriptionContent:self.operationModel.id type:self.operationModel.content_type userId:self.selectedManagerModel.userId handler:^(id object, NSString *msg) {
+        if (object) {
+            XLDismissHUD(self.view, YES, YES, @"成功");
+        } else {
+            XLDismissHUD(self.view, YES, NO, msg);
+        }
+    }];
+}
+
 
 #pragma mark - PrivateMethods
 - (void)createNavigationTitleView {
@@ -141,13 +237,13 @@
 - (void)refreshView {
     if (self.patientModel) {
         self.nameLabel.text = [NSString stringWithFormat:@"姓名：%@", self.patientModel.realname];
-        self.phoneLabel.text = [NSString stringWithFormat:@"手机号：%@", self.patientModel.mobile];
-        if (XLIsNullObject(self.patientModel.mobile)) {
-            self.phoneLabel.hidden = YES;
-        } else {
-            self.phoneLabel.hidden = NO;
-        }
-        self.informationViewHeightConstraint.constant = 44;
+//        self.phoneLabel.text = [NSString stringWithFormat:@"手机号：%@", self.patientModel.mobile];
+//        if (XLIsNullObject(self.patientModel.mobile)) {
+//            self.phoneLabel.hidden = YES;
+//        } else {
+//            self.phoneLabel.hidden = NO;
+//        }
+        self.informationViewHeightConstraint.constant = 105;
         [UIView animateWithDuration:0.2 animations:^{
             [self.view layoutIfNeeded];
         }];
@@ -160,9 +256,36 @@
         });
     }
 }
+- (void)refreshTableViews {
+    [self.tableView reloadData];
+    [self.contentsTableView reloadData];
+    self.tipLabel1.hidden = self.prescriptionsArray.count == 0 ? NO : YES;
+    self.tipLabel2.hidden = self.usersContentsArray.count == 0 ? NO : YES;
+    if (self.prescriptionsArray.count == 0) {
+        if (self.usersContentsArray.count > 0) {
+            [self contentAction:nil];
+        } else {
+            [self prescriptionAction:nil];
+        }
+    } else {
+        [self prescriptionAction:nil];
+    }
+}
 - (void)turnLogin {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginStateDidChanged" object:nil];
 }
+- (void)alertTip {
+    NSString *tipMessage = [NSString stringWithFormat:@"请检查%@眼镜是否正在使用", self.selectedManagerModel.user_username];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"注意事项" message:tipMessage preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *playAction = [UIAlertAction actionWithTitle:@"播放" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [self addTask];
+    }];
+    [alertController addAction:cancelAction];
+    [alertController addAction:playAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
 //保存搜索记录
 - (void)saveSearchHistory:(NSString *)searchString {
     if ([self.historyArray containsObject:searchString]) {
@@ -243,6 +366,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (tableView == self.tableView) {
         return self.prescriptionsArray.count * 2;
+    } else if (tableView == self.contentsTableView) {
+        return self.usersContentsArray.count * 2;
     } else {
         if (self.selectedHistoryArray.count > 0) {
             return self.selectedHistoryArray.count + 1;
@@ -254,6 +379,8 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView == self.tableView) {
         return indexPath.row % 2 == 0 ? 10.f : 100.f;
+    } else if (tableView == self.contentsTableView) {
+        return indexPath.row % 2 == 0 ? 10.f : 108.f;
     } else {
         return 40.f;
     }
@@ -292,6 +419,41 @@
         }
         cell.stateLabel.text = stateString;
         return cell;
+    } else if (tableView == self.contentsTableView) {
+        if (indexPath.row % 2 == 0) {
+            UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SeparatorCell"];
+            cell.backgroundColor = [UIColor clearColor];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
+        } else {
+            PrescriptionContentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PrescriptionContentCell" forIndexPath:indexPath];
+            PrescriptionContentModel *tempModel = self.usersContentsArray[indexPath.row / 2];
+            [cell.contentImageView setImageWithURL:[NSURL URLWithString:tempModel.content_coverPic] placeholderImage:[UIImage imageNamed:@"default_image"]];
+            cell.nameLabel.text = [NSString stringWithFormat:@"%@", tempModel.content_name];
+            //    if ([tempModel.content_type integerValue] == 1) {
+            //        cell.typeLabel.text = @"类型：视频";
+            //    } else if ([tempModel.content_type integerValue] == 2) {
+            //        cell.typeLabel.text = @"类型：音频";
+            //    }
+//            NSString *unit;
+//            if ([tempModel.periodUnit integerValue] == 1) {
+//                unit = @"日";
+//            } else if ([tempModel.periodUnit integerValue] == 2) {
+//                unit = @"周";
+//            } else {
+//                unit = @"月";
+//            }
+//            cell.timesLabel.text = [NSString stringWithFormat:@"%@次/%@-共%@%@-合计%@次 已使用%@次", @([tempModel.frequency integerValue]), unit, @([tempModel.period integerValue]), unit, @([tempModel.times integerValue]), @([tempModel.useTimes integerValue])];
+            cell.timesLabel.hidden = YES;
+            cell.dateLabel.text = [NSString stringWithFormat:@"上次使用时间 : %@", tempModel.lastUseAt];
+            if (XLIsNullObject(tempModel.lastUseAt)) {
+                cell.dateLabel.hidden = YES;
+            } else {
+                cell.dateLabel.hidden = NO;
+            }
+            return cell;
+        }
+
     } else {
         if (indexPath.row == 0) {
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HeaderCell" forIndexPath:indexPath];
@@ -318,10 +480,28 @@
             contentsViewController.prescriptionId = model.id;
             [self.navigationController pushViewController:contentsViewController animated:YES];
         }
+    } else if (tableView == self.contentsTableView) {
+        if (indexPath.row % 2 == 1) {
+            PrescriptionContentModel *tempModel = self.usersContentsArray[indexPath.row / 2];
+            self.operationModel = tempModel;
+            [self.titlesPickerView resetContents:self.devicesArray selected:self.selectedManagerModel];
+            [self.titlesPickerView show];
+        }
     } else {
         if (indexPath.row > 0) {
             self.selectedKeyword = self.selectedHistoryArray[indexPath.row - 1];
             [self textFieldShouldReturn:self.searchTextField];
+        }
+    }
+}
+
+#pragma mark - Scroll view delegate
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    if (scrollView == self.scrollView) {
+        if (scrollView.contentOffset.x == 0) {
+            [self prescriptionAction:nil];
+        } else if (scrollView.contentOffset.x == SCREEN_WIDTH) {
+            [self contentAction:nil];
         }
     }
 }
@@ -387,6 +567,12 @@
         _usersContentsArray = [[NSMutableArray alloc] init];
     }
     return _usersContentsArray;
+}
+- (TitlesPickerView *)titlesPickerView {
+    if (!_titlesPickerView) {
+        _titlesPickerView = [[TitlesPickerView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    }
+    return _titlesPickerView;
 }
 
 @end

@@ -1,0 +1,18 @@
+//
+//  VRRoom-Prefix.pch
+//  VRRoom
+//
+//  Created by 项小盆友 on 2017/7/11.
+//  Copyright © 2017年 InHeart. All rights reserved.
+//
+
+#ifndef VRRoom_Prefix_pch
+#define VRRoom_Prefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import "UtilDefine.h"
+#import "CommonsDefines.h"
+#import <Masonry.h>
+
+#endif /* VRRoom_Prefix_pch */

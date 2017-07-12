@@ -10,11 +10,6 @@
 
 #import "LoginContentCell.h"
 #import "UserModel.h"
-#import "CommonsDefines.h"
-#import "UtilDefine.h"
-
-#import <Masonry.h>
-
 
 @interface ChangePasswordTableViewController ()<UITextFieldDelegate>
 @property (strong, nonatomic) UITextField *oldPasswordTextField;
