@@ -126,7 +126,7 @@
         _finishButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_finishButton setTitle:@"播放" forState:UIControlStateNormal];
         [_finishButton setTitleColor:NAVIGATIONBAR_COLOR forState:UIControlStateNormal];
-        _finishButton.titleLabel.font = kSystemFont(16);
+        _finishButton.titleLabel.font = XJSystemFont(16);
         [_finishButton addTarget:self action:@selector(finishAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _finishButton;
@@ -135,8 +135,8 @@
     if (!_cancelButton) {
         _cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_cancelButton setTitle:@"取消" forState:UIControlStateNormal];
-        [_cancelButton setTitleColor:kRGBColor(100, 100, 100, 1) forState:UIControlStateNormal];
-        _cancelButton.titleLabel.font = kSystemFont(16);
+        [_cancelButton setTitleColor:XJRGBColor(100, 100, 100, 1) forState:UIControlStateNormal];
+        _cancelButton.titleLabel.font = XJSystemFont(16);
         [_cancelButton addTarget:self action:@selector(dismissAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _cancelButton;

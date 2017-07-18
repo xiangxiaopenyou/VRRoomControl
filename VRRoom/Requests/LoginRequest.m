@@ -26,7 +26,7 @@
                                     @"deviceVersion" : XLSystemVersion,
                                     @"appId" : XLIDFVString,
                                     @"channel" : @"AppStore"} mutableCopy];
-    [[RequestManager sharedInstance] POST:@"appControlVrRoom/login" parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+    [[RequestManager sharedInstance] POST:@"login" parameters:param progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         if ([responseObject[@"success"] boolValue]) {
             !resultHandler ?: resultHandler(responseObject[@"data"], nil);
         } else {

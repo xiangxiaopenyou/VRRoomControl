@@ -43,21 +43,13 @@
                                             <color key="textColor" red="0.1764705882" green="0.47843137250000001" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abr-os-IiT">
-                                            <rect key="frame" x="178.5" y="169" width="18.5" height="24"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                            <color key="textColor" red="0.1764705882" green="0.47843137250000001" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <gestureRecognizers/>
                                     <constraints>
                                         <constraint firstItem="oUz-zF-gCH" firstAttribute="centerX" secondItem="bdR-t2-iAw" secondAttribute="centerX" id="61u-bb-vTw"/>
-                                        <constraint firstItem="abr-os-IiT" firstAttribute="top" secondItem="oUz-zF-gCH" secondAttribute="bottom" constant="10" id="7te-6f-Wnt"/>
                                         <constraint firstItem="8ZH-YZ-BfQ" firstAttribute="centerX" secondItem="bdR-t2-iAw" secondAttribute="centerX" id="IsH-lH-hCe"/>
                                         <constraint firstItem="8ZH-YZ-BfQ" firstAttribute="top" secondItem="bdR-t2-iAw" secondAttribute="top" constant="50" id="Qrs-Zb-G0d"/>
-                                        <constraint firstItem="abr-os-IiT" firstAttribute="centerX" secondItem="bdR-t2-iAw" secondAttribute="centerX" id="jno-oT-PYC"/>
                                         <constraint firstItem="oUz-zF-gCH" firstAttribute="top" secondItem="8ZH-YZ-BfQ" secondAttribute="bottom" constant="15" id="kor-XI-Lot"/>
                                     </constraints>
                                 </view>
@@ -75,13 +67,14 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Gqz-o9-xGN" secondAttribute="height" constant="30" id="IjA-zM-71Q"/>
                                                     </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                     <inset key="titleEdgeInsets" minX="-50" minY="0.0" maxX="0.0" maxY="-40"/>
-                                                    <inset key="imageEdgeInsets" minX="0.0" minY="-40" maxX="-74" maxY="0.0"/>
-                                                    <state key="normal" title="增加向导" image="homepage_add">
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="-40" maxX="-64" maxY="0.0"/>
+                                                    <state key="normal" title="我的患者" image="homepage_add">
                                                         <color key="titleColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="addAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eYV-xB-zFN"/>
+                                                        <action selector="myPatientsAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fwI-KN-rXK"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mt0-F5-0Ou">
@@ -90,13 +83,14 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="mt0-F5-0Ou" secondAttribute="height" constant="30" id="fHn-gJ-3g7"/>
                                                     </constraints>
-                                                    <inset key="titleEdgeInsets" minX="-50" minY="0.0" maxX="0.0" maxY="-40"/>
-                                                    <inset key="imageEdgeInsets" minX="0.0" minY="-40" maxX="-44" maxY="0.0"/>
-                                                    <state key="normal" title="查询" image="homepage_search">
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                    <inset key="titleEdgeInsets" minX="-54" minY="0.0" maxX="0.0" maxY="-40"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="-40" maxX="-52" maxY="0.0"/>
+                                                    <state key="normal" title="VR内容" image="homepage_content">
                                                         <color key="titleColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="searchPatientAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cGe-ih-jd9"/>
+                                                        <action selector="vrContentsAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xfr-ga-dxv"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IHL-VN-sUu">
@@ -105,13 +99,14 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="IHL-VN-sUu" secondAttribute="height" constant="30" id="Z8x-k8-NhT"/>
                                                     </constraints>
-                                                    <inset key="titleEdgeInsets" minX="-55" minY="0.0" maxX="0.0" maxY="-40"/>
-                                                    <inset key="imageEdgeInsets" minX="0.0" minY="-40" maxX="-62" maxY="0.0"/>
-                                                    <state key="normal" title="VR内容" image="homepage_content">
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                    <inset key="titleEdgeInsets" minX="-54" minY="0.0" maxX="0.0" maxY="-40"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="-40" maxX="-32" maxY="0.0"/>
+                                                    <state key="normal" title="手册" image="homepage_help">
                                                         <color key="titleColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="vrContentsAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xGT-3s-Nsy"/>
+                                                        <action selector="directionAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Bte-OV-fFv"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vXY-E3-6uy">
@@ -120,14 +115,12 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="vXY-E3-6uy" secondAttribute="height" constant="30" id="1Fv-5v-1qY"/>
                                                     </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                     <inset key="titleEdgeInsets" minX="-48" minY="0.0" maxX="0.0" maxY="-40"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="-40" maxX="-40" maxY="0.0"/>
-                                                    <state key="normal" title="手册" image="homepage_help">
+                                                    <state key="normal" title="更多期待" image="homepage_help">
                                                         <color key="titleColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
-                                                    <connections>
-                                                        <action selector="directionAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FWR-Cs-hK3"/>
-                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -146,10 +139,10 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="addButton" destination="Gqz-o9-xGN" id="z8X-r7-fFM"/>
-                                            <outlet property="helpButton" destination="vXY-E3-6uy" id="2E3-vD-DLw"/>
-                                            <outlet property="searchButton" destination="mt0-F5-0Ou" id="HNb-vX-YEr"/>
-                                            <outlet property="vrContentsButton" destination="IHL-VN-sUu" id="fCg-aG-pXz"/>
+                                            <outlet property="helpButton" destination="IHL-VN-sUu" id="Xck-pM-Oet"/>
+                                            <outlet property="moreButton" destination="vXY-E3-6uy" id="bcu-gk-1Ok"/>
+                                            <outlet property="myPatientsButton" destination="Gqz-o9-xGN" id="Vyu-0M-qII"/>
+                                            <outlet property="vrContentsButton" destination="mt0-F5-0Ou" id="ZzF-i3-Me3"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -170,7 +163,6 @@
                     <navigationItem key="navigationItem" title="心景VRMC" id="xlY-AD-9hS"/>
                     <connections>
                         <outlet property="contentView" destination="bdR-t2-iAw" id="xpx-67-2qD"/>
-                        <outlet property="roomNameLabel" destination="abr-os-IiT" id="J7f-FI-rQg"/>
                         <outlet property="tableView" destination="jzO-Uh-La6" id="Gku-Uc-cIv"/>
                     </connections>
                 </viewController>
@@ -733,8 +725,8 @@
                                                 <constraint firstAttribute="width" constant="70" id="P5D-lu-5BS"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="心景™VRMC治疗师" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GzH-Xe-uOz">
-                                            <rect key="frame" x="98.5" y="100" width="178.5" height="24"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="心景VRMC治疗师" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GzH-Xe-uOz">
+                                            <rect key="frame" x="107" y="100" width="161.5" height="24"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                             <color key="textColor" red="0.1764705882352941" green="0.47843137254901957" blue="0.73333333333333328" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -1084,7 +1076,6 @@
         <image name="homepage_add" width="57" height="36"/>
         <image name="homepage_content" width="57" height="36"/>
         <image name="homepage_help" width="57" height="36"/>
-        <image name="homepage_search" width="57" height="36"/>
         <image name="login_logo" width="70" height="70"/>
         <image name="logo_small" width="78" height="60"/>
         <image name="phone" width="21" height="21"/>

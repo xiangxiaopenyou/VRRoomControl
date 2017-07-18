@@ -14,5 +14,6 @@
 #import "UtilDefine.h"
 #import "CommonsDefines.h"
 #import <Masonry.h>
+#import <GJCFUitils.h>
 
 #endif /* VRRoom_Prefix_pch */

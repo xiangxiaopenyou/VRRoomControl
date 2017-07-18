@@ -19,17 +19,15 @@ typedef NS_ENUM(NSInteger, XJSortTypes) {
 typedef NS_ENUM(NSInteger, XJUserSex) {
     XJUserSexUnknown = 0,
     XJUserSexMale,
-    XJUserSexFemale,
-    XJUserSexEmpty
+    XJUserSexFemale
 };
 typedef NS_ENUM(NSInteger, XJMaritalStatus) {
     XJMaritalStatusUnknown = 0,
     XJMaritalStatusMarried,
-    XJMaritalStatusNotMarried,
-    XJMaritalStatusEmpty
+    XJMaritalStatusNotMarried
 };
 typedef NS_ENUM(NSInteger, XJEducationDegree) {
-    XJEducationDegreeEmpty = 0,
+    XJEducationDegreeUnknown = 0,
     XJEducationDegreeNone = 1,
     XJEducationDegreePrimary,
     XJEducationDegreeMiddle,
@@ -65,6 +63,8 @@ extern NSString * const ROOMID;
 extern NSString * const VRROOMNAME;
 extern NSString * const SEARCHHISTORY;
 extern NSString * const USERNAME;
+extern NSString * const USERHOSPITAL;
+extern NSString * const REALNAME;
 
 //常用数值
 extern CGFloat const TABBARHEIGHT;

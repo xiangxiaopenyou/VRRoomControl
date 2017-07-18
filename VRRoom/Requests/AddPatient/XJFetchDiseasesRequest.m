@@ -13,7 +13,7 @@
     if (!paramsBlock(self)) {
         return;
     }
-    [[RequestManager sharedInstance] POST:@"appControlVrRoom/diseaseList" parameters:self.params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [[RequestManager sharedInstance] POST:@"diseaseList" parameters:self.params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject[@"success"] boolValue]) {
             !resultHandler ?: resultHandler(responseObject[@"data"], nil);
         } else {

@@ -8,6 +8,7 @@
 
 #import "PatientModel.h"
 #import "SearchPatientsRequest.h"
+#import "XJPatientInformationsRequest.h"
 
 @implementation PatientModel
 + (void)searchPatient:(NSString *)keyword handler:(RequestResultHandler)handler {
@@ -19,6 +20,19 @@
             !handler ?: handler(nil, msg);
         } else {
             PatientModel *tempModel = [PatientModel yy_modelWithDictionary:(NSDictionary *)object];
+            !handler ?: handler(tempModel, nil);
+        }
+    }];
+}
++ (void)patientInformations:(NSString *)patientId handler:(RequestResultHandler)handler {
+    [[XJPatientInformationsRequest new] request:^BOOL(XJPatientInformationsRequest *request) {
+        request.patientId = patientId;
+        return YES;
+    } result:^(id object, NSString *msg) {
+        if (msg) {
+            !handler ?: handler(nil, msg);
+        } else {
+            PatientModel *tempModel = [PatientModel yy_modelWithDictionary:object];
             !handler ?: handler(tempModel, nil);
         }
     }];

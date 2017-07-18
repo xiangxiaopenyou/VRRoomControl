@@ -14,7 +14,7 @@
         return;
     }
     [self.params setObject:self.keyword forKey:@"keyword"];
-    [[RequestManager sharedInstance] POST:@"appControlVrRoom/getPatientByKeywordCase" parameters:self.params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [[RequestManager sharedInstance] POST:@"getPatientByKeywordCase" parameters:self.params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject[@"success"] boolValue]) {
             !resultHandler ?: resultHandler(responseObject[@"data"], nil);
         } else {

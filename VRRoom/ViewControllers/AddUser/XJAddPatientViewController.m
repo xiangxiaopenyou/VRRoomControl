@@ -51,9 +51,9 @@
         _selectedDisease = model;
         [strongSelf.tableView reloadData];
     };
-    _sex = XJUserSexEmpty;
-    _maritalStatus = XJMaritalStatusEmpty;
-    _educationDegree = XJEducationDegreeEmpty;
+    _sex = XJUserSexUnknown;
+    _maritalStatus = XJMaritalStatusUnknown;
+    _educationDegree = XJEducationDegreeUnknown;
     [self fetchDiseasesList];
 }
 
@@ -68,8 +68,9 @@
         XLShowHUDWithMessage(nil, self.view);
         UITextField *textField1 = (UITextField *)[self.tableView viewWithTag:100];
         UITextField *textField2 = (UITextField *)[self.tableView viewWithTag:101];
-        UITextField *textField3 = (UITextField *)[self.tableView viewWithTag:105];  //手机号
-        UITextField *textField4 = (UITextField *)[self.tableView viewWithTag:108];  //医保卡号
+        UITextField *textField5 = (UITextField *)[self.tableView viewWithTag:102];  //备注
+        UITextField *textField3 = (UITextField *)[self.tableView viewWithTag:106];  //手机号
+        UITextField *textField4 = (UITextField *)[self.tableView viewWithTag:109];  //医保卡号
         NSMutableDictionary *informations = [@{@"clinichistoryNo" : textField1.text,
                                                @"name" : textField2.text,
                                                @"birthday" : [_birthdayString stringByAppendingString:@" 00:00:00"],
@@ -78,17 +79,15 @@
         if (!XLIsNullObject(textField3.text)) {
             [informations setObject:textField3.text forKey:@"phone"];
         }
-        if (_maritalStatus != XJMaritalStatusEmpty) {
-            [informations setObject:@(_maritalStatus) forKey:@"maritalStatus"];
+        if (!XLIsNullObject(textField5.text)) {
+            [informations setObject:textField5.text forKey:@"remark"];
         }
-        if (_educationDegree != XJEducationDegreeEmpty) {
-            [informations setObject:@(_educationDegree) forKey:@"educationDegree"];
-        }
+        [informations setObject:@(_maritalStatus) forKey:@"maritalStatus"];
+        [informations setObject:@(_educationDegree) forKey:@"educationDegree"];
         if (!XLIsNullObject(textField4.text)) {
             [informations setObject:textField4.text forKey:@"medicalInsuranceCardNo"];
         }
-        NSString *roomId = [[NSUserDefaults standardUserDefaults] stringForKey:ROOMID];
-        [UserModel addPatient:roomId informations:informations handler:^(id object, NSString *msg) {
+        [UserModel addPatient:informations handler:^(id object, NSString *msg) {
             if (object) {
                 XLDismissHUD(self.view, YES, YES, @"增加患者成功");
                 [self performSelector:@selector(turnToAddPrescription) withObject:nil afterDelay:0.5];
@@ -106,6 +105,14 @@
     BOOL canUpload = YES;
     UITextField *textField1 = (UITextField *)[self.tableView viewWithTag:100];
     UITextField *textField2 = (UITextField *)[self.tableView viewWithTag:101];
+    UITextField *textField5 = (UITextField *)[self.tableView viewWithTag:102];  //备注
+    UITextField *textField3 = (UITextField *)[self.tableView viewWithTag:106];  //手机号
+    UITextField *textField4 = (UITextField *)[self.tableView viewWithTag:109];  //医保卡号
+    [textField1 resignFirstResponder];
+    [textField2 resignFirstResponder];
+    [textField3 resignFirstResponder];
+    [textField4 resignFirstResponder];
+    [textField5 resignFirstResponder];
     if (XLIsNullObject(textField1.text)) {
         XLDismissHUD(self.view, YES, NO, @"请先输入患者病历号");
         return NO;
@@ -120,10 +127,6 @@
     }
     if (!_selectedDisease) {
         XLDismissHUD(self.view, YES, NO, @"请先选择患者病症");
-        return NO;
-    }
-    if (_sex == XJUserSexEmpty) {
-        XLDismissHUD(self.view, YES, NO, @"请先选择患者性别");
         return NO;
     }
     return canUpload;
@@ -157,7 +160,7 @@
     return self.titlesArray.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 50.f;
+    return 46.f;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     XJPatientsInformationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PatientsInformationCell" forIndexPath:indexPath];
@@ -165,57 +168,55 @@
     cell.headerLabel.text = self.titlesArray[indexPath.row];
     cell.textField.tag = 100 + indexPath.row;
     cell.textField.delegate = self;
-    if (indexPath.row == 0 || indexPath.row == 1 || indexPath.row == 5 || indexPath.row == 8) {
+    if (indexPath.row == 0 || indexPath.row == 1 || indexPath.row == 2 || indexPath.row == 6 || indexPath.row == 9) {
         cell.textField.enabled = YES;
     } else {
         cell.textField.enabled = NO;
     }
-    if (indexPath.row > 4) {
+    if (indexPath.row == 2 || indexPath.row == 6 || indexPath.row == 9) {
         cell.textField.placeholder = @"非必输";
-    } else {
+    } else if (indexPath.row == 0 || indexPath.row == 1 || indexPath.row == 3 || indexPath.row == 4) {
         cell.textField.placeholder = @"必输";
+    } else {
+        cell.textField.placeholder = @"保密";
     }
-    if (indexPath.row == 5) {
+    if (indexPath.row == 6) {
         cell.textField.keyboardType = UIKeyboardTypeNumberPad;
     }
     switch (indexPath.row) {
-        case 2: {
+        case 3: {
             cell.textField.text = _birthdayString;
         }
             break;
-        case 3: {
+        case 4: {
             if (_selectedDisease) {
                 cell.textField.text = _selectedDisease.diseaseName;
             }
         }
             break;
-        case 4: {
+        case 5: {
             if (_sex == XJUserSexUnknown) {
-                cell.textField.text = @"保密";
+                cell.textField.text = nil;
             } else if (_sex == XJUserSexMale) {
                 cell.textField.text = @"男";
             } else if (_sex == XJUserSexFemale) {
                 cell.textField.text = @"女";
-            } else {
-                cell.textField.text = nil;
-            }
-        }
-            break;
-        case 6: {
-            if (_maritalStatus == XJMaritalStatusUnknown) {
-                cell.textField.text = @"保密";
-            } else if (_maritalStatus == XJMaritalStatusMarried) {
-                cell.textField.text = @"已婚";
-            } else if (_maritalStatus == XJMaritalStatusNotMarried) {
-                cell.textField.text = @"未婚";
-            } else {
-                cell.textField.text = nil;
             }
         }
             break;
         case 7: {
+            if (_maritalStatus == XJMaritalStatusUnknown) {
+                cell.textField.text = nil;
+            } else if (_maritalStatus == XJMaritalStatusMarried) {
+                cell.textField.text = @"已婚";
+            } else if (_maritalStatus == XJMaritalStatusNotMarried) {
+                cell.textField.text = @"未婚";
+            }
+        }
+            break;
+        case 8: {
             switch (_educationDegree) {
-                case XJEducationDegreeEmpty:
+                case XJEducationDegreeUnknown:
                     cell.textField.text = nil;
                     break;
                 case XJEducationDegreeNone:
@@ -251,15 +252,15 @@
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
-        case 2: {
+        case 3: {
             [self.datePickerView show];
         }
             break;
-        case 3: {
+        case 4: {
             [self.diseasePickerView show];
         }
             break;
-        case 4: {
+        case 5: {
             [[[XLBlockActionSheet alloc] initWithTitle:nil clickedBlock:^(NSInteger buttonIndex) {
                 if (buttonIndex == 0) {
                     _sex = XJUserSexUnknown;
@@ -276,7 +277,7 @@
             } cancelButtonTitle:@"取消" destructiveButtonTitle:@"保密" otherButtonTitles:@"男", @"女", nil] showInView:self.view];
         }
             break;
-        case 6: {
+        case 7: {
             [[[XLBlockActionSheet alloc] initWithTitle:nil clickedBlock:^(NSInteger buttonIndex) {
                 if (buttonIndex == 0) {
                     _maritalStatus = XJMaritalStatusUnknown;
@@ -293,36 +294,39 @@
             } cancelButtonTitle:@"取消" destructiveButtonTitle:@"保密" otherButtonTitles:@"已婚", @"未婚", nil] showInView:self.view];
         }
             break;
-        case 7: {
+        case 8: {
             [[[XLBlockActionSheet alloc] initWithTitle:nil clickedBlock:^(NSInteger buttonIndex) {
                 switch (buttonIndex) {
-                    case 1:
-                        _educationDegree = XJEducationDegreeNone;
+                    case 0:
+                        _educationDegree = XJEducationDegreeUnknown;
                         break;
                     case 2:
-                        _educationDegree = XJEducationDegreePrimary;
+                        _educationDegree = XJEducationDegreeNone;
                         break;
                     case 3:
-                        _educationDegree = XJEducationDegreeMiddle;
+                        _educationDegree = XJEducationDegreePrimary;
                         break;
                     case 4:
-                        _educationDegree = XJEducationDegreeHigh;
+                        _educationDegree = XJEducationDegreeMiddle;
                         break;
                     case 5:
-                        _educationDegree = XJEducationDegreeUniversity;
+                        _educationDegree = XJEducationDegreeHigh;
                         break;
                     case 6:
+                        _educationDegree = XJEducationDegreeUniversity;
+                        break;
+                    case 7:
                         _educationDegree = XJEducationDegreeMaster;
                         break;
                     default:
                         break;
                 }
-                if (buttonIndex != 0) {
+                if (buttonIndex != 1) {
                     GJCFAsyncMainQueue(^{
                         [self.tableView reloadData];
                     });
                 }
-            } cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"文盲", @"小学", @"初中", @"高中", @"大学", @"研究生及以上", nil] showInView:self.view];
+            } cancelButtonTitle:@"取消" destructiveButtonTitle:@"保密" otherButtonTitles:@"文盲", @"小学", @"初中", @"高中", @"大学", @"研究生及以上", nil] showInView:self.view];
         }
             break;
             
@@ -334,7 +338,7 @@
 #pragma mark - Getters
 - (NSArray *)titlesArray {
     if (!_titlesArray) {
-        _titlesArray = @[@"病 历 号", @"姓       名", @"出生日期", @"病       症", @"性       别", @"手       机", @"婚姻状况", @"文化程度", @"医保卡号"];
+        _titlesArray = @[@"病 历 号", @"姓       名", @"备       注", @"出生日期", @"病       症", @"性       别", @"手       机", @"婚姻状况", @"文化程度", @"医保卡号"];
     }
     return _titlesArray;
 }

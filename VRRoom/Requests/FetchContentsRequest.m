@@ -15,7 +15,7 @@
         return;
     }
     [self.params setObject:self.prescriptionId forKey:@"prescriptionId"];
-    [[RequestManager sharedInstance] POST:@"appControlVrRoom/prescriptionContent/getByPrescriptionId" parameters:self.params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [[RequestManager sharedInstance] POST:@"prescriptionContent/getByPrescriptionId" parameters:self.params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject[@"success"] boolValue]) {
             !resultHandler ?: resultHandler(responseObject[@"data"], nil);
         } else {

@@ -9,7 +9,6 @@
 #import "BaseRequest.h"
 
 @interface XJAddPatientRequest : BaseRequest
-@property (copy, nonatomic) NSString *roomId;
 @property (copy, nonatomic) NSDictionary *informations;
 
 @end

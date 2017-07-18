@@ -28,10 +28,10 @@
     self.serviceButton.layer.borderWidth = 0.5;
     self.serviceButton.layer.borderColor = [UIColor colorWithRed:229/255.0 green:229/255.0 blue:229/255.0 alpha:1].CGColor;
     [self.serviceButton setBackgroundImage:[UIImage imageWithColor:BREAK_LINE_COLOR] forState:UIControlStateHighlighted];
-    NSString *usernameString = [[NSUserDefaults standardUserDefaults] stringForKey:USERNAME];
-    NSString *roomString = [[NSUserDefaults standardUserDefaults] stringForKey:VRROOMNAME];
-    self.usernameLabel.text = usernameString;
-    self.roomNameLabel.text = roomString;
+    NSString *nameString = [[NSUserDefaults standardUserDefaults] stringForKey:REALNAME];
+    NSString *hospitalString = [[NSUserDefaults standardUserDefaults] stringForKey:USERHOSPITAL];
+    self.usernameLabel.text = nameString;
+    self.roomNameLabel.text = hospitalString;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -102,8 +102,8 @@
             UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
             UIAlertAction *playAction = [UIAlertAction actionWithTitle:@"注销" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:USERTOKEN];
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:ROOMID];
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:VRROOMNAME];
+//                [[NSUserDefaults standardUserDefaults] removeObjectForKey:ROOMID];
+//                [[NSUserDefaults standardUserDefaults] removeObjectForKey:VRROOMNAME];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 [self performSelector:@selector(turnLogin) withObject:nil afterDelay:0.1];
             }];

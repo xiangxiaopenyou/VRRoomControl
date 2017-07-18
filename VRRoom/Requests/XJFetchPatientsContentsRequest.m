@@ -15,7 +15,7 @@
     }
     [self.params setObject:self.userId forKey:@"userId"];
     [self.params setObject:self.paging forKey:@"paging"];
-    [[RequestManager sharedInstance] POST:@"appControlVrRoom/prescriptionCase/getContent" parameters:self.params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [[RequestManager sharedInstance] POST:@"prescriptionCase/getContent" parameters:self.params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject[@"success"] boolValue]) {
             !resultHandler ?: resultHandler(responseObject[@"data"], nil);
         } else {

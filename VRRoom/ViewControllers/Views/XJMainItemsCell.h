@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface XJMainItemsCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIButton *addButton;
-@property (weak, nonatomic) IBOutlet UIButton *searchButton;
+@property (weak, nonatomic) IBOutlet UIButton *myPatientsButton;
 @property (weak, nonatomic) IBOutlet UIButton *vrContentsButton;
 @property (weak, nonatomic) IBOutlet UIButton *helpButton;
+@property (weak, nonatomic) IBOutlet UIButton *moreButton;
 
 @end

@@ -57,8 +57,8 @@
         if (object) {
             XLDismissHUD(self.view, YES, YES, @"成功");
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:USERTOKEN];
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:ROOMID];
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:VRROOMNAME];
+//            [[NSUserDefaults standardUserDefaults] removeObjectForKey:ROOMID];
+//            [[NSUserDefaults standardUserDefaults] removeObjectForKey:VRROOMNAME];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [self backAction:nil];
             [self performSelector:@selector(turnLogin) withObject:nil afterDelay:0.1];
@@ -190,8 +190,8 @@
 - (UITextField *)passwordTextField {
     if (!_passwordTextField) {
         _passwordTextField = [[UITextField alloc] init];
-        [_passwordTextField setValue:kHexRGBColorWithAlpha(0xd0d0d0, 1.0) forKeyPath:@"_placeholderLabel.textColor"];
-        _passwordTextField.font = kSystemFont(14);
+        [_passwordTextField setValue:XJHexRGBColorWithAlpha(0xd0d0d0, 1.0) forKeyPath:@"_placeholderLabel.textColor"];
+        _passwordTextField.font = XJSystemFont(14);
         _passwordTextField.textColor = MAIN_TEXT_COLOR;
         _passwordTextField.secureTextEntry = YES;
         _passwordTextField.placeholder = @"请输入新密码";
@@ -204,8 +204,8 @@
 - (UITextField *)oldPasswordTextField {
     if (!_oldPasswordTextField) {
         _oldPasswordTextField = [[UITextField alloc] init];
-        [_oldPasswordTextField setValue:kHexRGBColorWithAlpha(0xd0d0d0, 1.0) forKeyPath:@"_placeholderLabel.textColor"];
-        _oldPasswordTextField.font = kSystemFont(14);
+        [_oldPasswordTextField setValue:XJHexRGBColorWithAlpha(0xd0d0d0, 1.0) forKeyPath:@"_placeholderLabel.textColor"];
+        _oldPasswordTextField.font = XJSystemFont(14);
         _oldPasswordTextField.textColor = MAIN_TEXT_COLOR;
         _oldPasswordTextField.secureTextEntry = YES;
         _oldPasswordTextField.placeholder = @"请输入旧密码";
@@ -218,8 +218,8 @@
 - (UITextField *)validatePasswordTextField {
     if (!_validatePasswordTextField) {
         _validatePasswordTextField = [[UITextField alloc] init];
-        [_validatePasswordTextField setValue:kHexRGBColorWithAlpha(0xd0d0d0, 1.0) forKeyPath:@"_placeholderLabel.textColor"];
-        _validatePasswordTextField.font = kSystemFont(14);
+        [_validatePasswordTextField setValue:XJHexRGBColorWithAlpha(0xd0d0d0, 1.0) forKeyPath:@"_placeholderLabel.textColor"];
+        _validatePasswordTextField.font = XJSystemFont(14);
         _validatePasswordTextField.textColor = MAIN_TEXT_COLOR;
         _validatePasswordTextField.secureTextEntry = YES;
         _validatePasswordTextField.placeholder = @"请再次输入新密码";

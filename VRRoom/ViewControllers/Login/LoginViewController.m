@@ -42,6 +42,16 @@
     
 }
 
+#pragma mark - Text field delegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField == self.phoneTextField) {
+        [self.phoneTextField resignFirstResponder];
+    } else {
+        [self.passwordTextField resignFirstResponder];
+    }
+    return YES;
+}
+
 #pragma mark - UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 2;
@@ -96,9 +106,9 @@
         if (object) {
             UserModel *model = object;
             [[NSUserDefaults standardUserDefaults] setObject:model.token forKey:USERTOKEN];
-            [[NSUserDefaults standardUserDefaults] setObject:model.vrRoomId forKey:ROOMID];
-            [[NSUserDefaults standardUserDefaults] setObject:model.vrRoomName forKey:VRROOMNAME];
-            [[NSUserDefaults standardUserDefaults] setObject:self.phoneTextField.text forKey:USERNAME];
+            [[NSUserDefaults standardUserDefaults] setObject:model.hospital forKey:USERHOSPITAL];
+            [[NSUserDefaults standardUserDefaults] setObject:model.username forKey:USERNAME];
+            [[NSUserDefaults standardUserDefaults] setObject:model.realname forKey:REALNAME];
             [[NSUserDefaults standardUserDefaults] synchronize];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.navigationController dismissViewControllerAnimated:NO completion:nil];
@@ -113,11 +123,13 @@
 - (UITextField *)phoneTextField {
     if (!_phoneTextField) {
         _phoneTextField = [[UITextField alloc] init];
-        [_phoneTextField setValue:kHexRGBColorWithAlpha(0xd0d0d0, 1.0) forKeyPath:@"_placeholderLabel.textColor"];
+        [_phoneTextField setValue:XJHexRGBColorWithAlpha(0xd0d0d0, 1.0) forKeyPath:@"_placeholderLabel.textColor"];
         _phoneTextField.font = [UIFont systemFontOfSize:14];
         _phoneTextField.textColor = MAIN_TEXT_COLOR;
         _phoneTextField.placeholder = @"请输入您的账号";
         _phoneTextField.clearButtonMode =  UITextFieldViewModeWhileEditing;
+        _phoneTextField.returnKeyType = UIReturnKeyDone;
+        _phoneTextField.keyboardType = UIKeyboardTypeNumberPad;
         _phoneTextField.delegate = self;
     }
     return _phoneTextField;
@@ -125,7 +137,7 @@
 - (UITextField *)passwordTextField {
     if (!_passwordTextField) {
         _passwordTextField = [[UITextField alloc] init];
-        [_passwordTextField setValue:kHexRGBColorWithAlpha(0xd0d0d0, 1.0) forKeyPath:@"_placeholderLabel.textColor"];
+        [_passwordTextField setValue:XJHexRGBColorWithAlpha(0xd0d0d0, 1.0) forKeyPath:@"_placeholderLabel.textColor"];
         _passwordTextField.font = [UIFont systemFontOfSize:14];
         _passwordTextField.textColor = MAIN_TEXT_COLOR;
         _passwordTextField.secureTextEntry = YES;

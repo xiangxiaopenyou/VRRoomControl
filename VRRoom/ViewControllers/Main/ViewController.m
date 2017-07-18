@@ -10,6 +10,7 @@
 #import "SearchViewController.h"
 #import "ChangePasswordTableViewController.h"
 #import "XJAddPatientViewController.h"
+#import "XJMyPatientsViewController.h"
 #import "XJMainItemsCell.h"
 
 #import "PatientModel.h"
@@ -20,7 +21,6 @@
 @interface ViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 
-@property (weak, nonatomic) IBOutlet UILabel *roomNameLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 //@property (strong, nonatomic) UIView *titleView;
@@ -39,8 +39,8 @@
     // Do any additional setup after loading the view, typically from a nib.
     self.tableView.userInteractionEnabled = YES;
     [self.tableView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closeMemu)]];
-    NSString *roomName = [[NSUserDefaults standardUserDefaults] stringForKey:VRROOMNAME];
-    self.roomNameLabel.text = XLIsNullObject(roomName) ? nil : roomName;
+    //NSString *roomName = [[NSUserDefaults standardUserDefaults] stringForKey:VRROOMNAME];
+    //self.roomNameLabel.text = XLIsNullObject(roomName) ? nil : roomName;
     
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(turnChangePassword) name:@"changePasswordDidClick" object:nil];
 }
@@ -59,6 +59,10 @@
 - (IBAction)searchPatientAction:(id)sender {
     SearchViewController *searchController = [self.storyboard instantiateViewControllerWithIdentifier:@"Search"];
     [self.navigationController pushViewController:searchController animated:YES];
+}
+- (IBAction)myPatientsAction:(id)sender {
+    XJMyPatientsViewController *myPatientsController = [[UIStoryboard storyboardWithName:@"Patients" bundle:nil] instantiateViewControllerWithIdentifier:@"MyPatientsController"];
+    [self.navigationController pushViewController:myPatientsController animated:YES];
 }
 - (IBAction)vrContentsAction:(id)sender {
 }

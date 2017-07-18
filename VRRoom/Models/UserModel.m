@@ -10,7 +10,9 @@
 #import "LoginRequest.h"
 #import "ChangePasswordRequest.h"
 #import "XJAddPatientRequest.h"
+#import "XJFetchMyPatientsRequest.h"
 #import "PrescriptionModel.h"
+#import "PatientModel.h"
 
 @implementation UserModel
 + (void)userLogin:(NSString *)username password:(NSString *)password hanlder:(RequestResultHandler)handler {
@@ -34,9 +36,8 @@
         return YES;
     } result:hanlder];
 }
-+ (void)addPatient:(NSString *)roomId informations:(NSDictionary *)informations handler:(RequestResultHandler)handler {
++ (void)addPatient:(NSDictionary *)informations handler:(RequestResultHandler)handler {
     [[XJAddPatientRequest new] request:^BOOL(XJAddPatientRequest *request) {
-        request.roomId = roomId;
         request.informations = informations;
         return YES;
     } result:^(id object, NSString *msg) {
@@ -48,6 +49,18 @@
     }];
 }
 + (void)sendPrescription:(PrescriptionModel *)model handler:(RequestResultHandler)handler {
+}
++ (void)myPatients:(RequestResultHandler)hanlder {
+    [[XJFetchMyPatientsRequest new] request:^BOOL(id request) {
+        return YES;
+    } result:^(id object, NSString *msg) {
+        if (msg) {
+            !hanlder ?: hanlder(nil, msg);
+        } else {
+            NSArray *tempArray = [PatientModel setupWithArray:(NSArray *)object];
+            !hanlder ?: hanlder(tempArray, nil);
+        }
+    }];
 }
 
 @end

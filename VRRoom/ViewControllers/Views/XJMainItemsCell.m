@@ -14,10 +14,10 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    self.addButton.layer.borderWidth = 1;
-    self.addButton.layer.borderColor = BREAK_LINE_COLOR.CGColor;
-    self.searchButton.layer.borderWidth = 1;
-    self.searchButton.layer.borderColor = BREAK_LINE_COLOR.CGColor;
+    self.myPatientsButton.layer.borderWidth = 1;
+    self.myPatientsButton.layer.borderColor = BREAK_LINE_COLOR.CGColor;
+    self.moreButton.layer.borderWidth = 1;
+    self.moreButton.layer.borderColor = BREAK_LINE_COLOR.CGColor;
     self.vrContentsButton.layer.borderWidth = 1;
     self.vrContentsButton.layer.borderColor = BREAK_LINE_COLOR.CGColor;
     self.helpButton.layer.borderWidth = 1;

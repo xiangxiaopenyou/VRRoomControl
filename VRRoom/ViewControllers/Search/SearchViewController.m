@@ -306,7 +306,7 @@
         [self.selectedHistoryArray removeAllObjects];
         [self.historyArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             NSString *string = (NSString *)obj;
-            if ([string containsString:self.self.searchTextField.text]) {
+            if ([string containsString:self.searchTextField.text]) {
                 [self.selectedHistoryArray addObject:string];
             }
         }];
@@ -322,7 +322,7 @@
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (XLIsNullObject(self.searchTextField.text) && XLIsNullObject(self.selectedKeyword)) {
-        XLShowThenDismissHUD(NO, @"请先输入手机号或姓名再进行搜索", self.view);
+        XLShowThenDismissHUD(NO, @"请先输入病历号再进行搜索", self.view);
         return NO;
     }
     [self.searchTextField resignFirstResponder];
@@ -349,8 +349,8 @@
             });
             if ([msg integerValue] >= 95 && [msg integerValue] < 100) {
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:USERTOKEN];
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:ROOMID];
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:VRROOMNAME];
+//                [[NSUserDefaults standardUserDefaults] removeObjectForKey:ROOMID];
+//                [[NSUserDefaults standardUserDefaults] removeObjectForKey:VRROOMNAME];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 XLDismissHUD(self.view, YES, NO, @"登录失效，请重新登录");
                 [self performSelector:@selector(turnLogin) withObject:nil afterDelay:1.0];
@@ -461,8 +461,8 @@
             return cell;
         } else {
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HistoryCell" forIndexPath:indexPath];
-            cell.textLabel.font = kSystemFont(14);
-            cell.textLabel.textColor = kRGBColor(100, 100, 100, 1);
+            cell.textLabel.font = XJSystemFont(14);
+            cell.textLabel.textColor = XJRGBColor(100, 100, 100, 1);
             NSString *temp = self.selectedHistoryArray[indexPath.row - 1];
             cell.textLabel.text = temp;
             return cell;
@@ -528,10 +528,10 @@
 - (UITextField *)searchTextField {
     if (!_searchTextField) {
         _searchTextField = [[UITextField alloc] init];
-        _searchTextField.placeholder = @"请输入手机号或姓名";
+        _searchTextField.placeholder = @"请输入病历号";
         [_searchTextField setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
         _searchTextField.textColor = [UIColor whiteColor];
-        _searchTextField.font = kSystemFont(14);
+        _searchTextField.font = XJSystemFont(14);
         _searchTextField.returnKeyType = UIReturnKeySearch;
         _searchTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _searchTextField.delegate = self;
@@ -545,7 +545,7 @@
         [_searchButton setTitle:@"查询" forState:UIControlStateNormal];
         [_searchButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_searchButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
-        _searchButton.titleLabel.font = kSystemFont(15);
+        _searchButton.titleLabel.font = XJSystemFont(15);
         [_searchButton addTarget:self action:@selector(textFieldShouldReturn:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _searchButton;

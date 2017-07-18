@@ -12,12 +12,13 @@
 @interface UserModel : XLModel
 @property (copy, nonatomic) NSString *userId;
 @property (copy, nonatomic) NSString *username;
-@property (copy, nonatomic) NSString *vrRoomId;
 @property (copy, nonatomic) NSString *realname;
 @property (copy, nonatomic) NSString *token;
-@property (copy, nonatomic) NSString *vrRoomName;
+@property (copy, nonatomic) NSString *hospital;
+//@property (copy, nonatomic) NSString *vrRoomName;
 + (void)userLogin:(NSString *)username password:(NSString *)password hanlder:(RequestResultHandler)handler;
 + (void)changePassword:(NSString *)oldPassword password:(NSString *)password hanlder:(RequestResultHandler)hanlder;
-+ (void)addPatient:(NSString *)roomId informations:(NSDictionary *)informations handler:(RequestResultHandler)handler;
++ (void)addPatient:(NSDictionary *)informations handler:(RequestResultHandler)handler;
 + (void)sendPrescription:(PrescriptionModel *)model handler:(RequestResultHandler)handler;
++ (void)myPatients:(RequestResultHandler)hanlder;
 @end

@@ -19,7 +19,7 @@
         [self.params setObject:self.prescriptionContentId forKey:@"prescriptionContentId"];
     }
     [self.params setObject:self.content forKey:@"content"];
-    [[RequestManager sharedInstance] POST:@"appControlVrRoom/task/add" parameters:self.params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [[RequestManager sharedInstance] POST:@"task/add" parameters:self.params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject[@"success"] boolValue]) {
             !resultHandler ?: resultHandler(responseObject, nil);
         } else {

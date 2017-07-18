@@ -8,5 +8,6 @@ pod 'Masonry'
 pod 'UIImage-Helpers'
 pod 'MJRefresh'
 pod 'GJCFUitils'
+pod 'YUChineseSorting'
 end 
 

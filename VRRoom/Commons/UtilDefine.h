@@ -29,21 +29,21 @@
 #define BREAK_LINE_COLOR [UIColor colorWithRed:208/255.0 green:208/255.0 blue:208/255.0 alpha:1.0]
 #define MAIN_TEXT_COLOR [UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:1.0]
 
-/**
- *  RGB颜色
- */
-#define kRGBColor(r,g,b,a)	[UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
-
-/**
- *  Hex颜色转RGB颜色
- */
-#define kHexRGBColorWithAlpha(rgbValue,a) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
-
-/**
- *  系统字体
- */
-#define kSystemFont(x) [UIFont systemFontOfSize:x]
-#define kBoldSystemFont(x) [UIFont boldSystemFontOfSize:x]
+///**
+// *  RGB颜色
+// */
+//#define kRGBColor(r,g,b,a)	[UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
+//
+///**
+// *  Hex颜色转RGB颜色
+// */
+//#define kHexRGBColorWithAlpha(rgbValue,a) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
+//
+///**
+// *  系统字体
+// */
+//#define kSystemFont(x) [UIFont systemFontOfSize:x]
+//#define kBoldSystemFont(x) [UIFont boldSystemFontOfSize:x]
 /**
  *  判空
  */
