@@ -116,9 +116,9 @@
                                                         <constraint firstAttribute="width" secondItem="vXY-E3-6uy" secondAttribute="height" constant="30" id="1Fv-5v-1qY"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                                    <inset key="titleEdgeInsets" minX="-48" minY="0.0" maxX="0.0" maxY="-40"/>
-                                                    <inset key="imageEdgeInsets" minX="0.0" minY="-40" maxX="-40" maxY="0.0"/>
-                                                    <state key="normal" title="更多期待" image="homepage_help">
+                                                    <inset key="titleEdgeInsets" minX="-50" minY="0.0" maxX="0.0" maxY="-40"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="-40" maxX="-62" maxY="0.0"/>
+                                                    <state key="normal" title="更多期待" image="homepage_more">
                                                         <color key="titleColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                 </button>
@@ -1076,6 +1076,7 @@
         <image name="homepage_add" width="57" height="36"/>
         <image name="homepage_content" width="57" height="36"/>
         <image name="homepage_help" width="57" height="36"/>
+        <image name="homepage_more" width="57" height="36"/>
         <image name="login_logo" width="70" height="70"/>
         <image name="logo_small" width="78" height="60"/>
         <image name="phone" width="21" height="21"/>

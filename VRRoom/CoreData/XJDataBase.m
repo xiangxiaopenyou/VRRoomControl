@@ -83,6 +83,7 @@
     userInfo.diseaseId = user.diseaseId;
     userInfo.disease = user.disease;
     userInfo.canModify = user.canModify.integerValue;
+    userInfo.ts = user.ts;
     NSError *error = nil;
     if (context.hasChanges) {
         [context save:&error];
@@ -116,6 +117,7 @@
         userInfo.diseaseId = user.diseaseId;
         userInfo.disease = user.disease;
         userInfo.canModify = @(user.canModify);
+        userInfo.ts = user.ts;
         [resultArray addObject:userInfo];
     }
     return resultArray;
@@ -143,6 +145,7 @@
         userInfo.diseaseId = user.diseaseId;
         userInfo.disease = user.disease;
         userInfo.canModify = user.canModify.integerValue;
+        userInfo.ts = user.ts;
     }
     if ([context save:&error]) {
         //更新成功

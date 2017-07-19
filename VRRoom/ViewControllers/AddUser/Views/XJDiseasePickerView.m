@@ -101,6 +101,9 @@
         self.hidden = YES;
     }];
 }
+- (void)selectRow:(NSInteger)row {
+    [self.pickerView selectRow:row inComponent:0 animated:NO];
+}
 
 #pragma mark - Picker view data source
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {

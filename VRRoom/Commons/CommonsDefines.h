@@ -35,6 +35,20 @@ typedef NS_ENUM(NSInteger, XJEducationDegree) {
     XJEducationDegreeUniversity,
     XJEducationDegreeMaster
 };
+typedef NS_ENUM(NSInteger, XJPatientInformationTypes) {
+    XJPatientInformationTypesName = 0,
+    XJPatientInformationTypesRemark,
+    XJPatientInformationTypesClinichistoryNo,
+    XJPatientInformationTypesMedicalInsuranceCardNo,
+    XJPatientInformationTypesDisease,
+    XJPatientInformationTypesPhone,
+    XJPatientInformationTypesSex,
+    XJPatientInformationTypesBirthday,
+    XJPatientInformationTypesEducationDegree,
+    XJPatientInformationTypesMaritalStatus,
+    XJPatientInformationTypesNone
+    
+};
 #define MAIN_TEXT_COLOR [UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:1.0]
 #define NAVIGATIONBAR_COLOR [UIColor colorWithRed:82/255.0 green:184/255.0 blue:255/255.0 alpha:1.0]
 #define TABBAR_TITLE_COLOR [UIColor colorWithRed:170/255.0 green:170/255.0 blue:170/255.0 alpha:1.0]

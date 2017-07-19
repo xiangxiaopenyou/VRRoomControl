@@ -28,7 +28,9 @@
 @property (copy, nonatomic) NSString *diseaseId;
 @property (copy, nonatomic) NSString *disease;
 @property (strong, nonatomic) NSNumber *canModify;
+@property (copy, nonatomic) NSString *ts;                       //时间戳
 + (void)searchPatient:(NSString *)keyword handler:(RequestResultHandler)handler;
 + (void)patientInformations:(NSString *)patientId handler:(RequestResultHandler)handler;
++ (void)modifyInformations:(PatientModel *)model patientId:(NSString *)patientId handler:(RequestResultHandler)handler;
 
 @end

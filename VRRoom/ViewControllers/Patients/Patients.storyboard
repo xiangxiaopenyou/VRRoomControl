@@ -162,7 +162,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="患者信息" id="wrJ-J7-nFW">
-                        <barButtonItem key="rightBarButtonItem" title="开处方" id="mkw-3r-QG0"/>
+                        <barButtonItem key="rightBarButtonItem" title="开处方" id="mkw-3r-QG0">
+                            <connections>
+                                <action selector="addPrescriptionAction:" destination="WDY-4t-IAq" id="VtP-Dy-5HO"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
@@ -172,6 +176,77 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CYS-c1-iNt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1836" y="-186"/>
+        </scene>
+        <!--Modify Informations View Controller-->
+        <scene sceneID="4KP-6E-Obp">
+            <objects>
+                <viewController storyboardIdentifier="ModifyInformations" automaticallyAdjustsScrollViewInsets="NO" id="hQZ-Qr-r6X" customClass="XJModifyInformationsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7tW-vh-ynS"/>
+                        <viewControllerLayoutGuide type="bottom" id="HKY-SD-qiL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mUk-nj-YTY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="dSg-j2-Oxb">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ModifyInformationCell" rowHeight="50" id="DqP-im-ljp" customClass="XJModifyInformationCell">
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DqP-im-ljp" id="QOP-QV-Hbf">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="--" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="9Yu-ZS-cbc">
+                                                    <rect key="frame" x="15" y="14.5" width="345" height="19"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="9Yu-ZS-cbc" firstAttribute="centerY" secondItem="QOP-QV-Hbf" secondAttribute="centerY" id="94n-Tm-cJX"/>
+                                                <constraint firstItem="9Yu-ZS-cbc" firstAttribute="leading" secondItem="QOP-QV-Hbf" secondAttribute="leading" constant="15" id="nsi-7U-gbB"/>
+                                                <constraint firstAttribute="trailing" secondItem="9Yu-ZS-cbc" secondAttribute="trailing" constant="15" id="zVe-S2-mo6"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="modifyTextField" destination="9Yu-ZS-cbc" id="13v-LE-5ZP"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="hQZ-Qr-r6X" id="vlC-gM-jww"/>
+                                    <outlet property="delegate" destination="hQZ-Qr-r6X" id="Daq-oX-4i9"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="dSg-j2-Oxb" firstAttribute="top" secondItem="7tW-vh-ynS" secondAttribute="bottom" id="6b0-Yc-QC9"/>
+                            <constraint firstAttribute="trailing" secondItem="dSg-j2-Oxb" secondAttribute="trailing" id="YMy-4i-1FC"/>
+                            <constraint firstItem="dSg-j2-Oxb" firstAttribute="leading" secondItem="mUk-nj-YTY" secondAttribute="leading" id="YUf-zT-o5f"/>
+                            <constraint firstItem="HKY-SD-qiL" firstAttribute="top" secondItem="dSg-j2-Oxb" secondAttribute="bottom" id="gtB-hE-uhv"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="0MW-1z-yQg">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="保存" id="qPf-oC-ZtF">
+                            <connections>
+                                <action selector="saveAction:" destination="hQZ-Qr-r6X" id="efd-xU-B0i"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="tableView" destination="dSg-j2-Oxb" id="dtE-bI-HbI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qBn-NT-D4o" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2080" y="296"/>
         </scene>
     </scenes>
     <resources>

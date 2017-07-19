@@ -11,4 +11,5 @@
 @interface XJDatePickerView : UIView
 @property (copy, nonatomic) void (^selectBlock)(NSString *dateString);
 - (void)show;
+- (void)selectDate:(NSString *)dateString;
 @end

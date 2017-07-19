@@ -94,6 +94,11 @@
         self.hidden = YES;
     }];
 }
+- (void)selectDate:(NSString *)dateString {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    [self.datePicker setDate:[dateFormatter dateFromString:dateString]];
+}
 
 #pragma mark - Getters
 - (UIView *)contentView {

@@ -9,6 +9,7 @@
 #import "PatientModel.h"
 #import "SearchPatientsRequest.h"
 #import "XJPatientInformationsRequest.h"
+#import "XJModifyInformationsRequest.h"
 
 @implementation PatientModel
 + (void)searchPatient:(NSString *)keyword handler:(RequestResultHandler)handler {
@@ -36,6 +37,13 @@
             !handler ?: handler(tempModel, nil);
         }
     }];
+}
++ (void)modifyInformations:(PatientModel *)model patientId:(NSString *)patientId handler:(RequestResultHandler)handler {
+    [[XJModifyInformationsRequest new] request:^BOOL(XJModifyInformationsRequest *request) {
+        request.model = model;
+        request.patientId = patientId;
+        return YES;
+    } result:handler];
 }
 
 @end

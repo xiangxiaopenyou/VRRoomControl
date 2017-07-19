@@ -7,7 +7,7 @@
 //
 
 #import "XJAddPatientViewController.h"
-#import "WritePrescriptionViewController.h"
+#import "XJPatientDetailViewController.h"
 #import "XJPatientsInformationCell.h"
 #import "XJDatePickerView.h"
 #import "XJDiseasePickerView.h"
@@ -29,6 +29,7 @@
 @property (nonatomic) XJUserSex sex;
 @property (nonatomic) XJMaritalStatus maritalStatus;
 @property (nonatomic) XJEducationDegree educationDegree;
+@property (copy, nonatomic) NSString *patientId;
 
 @end
 
@@ -90,6 +91,7 @@
         [UserModel addPatient:informations handler:^(id object, NSString *msg) {
             if (object) {
                 XLDismissHUD(self.view, YES, YES, @"增加患者成功");
+                self.patientId = object[@"id"];
                 [self performSelector:@selector(turnToAddPrescription) withObject:nil afterDelay:0.5];
             } else {
                 XLDismissHUD(self.view, YES, NO, msg);
@@ -132,8 +134,9 @@
     return canUpload;
 }
 - (void)turnToAddPrescription {
-    WritePrescriptionViewController *writePrescriptionController = [self.storyboard instantiateViewControllerWithIdentifier:@"WritePrescription"];
-    [self.navigationController pushViewController:writePrescriptionController animated:YES];
+    XJPatientDetailViewController *detailController = [[UIStoryboard storyboardWithName:@"Patients" bundle:nil] instantiateViewControllerWithIdentifier:@"PatientDetail"];
+    detailController.patientId = self.patientId;
+    [self.navigationController pushViewController:detailController animated:YES];
 }
 
 #pragma mark - Requests

@@ -36,39 +36,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.tableView.tableFooterView = [UIView new];
-    PatientModel *model1 = [[PatientModel alloc] init];
-    model1.realnameFirstSpell = @"A";
-    model1.name = @"啊哈";
-    PatientModel *model2 = [[PatientModel alloc] init];
-    model2.realnameFirstSpell = @"C";
-    model2.name = @"草";
-    PatientModel *model3 = [[PatientModel alloc] init];
-    model3.realnameFirstSpell = @"H";
-    model3.name = @"呼呼";
-    PatientModel *model6 = [[PatientModel alloc] init];
-    model6.realnameFirstSpell = @"#";
-    model6.name = @"%%";
-    PatientModel *model4 = [[PatientModel alloc] init];
-    model4.realnameFirstSpell = @"L";
-    model4.name = @"啦啦";
-    PatientModel *model5 = [[PatientModel alloc] init];
-    model5.realnameFirstSpell = @"H";
-    model5.name = @"hehe";
-    PatientModel *model7 = [[PatientModel alloc] init];
-    model7.realnameFirstSpell = @"H";
-    model7.name = @"胡子";
-    PatientModel *model8 = [[PatientModel alloc] init];
-    model8.realnameFirstSpell = @"H";
-    model8.name = @"hhhh";
-    
-    //self.myPatientsArray = @[model5, model1, model4, model6, model2, model3, model7, model8];
-//    self.indexArray = [self indexArray:self.myPatientsArray];
-//    self.patientsDataArray = [self sortResultArray:self.myPatientsArray];
+
     [self.searchController.view addSubview:self.searchTableView];
     
     self.historyArray = [[[NSUserDefaults standardUserDefaults] arrayForKey:SEARCHHISTORY] mutableCopy];
     self.selectedHistoryArray = [self.historyArray mutableCopy];
-    
+    XLShowHUDWithMessage(nil, self.view);
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -82,7 +55,6 @@
 
 #pragma mark - Requests
 - (void)fetchMyPatients {
-    XLShowHUDWithMessage(nil, self.view);
     [UserModel myPatients:^(id object, NSString *msg) {
         if (object) {
             XLDismissHUD(self.view, NO, YES, nil);
@@ -177,7 +149,7 @@
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return tableView == self.tableView ? 45.f : 40.f;
+    return tableView == self.tableView ? 50.f : 40.f;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView == self.tableView) {

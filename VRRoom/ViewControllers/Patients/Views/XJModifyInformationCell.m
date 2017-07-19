@@ -1,19 +1,18 @@
 //
-//  XJPatientsInformationCell.m
+//  XJModifyInformationCell.m
 //  VRRoom
 //
-//  Created by 项小盆友 on 2017/7/11.
+//  Created by 项小盆友 on 2017/7/18.
 //  Copyright © 2017年 InHeart. All rights reserved.
 //
 
-#import "XJPatientsInformationCell.h"
+#import "XJModifyInformationCell.h"
 
-@implementation XJPatientsInformationCell
+@implementation XJModifyInformationCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    self.textField.borderStyle = UITextBorderStyleNone;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

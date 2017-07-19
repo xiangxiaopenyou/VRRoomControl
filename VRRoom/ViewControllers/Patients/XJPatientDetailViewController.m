@@ -7,6 +7,9 @@
 //
 
 #import "XJPatientDetailViewController.h"
+#import "XJModifyInformationsViewController.h"
+#import "WritePrescriptionViewController.h"
+#import "XJAddPatientViewController.h"
 #import "PatientModel.h"
 #import "XJDataBase.h"
 
@@ -30,9 +33,19 @@
     if (tempArray.count > 0) {
         self.patientModel = tempArray[0];
         [self.tableView reloadData];
-    } else {
-        [self fetchInformations];
     }
+    NSMutableArray *viewControllers = [self.navigationController.viewControllers mutableCopy];
+    for (NSInteger i = 0; i < self.navigationController.viewControllers.count; i ++) {
+        UIViewController *controller = self.navigationController.viewControllers[i];
+        if ([controller isKindOfClass:[XJAddPatientViewController class]]) {
+            [viewControllers removeObjectAtIndex:i];
+        }
+    }
+    [self.navigationController setViewControllers:viewControllers];
+}
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self fetchInformations];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,17 +53,29 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Action
+- (IBAction)addPrescriptionAction:(id)sender {
+    WritePrescriptionViewController *writePrescriptionController = [[UIStoryboard storyboardWithName:@"AddUser" bundle:nil] instantiateViewControllerWithIdentifier:@"WritePrescription"];
+    [self.navigationController pushViewController:writePrescriptionController animated:YES];
+}
 #pragma mark - Request
 - (void)fetchInformations {
-    XLShowHUDWithMessage(nil, self.view);
+    if (!self.patientModel) {
+        XLShowHUDWithMessage(nil, self.view);
+    }
     [PatientModel patientInformations:self.patientId handler:^(id object, NSString *msg) {
         if (object) {
             XLDismissHUD(self.view, NO, YES, nil);
             self.patientModel = object;
-            [[XJDataBase sharedDataBase] insertUser:self.patientModel];
-            GJCFAsyncMainQueue(^{
-                [self.tableView reloadData];
-            });
+            self.patientModel.id = self.patientId;
+            if ([[XJDataBase sharedDataBase] selectUser:self.patientId].count > 0) {
+                [[XJDataBase sharedDataBase] updatePatientData:self.patientModel];
+            } else {
+                [[XJDataBase sharedDataBase] insertUser:self.patientModel];
+                GJCFAsyncMainQueue(^{
+                    [self.tableView reloadData];
+                });
+            }
         } else {
             XLDismissHUD(self.view, YES, NO, msg);
         }
@@ -71,7 +96,7 @@
             number = 4;
             break;
         case 2:
-            number = 6;
+            number = 5;
             break;
         case 3:
             number = 1;
@@ -82,7 +107,7 @@
     return number;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 40.f;
+    return 45.f;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DetailsCell" forIndexPath:indexPath];
@@ -106,6 +131,7 @@
                 cell.accessoryType = UITableViewCellAccessoryNone;
                 NSString *hospital = [[NSUserDefaults standardUserDefaults] stringForKey:USERHOSPITAL];
                 cell.detailTextLabel.text = hospital;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
             } else if (indexPath.row == 1) {
                 cell.detailTextLabel.text = self.patientModel.clinichistoryNo;
             } else if (indexPath.row == 2) {
@@ -128,7 +154,7 @@
                     cell.detailTextLabel.text = @"女";
                 }
             } else if (indexPath.row == 2) {
-                cell.detailTextLabel.text = XLIsNullObject(self.patientModel.birthday) ? @"" : [self.patientModel.birthday substringToIndex:9];
+                cell.detailTextLabel.text = XLIsNullObject(self.patientModel.birthday) ? @"" : [self.patientModel.birthday substringToIndex:10];
             } else if (indexPath.row == 3) {
                 switch (self.patientModel.educationDegree.integerValue) {
                     case XJEducationDegreeUnknown:
@@ -189,6 +215,68 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 0.1f;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (self.patientModel.canModify.integerValue == 1) {
+        if (indexPath.section < 3 && !(indexPath.section == 1 && indexPath.row == 0)) {
+            XJModifyInformationsViewController *modifyController = [self.storyboard instantiateViewControllerWithIdentifier:@"ModifyInformations"];
+            XJPatientInformationTypes type = XJPatientInformationTypesNone;
+            if (indexPath.section == 0) {
+                if (indexPath.row == 0) {
+                    type = XJPatientInformationTypesName;
+                } else {
+                    type = XJPatientInformationTypesRemark;
+                }
+            } else if (indexPath.section == 1) {
+                if (indexPath.row == 1) {
+                    type = XJPatientInformationTypesClinichistoryNo;
+                } else if (indexPath.row == 2) {
+                    type = XJPatientInformationTypesMedicalInsuranceCardNo;
+                } else if (indexPath.row == 3) {
+                    type = XJPatientInformationTypesDisease;
+                }
+            } else if (indexPath.section == 2) {
+                if (indexPath.row == 0) {
+                    type = XJPatientInformationTypesPhone;
+                } else if (indexPath.row == 1) {
+                    type = XJPatientInformationTypesSex;
+                } else if (indexPath.row == 2) {
+                    type = XJPatientInformationTypesBirthday;
+                } else if (indexPath.row == 3) {
+                    type = XJPatientInformationTypesEducationDegree;
+                } else {
+                    type = XJPatientInformationTypesMaritalStatus;
+                }
+            }
+            modifyController.type = type;
+            modifyController.model = self.patientModel;
+            modifyController.modifyBlock = ^(PatientModel *model) {
+                if (model) {
+                    self.patientModel = model;
+                    GJCFAsyncMainQueue(^{
+                        [self.tableView reloadData];
+                    });
+                }
+            };
+            [self.navigationController pushViewController:modifyController animated:YES];
+        }
+    } else {                                //只能修改备注
+        if (indexPath.section == 0 && indexPath.row == 1) {
+            XJModifyInformationsViewController *modifyController = [self.storyboard instantiateViewControllerWithIdentifier:@"ModifyInformations"];
+            modifyController.type = XJPatientInformationTypesRemark;
+            modifyController.model = self.patientModel;
+            modifyController.modifyBlock = ^(PatientModel *model) {
+                if (model) {
+                    self.patientModel = model;
+                    GJCFAsyncMainQueue(^{
+                        [self.tableView reloadData];
+                    });
+                }
+            };
+            [self.navigationController pushViewController:modifyController animated:YES];
+        }
+    }
 }
 
 #pragma mark - Getters

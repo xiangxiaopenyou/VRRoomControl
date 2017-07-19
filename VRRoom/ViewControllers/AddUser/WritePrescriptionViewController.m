@@ -121,7 +121,7 @@
 
 #pragma mark - PrescriptionContentsCellDelegate
 - (void)didClickAddContent {
-    SceneContentsViewController *contentsViewController = [[UIStoryboard storyboardWithName:@"Homepage" bundle:nil] instantiateViewControllerWithIdentifier:@"SceneContents"];
+    SceneContentsViewController *contentsViewController = [[UIStoryboard storyboardWithName:@"AddUser" bundle:nil] instantiateViewControllerWithIdentifier:@"SceneContents"];
     contentsViewController.viewType = 2;
     contentsViewController.selectedArray = [self.contentsArray copy];
     contentsViewController.pickBlock = ^(NSArray *array) {
@@ -182,9 +182,6 @@
 */
 
 #pragma mark - IBAction & Selector
-- (IBAction)closeAction:(id)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
 - (IBAction)submitAction:(id)sender {
     [self hideKeyboard];
     if (XLIsNullObject(self.diseaseTextView.text)) {
