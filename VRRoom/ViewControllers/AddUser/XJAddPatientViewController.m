@@ -39,14 +39,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.tableView.tableFooterView = [UIView new];
-    [[UIApplication sharedApplication].keyWindow addSubview:self.datePickerView];
+    [XJKeyWindow addSubview:self.datePickerView];
     GJCFWeakSelf weakSelf = self;
     self.datePickerView.selectBlock = ^(NSString *dateString) {
         GJCFStrongSelf strongSelf = weakSelf;
         _birthdayString = dateString;
         [strongSelf.tableView reloadData];
     };
-    [[UIApplication sharedApplication].keyWindow addSubview:self.diseasePickerView];
+    [XJKeyWindow addSubview:self.diseasePickerView];
     self.diseasePickerView.selectBlock = ^(DiseaseModel *model) {
         GJCFStrongSelf strongSelf = weakSelf;
         _selectedDisease = model;

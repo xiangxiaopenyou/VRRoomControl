@@ -11,10 +11,12 @@
 #import "ChangePasswordTableViewController.h"
 #import "XJAddPatientViewController.h"
 #import "XJMyPatientsViewController.h"
+#import "SceneContentsViewController.h"
 #import "XJMainItemsCell.h"
 
 #import "PatientModel.h"
 #import "PrescriptionModel.h"
+#import "UserModel.h"
 
 #define XLAppVersion [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"]
 
@@ -44,11 +46,36 @@
     
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(turnChangePassword) name:@"changePasswordDidClick" object:nil];
 }
-
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self versionInformationsRequest];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Request
+- (void)versionInformationsRequest {
+    [UserModel versionInformations:^(id object, NSString *msg) {
+        if (object) {
+//            [[NSUserDefaults standardUserDefaults] removeObjectForKey:USERTOKEN];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
+//            XLDismissHUD(self.view, YES, NO, @"登录失效，请重新登录");
+//            [self performSelector:@selector(turnLogin) withObject:nil afterDelay:1.0];
+        } else {
+            if ([msg integerValue] >= 95 && [msg integerValue] < 100) {
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:USERTOKEN];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                XLDismissHUD(self.view, YES, NO, @"登录失效，请重新登录");
+                [self performSelector:@selector(turnLogin) withObject:nil afterDelay:1.0];
+            } else {
+                XLDismissHUD(self.view, YES, NO, msg);
+            }
+
+        }
+    }];
 }
 
 #pragma mark - IBAction
@@ -65,6 +92,9 @@
     [self.navigationController pushViewController:myPatientsController animated:YES];
 }
 - (IBAction)vrContentsAction:(id)sender {
+    SceneContentsViewController *contentsViewController = [[UIStoryboard storyboardWithName:@"AddUser" bundle:nil] instantiateViewControllerWithIdentifier:@"SceneContents"];
+    contentsViewController.viewType = 1;
+    [self.navigationController pushViewController:contentsViewController animated:YES];
 }
 - (IBAction)directionAction:(id)sender {
 }
@@ -93,6 +123,9 @@
 //    
 //    self.navigationItem.titleView = _titleView;
 //}
+- (void)turnLogin {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginStateDidChanged" object:nil];
+}
 
 #pragma mark - SlideNavigationControllerDelegate
 - (BOOL)slideNavigationControllerShouldDisplayLeftMenu {

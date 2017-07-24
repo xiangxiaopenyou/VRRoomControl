@@ -71,8 +71,12 @@ typedef NS_ENUM(NSInteger, XJPatientInformationTypes) {
 #define XJSystemFont(x) [UIFont systemFontOfSize:x]
 #define XJBoldSystemFont(x) [UIFont boldSystemFontOfSize:x]
 
+//主窗口
+#define XJKeyWindow [UIApplication sharedApplication].keyWindow
+
 //用户相关
 extern NSString * const USERTOKEN;
+extern NSString * const USERID;
 extern NSString * const ROOMID;
 extern NSString * const VRROOMNAME;
 extern NSString * const SEARCHHISTORY;

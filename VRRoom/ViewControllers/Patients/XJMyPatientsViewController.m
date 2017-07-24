@@ -36,9 +36,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.tableView.tableFooterView = [UIView new];
-
     [self.searchController.view addSubview:self.searchTableView];
-    
+    //self.definesPresentationContext = YES;
     self.historyArray = [[[NSUserDefaults standardUserDefaults] arrayForKey:SEARCHHISTORY] mutableCopy];
     self.selectedHistoryArray = [self.historyArray mutableCopy];
     XLShowHUDWithMessage(nil, self.view);
@@ -79,6 +78,31 @@
         }
     }];
 }
+- (void)searchPatient:(NSString *)keyword {
+    XLShowHUDWithMessage(@"正在搜索", XJKeyWindow);
+    [PatientModel searchPatient:keyword handler:^(id object, NSString *msg) {
+        if (object) {
+            XLDismissHUD(XJKeyWindow, NO, YES, nil);
+            PatientModel *tempModel = object;
+            [self pushToPatientDetail:tempModel.userId];
+            [self saveSearchHistory:keyword];
+        } else {
+            XLDismissHUD(XJKeyWindow, YES, NO, msg);
+        }
+    }];
+}
+
+#pragma mark - Private methods
+- (void)pushToPatientDetail:(NSString *)patientId {
+    XJPatientDetailViewController *detailController = [self.storyboard instantiateViewControllerWithIdentifier:@"PatientDetail"];
+    detailController.patientId = patientId;
+    [self.navigationController pushViewController:detailController animated:YES];
+    [self.searchController dismissViewControllerAnimated:NO completion:^{
+        self.searchBar.hidden = NO;
+        self.view.hidden = NO;
+        self.searchTableView.hidden = YES;
+    }];
+}
 
 #pragma mark - Action
 - (void)deleteHistoryAction {
@@ -117,6 +141,13 @@
             }];
         }
         [self.searchTableView reloadData];
+    }
+}
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    if (searchBar == self.searchController.searchBar) {
+        if (searchBar.text.length > 0) {
+            [self searchPatient:searchBar.text];
+        }
     }
 }
 
@@ -219,6 +250,11 @@
         XJPatientDetailViewController *informationsController = [self.storyboard instantiateViewControllerWithIdentifier:@"PatientDetail"];
         informationsController.patientId = tempModel.id;
         [self.navigationController pushViewController:informationsController animated:YES];
+    } else {
+        if (indexPath.row > 0) {
+            NSString *temp = self.selectedHistoryArray[indexPath.row - 1];
+            [self searchPatient:temp];
+        }
     }
 }
 
@@ -295,9 +331,10 @@
         _searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
         _searchController.delegate = self;
         _searchController.searchResultsUpdater = self;
-        _searchController.searchBar.placeholder = @"输入病历号搜索";
+        _searchController.searchBar.placeholder = @"输入病历号或手机号搜索";
         _searchController.searchBar.delegate = self;
         _searchController.view.backgroundColor = MAIN_BACKGROUND_COLOR;
+        _searchController.hidesNavigationBarDuringPresentation = NO;
     }
     return _searchController;
 }

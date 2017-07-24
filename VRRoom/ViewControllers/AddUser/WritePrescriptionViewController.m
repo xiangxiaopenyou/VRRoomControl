@@ -37,7 +37,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     //[self fetchPrice];
-    
     [self.diseaseTextView becomeFirstResponder];
 }
 - (void)viewWillAppear:(BOOL)animated {
@@ -69,7 +68,7 @@
                           @"times" : @(times)}];
         price += tempModel.price.floatValue * times;
     }
-    NSString *doctorId = [[NSUserDefaults standardUserDefaults] stringForKey:ROOMID];
+    NSString *doctorId = [[NSUserDefaults standardUserDefaults] stringForKey:USERID];
     PrescriptionModel *model = [[PrescriptionModel alloc] init];
     model.doctorId = doctorId;
     model.patientId = self.patientId;
@@ -81,17 +80,8 @@
         self.navigationItem.rightBarButtonItem.enabled = YES;
         self.navigationItem.leftBarButtonItem.enabled = YES;
         if (object && object[@"prescriptionId"]) {
-            XLDismissHUD(self.view, YES, YES, @"发送成功");
-//            NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
-//            NSString *prescriptionId = object[@"prescriptionId"];
-//            [dictionary setObject:prescriptionId forKey:@"prescriptionId"];
-//            [dictionary setObject:@(1) forKey:@"status"];
-//            [dictionary setObject:@(price) forKey:@"price"];
-//            if (self.contentsArray.count > 0) {
-//                ContentModel *tempModel = self.contentsArray[0];
-//                [dictionary setObject:tempModel.coverPic forKey:@"imageUrl"];
-//            }
-//            [self dismissViewControllerAnimated:YES completion:nil];
+            XLDismissHUD(XJKeyWindow, YES, YES, @"发送成功");
+            [self.navigationController popViewControllerAnimated:YES];
         } else {
             XLDismissHUD(self.view, YES, NO, msg);
         }

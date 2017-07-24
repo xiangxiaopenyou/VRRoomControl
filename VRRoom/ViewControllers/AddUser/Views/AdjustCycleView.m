@@ -203,7 +203,7 @@
 
 - (void)show {
     self.alpha = 1.0;
-    [[UIApplication sharedApplication].keyWindow addSubview:self];
+    [XJKeyWindow addSubview:self];
     [self addSubview:self.contentView];
     CAKeyframeAnimation *popAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
     popAnimation.duration = 0.4;

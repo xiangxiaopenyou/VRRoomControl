@@ -12,6 +12,7 @@
 @interface Util : NSObject
 
 + (BOOL)isNullObject:(id)anObject;
++ (CGSize)sizeOfText:(NSString *)text width:(CGFloat)width font:(UIFont *)font;
 + (void)showHUDWithMessage:(NSString *)message view:(UIView *)view;
 + (void)dismissHUD:(UIView *)view showTip:(BOOL)isShow success:(BOOL)isSuccess message:(NSString *)message;
 + (void)showThenDismissHud:(BOOL)success message:(NSString *)message view:(UIView *)view;

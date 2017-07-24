@@ -27,6 +27,7 @@
 
 #import "SlideNavigationController.h"
 #import "SlideNavigationContorllerAnimator.h"
+#import "ViewController.h"
 
 typedef enum {
 	PopTypeAll,
@@ -674,6 +675,17 @@ static SlideNavigationController *singletonInstance;
 	
 	if ([self shouldDisplayMenu:MenuRight forViewController:viewController])
 		viewController.navigationItem.rightBarButtonItem = [self barButtonItemForMenu:MenuRight];
+    if (![viewController isKindOfClass:[ViewController class]]) {
+        id target = self.interactivePopGestureRecognizer.delegate;
+        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:target action:@selector(handleNavigationTransition:)];
+        pan.delegate = self;
+        [viewController.view addGestureRecognizer:pan];
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
+}
+- (void)handleNavigationTransition:(UIPanGestureRecognizer *)gesture {
+    
+    
 }
 
 - (CGFloat)slideOffset
@@ -882,5 +894,6 @@ static SlideNavigationController *singletonInstance;
     
     _rightMenu = rightMenu;
 }
+
 
 @end

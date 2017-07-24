@@ -21,4 +21,5 @@
 + (void)addPatient:(NSDictionary *)informations handler:(RequestResultHandler)handler;
 + (void)sendPrescription:(PrescriptionModel *)model handler:(RequestResultHandler)handler;
 + (void)myPatients:(RequestResultHandler)hanlder;
++ (void)versionInformations:(RequestResultHandler)handler;
 @end

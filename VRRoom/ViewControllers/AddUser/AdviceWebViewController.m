@@ -37,6 +37,7 @@
     }
     NSURL *requestUrl = [NSURL URLWithString:urlString];
     [self.webView loadRequest:[NSURLRequest requestWithURL:requestUrl]];
+    XLShowHUDWithMessage(@"正在加载", self.view);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,10 +54,10 @@
 
 
 #pragma mark - UIWebViewDelegate
-- (void)webViewDidStartLoad:(UIWebView *)webView {
-    XLShowHUDWithMessage(@"正在加载", self.view);
-}
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
+    if (webView.isLoading) {
+        return;
+    }
     XLDismissHUD(self.view, NO, YES, nil);
 }
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {

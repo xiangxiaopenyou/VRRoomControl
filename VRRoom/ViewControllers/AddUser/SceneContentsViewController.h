@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface SceneContentsViewController : UIViewController
-@property (assign, nonatomic) NSInteger viewType;
+@property (assign, nonatomic) NSInteger viewType;       //1预览场景 2开处方
 @property (copy, nonatomic) NSArray *selectedArray;
 
 @property (copy, nonatomic) void (^pickBlock)(NSArray *array);

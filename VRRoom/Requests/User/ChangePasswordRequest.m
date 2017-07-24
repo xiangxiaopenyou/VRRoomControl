@@ -14,7 +14,9 @@
         return;
     }
     [self.params setObject:self.oldPassword forKey:@"oldPassword"];
-    [self.params setObject:self.password forKey:@"newPassword"];
+    [self.params setObject:self.password forKey:@"password"];
+    NSString *username = [[NSUserDefaults standardUserDefaults] stringForKey:USERNAME];
+    [self.params setObject:username forKey:@"username"];
     [[RequestManager sharedInstance] POST:@"modifyPassword" parameters:self.params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject[@"success"] boolValue]) {
             !resultHandler ?: resultHandler(responseObject, nil);

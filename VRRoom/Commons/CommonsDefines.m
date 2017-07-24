@@ -9,6 +9,7 @@
 #import "CommonsDefines.h"
 
 NSString * const USERTOKEN = @"UserToken";
+NSString * const USERID = @"UserId";
 NSString * const ROOMID = @"RoomId";
 NSString * const VRROOMNAME = @"VRRoomName";
 NSString * const SEARCHHISTORY = @"SearchHistory";

@@ -48,7 +48,10 @@
  *  判空
  */
 #define XLIsNullObject(object) [Util isNullObject:object]
-
+/**
+ *  计算文字大小
+ */
+#define XLSizeOfText(aText, aWidth, aFont) [Util sizeOfText:aText width:aWidth font:aFont]
 
 //提示
 #define XLShowHUDWithMessage(aMessage, aView) [Util showHUDWithMessage:aMessage view:aView]

@@ -10,6 +10,7 @@
 #import "XJModifyInformationsViewController.h"
 #import "WritePrescriptionViewController.h"
 #import "XJAddPatientViewController.h"
+#import "XJHistoricalPrescriptionsViewController.h"
 #import "PatientModel.h"
 #import "XJDataBase.h"
 
@@ -42,10 +43,10 @@
         }
     }
     [self.navigationController setViewControllers:viewControllers];
+    [self fetchInformations];
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self fetchInformations];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -56,6 +57,7 @@
 #pragma mark - Action
 - (IBAction)addPrescriptionAction:(id)sender {
     WritePrescriptionViewController *writePrescriptionController = [[UIStoryboard storyboardWithName:@"AddUser" bundle:nil] instantiateViewControllerWithIdentifier:@"WritePrescription"];
+    writePrescriptionController.patientId = self.patientId;
     [self.navigationController pushViewController:writePrescriptionController animated:YES];
 }
 #pragma mark - Request
@@ -218,7 +220,13 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (self.patientModel.canModify.integerValue == 1) {
+    if (indexPath.section == 3) {
+        XJHistoricalPrescriptionsViewController *historicalController = [self.storyboard instantiateViewControllerWithIdentifier:@"HistoricalPrescriptions"];
+        historicalController.patientId = self.patientId;
+        historicalController.patientModel = self.patientModel;
+        [self.navigationController pushViewController:historicalController animated:YES];
+    }
+    if (self.patientModel.canModify.integerValue == 1) {         //可以修改所有信息
         if (indexPath.section < 3 && !(indexPath.section == 1 && indexPath.row == 0)) {
             XJModifyInformationsViewController *modifyController = [self.storyboard instantiateViewControllerWithIdentifier:@"ModifyInformations"];
             XJPatientInformationTypes type = XJPatientInformationTypesNone;

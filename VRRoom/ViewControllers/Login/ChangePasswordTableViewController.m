@@ -37,6 +37,9 @@
 
 #pragma mark - IBAction
 - (IBAction)submitAction:(id)sender {
+    [self.oldPasswordTextField resignFirstResponder];
+    [self.passwordTextField resignFirstResponder];
+    [self.validatePasswordTextField resignFirstResponder];
     if (XLIsNullObject(self.oldPasswordTextField.text)) {
         XLShowThenDismissHUD(NO, @"请输入旧密码", self.view);
     }
@@ -55,7 +58,7 @@
     XLShowHUDWithMessage(nil, self.view);
     [UserModel changePassword:self.oldPasswordTextField.text password:self.passwordTextField.text hanlder:^(id object, NSString *msg) {
         if (object) {
-            XLDismissHUD(self.view, YES, YES, @"成功");
+            XLDismissHUD(XJKeyWindow, YES, YES, @"修改成功，请重新登录");
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:USERTOKEN];
 //            [[NSUserDefaults standardUserDefaults] removeObjectForKey:ROOMID];
 //            [[NSUserDefaults standardUserDefaults] removeObjectForKey:VRROOMNAME];

@@ -8,6 +8,7 @@
 
 #import "MenuViewController.h"
 #import "ChangePasswordTableViewController.h"
+#import "UserModel.h"
 #import <UIImage-Helpers.h>
 
 #define ROOTCONTROLLER [UIApplication sharedApplication].keyWindow.rootViewController
@@ -39,7 +40,7 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)serviceAction:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://13732254511"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://4001667866"]];
 }
 
 - (void)turnLogin {
@@ -91,10 +92,18 @@
         }
             break;
         case 1:{
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"已经是最新版本了！" preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleCancel handler:nil];
-            [alertController addAction:cancelAction];
-            [ROOTCONTROLLER presentViewController:alertController animated:YES completion:nil];
+            XLShowHUDWithMessage(@"正在检查版本...", XJKeyWindow);
+            [UserModel versionInformations:^(id object, NSString *msg) {
+                if (object) {
+                    XLDismissHUD(XJKeyWindow, NO, YES, nil);
+                } else {
+                    XLDismissHUD(XJKeyWindow, YES, NO, msg);
+                }
+            }];
+//            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"已经是最新版本了！" preferredStyle:UIAlertControllerStyleAlert];
+//            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleCancel handler:nil];
+//            [alertController addAction:cancelAction];
+//            [ROOTCONTROLLER presentViewController:alertController animated:YES completion:nil];
         }
             break;
         case 2:{
@@ -102,15 +111,12 @@
             UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
             UIAlertAction *playAction = [UIAlertAction actionWithTitle:@"注销" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:USERTOKEN];
-//                [[NSUserDefaults standardUserDefaults] removeObjectForKey:ROOMID];
-//                [[NSUserDefaults standardUserDefaults] removeObjectForKey:VRROOMNAME];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 [self performSelector:@selector(turnLogin) withObject:nil afterDelay:0.1];
             }];
             [alertController addAction:cancelAction];
             [alertController addAction:playAction];
             [ROOTCONTROLLER presentViewController:alertController animated:YES completion:nil];
-           // [self presentViewController:alertController animated:YES completion:nil];
         }
             break;
             

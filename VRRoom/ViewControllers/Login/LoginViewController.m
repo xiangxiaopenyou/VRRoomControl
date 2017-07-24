@@ -109,6 +109,7 @@
             [[NSUserDefaults standardUserDefaults] setObject:model.hospital forKey:USERHOSPITAL];
             [[NSUserDefaults standardUserDefaults] setObject:model.username forKey:USERNAME];
             [[NSUserDefaults standardUserDefaults] setObject:model.realname forKey:REALNAME];
+            [[NSUserDefaults standardUserDefaults] setObject:model.userId forKey:USERID];
             [[NSUserDefaults standardUserDefaults] synchronize];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.navigationController dismissViewControllerAnimated:NO completion:nil];

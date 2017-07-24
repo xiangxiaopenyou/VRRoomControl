@@ -20,7 +20,10 @@
         return NO;
     }
 }
-
++ (CGSize)sizeOfText:(NSString *)text width:(CGFloat)width font:(UIFont *)font {
+    CGSize size = [text boundingRectWithSize:CGSizeMake(width, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : font} context:nil].size;
+    return size;
+}
 + (void)showHUDWithMessage:(NSString *)message view:(UIView *)view {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
     hud.square = YES;

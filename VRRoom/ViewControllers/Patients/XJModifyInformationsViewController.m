@@ -14,6 +14,7 @@
 
 #import "DiseaseModel.h"
 #import "PatientModel.h"
+#import "XJDataBase.h"
 
 @interface XJModifyInformationsViewController ()<UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -50,7 +51,7 @@
         case XJPatientInformationTypesDisease: {
             titleString = @"病症";
             GJCFWeakSelf weakSelf = self;
-            [[UIApplication sharedApplication].keyWindow addSubview:self.diseasePickerView];
+            [XJKeyWindow addSubview:self.diseasePickerView];
             self.diseasePickerView.selectBlock = ^(DiseaseModel *model) {
                 GJCFStrongSelf strongSelf = weakSelf;
                 strongSelf.selectedDisease = model;
@@ -76,7 +77,7 @@
         case XJPatientInformationTypesBirthday: {
             titleString = @"出生日期";
             _birthdayString = self.model.birthday;
-            [[UIApplication sharedApplication].keyWindow addSubview:self.datePickerView];
+            [XJKeyWindow addSubview:self.datePickerView];
             [self.datePickerView selectDate:[_birthdayString substringToIndex:10]];
             GJCFWeakSelf weakSelf = self;
             self.datePickerView.selectBlock = ^(NSString *dateString) {
@@ -187,6 +188,7 @@
         self.navigationItem.rightBarButtonItem.enabled = YES;
         if (object) {
             XLDismissHUD(self.view, YES, YES, @"保存成功");
+            [[XJDataBase sharedDataBase] updatePatientData:self.model];
             if (self.modifyBlock) {
                 self.modifyBlock(self.model);
             }

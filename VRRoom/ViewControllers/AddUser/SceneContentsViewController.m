@@ -39,12 +39,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationController.interactivePopGestureRecognizer.delegate = (id)self;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(backAction)];
     [self createNavigationTitleView];
     
     //默认当前选择全部病种
-    _seletedDepartmentIndexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+    _seletedDepartmentIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self fetchDiseases];
 }
 
@@ -72,11 +71,13 @@
 
 #pragma mark - Request
 - (void)fetchDiseases {
+    XLShowHUDWithMessage(nil, self.view);
     [DiseaseModel fetchDiseasesAndTherapies:^(id object, NSString *msg) {
         if (object) {
+            XLDismissHUD(self.view, NO, YES, nil);
             self.diseasesArray = [object copy];
-            DiseaseModel *tempModel = self.diseasesArray[0];
-            self.selectedTherapiesArray = [tempModel.therapiesArray copy];
+//            DiseaseModel *tempModel = self.diseasesArray[0];
+//            self.selectedTherapiesArray = [tempModel.therapiesArray copy];
             GJCFAsyncMainQueue(^{
                 [self.departmentTableView reloadData];
                 [self.diseaseTableView reloadData];

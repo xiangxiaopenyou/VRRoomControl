@@ -11,6 +11,8 @@
 #import "ChangePasswordRequest.h"
 #import "XJAddPatientRequest.h"
 #import "XJFetchMyPatientsRequest.h"
+#import "SendPrescriptionRequest.h"
+#import "XJCheckVersionRequest.h"
 #import "PrescriptionModel.h"
 #import "PatientModel.h"
 
@@ -49,6 +51,10 @@
     }];
 }
 + (void)sendPrescription:(PrescriptionModel *)model handler:(RequestResultHandler)handler {
+    [[SendPrescriptionRequest new] request:^BOOL(SendPrescriptionRequest *request) {
+        request.model = model;
+        return YES;
+    } result:handler];
 }
 + (void)myPatients:(RequestResultHandler)hanlder {
     [[XJFetchMyPatientsRequest new] request:^BOOL(id request) {
@@ -59,6 +65,17 @@
         } else {
             NSArray *tempArray = [PatientModel setupWithArray:(NSArray *)object];
             !hanlder ?: hanlder(tempArray, nil);
+        }
+    }];
+}
++ (void)versionInformations:(RequestResultHandler)handler {
+    [[XJCheckVersionRequest new] request:^BOOL(id request) {
+        return YES;
+    } result:^(id object, NSString *msg) {
+        if (msg) {
+            !handler ?: handler(nil, msg);
+        } else {
+            !handler ?: handler(object, nil);
         }
     }];
 }
