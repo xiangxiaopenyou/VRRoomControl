@@ -313,7 +313,7 @@
         }
             break;
         case XJPatientInformationTypesClinichistoryNo: {
-            if ([textField.text isEqualToString:self.model.name] || XLIsNullObject(textField.text)) {
+            if ([textField.text isEqualToString:self.model.clinichistoryNo] || XLIsNullObject(textField.text) || XLIsMobileNumber(textField.text)) {
                 self.navigationItem.rightBarButtonItem.enabled = NO;
             } else {
                 self.navigationItem.rightBarButtonItem.enabled = YES;
@@ -321,7 +321,7 @@
         }
             break;
         case XJPatientInformationTypesMedicalInsuranceCardNo: {
-            if ([textField.text isEqualToString:self.model.remark]) {
+            if ([textField.text isEqualToString:self.model.medicalInsuranceCardNo]) {
                 self.navigationItem.rightBarButtonItem.enabled = NO;
             } else {
                 self.navigationItem.rightBarButtonItem.enabled = YES;
@@ -329,10 +329,10 @@
         }
             break;
         case XJPatientInformationTypesPhone: {
-            if ([textField.text isEqualToString:self.model.remark]) {
-                self.navigationItem.rightBarButtonItem.enabled = NO;
-            } else {
+            if ((![textField.text isEqualToString:self.model.phone] && XLIsMobileNumber(textField.text)) || (![textField.text isEqualToString:self.model.phone] && textField.text.length == 0)) {
                 self.navigationItem.rightBarButtonItem.enabled = YES;
+            } else {
+                self.navigationItem.rightBarButtonItem.enabled = NO;
             }
         }
             break;
@@ -370,6 +370,7 @@
         case XJPatientInformationTypesClinichistoryNo: {
             cell.modifyTextField.enabled = YES;
             cell.modifyTextField.text = self.model.clinichistoryNo;
+            cell.modifyTextField.keyboardType = UIKeyboardTypeNumberPad;
             [cell.modifyTextField becomeFirstResponder];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }

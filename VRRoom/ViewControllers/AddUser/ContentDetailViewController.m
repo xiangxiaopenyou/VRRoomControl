@@ -175,9 +175,11 @@
         if (self.contentModel.isCollected.integerValue == 0) {
             self.contentModel.isCollected = @(1);
             [ContentModel collectContent:self.contentModel.id handler:nil];
+            XLDismissHUD(self.view, YES, YES, @"收藏成功");
         } else {
             self.contentModel.isCollected = @(0);
             [ContentModel cancelCollectContent:self.contentModel.id handler:nil];
+            XLDismissHUD(self.view, YES, YES, @"取消收藏成功");
         }
     } else {
         self.contentModel.isAdded = self.contentModel.isAdded.integerValue == 0 ? @(1) : @(0);
@@ -293,10 +295,12 @@
                 self.contentModel.isCollected = @1;
                 weakCell.collectionButton.selected = YES;
                 [ContentModel collectContent:self.contentModel.id handler:nil];
+                XLDismissHUD(self.view, YES, YES, @"收藏成功");
             } else {
                 self.contentModel.isCollected = @0;
                 weakCell.collectionButton.selected = NO;
                 [ContentModel cancelCollectContent:self.contentModel.id handler:nil];
+                XLDismissHUD(self.view, YES, YES, @"取消收藏成功");
             }
             if (self.collectBlock) {
                 self.collectBlock(self.contentModel);

@@ -47,6 +47,7 @@
 		3D4FC22C1EA0948800E9CE5E /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4FC22A1EA0948800E9CE5E /* Util.m */; };
 		3D4FC23E1EA0BEB400E9CE5E /* PrescriptionContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4FC23D1EA0BEB400E9CE5E /* PrescriptionContentCell.m */; };
 		3D4FC2501EA45A1300E9CE5E /* TitlesPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4FC24F1EA45A1300E9CE5E /* TitlesPickerView.m */; };
+		3D6F74E41F297AB20081E9B8 /* XLAlertControllerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D6F74E31F297AB20081E9B8 /* XLAlertControllerObject.m */; };
 		3D7357A31F1EF5F100B9180F /* SearchContentsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7357A21F1EF5F100B9180F /* SearchContentsRequest.m */; };
 		3D7C41501F132D400072083C /* XJMainItemsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C414F1F132D400072083C /* XJMainItemsCell.m */; };
 		3D7C41561F14636E0072083C /* AddUser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D7C41551F14636E0072083C /* AddUser.storyboard */; };
@@ -213,6 +214,8 @@
 		3D4FC23D1EA0BEB400E9CE5E /* PrescriptionContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrescriptionContentCell.m; sourceTree = "<group>"; };
 		3D4FC24E1EA45A1300E9CE5E /* TitlesPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitlesPickerView.h; sourceTree = "<group>"; };
 		3D4FC24F1EA45A1300E9CE5E /* TitlesPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitlesPickerView.m; sourceTree = "<group>"; };
+		3D6F74E21F297AB20081E9B8 /* XLAlertControllerObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLAlertControllerObject.h; sourceTree = "<group>"; };
+		3D6F74E31F297AB20081E9B8 /* XLAlertControllerObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLAlertControllerObject.m; sourceTree = "<group>"; };
 		3D7357A11F1EF5F100B9180F /* SearchContentsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchContentsRequest.h; sourceTree = "<group>"; };
 		3D7357A21F1EF5F100B9180F /* SearchContentsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchContentsRequest.m; sourceTree = "<group>"; };
 		3D7C414E1F132D400072083C /* XJMainItemsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XJMainItemsCell.h; sourceTree = "<group>"; };
@@ -734,6 +737,8 @@
 				3D7C41811F14990C0072083C /* XLCommonPickerView.m */,
 				3D7C41821F14990C0072083C /* XLHyperLinkButton.h */,
 				3D7C41831F14990C0072083C /* XLHyperLinkButton.m */,
+				3D6F74E21F297AB20081E9B8 /* XLAlertControllerObject.h */,
+				3D6F74E31F297AB20081E9B8 /* XLAlertControllerObject.m */,
 			);
 			path = XLKit;
 			sourceTree = "<group>";
@@ -1052,6 +1057,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D7C416F1F147DCC0072083C /* AdjustCycleView.m in Sources */,
+				3D6F74E41F297AB20081E9B8 /* XLAlertControllerObject.m in Sources */,
 				3DFB2CB11F1DAB1D00C2CE26 /* XJModifyInformationsViewController.m in Sources */,
 				3D7C415D1F1464560072083C /* XJPatientsInformationCell.m in Sources */,
 				3DC6D6D11F20537F00441171 /* PrescriptionDetailInformationCell.m in Sources */,

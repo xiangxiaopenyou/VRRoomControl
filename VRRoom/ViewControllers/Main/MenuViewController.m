@@ -9,9 +9,9 @@
 #import "MenuViewController.h"
 #import "ChangePasswordTableViewController.h"
 #import "UserModel.h"
+#import "XLBlockAlertView.h"
+#import "XLAlertControllerObject.h"
 #import <UIImage-Helpers.h>
-
-#define ROOTCONTROLLER [UIApplication sharedApplication].keyWindow.rootViewController
 
 @interface MenuViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -39,12 +39,31 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - Action
 - (IBAction)serviceAction:(id)sender {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://4001667866"]];
 }
 
 - (void)turnLogin {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginStateDidChanged" object:nil];
+}
+
+#pragma mark - Private methods
+- (void)checkNeedUpdate:(NSDictionary *)dictionary {
+    NSString *localVersion = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
+    NSString *currentVersion = dictionary[@"versionCode"];
+    if ([localVersion isEqualToString:currentVersion]) {
+        [XLAlertControllerObject showWithTitle:@"提示" message:@"已经是最新版本了！" cancelTitle:@"好的" ensureTitle:nil ensureBlock:nil];
+    } else {
+        [XLAlertControllerObject showWithTitle:@"提示" message:@"发现新版本" cancelTitle:@"以后再说" ensureTitle:@"版本升级" ensureBlock:^{
+            NSString *urlString = dictionary[@"downloadUrl."];
+            NSURL *url = [NSURL URLWithString:urlString];
+            if ([[UIApplication sharedApplication] canOpenURL:url]) {
+                [[UIApplication sharedApplication] openURL:url];
+            }
+        }];
+    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -96,27 +115,19 @@
             [UserModel versionInformations:^(id object, NSString *msg) {
                 if (object) {
                     XLDismissHUD(XJKeyWindow, NO, YES, nil);
+                    [self checkNeedUpdate:(NSDictionary *)object];
                 } else {
                     XLDismissHUD(XJKeyWindow, YES, NO, msg);
                 }
             }];
-//            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"已经是最新版本了！" preferredStyle:UIAlertControllerStyleAlert];
-//            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleCancel handler:nil];
-//            [alertController addAction:cancelAction];
-//            [ROOTCONTROLLER presentViewController:alertController animated:YES completion:nil];
         }
             break;
         case 2:{
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"确定要注销吗？" preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-            UIAlertAction *playAction = [UIAlertAction actionWithTitle:@"注销" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            [XLAlertControllerObject showWithTitle:@"提示" message:@"确定要注销吗？" cancelTitle:@"取消" ensureTitle:@"注销" ensureBlock:^{
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:USERTOKEN];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 [self performSelector:@selector(turnLogin) withObject:nil afterDelay:0.1];
             }];
-            [alertController addAction:cancelAction];
-            [alertController addAction:playAction];
-            [ROOTCONTROLLER presentViewController:alertController animated:YES completion:nil];
         }
             break;
             

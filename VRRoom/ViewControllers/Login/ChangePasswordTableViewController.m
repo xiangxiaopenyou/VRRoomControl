@@ -42,9 +42,18 @@
     [self.validatePasswordTextField resignFirstResponder];
     if (XLIsNullObject(self.oldPasswordTextField.text)) {
         XLShowThenDismissHUD(NO, @"请输入旧密码", self.view);
+        return;
     }
     if (XLIsNullObject(self.passwordTextField.text)) {
         XLShowThenDismissHUD(NO, @"请输入新密码", self.view);
+        return;
+    }
+    if (self.passwordTextField.text.length < 6 || self.passwordTextField.text.length > 16) {
+        XLShowThenDismissHUD(NO, @"密码要求6-16位", self.view);
+        return;
+    }
+    if ([self.oldPasswordTextField.text isEqualToString:self.passwordTextField.text]) {
+        XLShowThenDismissHUD(NO, @"原密码与新密码一致，请重新输入", self.view);
         return;
     }
     if (XLIsNullObject(self.validatePasswordTextField.text)) {
@@ -197,7 +206,7 @@
         _passwordTextField.font = XJSystemFont(14);
         _passwordTextField.textColor = MAIN_TEXT_COLOR;
         _passwordTextField.secureTextEntry = YES;
-        _passwordTextField.placeholder = @"请输入新密码";
+        _passwordTextField.placeholder = @"请输入新密码(6-16位)";
         _passwordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _passwordTextField.returnKeyType = UIReturnKeyNext;
         _passwordTextField.delegate = self;
@@ -225,7 +234,7 @@
         _validatePasswordTextField.font = XJSystemFont(14);
         _validatePasswordTextField.textColor = MAIN_TEXT_COLOR;
         _validatePasswordTextField.secureTextEntry = YES;
-        _validatePasswordTextField.placeholder = @"请再次输入新密码";
+        _validatePasswordTextField.placeholder = @"请再次输入新密码(6-16位)";
         _validatePasswordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _validatePasswordTextField.returnKeyType = UIReturnKeyDone;
         _validatePasswordTextField.delegate = self;

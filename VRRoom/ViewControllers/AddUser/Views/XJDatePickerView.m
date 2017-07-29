@@ -115,7 +115,8 @@
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd"];
         _datePicker.minimumDate = [dateFormatter dateFromString:@"1900-01-01"];
-        _datePicker.maximumDate = [dateFormatter dateFromString:@"2017-12-31"];
+        NSDate *nowDate = [NSDate date];
+        _datePicker.maximumDate = nowDate;
         [_datePicker setDate:[dateFormatter dateFromString:@"1990-01-01"]];
     }
     return _datePicker;

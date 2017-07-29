@@ -119,6 +119,10 @@
         XLDismissHUD(self.view, YES, NO, @"请先输入患者病历号");
         return NO;
     }
+    if (XLIsMobileNumber(textField1.text)) {
+        XLDismissHUD(self.view, YES, NO, @"病历号格式错误");
+        return NO;
+    }
     if (XLIsNullObject(textField2.text)) {
         XLDismissHUD(self.view, YES, NO, @"请先输入患者姓名");
         return NO;
@@ -130,6 +134,15 @@
     if (!_selectedDisease) {
         XLDismissHUD(self.view, YES, NO, @"请先选择患者病症");
         return NO;
+    }
+    if (!XLIsNullObject(textField3.text)) {
+        if (textField3.text.length != 11) {
+            XLDismissHUD(self.view, YES, NO, @"手机号应为11位");
+            return NO;
+        } else if (!XLIsMobileNumber(textField3.text)) {
+            XLDismissHUD(self.view, YES, NO, @"请输入正确的手机号");
+            return NO;
+        }
     }
     return canUpload;
 }
@@ -183,7 +196,7 @@
     } else {
         cell.textField.placeholder = @"保密";
     }
-    if (indexPath.row == 6) {
+    if (indexPath.row == 0 || indexPath.row == 6) {
         cell.textField.keyboardType = UIKeyboardTypeNumberPad;
     }
     switch (indexPath.row) {

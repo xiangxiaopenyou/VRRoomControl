@@ -30,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *durationSortButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topViewHeightConstraint;
+@property (weak, nonatomic) IBOutlet UILabel *emptyTipLabel;
 @property (strong, nonatomic) UIButton *submitButton;
 
 @property (strong, nonatomic) NSMutableArray *contentsArray;
@@ -277,6 +278,11 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (self.contentsArray.count == 0) {
+        self.emptyTipLabel.hidden = NO;
+    } else {
+        self.emptyTipLabel.hidden = YES;
+    }
     return self.contentsArray.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -296,6 +302,7 @@
             if (self.viewType == 1) {
                 tempModel.isCollected = @(1);
                 [ContentModel collectContent:tempModel.id handler:nil];
+                XLDismissHUD(self.view, YES, YES, @"收藏成功");
             } else {
                 tempModel.isAdded = @(1);
                 [self.selectedContents addObject:tempModel];
@@ -308,6 +315,7 @@
             if (self.viewType == 1) {
                 tempModel.isCollected = @(0);
                 [ContentModel cancelCollectContent:tempModel.id handler:nil];
+                XLDismissHUD(self.view, YES, YES, @"取消收藏成功");
             } else {
                 tempModel.isAdded = @(0);
                 [self.selectedContents removeObject:tempModel];

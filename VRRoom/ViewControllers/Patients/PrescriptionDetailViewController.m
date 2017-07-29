@@ -7,7 +7,7 @@
 //
 
 #import "PrescriptionDetailViewController.h"
-
+#import "WritePrescriptionViewController.h"
 #import "PrescriptionDetailInformationCell.h"
 #import "PrescriptionDetailContentCell.h"
 #import "PrescriptionPriceCell.h"
@@ -42,6 +42,7 @@
         if (object) {
             XLDismissHUD(self.view, NO, YES, nil);
             self.model = (PrescriptionModel *)object;
+            self.navigationItem.rightBarButtonItem.enabled = YES;
             GJCFAsyncMainQueue((^{
                 //self.orderNumberLabel.text = self.model.billno;
                 self.orderNumberLabel.text = [NSString stringWithFormat:@"订单号：%@", self.model.billno];
@@ -70,6 +71,11 @@
 #pragma mark - Action
 - (IBAction)serviceAction:(id)sender {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://4001667866"]];
+}
+- (IBAction)copyAction:(id)sender {
+    WritePrescriptionViewController *writePrescriptionController = [[UIStoryboard storyboardWithName:@"AddUser" bundle:nil] instantiateViewControllerWithIdentifier:@"WritePrescription"];
+    writePrescriptionController.patientId = self.model.patientId;
+    [self.navigationController pushViewController:writePrescriptionController animated:YES];
 }
 
 #pragma mark - UITableViewDataSource

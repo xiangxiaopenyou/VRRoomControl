@@ -14,13 +14,13 @@
     if (view == nil) view = [UIApplication sharedApplication].keyWindow;
    
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
-    hud.labelText = text;
+    hud.detailsLabelText = text;
     hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", icon]]];
     hud.mode = MBProgressHUDModeCustomView;
     
     hud.removeFromSuperViewOnHide = YES;
     
-    [hud hide:YES afterDelay:0.7];
+    [hud hide:YES afterDelay:1.f];
 }
 
 + (void)showError:(NSString *)error toView:(UIView *)view{

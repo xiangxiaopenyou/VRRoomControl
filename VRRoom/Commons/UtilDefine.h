@@ -60,5 +60,8 @@
 
 #define XLShowThenDismissHUD(aSuccess, aMessage, aView) [Util showThenDismissHud:aSuccess message:aMessage view:aView]
 
+//手机号验证
+#define XLIsMobileNumber(aString) [Util isMobileNumber:aString]
+
 
 

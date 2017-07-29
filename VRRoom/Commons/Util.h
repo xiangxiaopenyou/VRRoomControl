@@ -16,5 +16,6 @@
 + (void)showHUDWithMessage:(NSString *)message view:(UIView *)view;
 + (void)dismissHUD:(UIView *)view showTip:(BOOL)isShow success:(BOOL)isSuccess message:(NSString *)message;
 + (void)showThenDismissHud:(BOOL)success message:(NSString *)message view:(UIView *)view;
++ (BOOL)isMobileNumber:(NSString *)mobileNum;
 
 @end

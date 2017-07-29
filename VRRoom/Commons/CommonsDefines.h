@@ -73,6 +73,8 @@ typedef NS_ENUM(NSInteger, XJPatientInformationTypes) {
 
 //主窗口
 #define XJKeyWindow [UIApplication sharedApplication].keyWindow
+//主控制器
+#define ROOTCONTROLLER [UIApplication sharedApplication].keyWindow.rootViewController
 
 //用户相关
 extern NSString * const USERTOKEN;

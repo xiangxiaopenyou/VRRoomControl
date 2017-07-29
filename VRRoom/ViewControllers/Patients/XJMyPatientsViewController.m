@@ -189,7 +189,7 @@
         NSArray *tempArray = [self.patientsDataArray[indexPath.section][@"models"] copy];
         PatientModel *tempModel = tempArray[indexPath.row];
         cell.avatarImageView.image = [UIImage imageNamed:@"personal_avatar"];
-        cell.nameLabel.text = tempModel.remark ? tempModel.remark : tempModel.name;
+        cell.nameLabel.text = XLIsNullObject(tempModel.remark) ? tempModel.name : tempModel.remark;
         return cell;
     } else {
         if (indexPath.row == 0) {
