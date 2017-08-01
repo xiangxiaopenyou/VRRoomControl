@@ -21,7 +21,7 @@
 #import "CommonsDefines.h"
 
 
-@interface WritePrescriptionViewController ()<UITableViewDelegate, UITableViewDataSource, PrescriptionContentsCellDelegate>
+@interface WritePrescriptionViewController ()<UITableViewDelegate, UITableViewDataSource, PrescriptionContentsCellDelegate, UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextView *adviceTextView;
 @property (weak, nonatomic) IBOutlet UITextView *diseaseTextView;
@@ -160,6 +160,7 @@
         return cell;
     }
 }
+
 
 /*
 #pragma mark - Navigation
