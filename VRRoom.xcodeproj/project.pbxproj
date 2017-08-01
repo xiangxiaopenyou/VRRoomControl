@@ -53,7 +53,6 @@
 		3D7C41561F14636E0072083C /* AddUser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D7C41551F14636E0072083C /* AddUser.storyboard */; };
 		3D7C415D1F1464560072083C /* XJPatientsInformationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C415C1F1464560072083C /* XJPatientsInformationCell.m */; };
 		3D7C41631F147C6D0072083C /* WritePrescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C41621F147C6D0072083C /* WritePrescriptionViewController.m */; };
-		3D7C416A1F147D900072083C /* PrescriptionContentsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C41651F147D900072083C /* PrescriptionContentsCell.m */; };
 		3D7C416B1F147D900072083C /* PrescriptionPriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C41671F147D900072083C /* PrescriptionPriceCell.m */; };
 		3D7C416C1F147D900072083C /* ContentsItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C41691F147D900072083C /* ContentsItemCell.m */; };
 		3D7C416F1F147DCC0072083C /* AdjustCycleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C416E1F147DCC0072083C /* AdjustCycleView.m */; };
@@ -92,6 +91,7 @@
 		3DC6D6D21F20537F00441171 /* PrescriptionDetailContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC6D6CE1F20537F00441171 /* PrescriptionDetailContentCell.m */; };
 		3DC6D6D31F20537F00441171 /* DetailContentItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC6D6D01F20537F00441171 /* DetailContentItemCell.m */; };
 		3DC6D6D61F2054EF00441171 /* PrescriptionDetailRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC6D6D51F2054EF00441171 /* PrescriptionDetailRequest.m */; };
+		3DE07E211F300FDB004B703D /* XJAddContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE07E201F300FDB004B703D /* XJAddContentCell.m */; };
 		3DFB2CAE1F1DA61D00C2CE26 /* XJModifyInformationsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB2CAD1F1DA61D00C2CE26 /* XJModifyInformationsRequest.m */; };
 		3DFB2CB11F1DAB1D00C2CE26 /* XJModifyInformationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB2CB01F1DAB1D00C2CE26 /* XJModifyInformationsViewController.m */; };
 		3DFB2CB41F1DACFC00C2CE26 /* XJModifyInformationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB2CB31F1DACFC00C2CE26 /* XJModifyInformationCell.m */; };
@@ -225,8 +225,6 @@
 		3D7C415C1F1464560072083C /* XJPatientsInformationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XJPatientsInformationCell.m; sourceTree = "<group>"; };
 		3D7C41611F147C6D0072083C /* WritePrescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WritePrescriptionViewController.h; sourceTree = "<group>"; };
 		3D7C41621F147C6D0072083C /* WritePrescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WritePrescriptionViewController.m; sourceTree = "<group>"; };
-		3D7C41641F147D900072083C /* PrescriptionContentsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrescriptionContentsCell.h; sourceTree = "<group>"; };
-		3D7C41651F147D900072083C /* PrescriptionContentsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrescriptionContentsCell.m; sourceTree = "<group>"; };
 		3D7C41661F147D900072083C /* PrescriptionPriceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrescriptionPriceCell.h; sourceTree = "<group>"; };
 		3D7C41671F147D900072083C /* PrescriptionPriceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrescriptionPriceCell.m; sourceTree = "<group>"; };
 		3D7C41681F147D900072083C /* ContentsItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentsItemCell.h; sourceTree = "<group>"; };
@@ -304,6 +302,8 @@
 		3DC6D6D01F20537F00441171 /* DetailContentItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailContentItemCell.m; sourceTree = "<group>"; };
 		3DC6D6D41F2054EF00441171 /* PrescriptionDetailRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrescriptionDetailRequest.h; sourceTree = "<group>"; };
 		3DC6D6D51F2054EF00441171 /* PrescriptionDetailRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrescriptionDetailRequest.m; sourceTree = "<group>"; };
+		3DE07E1F1F300FDB004B703D /* XJAddContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XJAddContentCell.h; sourceTree = "<group>"; };
+		3DE07E201F300FDB004B703D /* XJAddContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XJAddContentCell.m; sourceTree = "<group>"; };
 		3DFB2CAC1F1DA61D00C2CE26 /* XJModifyInformationsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XJModifyInformationsRequest.h; sourceTree = "<group>"; };
 		3DFB2CAD1F1DA61D00C2CE26 /* XJModifyInformationsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XJModifyInformationsRequest.m; sourceTree = "<group>"; };
 		3DFB2CAF1F1DAB1D00C2CE26 /* XJModifyInformationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XJModifyInformationsViewController.h; sourceTree = "<group>"; };
@@ -595,7 +595,6 @@
 				3D28EC691F18B44E00FAA61F /* Patients */,
 				3D22B46B1F10B3EB00C9D459 /* Search */,
 				3D7C41541F14634B0072083C /* AddUser */,
-				3DC6D6D71F205BDC00441171 /* Prescription */,
 				3D4FC21B1EA0764500E9CE5E /* Views */,
 			);
 			path = ViewControllers;
@@ -698,8 +697,6 @@
 				3DC6D6B11F1EFD6800441171 /* DetailContentCell.m */,
 				3D7C415B1F1464560072083C /* XJPatientsInformationCell.h */,
 				3D7C415C1F1464560072083C /* XJPatientsInformationCell.m */,
-				3D7C41641F147D900072083C /* PrescriptionContentsCell.h */,
-				3D7C41651F147D900072083C /* PrescriptionContentsCell.m */,
 				3D7C41661F147D900072083C /* PrescriptionPriceCell.h */,
 				3D7C41671F147D900072083C /* PrescriptionPriceCell.m */,
 				3D7C41681F147D900072083C /* ContentsItemCell.h */,
@@ -720,6 +717,8 @@
 				3D7C41A61F14AA730072083C /* XJDatePickerView.m */,
 				3D7C41B01F14CC390072083C /* XJDiseasePickerView.h */,
 				3D7C41B11F14CC390072083C /* XJDiseasePickerView.m */,
+				3DE07E1F1F300FDB004B703D /* XJAddContentCell.h */,
+				3DE07E201F300FDB004B703D /* XJAddContentCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -771,13 +770,6 @@
 				3D7C41AE1F14CB430072083C /* XJAddPatientRequest.m */,
 			);
 			path = AddPatient;
-			sourceTree = "<group>";
-		};
-		3DC6D6D71F205BDC00441171 /* Prescription */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Prescription;
 			sourceTree = "<group>";
 		};
 		3DFB2CB81F1EEDBF00C2CE26 /* Prescription */ = {
@@ -1075,6 +1067,7 @@
 				3DC6D6BE1F1F463D00441171 /* SendPrescriptionRequest.m in Sources */,
 				3DFB2CB41F1DACFC00C2CE26 /* XJModifyInformationCell.m in Sources */,
 				3D22B4761F10B48600C9D459 /* MenuViewController.m in Sources */,
+				3DE07E211F300FDB004B703D /* XJAddContentCell.m in Sources */,
 				3DFB2CC81F1EEEDF00C2CE26 /* RequestCacher.m in Sources */,
 				3DFB2CC91F1EEEDF00C2CE26 /* RequestManager.m in Sources */,
 				3D22B4771F10B48600C9D459 /* ViewController.m in Sources */,
@@ -1131,7 +1124,6 @@
 				3DC6D6AE1F1EFC7D00441171 /* DetailNavigationController.m in Sources */,
 				3D7C41881F14990C0072083C /* XLHyperLinkButton.m in Sources */,
 				3D22B47C1F10B49100C9D459 /* PrescriptionContentsTableViewController.m in Sources */,
-				3D7C416A1F147D900072083C /* PrescriptionContentsCell.m in Sources */,
 				3D7C41A41F14A8B30072083C /* XJAddPatientViewController.m in Sources */,
 				3DC6D6D21F20537F00441171 /* PrescriptionDetailContentCell.m in Sources */,
 				3D4FC22C1EA0948800E9CE5E /* Util.m in Sources */,

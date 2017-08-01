@@ -181,6 +181,9 @@
     [headerView addSubview:headerLabel];
     return headerView;
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return .1f;
+}
 
 /*
 #pragma mark - Navigation

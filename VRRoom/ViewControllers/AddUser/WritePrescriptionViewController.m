@@ -10,8 +10,10 @@
 #import "SceneContentsViewController.h"
 
 #import "XLBlockAlertView.h"
-#import "PrescriptionContentsCell.h"
+#import "ContentsItemCell.h"
+#import "XJAddContentCell.h"
 #import "PrescriptionPriceCell.h"
+#import "AdjustCycleView.h"
 
 #import "ContentModel.h"
 #import "UserModel.h"
@@ -20,11 +22,14 @@
 #import "UtilDefine.h"
 #import "CommonsDefines.h"
 
+#import <UIImageView+WebCache.h>
 
-@interface WritePrescriptionViewController ()<UITableViewDelegate, UITableViewDataSource, PrescriptionContentsCellDelegate, UIGestureRecognizerDelegate>
+
+@interface WritePrescriptionViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextView *adviceTextView;
 @property (weak, nonatomic) IBOutlet UITextView *diseaseTextView;
+@property (strong, nonatomic) AdjustCycleView *cycleView;
 
 @property (strong, nonatomic) NSMutableArray *contentsArray;
 
@@ -88,90 +93,6 @@
     }];
 }
 
-#pragma mark - private methods
-- (void)hideKeyboard {
-    [self.adviceTextView resignFirstResponder];
-    [self.diseaseTextView resignFirstResponder];
-}
-
-#pragma mark - UITextField Delegate
-//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-//    const char *ch = [string cStringUsingEncoding:NSUTF8StringEncoding];
-//    if ([textField.text rangeOfString:@"."].length == 1) {
-//        if (*ch == 0) {
-//            return YES;
-//        }
-//        NSUInteger length = [textField.text rangeOfString:@"."].location;
-//        if ([[textField.text substringFromIndex:length] length] > 2 || *ch == 46) {
-//            return NO;
-//        }
-//    }
-//    return YES;
-//}
-
-#pragma mark - PrescriptionContentsCellDelegate
-- (void)didClickAddContent {
-    SceneContentsViewController *contentsViewController = [[UIStoryboard storyboardWithName:@"AddUser" bundle:nil] instantiateViewControllerWithIdentifier:@"SceneContents"];
-    contentsViewController.viewType = 2;
-    contentsViewController.selectedArray = [self.contentsArray copy];
-    contentsViewController.pickBlock = ^(NSArray *array) {
-        self.contentsArray = [array mutableCopy];
-    };
-    [self.navigationController pushViewController:contentsViewController animated:YES];
-}
-- (void)didDeleteContent:(NSArray *)contentsArray {
-    self.contentsArray = [contentsArray mutableCopy];
-    [self.tableView reloadData];
-}
-- (void)didSetContentCycle:(NSArray *)contentsArray {
-    self.contentsArray = [contentsArray mutableCopy];
-    [self.tableView reloadData];
-}
-
-#pragma mark - UITableViewDataSource
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-        return 90.f * self.contentsArray.count + 105;
-    } else {
-        return 90.f;
-    }
-}
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-        static NSString *identifier = @"PrescriptionContentsCell";
-        PrescriptionContentsCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.delegate = self;
-        [cell resetContents:self.contentsArray];
-        return cell;
-    } else {
-        static NSString *identifier = @"PrescriptionPriceCell";
-        PrescriptionPriceCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
-        CGFloat price = 0;
-        for (ContentModel *tempModel in self.contentsArray) {
-            NSInteger times = tempModel.frequency.integerValue * tempModel.period.integerValue;
-            price += tempModel.price.floatValue * times;
-        }
-        cell.priceLabel.text = [NSString stringWithFormat:@"%.2f", price];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        return cell;
-    }
-}
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 #pragma mark - IBAction & Selector
 - (IBAction)submitAction:(id)sender {
     [self hideKeyboard];
@@ -199,18 +120,125 @@
     }
     [self sendPrescription];
 }
-//- (void)addContentsAction {
-//    ChooseContentsViewController *contentsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ChooseContents"];
-//    contentsViewController.contentArray = [self.contentsArray mutableCopy];
-//    contentsViewController.saveBlock = ^(NSArray *array) {
-//        NSArray *tempArray = [array copy];
-//        self.contentsArray = [tempArray mutableCopy];
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [self resetViewOfContents];
-//        });
-//    };
-//    [self.navigationController pushViewController:contentsViewController animated:YES];
-//}
+- (void)resetCycleAction:(UIButton *)button {
+    [self hideKeyboard];
+    [self.cycleView show];
+    __block ContentModel *tempModel = self.contentsArray[button.tag - 1000];
+    [self.cycleView reloadContents:tempModel];
+    GJCFWeakSelf weakSelf = self;
+    self.cycleView.submitBlock = ^(ContentModel *model) {
+        tempModel = model;
+        [weakSelf.contentsArray replaceObjectAtIndex:button.tag - 1000 withObject:tempModel];
+        GJCFAsyncMainQueue(^{
+            [weakSelf.tableView reloadData];
+        });
+    };
+}
+
+#pragma mark - private methods
+- (void)hideKeyboard {
+    [self.adviceTextView resignFirstResponder];
+    [self.diseaseTextView resignFirstResponder];
+}
+
+
+#pragma mark - UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.contentsArray.count + 2;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return indexPath.row == self.contentsArray.count ? 45.f : 90.f;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == self.contentsArray.count + 1) {
+        static NSString *identifier = @"PrescriptionPriceCell";
+        PrescriptionPriceCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+        CGFloat price = 0;
+        for (ContentModel *tempModel in self.contentsArray) {
+            NSInteger times = tempModel.frequency.integerValue * tempModel.period.integerValue;
+            price += tempModel.price.floatValue * times;
+        }
+        cell.priceLabel.text = [NSString stringWithFormat:@"%.2f", price];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+    } else if (indexPath.row == self.contentsArray.count) {
+        static NSString *identifier = @"AddContentCell";
+        XJAddContentCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+    } else {
+        static NSString *identifier = @"ContentsItemCell";
+        ContentsItemCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        ContentModel *tempModel = self.contentsArray[indexPath.row];
+        [cell.contentImageView sd_setImageWithURL:[NSURL URLWithString:tempModel.coverPic] placeholderImage:[UIImage imageNamed:@"default_image"]];
+        cell.contentNameLabel.text = [NSString stringWithFormat:@"%@", tempModel.name];
+        cell.contentPriceLabel.text = [NSString stringWithFormat:@"￥%.2f", [tempModel.price floatValue]];
+        if (tempModel.frequency.integerValue > 0) {
+            cell.contentCycleLabel.hidden = NO;
+            NSString *unit = @"日";
+            switch ([tempModel.periodUnit integerValue]) {
+                case 1:
+                    unit = @"日";
+                    break;
+                case 2:
+                    unit = @"周";
+                    break;
+                case 3:
+                    unit = @"月";
+                    break;
+                default:
+                    break;
+            }
+            NSInteger count = tempModel.frequency.integerValue * tempModel.period.integerValue;
+            cell.contentCycleLabel.text = [NSString stringWithFormat:@"%@次/%@-共%@%@-共%@次", tempModel.frequency, unit, tempModel.period, unit, @(count)];
+        } else {
+            cell.contentCycleLabel.hidden = YES;
+        }
+        cell.resetCycleButton.tag = 1000 + indexPath.row;
+        [cell.resetCycleButton addTarget:self action:@selector(resetCycleAction:) forControlEvents:UIControlEventTouchUpInside];
+        return cell;
+    }
+}
+
+#pragma mark - Table view delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == self.contentsArray.count) {
+        SceneContentsViewController *contentsViewController = [[UIStoryboard storyboardWithName:@"AddUser" bundle:nil] instantiateViewControllerWithIdentifier:@"SceneContents"];
+        contentsViewController.viewType = 2;
+        contentsViewController.selectedArray = [self.contentsArray copy];
+        contentsViewController.pickBlock = ^(NSArray *array) {
+            self.contentsArray = [array mutableCopy];
+        };
+        [self.navigationController pushViewController:contentsViewController animated:YES];
+    }
+}
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row < self.contentsArray.count) {
+        return YES;
+    }
+    return NO;
+}
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return @"删除";
+}
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.contentsArray removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
+    }
+}
+
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 #pragma mark - Getters
 - (NSMutableArray *)contentsArray {
@@ -219,5 +247,10 @@
     }
     return _contentsArray;
 }
-
+- (AdjustCycleView *)cycleView {
+    if (!_cycleView) {
+        _cycleView = [[AdjustCycleView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    }
+    return _cycleView;
+}
 @end

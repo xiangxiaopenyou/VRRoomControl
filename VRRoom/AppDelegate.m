@@ -41,9 +41,10 @@
     [SlideNavigationController sharedInstance].leftMenu = leftViewController;
     [SlideNavigationController sharedInstance].menuRevealAnimationDuration = 0.25;
     [SlideNavigationController sharedInstance].enableShadow = YES;
-    [SlideNavigationController sharedInstance].enableSwipeGesture = YES;
+    [SlideNavigationController sharedInstance].enableSwipeGesture = NO;
     [SlideNavigationController sharedInstance].avoidSwitchingToSameClassViewController = YES;
     [SlideNavigationController sharedInstance].portraitSlideOffset = CGRectGetWidth([UIScreen mainScreen].bounds) * 0.3;
+//    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mainController];
     self.window.rootViewController = navigationController;
     
     [self.window makeKeyAndVisible];

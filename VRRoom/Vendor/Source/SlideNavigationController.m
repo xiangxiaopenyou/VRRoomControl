@@ -675,12 +675,10 @@ static SlideNavigationController *singletonInstance;
 	
 	if ([self shouldDisplayMenu:MenuRight forViewController:viewController])
 		viewController.navigationItem.rightBarButtonItem = [self barButtonItemForMenu:MenuRight];
-    if (![viewController isKindOfClass:[ViewController class]]) {
-        id target = self.interactivePopGestureRecognizer.delegate;
-        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:target action:@selector(handleNavigationTransition:)];
-        pan.delegate = self;
-        [viewController.view addGestureRecognizer:pan];
-        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    if ([viewController isKindOfClass:[ViewController class]]) {
+        self.enableSwipeGesture = YES;
+    } else {
+        self.enableSwipeGesture = NO;
     }
 }
 - (void)handleNavigationTransition:(UIPanGestureRecognizer *)gesture {

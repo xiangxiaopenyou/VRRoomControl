@@ -9,7 +9,7 @@
 #import "SceneContentCell.h"
 #import "ContentModel.h"
 
-#import <UIImageView+AFNetworking.h>
+#import <UIImageView+WebCache.h>
 
 @interface SceneContentCell ()
 @property (nonatomic) NSInteger viewType;
@@ -46,7 +46,7 @@
             self.operationButton.selected = YES;
         }
     }
-    [self.contentImageView setImageWithURL:[NSURL URLWithString:model.coverPic] placeholderImage:[UIImage imageNamed:@"default_image"]];
+    [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:model.coverPic] placeholderImage:[UIImage imageNamed:@"default_image"]];
     self.contentNameLabel.text = [NSString stringWithFormat:@"%@", model.name];
     self.clickNumberLabel.text = [NSString stringWithFormat:@"点击量:%@", @(model.clicks.integerValue)];
     if ([model.type integerValue] == 1 || [model.type integerValue] == 2) {

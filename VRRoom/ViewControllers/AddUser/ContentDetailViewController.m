@@ -15,7 +15,7 @@
 #import "ContentModel.h"
 //#import "ContentsMediaModel.h"
 
-#import <UIImageView+AFNetworking.h>
+#import <UIImageView+WebCache.h>
 #import <UIImage-Helpers.h>
 
 //#import <UtoVRPlayer/UtoVRPlayer.h>
@@ -75,7 +75,7 @@
 //    }
     [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStyleDone target:self action:@selector(closeAction)]];
     XLShowHUDWithMessage(nil, self.view);
-    [self.contentImageView setImageWithURL:[NSURL URLWithString:self.contentModel.coverPic] placeholderImage:[UIImage imageNamed:@"default_image"]];
+    [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:self.contentModel.coverPic] placeholderImage:[UIImage imageNamed:@"default_image"]];
     [self.collectButton setBackgroundImage:[UIImage imageWithColor:NAVIGATIONBAR_COLOR] forState:UIControlStateSelected];
     [self.collectButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithWhite:0.9 alpha:1]] forState:UIControlStateNormal];
     [self refreshBottomButtonState];

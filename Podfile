@@ -9,5 +9,6 @@ pod 'UIImage-Helpers'
 pod 'MJRefresh'
 pod 'GJCFUitils'
 pod 'YUChineseSorting'
+pod 'SDWebImage'
 end 
 

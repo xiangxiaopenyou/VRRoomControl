@@ -18,7 +18,7 @@
 #import "ManagerModel.h"
 
 #import <MJRefresh.h>
-#import <UIImageView+AFNetworking.h>
+#import <UIImageView+WebCache.h>
 #import <UIImage-Helpers.h>
 
 @interface SearchViewController ()<UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
@@ -428,7 +428,7 @@
         } else {
             PrescriptionContentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PrescriptionContentCell" forIndexPath:indexPath];
             PrescriptionContentModel *tempModel = self.usersContentsArray[indexPath.row / 2];
-            [cell.contentImageView setImageWithURL:[NSURL URLWithString:tempModel.content_coverPic] placeholderImage:[UIImage imageNamed:@"default_image"]];
+            [cell.contentImageView sd_setImageWithURL:[NSURL URLWithString:tempModel.content_coverPic] placeholderImage:[UIImage imageNamed:@"default_image"]];
             cell.nameLabel.text = [NSString stringWithFormat:@"%@", tempModel.content_name];
             //    if ([tempModel.content_type integerValue] == 1) {
             //        cell.typeLabel.text = @"类型：视频";

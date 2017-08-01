@@ -16,7 +16,7 @@
 #import "CommonsDefines.h"
 #import "UtilDefine.h"
 
-#import <UIImageView+AFNetworking.h>
+#import <UIImageView+WebCache.h>
 @interface PrescriptionContentsTableViewController ()
 @property (strong, nonatomic) TitlesPickerView *titlesPickerView;
 
@@ -137,7 +137,7 @@
     } else {
         PrescriptionContentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PrescriptionContentCell" forIndexPath:indexPath];
         PrescriptionContentModel *tempModel = self.contentsArray[indexPath.row / 2];
-        [cell.contentImageView setImageWithURL:[NSURL URLWithString:tempModel.content_coverPic] placeholderImage:[UIImage imageNamed:@"default_image"]];
+        [cell.contentImageView sd_setImageWithURL:[NSURL URLWithString:tempModel.content_coverPic] placeholderImage:[UIImage imageNamed:@"default_image"]];
         cell.nameLabel.text = [NSString stringWithFormat:@"%@", tempModel.content_name];
         //    if ([tempModel.content_type integerValue] == 1) {
         //        cell.typeLabel.text = @"类型：视频";

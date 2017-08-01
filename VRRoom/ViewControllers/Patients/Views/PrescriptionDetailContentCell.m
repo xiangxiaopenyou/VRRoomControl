@@ -9,7 +9,7 @@
 #import "PrescriptionDetailContentCell.h"
 #import "DetailContentItemCell.h"
 #import "ContentModel.h"
-#import <UIImageView+AFNetworking.h>
+#import <UIImageView+WebCache.h>
 
 @interface PrescriptionDetailContentCell ()<UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSMutableArray *selectedContents;
@@ -44,7 +44,7 @@
     DetailContentItemCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     ContentModel *tempModel = self.selectedContents[indexPath.row];
-    [cell.contentImageView setImageWithURL:[NSURL URLWithString:tempModel.coverPic] placeholderImage:[UIImage imageNamed:@"default_image"]];
+    [cell.contentImageView sd_setImageWithURL:[NSURL URLWithString:tempModel.coverPic] placeholderImage:[UIImage imageNamed:@"default_image"]];
     cell.contentNameLabel.text = [NSString stringWithFormat:@"%@", tempModel.name];
     cell.contentPriceLabel.text = [NSString stringWithFormat:@"￥%.2f", [tempModel.price floatValue]];
     if (tempModel.frequency.integerValue > 0) {
