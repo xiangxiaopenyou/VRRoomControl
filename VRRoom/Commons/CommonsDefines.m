@@ -24,6 +24,6 @@ CGFloat const NAVIGATIONBARHEIGHT = 64.0;
 NSString * const BASEAPIURL = @"http://test.med-vision.cn/api/v1/appControlDoctor/";
 NSString * const ADVICEBASEURL = @"http://test.med-vision.cn/h5/help/";
 
-NSString * const XJNetworkError = @"网络错误";
+NSString * const XJNetworkError = @"请检查网络";
 
 

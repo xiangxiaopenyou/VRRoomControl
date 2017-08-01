@@ -139,7 +139,17 @@
     return tableView == self.departmentTableView ? self.diseasesArray.count + 1 : 1;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return tableView == self.departmentTableView ? 45 : (SCREEN_WIDTH / 3.0 - 2.5) * (self.selectedTherapiesArray.count / 2 + 1);
+    CGFloat height = 45.f;
+    if (tableView == self.departmentTableView) {
+        if (indexPath.row > 0) {
+            DiseaseModel *model = self.diseasesArray[indexPath.row - 1];
+            CGSize size = XLSizeOfText(model.diseaseName, SCREEN_WIDTH / 3.0 - 10, XJSystemFont(15));
+            height = size.height + 24.f;
+        }
+    } else {
+        height = (SCREEN_WIDTH / 3.0 - 2.5) * (self.selectedTherapiesArray.count / 2 + 1);
+    }
+    return height;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView == self.departmentTableView) {

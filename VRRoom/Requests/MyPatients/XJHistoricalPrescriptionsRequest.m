@@ -22,7 +22,7 @@
             !resultHandler ?: resultHandler(nil, responseObject[@"message"]);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        !resultHandler ?: resultHandler(nil, @"网络错误");
+        !resultHandler ?: resultHandler(nil, XJNetworkError);
     }];
 }
 

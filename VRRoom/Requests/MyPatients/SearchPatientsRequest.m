@@ -25,7 +25,7 @@
             }
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        !resultHandler ?: resultHandler(nil, error.description);
+        !resultHandler ?: resultHandler(nil, XJNetworkError);
     }];
 }
 

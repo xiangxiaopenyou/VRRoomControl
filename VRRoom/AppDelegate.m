@@ -44,7 +44,6 @@
     [SlideNavigationController sharedInstance].enableSwipeGesture = NO;
     [SlideNavigationController sharedInstance].avoidSwitchingToSameClassViewController = YES;
     [SlideNavigationController sharedInstance].portraitSlideOffset = CGRectGetWidth([UIScreen mainScreen].bounds) * 0.3;
-//    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mainController];
     self.window.rootViewController = navigationController;
     
     [self.window makeKeyAndVisible];
