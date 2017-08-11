@@ -62,6 +62,18 @@
             }
             GJCFAsyncMainQueue(^{
                 [self.tableView reloadData];
+                if (self.dataArray.count == 0) {
+                    UILabel *label = [[UILabel alloc] initWithFrame:self.view.bounds];
+                    label.font = XJBoldSystemFont(17);
+                    label.textColor = [UIColor lightGrayColor];
+                    label.text = @"暂无历史处方";
+                    label.textAlignment = NSTextAlignmentCenter;
+                    self.tableView.tableFooterView = label;
+                    self.tableView.mj_header.hidden = YES;
+                } else {
+                    self.tableView.tableFooterView = [UIView new];
+                    self.tableView.mj_header.hidden = NO;
+                }
                 if (resultArray.count < 10) {
                     [self.tableView.mj_footer endRefreshingWithNoMoreData];
                     self.tableView.mj_footer.hidden = YES;

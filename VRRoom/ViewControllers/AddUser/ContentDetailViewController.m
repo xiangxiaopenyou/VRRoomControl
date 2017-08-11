@@ -7,7 +7,7 @@
 //
 
 #import "ContentDetailViewController.h"
-#import "XJContentWebViewController.h"
+//#import "XJContentWebViewController.h"
 #import "DetailContentCell.h"
 //#import "AudioPlayerView.h"
 #import "XLBlockAlertView.h"
@@ -21,12 +21,15 @@
 //#import <UtoVRPlayer/UtoVRPlayer.h>
 //#import <SDCycleScrollView.h>
 
-@interface ContentDetailViewController ()</*UVPlayerDelegate,*/UITableViewDelegate, UITableViewDataSource/*, SDCycleScrollViewDelegate*/>
+static NSString * const XJContentUrl = @"http://test.med-vision.cn/";
+
+@interface ContentDetailViewController ()</*UVPlayerDelegate,*/UITableViewDelegate, UITableViewDataSource/*, SDCycleScrollViewDelegate*/, UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *viewOfPlayer;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIImageView *contentImageView;
 @property (weak, nonatomic) IBOutlet UIButton *collectButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraintOfPlayer;
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (nonatomic) NSInteger isAdded;
 //@property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectButtonHeight;
 
@@ -152,14 +155,18 @@
             XLDismissHUD(self.view, NO, YES, nil);
             self.contentModel = object;
             self.contentModel.isAdded = @(_isAdded);
-            GJCFAsyncMainQueue(^{
-//                if (self.contentModel.ext) {
-//                    self.mediaModel = [ContentsMediaModel yy_modelWithDictionary:self.contentModel.ext];
-//                    [self loadPlayer];
-//                }
+            GJCFAsyncMainQueue((^{
+                //                if (self.contentModel.ext) {
+                //                    self.mediaModel = [ContentsMediaModel yy_modelWithDictionary:self.contentModel.ext];
+                //                    [self loadPlayer];
+                //                }
+                NSString *urlString = [NSString stringWithFormat:@"%@%@", XJContentUrl, self.contentModel.contentDescription];
+                urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                NSURL *requestUrl = [NSURL URLWithString:urlString];
+                [self.webView loadRequest:[NSURLRequest requestWithURL:requestUrl]];
                 [self refreshBottomButtonState];
-                [self.tableView reloadData];
-            });
+                //[self.tableView reloadData];
+            }));
         } else {
             XLDismissHUD(self.view, YES, NO, msg);
         }
@@ -168,7 +175,11 @@
 
 #pragma mark - IBAction & Selector
 - (void)closeAction {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if ([self.webView canGoBack]) {
+        [self.webView goBack];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 - (IBAction)collectAction:(id)sender {
     if (self.viewType == 1) {
@@ -190,9 +201,9 @@
     }
 }
 - (void)linkAction {
-    XJContentWebViewController *webController = [[XJContentWebViewController alloc] init];
-    webController.urlString = self.contentModel.contentDescription;
-    [self.navigationController pushViewController:webController animated:YES];
+//    XJContentWebViewController *webController = [[XJContentWebViewController alloc] init];
+//    webController.urlString = self.contentModel.contentDescription;
+//    [self.navigationController pushViewController:webController animated:YES];
 }
 //- (void)startPlay {
 //    if (XLNetworkState != 5) {
@@ -248,6 +259,17 @@
 //        self.startButton.hidden = NO;
 //    }
 //}
+
+#pragma mark - Webview delegate
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    if (webView.isLoading) {
+        return;
+    }
+    XLDismissHUD(self.view, NO, YES, nil);
+}
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    XLDismissHUD(self.view, YES, NO, @"加载失败");
+}
 #pragma mark - UITableView DataSource Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;

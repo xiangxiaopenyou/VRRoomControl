@@ -197,6 +197,11 @@
 					3DCF770E1F30209B00567DFA = {
 						CreatedOnToolsVersion = 8.3.3;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					3DCF77221F30209B00567DFA = {
 						CreatedOnToolsVersion = 8.3.3;
@@ -511,6 +516,7 @@
 				3DCF77391F30209B00567DFA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3DCF773A1F30209B00567DFA /* Build configuration list for PBXNativeTarget "SwiftTestTests" */ = {
 			isa = XCConfigurationList;
@@ -519,6 +525,7 @@
 				3DCF773C1F30209B00567DFA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3DCF773D1F30209B00567DFA /* Build configuration list for PBXNativeTarget "SwiftTestUITests" */ = {
 			isa = XCConfigurationList;
@@ -527,6 +534,7 @@
 				3DCF773F1F30209B00567DFA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

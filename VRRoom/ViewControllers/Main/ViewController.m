@@ -12,6 +12,7 @@
 #import "XJAddPatientViewController.h"
 #import "XJMyPatientsViewController.h"
 #import "SceneContentsViewController.h"
+#import "XJCommonWebViewController.h"
 #import "XJMainItemsCell.h"
 
 #import "PatientModel.h"
@@ -97,6 +98,16 @@
     [self.navigationController pushViewController:contentsViewController animated:YES];
 }
 - (IBAction)directionAction:(id)sender {
+    XJCommonWebViewController *webController = [[UIStoryboard storyboardWithName:@"More" bundle:nil] instantiateViewControllerWithIdentifier:@"CommonWeb"];
+    webController.urlString = HELPBASEURL;
+    webController.title = @"康复综述";
+    [self.navigationController pushViewController:webController animated:YES];
+}
+- (IBAction)aboutAction:(id)sender {
+    XJCommonWebViewController *webController = [[UIStoryboard storyboardWithName:@"More" bundle:nil] instantiateViewControllerWithIdentifier:@"CommonWeb"];
+    webController.urlString = ABOUTBASEURL;
+    webController.title = @"关于心景";
+    [self.navigationController pushViewController:webController animated:YES];
 }
 //- (void)searchAction {
 //    SearchViewController *searchController = [self.storyboard instantiateViewControllerWithIdentifier:@"Search"];

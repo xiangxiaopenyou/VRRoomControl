@@ -20,9 +20,10 @@ NSString * const REALNAME = @"UserRealname";
 CGFloat const TABBARHEIGHT = 49.0;
 CGFloat const NAVIGATIONBARHEIGHT = 64.0;
 
-//NSString * const BASEAPIURL = @"http://support.med-vision.cn/api/v1/";
-NSString * const BASEAPIURL = @"http://test.med-vision.cn/api/v1/appControlDoctor/";
-NSString * const ADVICEBASEURL = @"http://test.med-vision.cn/h5/help/";
+NSString * const BASEAPIURL = @"http://support.med-vision.cn/api/v1/appControlDoctor/";
+//NSString * const BASEAPIURL = @"http://test.med-vision.cn/api/v1/appControlDoctor/";
+NSString * const HELPBASEURL = @"http://support.med-vision.cn/h5/help";
+NSString * const ABOUTBASEURL = @"http://mp.weixin.qq.com/s/QLJzUbgHek3ZB0flLqzbAg";
 
 NSString * const XJNetworkError = @"请检查网络";
 

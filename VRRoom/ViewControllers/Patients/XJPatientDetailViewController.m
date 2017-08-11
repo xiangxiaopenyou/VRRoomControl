@@ -86,21 +86,24 @@
 
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return 5;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSInteger number = 0;
     switch (section) {
         case 0:
-            number = 2;
-            break;
-        case 1:
             number = 4;
             break;
+        case 1:
+            number = 1;
+            break;
         case 2:
-            number = 5;
+            number = 3;
             break;
         case 3:
+            number = 2;
+            break;
+        case 4:
             number = 1;
             break;
         default:
@@ -109,7 +112,7 @@
     return number;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 45.f;
+    return 52.f;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DetailsCell" forIndexPath:indexPath];
@@ -118,35 +121,6 @@
             cell.textLabel.text = self.titlesArray[indexPath.row];
             if (indexPath.row == 0) {
                 cell.detailTextLabel.text = self.patientModel.name;
-            } else {
-                if (XLIsNullObject(self.patientModel.remark)) {
-                    cell.detailTextLabel.text = @"未设置";
-                } else {
-                    cell.detailTextLabel.text = self.patientModel.remark;
-                }
-            }
-        }
-            break;
-        case 1: {
-            cell.textLabel.text = self.titlesArray[indexPath.row + 2];
-            if (indexPath.row == 0) {
-                cell.accessoryType = UITableViewCellAccessoryNone;
-                NSString *hospital = [[NSUserDefaults standardUserDefaults] stringForKey:USERHOSPITAL];
-                cell.detailTextLabel.text = hospital;
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            } else if (indexPath.row == 1) {
-                cell.detailTextLabel.text = self.patientModel.clinichistoryNo;
-            } else if (indexPath.row == 2) {
-                cell.detailTextLabel.text = XLIsNullObject(self.patientModel.medicalInsuranceCardNo) ? @"未设置" : self.patientModel.medicalInsuranceCardNo;
-            } else {
-                cell.detailTextLabel.text = self.patientModel.disease;
-            }
-        }
-            break;
-        case 2: {
-            cell.textLabel.text = self.titlesArray[indexPath.row + 6];
-            if (indexPath.row == 0) {
-                cell.detailTextLabel.text = XLIsNullObject(self.patientModel.phone) ? @"未设置" : self.patientModel.phone;
             } else if (indexPath.row == 1) {
                 if (self.patientModel.sex.integerValue == XJUserSexUnknown) {
                     cell.detailTextLabel.text = @"保密";
@@ -157,7 +131,38 @@
                 }
             } else if (indexPath.row == 2) {
                 cell.detailTextLabel.text = XLIsNullObject(self.patientModel.birthday) ? @"" : [self.patientModel.birthday substringToIndex:10];
-            } else if (indexPath.row == 3) {
+            } else {
+                cell.detailTextLabel.text = XLIsNullObject(self.patientModel.phone) ? @"未设置" : self.patientModel.phone;
+            }
+        }
+            break;
+        case 1: {
+            
+            cell.textLabel.text = self.titlesArray[indexPath.row + 4];
+            if (XLIsNullObject(self.patientModel.remark)) {
+                cell.detailTextLabel.text = @"未设置";
+            } else {
+                cell.detailTextLabel.text = self.patientModel.remark;
+            }
+        }
+            break;
+        case 2: {
+            cell.textLabel.text = self.titlesArray[indexPath.row + 5];
+            if (indexPath.row == 0) {
+                cell.accessoryType = UITableViewCellAccessoryNone;
+                NSString *hospital = [[NSUserDefaults standardUserDefaults] stringForKey:USERHOSPITAL];
+                cell.detailTextLabel.text = hospital;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            } else if (indexPath.row == 1) {
+                cell.detailTextLabel.text = self.patientModel.clinichistoryNo;
+            } else {
+                cell.detailTextLabel.text = self.patientModel.disease;
+            }
+        }
+            break;
+        case 3: {
+            cell.textLabel.text = self.titlesArray[indexPath.row + 8];
+            if (indexPath.row == 0) {
                 switch (self.patientModel.educationDegree.integerValue) {
                     case XJEducationDegreeUnknown:
                         cell.detailTextLabel.text = @"保密";
@@ -194,8 +199,8 @@
             }
         }
             break;
-        case 3: {
-            cell.textLabel.text = self.titlesArray[indexPath.row + 11];
+        case 4: {
+            cell.textLabel.text = self.titlesArray[indexPath.row + 10];
             cell.detailTextLabel.text = nil;
         }
             break;
@@ -220,38 +225,36 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.section == 3) {
+    if (indexPath.section == 4) {
         XJHistoricalPrescriptionsViewController *historicalController = [self.storyboard instantiateViewControllerWithIdentifier:@"HistoricalPrescriptions"];
         historicalController.patientId = self.patientId;
         historicalController.patientModel = self.patientModel;
         [self.navigationController pushViewController:historicalController animated:YES];
     }
     if (self.patientModel.canModify.integerValue == 1) {         //可以修改所有信息
-        if (indexPath.section < 3 && !(indexPath.section == 1 && indexPath.row == 0)) {
+        if (indexPath.section < 4 && !(indexPath.section == 2 && indexPath.row == 0)) {
             XJModifyInformationsViewController *modifyController = [self.storyboard instantiateViewControllerWithIdentifier:@"ModifyInformations"];
             XJPatientInformationTypes type = XJPatientInformationTypesNone;
             if (indexPath.section == 0) {
                 if (indexPath.row == 0) {
                     type = XJPatientInformationTypesName;
-                } else {
-                    type = XJPatientInformationTypesRemark;
-                }
-            } else if (indexPath.section == 1) {
-                if (indexPath.row == 1) {
-                    type = XJPatientInformationTypesClinichistoryNo;
-                } else if (indexPath.row == 2) {
-                    type = XJPatientInformationTypesMedicalInsuranceCardNo;
-                } else if (indexPath.row == 3) {
-                    type = XJPatientInformationTypesDisease;
-                }
-            } else if (indexPath.section == 2) {
-                if (indexPath.row == 0) {
-                    type = XJPatientInformationTypesPhone;
                 } else if (indexPath.row == 1) {
                     type = XJPatientInformationTypesSex;
                 } else if (indexPath.row == 2) {
                     type = XJPatientInformationTypesBirthday;
-                } else if (indexPath.row == 3) {
+                } else {
+                    type = XJPatientInformationTypesPhone;
+                }
+            } else if (indexPath.section == 1) {
+                    type = XJPatientInformationTypesRemark;
+            } else if (indexPath.section == 2) {
+                if (indexPath.row == 1) {
+                    type = XJPatientInformationTypesClinichistoryNo;
+                } else if (indexPath.row == 2) {
+                    type = XJPatientInformationTypesDisease;
+                }
+            } else if (indexPath.section == 3) {
+                if (indexPath.row == 0) {
                     type = XJPatientInformationTypesEducationDegree;
                 } else {
                     type = XJPatientInformationTypesMaritalStatus;
@@ -270,7 +273,7 @@
             [self.navigationController pushViewController:modifyController animated:YES];
         }
     } else {                                //只能修改备注
-        if (indexPath.section == 0 && indexPath.row == 1) {
+        if (indexPath.section == 1) {
             XJModifyInformationsViewController *modifyController = [self.storyboard instantiateViewControllerWithIdentifier:@"ModifyInformations"];
             modifyController.type = XJPatientInformationTypesRemark;
             modifyController.model = self.patientModel;
@@ -290,7 +293,7 @@
 #pragma mark - Getters
 - (NSArray *)titlesArray {
     if (!_titlesArray) {
-        _titlesArray = @[@"姓       名", @"备       注", @"医       院", @"病 历 号", @"医保卡号", @"病       症", @"手       机", @"性       别", @"出生日期", @"文化程度", @"婚姻状况", @"处方记录"];
+        _titlesArray = @[@"姓　　名", @"性　　别", @"出生日期", @"手　　机", @"备　　注", @"医　　院", @"病历号", @"病　　症", @"文化程度", @"婚姻状况", @"历史处方"];
     }
     return _titlesArray;
 }

@@ -20,17 +20,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    NSString *urlString = ADVICEBASEURL;
+    NSString *urlString = HELPBASEURL;
     switch (self.adviceType) {
         case XJAdviceTypeAll:
-            urlString = ADVICEBASEURL;
+            urlString = HELPBASEURL;
             break;
         case XJAdviceTypeDisease:{
-            urlString = [NSString stringWithFormat:@"%@disease?id=%@", ADVICEBASEURL, self.resultId];
+            urlString = [NSString stringWithFormat:@"%@disease?id=%@", HELPBASEURL, self.resultId];
         }
             break;
         case XJAdviceTypeTherapy:{
-            urlString = [NSString stringWithFormat:@"%@therapy?id=%@", ADVICEBASEURL, self.resultId];
+            urlString = [NSString stringWithFormat:@"%@therapy?id=%@", HELPBASEURL, self.resultId];
         }
         default:
             break;

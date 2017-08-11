@@ -80,7 +80,7 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.model ? 4 : 0;
+    return self.model ? 3 : 0;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
@@ -97,9 +97,9 @@
         case 2:
             height = 90.f * self.model.prescriptionContentList.count;
             break;
-        case 3:
-            height = 50.f;
-            break;
+//        case 3:
+//            height = 50.f;
+//            break;
             
         default:
             break;
@@ -134,14 +134,14 @@
             return cell;
         }
             break;
-        case 3:{
-            static NSString *identifier = @"PrescriptionPriceCell";
-            PrescriptionPriceCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.priceLabel.text = [NSString stringWithFormat:@"%.2f", [self.model.total floatValue]];
-            return cell;
-        }
-            break;
+//        case 3:{
+//            static NSString *identifier = @"PrescriptionPriceCell";
+//            PrescriptionPriceCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//            cell.priceLabel.text = [NSString stringWithFormat:@"%.2f", [self.model.total floatValue]];
+//            return cell;
+//        }
+//            break;
             
         default:
             return [UITableViewCell new];
@@ -162,17 +162,17 @@
     NSString *title;
     switch (section) {
         case 0:
-            title = @"病症";
+            title = @"病症详情:";
             break;
         case 1:
-            title = @"医嘱";
+            title = @"建议方案:";
             break;
         case 2:
-            title = @"内容";
+            title = @"已选内容:";
             break;
-        case 3:
-            title = @"总价";
-            break;
+//        case 3:
+//            title = @"总价";
+//            break;
             
         default:
             break;

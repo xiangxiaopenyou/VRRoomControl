@@ -25,7 +25,7 @@
 #import <UIImageView+WebCache.h>
 
 
-@interface WritePrescriptionViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface WritePrescriptionViewController ()<UITableViewDelegate, UITableViewDataSource, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextView *adviceTextView;
 @property (weak, nonatomic) IBOutlet UITextView *diseaseTextView;
@@ -141,27 +141,36 @@
     [self.diseaseTextView resignFirstResponder];
 }
 
+#pragma mark - Textview delegate
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    //NSString *temp = [[textView textInputMode] primaryLanguage];
+    if (XLStringContainsEmoji(text)) {
+        return NO;
+    }
+    return YES;
+}
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.contentsArray.count + 2;
+    return self.contentsArray.count + 1;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return indexPath.row == self.contentsArray.count ? 45.f : 90.f;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == self.contentsArray.count + 1) {
-        static NSString *identifier = @"PrescriptionPriceCell";
-        PrescriptionPriceCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
-        CGFloat price = 0;
-        for (ContentModel *tempModel in self.contentsArray) {
-            NSInteger times = tempModel.frequency.integerValue * tempModel.period.integerValue;
-            price += tempModel.price.floatValue * times;
-        }
-        cell.priceLabel.text = [NSString stringWithFormat:@"%.2f", price];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        return cell;
-    } else if (indexPath.row == self.contentsArray.count) {
+//    if (indexPath.row == self.contentsArray.count + 1) {
+//        static NSString *identifier = @"PrescriptionPriceCell";
+//        PrescriptionPriceCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+//        CGFloat price = 0;
+//        for (ContentModel *tempModel in self.contentsArray) {
+//            NSInteger times = tempModel.frequency.integerValue * tempModel.period.integerValue;
+//            price += tempModel.price.floatValue * times;
+//        }
+//        cell.priceLabel.text = [NSString stringWithFormat:@"%.2f", price];
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        return cell;
+//    } else
+    if (indexPath.row == self.contentsArray.count) {
         static NSString *identifier = @"AddContentCell";
         XJAddContentCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -175,7 +184,7 @@
         cell.contentNameLabel.text = [NSString stringWithFormat:@"%@", tempModel.name];
         cell.contentPriceLabel.text = [NSString stringWithFormat:@"￥%.2f", [tempModel.price floatValue]];
         if (tempModel.frequency.integerValue > 0) {
-            cell.contentCycleLabel.hidden = NO;
+            //cell.contentCycleLabel.hidden = NO;
             NSString *unit = @"日";
             switch ([tempModel.periodUnit integerValue]) {
                 case 1:
@@ -193,7 +202,7 @@
             NSInteger count = tempModel.frequency.integerValue * tempModel.period.integerValue;
             cell.contentCycleLabel.text = [NSString stringWithFormat:@"%@次/%@-共%@%@-共%@次", tempModel.frequency, unit, tempModel.period, unit, @(count)];
         } else {
-            cell.contentCycleLabel.hidden = YES;
+            cell.contentCycleLabel.text = @"请设置周期";
         }
         cell.resetCycleButton.tag = 1000 + indexPath.row;
         [cell.resetCycleButton addTarget:self action:@selector(resetCycleAction:) forControlEvents:UIControlEventTouchUpInside];

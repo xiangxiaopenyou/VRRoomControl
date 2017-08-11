@@ -49,10 +49,10 @@ typedef NS_ENUM(NSInteger, XJPatientInformationTypes) {
     XJPatientInformationTypesNone
     
 };
-#define MAIN_TEXT_COLOR [UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:1.0]
+#define MAIN_TEXT_COLOR [UIColor blackColor]
 #define NAVIGATIONBAR_COLOR [UIColor colorWithRed:82/255.0 green:184/255.0 blue:255/255.0 alpha:1.0]
 #define TABBAR_TITLE_COLOR [UIColor colorWithRed:170/255.0 green:170/255.0 blue:170/255.0 alpha:1.0]
-#define MAIN_BACKGROUND_COLOR [UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:1.0]
+#define MAIN_BACKGROUND_COLOR [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1.0]
 #define BREAK_LINE_COLOR [UIColor colorWithRed:208/255.0 green:208/255.0 blue:208/255.0 alpha:1.0]
 
 /**
@@ -93,7 +93,9 @@ extern CGFloat const NAVIGATIONBARHEIGHT;
 //接口
 //1.BaseURL
 extern NSString * const BASEAPIURL;
-extern NSString * const ADVICEBASEURL;
+//extern NSString * const ADVICEBASEURL;
+extern NSString * const HELPBASEURL;
+extern NSString * const ABOUTBASEURL;
 
 extern NSString * const XJNetworkError;
 

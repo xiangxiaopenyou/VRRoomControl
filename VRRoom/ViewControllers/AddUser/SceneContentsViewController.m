@@ -43,6 +43,7 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(backAction)];
     [self createNavigationTitleView];
     
+    self.departmentTableView.tableFooterView = [UIView new];
     //默认当前选择全部病种
     _seletedDepartmentIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self fetchDiseases];
@@ -142,9 +143,10 @@
     CGFloat height = 45.f;
     if (tableView == self.departmentTableView) {
         if (indexPath.row > 0) {
-            DiseaseModel *model = self.diseasesArray[indexPath.row - 1];
-            CGSize size = XLSizeOfText(model.diseaseName, SCREEN_WIDTH / 3.0 - 10, XJSystemFont(15));
-            height = size.height + 24.f;
+//            DiseaseModel *model = self.diseasesArray[indexPath.row - 1];
+//            CGSize size = XLSizeOfText(model.diseaseName, SCREEN_WIDTH / 3.0 - 10, XJSystemFont(15));
+//            height =  size.height + 24.f;
+            height = 55.f;
         }
     } else {
         height = (SCREEN_WIDTH / 3.0 - 2.5) * (self.selectedTherapiesArray.count / 2 + 1);
@@ -290,11 +292,11 @@
         _searchTextField = [[UITextField alloc] init];
         _searchTextField.placeholder = @"请输入你要搜索的内容";
         [_searchTextField setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
-        _searchTextField.textColor = NAVIGATIONBAR_COLOR;
+        _searchTextField.textColor = MAIN_TEXT_COLOR;
         _searchTextField.font = XJSystemFont(14);
         _searchTextField.returnKeyType = UIReturnKeySearch;
         _searchTextField.delegate = self;
-        
+        _searchTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     }
     return _searchTextField;
 }

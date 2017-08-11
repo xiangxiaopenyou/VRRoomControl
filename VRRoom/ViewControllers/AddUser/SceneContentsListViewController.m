@@ -208,6 +208,15 @@
     }
 
 }
+- (void)checkTipLabel {
+    if (self.contentsArray.count == 0) {
+        self.emptyTipLabel.hidden = NO;
+        self.tableView.mj_header.hidden = YES;
+    } else {
+        self.emptyTipLabel.hidden = YES;
+        self.tableView.mj_header.hidden = NO;
+    }
+}
 
 #pragma mark - Requests
 - (void)fetchContents {
@@ -231,6 +240,7 @@
                  self.contentsArray = [array mutableCopy];
              }
              GJCFAsyncMainQueue(^{
+                 [self checkTipLabel];
                  [self.tableView reloadData];
                  if (tempArray.count < 10) {
                      [self.tableView.mj_footer endRefreshingWithNoMoreData];
@@ -261,6 +271,7 @@
                 self.contentsArray = [tempArray mutableCopy];
             }
             GJCFAsyncMainQueue(^{
+                [self checkTipLabel];
                 [self.tableView reloadData];
                 if (resultArray.count < 10) {
                     [self.tableView.mj_footer endRefreshingWithNoMoreData];
@@ -279,11 +290,6 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.contentsArray.count == 0) {
-        self.emptyTipLabel.hidden = NO;
-    } else {
-        self.emptyTipLabel.hidden = YES;
-    }
     return self.contentsArray.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

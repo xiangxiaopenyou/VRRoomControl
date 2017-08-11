@@ -15,6 +15,7 @@
 #import "UserModel.h"
 
 #import <ChineseString.h>
+#import <UIImage-Helpers.h>
 
 @interface XJMyPatientsViewController ()<UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating, UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -37,14 +38,16 @@
     // Do any additional setup after loading the view.
     self.tableView.tableFooterView = [UIView new];
     [self.searchController.view addSubview:self.searchTableView];
+    self.searchBar.backgroundImage = [UIImage imageWithColor:XJRGBColor(222, 222, 222, 1)];
     //self.definesPresentationContext = YES;
-    self.historyArray = [[[NSUserDefaults standardUserDefaults] arrayForKey:SEARCHHISTORY] mutableCopy];
-    self.selectedHistoryArray = [self.historyArray mutableCopy];
     XLShowHUDWithMessage(nil, self.view);
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self fetchMyPatients];
+    self.historyArray = [[[NSUserDefaults standardUserDefaults] arrayForKey:SEARCHHISTORY] mutableCopy];
+    self.selectedHistoryArray = [self.historyArray mutableCopy];
+    [self.searchTableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -86,6 +89,7 @@
             PatientModel *tempModel = object;
             [self pushToPatientDetail:tempModel.userId];
             [self saveSearchHistory:keyword];
+            self.searchController.searchBar.text = nil;
         } else {
             XLDismissHUD(XJKeyWindow, YES, NO, msg);
         }
@@ -180,7 +184,7 @@
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return tableView == self.tableView ? 50.f : 40.f;
+    return tableView == self.tableView ? 58.f : 40.f;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView == self.tableView) {
@@ -333,6 +337,7 @@
         _searchController.searchResultsUpdater = self;
         _searchController.searchBar.placeholder = @"输入病历号或手机号搜索";
         _searchController.searchBar.delegate = self;
+        _searchController.searchBar.backgroundImage = [UIImage imageWithColor:XJRGBColor(222, 222, 222, 1)];
         _searchController.view.backgroundColor = MAIN_BACKGROUND_COLOR;
         _searchController.hidesNavigationBarDuringPresentation = NO;
     }

@@ -33,8 +33,11 @@
     NSString *hospitalString = [[NSUserDefaults standardUserDefaults] stringForKey:USERHOSPITAL];
     self.usernameLabel.text = nameString;
     self.roomNameLabel.text = hospitalString;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess) name:@"LoginSuccess" object:nil];
 }
-
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LoginSuccess" object:nil];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -47,6 +50,12 @@
 
 - (void)turnLogin {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginStateDidChanged" object:nil];
+}
+- (void)loginSuccess {
+    NSString *nameString = [[NSUserDefaults standardUserDefaults] stringForKey:REALNAME];
+    NSString *hospitalString = [[NSUserDefaults standardUserDefaults] stringForKey:USERHOSPITAL];
+    self.usernameLabel.text = nameString;
+    self.roomNameLabel.text = hospitalString;
 }
 
 #pragma mark - Private methods

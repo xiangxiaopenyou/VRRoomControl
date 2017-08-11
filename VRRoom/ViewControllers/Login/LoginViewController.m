@@ -111,6 +111,7 @@
             [[NSUserDefaults standardUserDefaults] setObject:model.realname forKey:REALNAME];
             [[NSUserDefaults standardUserDefaults] setObject:model.userId forKey:USERID];
             [[NSUserDefaults standardUserDefaults] synchronize];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginSuccess" object:nil];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.navigationController dismissViewControllerAnimated:NO completion:nil];
             });
