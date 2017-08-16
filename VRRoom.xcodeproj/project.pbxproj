@@ -430,6 +430,7 @@
 		3D22B4691F10B39200C9D459 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				3DFFE34D1F43E75D00E41100 /* Views */,
 				3D22B46C1F10B47800C9D459 /* ChangePasswordTableViewController.h */,
 				3D22B46D1F10B47800C9D459 /* ChangePasswordTableViewController.m */,
 				3D22B46E1F10B47800C9D459 /* LoginViewController.h */,
@@ -856,6 +857,13 @@
 				3DFB2CEB1F1EEFD200C2CE26 /* UserModel.m */,
 			);
 			path = User;
+			sourceTree = "<group>";
+		};
+		3DFFE34D1F43E75D00E41100 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		B224848AA36CAC80B13F3A78 /* Pods */ = {

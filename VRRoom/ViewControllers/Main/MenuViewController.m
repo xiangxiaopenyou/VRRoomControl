@@ -61,12 +61,12 @@
 #pragma mark - Private methods
 - (void)checkNeedUpdate:(NSDictionary *)dictionary {
     NSString *localVersion = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
-    NSString *currentVersion = dictionary[@"versionCode"];
+    NSString *currentVersion = dictionary[@"versionName"];
     if ([localVersion isEqualToString:currentVersion]) {
         [XLAlertControllerObject showWithTitle:@"提示" message:@"已经是最新版本了！" cancelTitle:@"好的" ensureTitle:nil ensureBlock:nil];
     } else {
         [XLAlertControllerObject showWithTitle:@"提示" message:@"发现新版本" cancelTitle:@"以后再说" ensureTitle:@"版本升级" ensureBlock:^{
-            NSString *urlString = dictionary[@"downloadUrl."];
+            NSString *urlString = dictionary[@"downloadUrl"];
             NSURL *url = [NSURL URLWithString:urlString];
             if ([[UIApplication sharedApplication] canOpenURL:url]) {
                 [[UIApplication sharedApplication] openURL:url];

@@ -14,6 +14,7 @@
 #import "SceneContentsViewController.h"
 #import "XJCommonWebViewController.h"
 #import "XJMainItemsCell.h"
+#import "XLAlertControllerObject.h"
 
 #import "PatientModel.h"
 #import "PrescriptionModel.h"
@@ -65,6 +66,17 @@
 //            [[NSUserDefaults standardUserDefaults] synchronize];
 //            XLDismissHUD(self.view, YES, NO, @"登录失效，请重新登录");
 //            [self performSelector:@selector(turnLogin) withObject:nil afterDelay:1.0];
+            NSString *localVersion = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
+            NSString *currentVersion = object[@"versionName"];
+            if (![localVersion isEqualToString:currentVersion]) {
+                [XLAlertControllerObject showWithTitle:@"提示" message:@"发现新版本" cancelTitle:@"以后再说" ensureTitle:@"版本升级" ensureBlock:^{
+                    NSString *urlString = object[@"downloadUrl"];
+                    NSURL *url = [NSURL URLWithString:urlString];
+                    if ([[UIApplication sharedApplication] canOpenURL:url]) {
+                        [[UIApplication sharedApplication] openURL:url];
+                    }
+                }];
+            }
         } else {
             if ([msg integerValue] >= 95 && [msg integerValue] < 100) {
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:USERTOKEN];

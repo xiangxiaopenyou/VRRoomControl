@@ -41,6 +41,9 @@
     [self presentViewController:alertController animated:YES completion:nil];
     
 }
+- (IBAction)registerAction:(id)sender {
+    
+}
 
 #pragma mark - Text field delegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

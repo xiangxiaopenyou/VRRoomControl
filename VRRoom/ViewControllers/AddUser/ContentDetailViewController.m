@@ -21,7 +21,7 @@
 //#import <UtoVRPlayer/UtoVRPlayer.h>
 //#import <SDCycleScrollView.h>
 
-static NSString * const XJContentUrl = @"http://test.med-vision.cn/";
+static NSString * const XJContentUrl = @"http://support.med-vision.cn/";
 
 @interface ContentDetailViewController ()</*UVPlayerDelegate,*/UITableViewDelegate, UITableViewDataSource/*, SDCycleScrollViewDelegate*/, UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *viewOfPlayer;

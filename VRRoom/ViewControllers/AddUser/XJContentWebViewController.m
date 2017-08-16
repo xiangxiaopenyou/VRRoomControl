@@ -7,7 +7,7 @@
 //
 
 #import "XJContentWebViewController.h"
-static NSString * const XJContentUrl = @"http://test.med-vision.cn/";
+static NSString * const XJContentUrl = @"http://support.med-vision.cn/";
 
 @interface XJContentWebViewController ()<UIWebViewDelegate>
 @property (strong, nonatomic) UIWebView *webView;
