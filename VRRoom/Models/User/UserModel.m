@@ -13,6 +13,8 @@
 #import "XJFetchMyPatientsRequest.h"
 #import "SendPrescriptionRequest.h"
 #import "XJCheckVersionRequest.h"
+#import "FetchVerificationCodeRequest.h"
+#import "RegisterRequest.h"
 #import "PrescriptionModel.h"
 #import "PatientModel.h"
 
@@ -70,6 +72,27 @@
 }
 + (void)versionInformations:(RequestResultHandler)handler {
     [[XJCheckVersionRequest new] request:^BOOL(id request) {
+        return YES;
+    } result:^(id object, NSString *msg) {
+        if (msg) {
+            !handler ?: handler(nil, msg);
+        } else {
+            !handler ?: handler(object, nil);
+        }
+    }];
+}
++ (void)fetchCode:(NSString *)phoneNumber type:(NSNumber *)type handler:(RequestResultHandler)handler {
+    [[FetchVerificationCodeRequest new] request:^BOOL(FetchVerificationCodeRequest *request) {
+        request.phoneNumber = phoneNumber;
+        request.type = type;
+        return YES;
+    } result:handler];
+}
++ (void)userRegister:(NSString *)username password:(NSString *)password code:(NSString *)verificationCode handler:(RequestResultHandler)handler {
+    [[RegisterRequest new] request:^BOOL(RegisterRequest *request) {
+        request.username = username;
+        request.password = password;
+        request.captcha = verificationCode;
         return YES;
     } result:^(id object, NSString *msg) {
         if (msg) {

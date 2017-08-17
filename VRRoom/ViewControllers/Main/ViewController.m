@@ -7,7 +7,6 @@
 //
 
 #import "ViewController.h"
-#import "SearchViewController.h"
 #import "ChangePasswordTableViewController.h"
 #import "XJAddPatientViewController.h"
 #import "XJMyPatientsViewController.h"
@@ -51,6 +50,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self versionInformationsRequest];
+    [self authenticationStatusRequest];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -90,6 +90,11 @@
         }
     }];
 }
+- (void)authenticationStatusRequest {
+    [XLAlertControllerObject showWithTitle:@"医生认证" message:@"您需要进行医生资格认证" cancelTitle:@"以后再说" ensureTitle:@"现在认证" ensureBlock:^{
+        
+    }];
+}
 
 #pragma mark - IBAction
 - (IBAction)addAction:(id)sender {
@@ -97,8 +102,6 @@
     [self.navigationController pushViewController:addController animated:YES];
 }
 - (IBAction)searchPatientAction:(id)sender {
-    SearchViewController *searchController = [self.storyboard instantiateViewControllerWithIdentifier:@"Search"];
-    [self.navigationController pushViewController:searchController animated:YES];
 }
 - (IBAction)myPatientsAction:(id)sender {
     XJMyPatientsViewController *myPatientsController = [[UIStoryboard storyboardWithName:@"Patients" bundle:nil] instantiateViewControllerWithIdentifier:@"MyPatientsController"];

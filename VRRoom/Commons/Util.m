@@ -125,4 +125,11 @@
     return returnValue;
 }
 
++ (BOOL)checkPassword:(NSString *)password {
+    NSString *pattern = @"(?!^[0-9]+$)(?!^[A-z]+$)(?!^[^A-z0-9]+$)^.{6,14}$";
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", pattern];
+    BOOL isMatch = [predicate evaluateWithObject:password];
+    return isMatch;
+}
+
 @end

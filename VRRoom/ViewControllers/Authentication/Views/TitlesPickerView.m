@@ -7,7 +7,7 @@
 //
 
 #import "TitlesPickerView.h"
-#import "ManagerModel.h"
+#import "TitlesModel.h"
 
 @interface TitlesPickerView ()<UIPickerViewDataSource, UIPickerViewDelegate>
 @property (strong, nonatomic) UIView *bottomView;
@@ -16,7 +16,7 @@
 @property (strong, nonatomic) UIButton *finishButton;
 
 @property (copy, nonatomic) NSArray *array;
-@property (strong, nonatomic) ManagerModel *selectedModel;
+@property (strong, nonatomic) TitlesModel *selectedModel;
 @end
 
 @implementation TitlesPickerView
@@ -49,7 +49,7 @@
     }
     return self;
 }
-- (void)resetContents:(NSArray *)titlesArray selected:(ManagerModel *)model {
+- (void)resetContents:(NSArray *)titlesArray selected:(TitlesModel *)model {
     if (titlesArray) {
         _array = titlesArray;
     }
@@ -58,8 +58,8 @@
     }
     [self.pickerView reloadAllComponents];
     [_array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        ManagerModel *tempModel = (ManagerModel *)obj;
-        if ([tempModel.id isEqualToString:_selectedModel.id]) {
+        TitlesModel *tempModel = (TitlesModel *)obj;
+        if ([tempModel.titleId isEqualToString:_selectedModel.titleId]) {
             [self.pickerView selectRow:idx inComponent:0 animated:NO];
         }
     }];
@@ -92,8 +92,8 @@
     return _array.count;
 }
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    ManagerModel *tempModel = _array[row];
-    return tempModel.user_username;
+    TitlesModel *tempModel = _array[row];
+    return tempModel.name;
 }
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     _selectedModel = _array[row];
@@ -124,7 +124,7 @@
 - (UIButton *)finishButton {
     if (!_finishButton) {
         _finishButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_finishButton setTitle:@"播放" forState:UIControlStateNormal];
+        [_finishButton setTitle:@"完成" forState:UIControlStateNormal];
         [_finishButton setTitleColor:NAVIGATIONBAR_COLOR forState:UIControlStateNormal];
         _finishButton.titleLabel.font = XJSystemFont(16);
         [_finishButton addTarget:self action:@selector(finishAction) forControlEvents:UIControlEventTouchUpInside];

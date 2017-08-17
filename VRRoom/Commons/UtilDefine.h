@@ -42,5 +42,10 @@
 //字符串是否含表情符
 #define XLStringContainsEmoji(aString) [Util stringContainsEmoji:aString]
 
+/**
+ *验证密码格式
+ */
+#define XLCheckPassword(aString) [Util checkPassword:aString]
+
 
 

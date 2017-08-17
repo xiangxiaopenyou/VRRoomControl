@@ -18,5 +18,5 @@
 + (void)showThenDismissHud:(BOOL)success message:(NSString *)message view:(UIView *)view;
 + (BOOL)isMobileNumber:(NSString *)mobileNum;
 + (BOOL)stringContainsEmoji:(NSString *)string;
-
++ (BOOL)checkPassword:(NSString *)password;
 @end

@@ -22,4 +22,6 @@
 + (void)sendPrescription:(PrescriptionModel *)model handler:(RequestResultHandler)handler;
 + (void)myPatients:(RequestResultHandler)hanlder;
 + (void)versionInformations:(RequestResultHandler)handler;
++ (void)fetchCode:(NSString *)phoneNumber type:(NSNumber *)type handler:(RequestResultHandler)handler;
++ (void)userRegister:(NSString *)username password:(NSString *)password code:(NSString *)verificationCode handler:(RequestResultHandler)handler;
 @end

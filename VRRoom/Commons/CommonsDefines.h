@@ -99,6 +99,19 @@ extern NSString * const ABOUTBASEURL;
 
 extern NSString * const XJNetworkError;
 
+//登录注册
+extern NSString * const XJInputPhoneNumber;
+extern NSString * const XJInputPassword;
+extern NSString * const XJInputVerificationCode;
+extern NSString * const XJInputPasswordAgain;
+extern NSString * const XJUserAgreement;
+extern NSString * const XJFetchVerificationCode;
+extern NSString * const XJInputCorrectPhoneNumberTip;
+extern NSString * const XJInputPasswordTip;
+extern NSString * const XJPasswordFormatTip;
+extern NSString * const XJDifferentPasswordTip;
+extern NSString * const XJInputVerificationCodeTip;
+
 
 
 

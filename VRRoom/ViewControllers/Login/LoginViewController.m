@@ -30,19 +30,20 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)helpAction:(id)sender {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"帮助" message:@"账户问题请联系客服处理！\n客服电话 : 400-166-7866" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-    UIAlertAction *playAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://4001667866"]];
-    }];
-    [alertController addAction:cancelAction];
-    [alertController addAction:playAction];
-    [self presentViewController:alertController animated:YES completion:nil];
-    
-}
-- (IBAction)registerAction:(id)sender {
-    
+
+#pragma mark - Action
+//- (IBAction)helpAction:(id)sender {
+//    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"帮助" message:@"账户问题请联系客服处理！\n客服电话 : 400-166-7866" preferredStyle:UIAlertControllerStyleAlert];
+//    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+//    UIAlertAction *playAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://4001667866"]];
+//    }];
+//    [alertController addAction:cancelAction];
+//    [alertController addAction:playAction];
+//    [self presentViewController:alertController animated:YES completion:nil];
+//    
+//}
+- (IBAction)forgetPasswordAction:(id)sender {
 }
 
 #pragma mark - Text field delegate

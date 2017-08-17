@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-@class ManagerModel;
+@class TitlesModel;
 
-typedef void (^finishedBlock)(ManagerModel *model);
+typedef void (^finishedBlock)(TitlesModel *model);
 
 @interface TitlesPickerView : UIView
 @property (copy, nonatomic) finishedBlock block;
 
-- (void)resetContents:(NSArray *)titlesArray selected:(ManagerModel *)model;
+- (void)resetContents:(NSArray *)titlesArray selected:(TitlesModel *)model;
 - (void)show;
 
 @end
