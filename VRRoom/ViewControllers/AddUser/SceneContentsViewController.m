@@ -9,6 +9,7 @@
 #import "SceneContentsViewController.h"
 #import "SceneContentsListViewController.h"
 #import "AdviceWebViewController.h"
+#import "XJMyPlansViewController.h"
 
 #import "DepartmentSelectCell.h"
 #import "TherapyItemCell.h"
@@ -216,13 +217,15 @@
 
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.selectedTherapiesArray.count + 1;
+    return self.seletedDepartmentIndexPath.row == 0 ? 2 : self.selectedTherapiesArray.count + 1;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     TherapyCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TherapyCollection" forIndexPath:indexPath];
     if (self.seletedDepartmentIndexPath.row == 0) {
         if (indexPath.row == 0) {
             cell.nameLabel.text = @"常用场景";
+        } else {
+            cell.nameLabel.text = @"我的方案";
         }
     } else {
         if (indexPath.row == 0) {
@@ -237,29 +240,35 @@
 
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    SceneContentsListViewController *listViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneContentsList"];
-    if (self.seletedDepartmentIndexPath.row > 1) {
-        DiseaseModel *tempModel = self.diseasesArray[self.seletedDepartmentIndexPath.row - 1];
-        listViewController.diseaseModel = tempModel;
-    }
-    if (self.seletedDepartmentIndexPath.row > 0 && indexPath.row > 0) {
-        TherapyModel *model = self.selectedTherapiesArray[indexPath.row - 1];
-        listViewController.therapyModel = model;
-    }
-    listViewController.viewType = self.viewType;
-    if (self.viewType == 2) {
-        listViewController.selectedContents = [self.selectedArray mutableCopy];
-    }
-    if (self.seletedDepartmentIndexPath.row == 0 && indexPath.row == 0) {
-        listViewController.isCollectionView = YES;
-    }
-    listViewController.selectedBlock = ^(NSArray *array) {
-        self.selectedArray = [array copy];
-        if (self.pickBlock) {
-            self.pickBlock(self.selectedArray);
+    if (self.seletedDepartmentIndexPath.row == 0 && indexPath.row == 1) {
+        XJMyPlansViewController *planController = [[UIStoryboard storyboardWithName:@"Plan" bundle:nil] instantiateViewControllerWithIdentifier:@"MyPlans"];
+        planController.viewType = self.viewType;
+        [self.navigationController pushViewController:planController animated:YES];
+    } else {
+        SceneContentsListViewController *listViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneContentsList"];
+        if (self.seletedDepartmentIndexPath.row > 1) {
+            DiseaseModel *tempModel = self.diseasesArray[self.seletedDepartmentIndexPath.row - 1];
+            listViewController.diseaseModel = tempModel;
         }
-    };
-    [self.navigationController pushViewController:listViewController animated:YES];
+        if (self.seletedDepartmentIndexPath.row > 0 && indexPath.row > 0) {
+            TherapyModel *model = self.selectedTherapiesArray[indexPath.row - 1];
+            listViewController.therapyModel = model;
+        }
+        listViewController.viewType = self.viewType;
+        if (self.viewType == 2) {
+            listViewController.selectedContents = [self.selectedArray mutableCopy];
+        }
+        if (self.seletedDepartmentIndexPath.row == 0 && indexPath.row == 0) {
+            listViewController.isCollectionView = YES;
+        }
+        listViewController.selectedBlock = ^(NSArray *array) {
+            self.selectedArray = [array copy];
+            if (self.pickBlock) {
+                self.pickBlock(self.selectedArray);
+            }
+        };
+        [self.navigationController pushViewController:listViewController animated:YES];
+    }
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout

@@ -16,6 +16,7 @@ NSString * const SEARCHHISTORY = @"SearchHistory";
 NSString * const USERNAME = @"Username";
 NSString * const USERHOSPITAL = @"UserHospital";
 NSString * const REALNAME = @"UserRealname";
+NSString * const USERSTATUS = @"UserStatus";
 
 CGFloat const TABBARHEIGHT = 49.0;
 CGFloat const NAVIGATIONBARHEIGHT = 64.0;

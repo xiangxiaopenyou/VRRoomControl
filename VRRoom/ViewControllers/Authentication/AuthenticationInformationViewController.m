@@ -8,7 +8,7 @@
 
 #import "AuthenticationInformationViewController.h"
 //#import "EditInformationViewController.h"
-//#import "AuthenticationPicturesViewController.h"
+#import "AuthenticationPicturesViewController.h"
 
 #import "AuthenticationContentCell.h"
 #import "SelectSexCell.h"
@@ -36,22 +36,22 @@
 @property (assign, nonatomic) XJUserSex sex;
 @property (copy, nonatomic) NSArray *headTitleArray;
 @property (copy, nonatomic) NSArray *areasArray;
-@property (copy, nonatomic) NSString *nameString;               //姓名
-@property (strong, nonatomic) CitiesModel *selectedCityModel;   //已经选择的城市model
+//@property (copy, nonatomic) NSString *nameString;               //姓名
+//@property (strong, nonatomic) CitiesModel *selectedCityModel;   //已经选择的城市model
 @property (copy, nonatomic) NSArray *professionalTitlesArray;   //职称数组
-@property (strong, nonatomic) TitlesModel *selectedTitleModel;  //已经选择的职称model
-@property (copy, nonatomic) NSString *hospitalString;           //医院名称
-@property (copy, nonatomic) NSString *departmentString;         //医院科室
-@property (copy, nonatomic) NSString *clinicString;             //诊所名称
-@property (copy, nonatomic) NSString *positionString;           //诊所职位
-@property (strong, nonatomic) UIImage *selectedPersonalImage;   //个人照片
-@property (copy, nonatomic) NSString *personalImageUrl;         //个人照片链接
-@property (copy, nonatomic) NSString *introductionString;       //个人介绍
-@property (copy, nonatomic) NSString *selectedSpecialits;        //个人擅长
-@property (copy, nonatomic) NSArray *authenticationPicturesArray1;  //认证图片
-@property (copy, nonatomic) NSArray *authenticationPicturesArray2;  //认证图片
-@property (copy, nonatomic) NSArray *authenticationPicturesUrlArray1;   //认证图片Url
-@property (copy, nonatomic) NSArray *authenticationPicturesUrlArray2;
+//@property (strong, nonatomic) TitlesModel *selectedTitleModel;  //已经选择的职称model
+//@property (copy, nonatomic) NSString *hospitalString;           //医院名称
+//@property (copy, nonatomic) NSString *departmentString;         //医院科室
+//@property (copy, nonatomic) NSString *clinicString;             //诊所名称
+//@property (copy, nonatomic) NSString *positionString;           //诊所职位
+//@property (strong, nonatomic) UIImage *selectedPersonalImage;   //个人照片
+//@property (copy, nonatomic) NSString *personalImageUrl;         //个人照片链接
+//@property (copy, nonatomic) NSString *introductionString;       //个人介绍
+//@property (copy, nonatomic) NSString *selectedSpecialits;        //个人擅长
+//@property (copy, nonatomic) NSArray *authenticationPicturesArray1;  //认证图片
+//@property (copy, nonatomic) NSArray *authenticationPicturesArray2;  //认证图片
+//@property (copy, nonatomic) NSArray *authenticationPicturesUrlArray1;   //认证图片Url
+//@property (copy, nonatomic) NSArray *authenticationPicturesUrlArray2;
 @property (strong, nonatomic) InformationModel *model;
 
 @property (nonatomic) BOOL editable;
@@ -81,7 +81,8 @@
             strongSelf.cityView.frame = CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         }];
         if (selectedCity) {
-            strongSelf.selectedCityModel = selectedCity;
+            strongSelf.model.region = selectedCity.code;
+            strongSelf.model.regionFullName = selectedCity.fullName;
             [strongSelf.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:2 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
         }
     };
@@ -89,17 +90,11 @@
     self.titlesPickerView.block = ^(TitlesModel *model) {
         GJCFStrongSelf strongSelf = weakSelf;
         if (model) {
-            strongSelf.selectedTitleModel = model;
+            strongSelf.model.professionalTitle = model.name;
+            strongSelf.model.professionalTitleId = model.titleId;
             [strongSelf.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:3 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
         }
     };
-//    self.titlesPickerView.block = ^(TitlesModel *model) {
-//        GJCFStrongSelf strongSelf = weakSelf;
-//        if (model) {
-//            strongSelf.selectedTitleModel = model;
-//            [strongSelf.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:3 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-//        }
-//    };
     
 }
 - (void)viewDidDisappear:(BOOL)animated {
@@ -117,14 +112,14 @@
 #pragma mark - Private Methods
 - (void)checkTitleArray:(BOOL)seleted {
     if (seleted) {
-        _headTitleArray = @[@"姓  名", @"性  别", @"城  市", @"职  称", @"医  院", @"科  室", @"更  多", @"认  证"];
+        _headTitleArray = @[@"姓  名", @"性  别", @"城  市", @"职  称", @"医  院", @"科  室"];
     } else {
-        _headTitleArray = @[@"姓  名", @"性  别", @"城  市", @"职  称", @"诊  所", @"职  位", @"更  多", @"认  证"];
+        _headTitleArray = @[@"姓  名", @"性  别", @"城  市", @"职  称", @"诊  所", @"职  位"];
     }
 }
 //信息是否能编辑
 - (void)checkEditable {
-    if (!self.model || [self.model.status integerValue] == 1 || [self.model.status integerValue] == 3) {
+    if (!self.model.status || [self.model.status integerValue] == 1 || [self.model.status integerValue] == 3) {
         _editable = YES;
         self.submitButton.hidden = NO;
     } else {
@@ -134,26 +129,26 @@
     [self resetTipView];
 }
 - (void)resetTipView {
-    if (!self.model || [self.model.status integerValue] == 1) {
+    if (!self.model.status || [self.model.status integerValue] == 1) {
         self.footerView.hidden = YES;
     } else {
         self.footerView.hidden = NO;
         if ([self.model.status integerValue] == 2) {
             self.tipImageView.image = [UIImage imageNamed:@"authentication_waiting"];
             self.failureReasonLabel.textColor = XJRGBColor(67, 175, 61, 1);
-            self.failureReasonLabel.text = NSLocalizedString(@"personal.waitingAuthentication", nil);
+            self.failureReasonLabel.text = @"您的信息已提交，请耐心等待审核";
         } else if ([self.model.status integerValue] == 3) {
             self.tipImageView.image = [UIImage imageNamed:@"authentication_failure"];
             self.failureReasonLabel.textColor = XJRGBColor(225, 80, 41, 1);
-            NSString *failureString = NSLocalizedString(@"personal.pleaseSubmitAgain", nil);
+            NSString *failureString = @"请修改信息后重新提交审核";
             if (!XLIsNullObject(self.model.remark)) {
                 failureString = [NSString stringWithFormat:@"%@,%@", self.model.remark, failureString];
             }
-            self.failureReasonLabel.text = [NSString stringWithFormat:@"%@, %@", self.model.remark, NSLocalizedString(@"personal.pleaseSubmitAgain", nil)];
+            self.failureReasonLabel.text = failureString;
         } else {
             self.tipImageView.image = [UIImage imageNamed:@"authentication_success"];
             self.failureReasonLabel.textColor = NAVIGATIONBAR_COLOR;
-            self.failureReasonLabel.text = NSLocalizedString(@"personal.authenticationSuccess", nil);
+            self.failureReasonLabel.text = @"您已通过审核";
         }
     }
 }
@@ -162,67 +157,34 @@
     [self.tableView reloadData];
 }
 - (BOOL)checkIsCanUpload {
-    UITextField *nameTextField = (UITextField *)[self.tableView viewWithTag:100];
-    self.nameString = nameTextField.text;
-    if (XLIsNullObject(self.nameString)) {
-        XLDismissHUD(self.view, YES, NO, NSLocalizedString(@"personal.pleaseEntryName", nil));
+    if (XLIsNullObject(self.model.realname)) {
+        XLDismissHUD(self.view, YES, NO, @"请先输入您的真实姓名");
         return NO;
     }
-    if (XLIsNullObject(self.selectedCityModel)) {
-        XLDismissHUD(self.view, YES, NO, NSLocalizedString(@"personal.pleaseChooseRegion", nil));
+    if (XLIsNullObject(self.model.region)) {
+        XLDismissHUD(self.view, YES, NO, @"请先选择您所在城市");
         return NO;
     }
-    if (XLIsNullObject(self.selectedTitleModel)) {
-        XLDismissHUD(self.view, YES, NO, NSLocalizedString(@"personal.pleaseChooseTitle", nil));
+    if (XLIsNullObject(self.model.professionalTitleId)) {
+        XLDismissHUD(self.view, YES, NO, @"请先选择您的职称");
         return NO;
     }
     if (_isHospital) {
-        if (XLIsNullObject(self.hospitalString)) {
-            XLDismissHUD(self.view, YES, NO, NSLocalizedString(@"personal.pleaseEntryHospitalName", nil));
+        if (XLIsNullObject(self.model.hospital)) {
+            XLDismissHUD(self.view, YES, NO, @"请先输入您所在医院名称");
             return NO;
         }
-        if (XLIsNullObject(self.departmentString)) {
-            XLDismissHUD(self.view, YES, NO, NSLocalizedString(@"personal.pleaseEntryDepartment", nil));
-            return NO;
-        }
-    } else {
-        if (XLIsNullObject(self.clinicString)) {
-            XLDismissHUD(self.view, YES, NO, NSLocalizedString(@"personal.pleaseEntryClinicName", nil));
-            return NO;
-        }
-        if (XLIsNullObject(self.positionString)) {
-            XLDismissHUD(self.view, YES, NO, NSLocalizedString(@"personal.pleaseEntryPostion", nil));
-            return NO;
-        }
-    }
-    if (XLIsNullObject(self.selectedPersonalImage) && XLIsNullObject(self.model.headPictureUrl)) {
-        XLDismissHUD(self.view, YES, NO, NSLocalizedString(@"personal.pleaseUploadPersonalPhoto", nil));
-        return NO;
-    }
-    if (XLIsNullObject(self.introductionString)) {
-        XLDismissHUD(self.view, YES, NO, NSLocalizedString(@"personal.pleaseEntryIntroduction", nil));
-        return NO;
-    }
-    if (XLIsNullObject(self.selectedSpecialits)) {
-        XLDismissHUD(self.view, YES, NO, NSLocalizedString(@"personal.pleaseChooseSpecialits", nil));
-        return NO;
-    }
-    if ([self.selectedTitleModel.titleId integerValue] == 5 || [self.selectedTitleModel.titleId integerValue] == 6) {
-        if (XLIsNullObject(self.authenticationPicturesArray1)) {
-            XLDismissHUD(self.view, YES, NO, NSLocalizedString(@"personal.pleaseUploadCard3", nil));
-            return NO;
-        }
-        if (XLIsNullObject(self.authenticationPicturesArray2)) {
-            XLDismissHUD(self.view, YES, NO, NSLocalizedString(@"personal.pleaseUploadCard4", nil));
+        if (XLIsNullObject(self.model.department)) {
+            XLDismissHUD(self.view, YES, NO, @"请先输入您所属科室");
             return NO;
         }
     } else {
-        if (XLIsNullObject(self.authenticationPicturesArray1)) {
-            XLDismissHUD(self.view, YES, NO, NSLocalizedString(@"personal.pleaseUploadCard1", nil));
+        if (XLIsNullObject(self.model.hospital)) {
+            XLDismissHUD(self.view, YES, NO, @"请先输入您所在诊所名称");
             return NO;
         }
-        if (XLIsNullObject(self.authenticationPicturesArray2)) {
-            XLDismissHUD(self.view, YES, NO, NSLocalizedString(@"personal.pleaseUploadCard2", nil));
+        if (XLIsNullObject(self.model.position)) {
+            XLDismissHUD(self.view, YES, NO, @"请先输入您的职位");
             return NO;
         }
     }
@@ -233,35 +195,13 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)refreshInformations {
-    self.nameString = self.model.realname;
     self.sex = XLIsNullObject(self.model.gender) ? XJUserSexMale : [self.model.gender integerValue];
-    self.selectedCityModel.code = self.model.region;
-    self.selectedCityModel.fullName = self.model.regionFullName;
-    self.selectedTitleModel.titleId = self.model.professionalTitleId;
-    self.selectedTitleModel.name = self.model.professionalTitle;
     if (XLIsNullObject(self.model.workplaceType)) {
         _isHospital = YES;
     } else {
         _isHospital = [self.model.workplaceType integerValue] == 1 ? YES : NO;
     }
     [self checkTitleArray:_isHospital];
-    if (self.isHospital) {
-        self.hospitalString = self.model.hospital;
-        self.departmentString = self.model.department;
-    } else {
-        self.clinicString = self.model.hospital;
-        self.positionString = self.model.position;
-    }
-    self.personalImageUrl = self.model.headPictureUrl;
-    self.introductionString = self.model.introduction;
-    self.selectedSpecialits = self.model.expertise;
-    if ([self.model.professionalTitleId integerValue] == 5 || [self.model.professionalTitleId integerValue] == 6) {
-        self.authenticationPicturesArray1 = [self.model.psychologicalConsultantImageUrl componentsSeparatedByString:@","];
-        self.authenticationPicturesArray2 = [self.model.employeeImageUrl componentsSeparatedByString:@","];
-    } else {
-        self.authenticationPicturesArray1 = [self.model.doctorProfessionImageUrl componentsSeparatedByString:@","];
-        self.authenticationPicturesArray2 = [self.model.professionalQualificationImageUrl componentsSeparatedByString:@","];
-    }
     [self.tableView reloadData];
     [self fetchCities];
     [self fetchTitles];
@@ -271,128 +211,68 @@
 #pragma mark - Request
 //获取认证消息
 - (void)fetchInformations {
-//    [InformationModel fetchInformations:^(id object, NSString *msg) {
-//        if (msg) {
-//            XLDismissHUD(self.view, YES, NO, msg);
-//        } else {
-//            self.model = (InformationModel *)object;
-//            [self checkEditable];
-//            [self refreshInformations];
-//        }
-//    }];
+    [InformationModel fetchInformations:^(id object, NSString *msg) {
+        if (msg) {
+            XLDismissHUD(self.view, YES, NO, msg);
+        } else {
+            self.model = (InformationModel *)object;
+            [self checkEditable];
+//            _editable = YES;
+//            self.submitButton.hidden = NO;
+            [self refreshInformations];
+        }
+    }];
 }
 
-//上传认证图片
-- (void)uploadAuthenticationPictures {
-//    if ([self.selectedTitleModel.titleId integerValue] == 5 || [self.selectedTitleModel.titleId integerValue] == 6) {
-//        [InformationModel uploadAuthenticationImages:self.authenticationPicturesArray1 fileType:@2 handler:^(id object, NSString *msg) {
-//            if (object && [object isKindOfClass:[NSArray class]]) {
-//                self.authenticationPicturesUrlArray1 = (NSArray *)object;
-//                [InformationModel uploadAuthenticationImages:self.authenticationPicturesArray2 fileType:@3 handler:^(id object, NSString *msg) {
-//                    if (object && [object isKindOfClass:[NSArray class]]) {
-//                        self.authenticationPicturesUrlArray2 = (NSArray *)object;
-//                        [self uploadInformations];
-//                    } else {
-//                        XLDismissHUD(self.view, YES, NO, msg);
-//                    }
-//                }];
-//            } else {
-//                XLDismissHUD(self.view, YES, NO, msg);
-//            }
-//        }];
-//    } else {
-//        [InformationModel uploadAuthenticationImages:self.authenticationPicturesArray1 fileType:@4 handler:^(id object, NSString *msg) {
-//            if (object && [object isKindOfClass:[NSArray class]]) {
-//                self.authenticationPicturesUrlArray1 = (NSArray *)object;
-//                [InformationModel uploadAuthenticationImages:self.authenticationPicturesArray2 fileType:@5 handler:^(id object, NSString *msg) {
-//                    if (object && [object isKindOfClass:[NSArray class]]) {
-//                        self.authenticationPicturesUrlArray2 = (NSArray *)object;
-//                        [self uploadInformations];
-//                    } else {
-//                        XLDismissHUD(self.view, YES, NO, msg);
-//                    }
-//                }];
-//            } else {
-//                XLDismissHUD(self.view, YES, NO, msg);
-//            }
-//        }];
-//    }
-}
 //提交认证信息
 - (void)uploadInformations {
-    InformationModel *tempModel = [[InformationModel alloc] init];
-    tempModel.realname = self.nameString;
-    tempModel.gender = @(self.sex);
-    tempModel.region = self.selectedCityModel.code;
-    tempModel.regionFullName = self.selectedCityModel.fullName;
-    tempModel.professionalTitleId = self.selectedTitleModel.titleId;
-    tempModel.workplaceType = _isHospital ? @1 : @2;
-    if (_isHospital) {
-        tempModel.hospital = self.hospitalString;
-        tempModel.department = self.departmentString;
-    } else {
-        tempModel.hospital = self.clinicString;
-        tempModel.position = self.positionString;
-    }
-    tempModel.headPictureUrl = self.personalImageUrl;
-    tempModel.introduction = self.introductionString;
-    tempModel.expertise = self.selectedSpecialits;
-    NSString *urlString1 = [self.authenticationPicturesUrlArray1 componentsJoinedByString:@","];
-    NSString *urlString2 = [self.authenticationPicturesUrlArray2 componentsJoinedByString:@","];
-    if ([self.selectedTitleModel.titleId integerValue] == 5 || [self.selectedTitleModel.titleId integerValue] == 6) {
-        tempModel.psychologicalConsultantImageUrl = urlString1;
-        tempModel.employeeImageUrl = urlString2;
-    } else {
-        tempModel.doctorProfessionImageUrl = urlString1;
-        tempModel.professionalQualificationImageUrl = urlString2;
-    }
-//    [InformationModel uploadInformations:tempModel handler:^(id object, NSString *msg) {
-//        if (object) {
-//            XLDismissHUD(self.view, YES, YES, @"提交成功");
-//            if (self.selectedPersonalImage) {
-//                NSData *headData = UIImageJPEGRepresentation(self.selectedPersonalImage, 1.0);
-//                [[NSUserDefaults standardUserDefaults] setObject:headData forKey:USERAVATARDATA];
-//                [[NSUserDefaults standardUserDefaults] synchronize];
-//            }
-//            [self performSelector:@selector(popView) withObject:nil afterDelay:1.5];
-//        } else {
-//            XLDismissHUD(self.view, YES, NO, msg);
-//        }
-//    }];
+    self.model.gender = @(self.sex);
+    self.model.workplaceType = _isHospital ? @1 : @2;
+    AuthenticationPicturesViewController *picturesController = [self.storyboard instantiateViewControllerWithIdentifier:@"AuthenticationPictures"];
+    picturesController.informationModel = self.model;
+    picturesController.editable = _editable;
+    [self.navigationController pushViewController:picturesController animated:YES];
 }
 //获取城市列表
 - (void)fetchCities {
-//    [ProvincesModel fetchAreas:^(id object, NSString *msg) {
-//        if (object) {
-//            self.areasArray = [object copy];
-//            [self.cityView resetContents:self.areasArray selectedCity:self.selectedCityModel];
-//        }
-//    }];
+    [ProvincesModel fetchAreas:^(id object, NSString *msg) {
+        if (object) {
+            self.areasArray = [object copy];
+            CitiesModel *tempModel = [[CitiesModel alloc] init];
+            tempModel.code = self.model.region;
+            tempModel.fullName = self.model.regionFullName;
+            [self.cityView resetContents:self.areasArray selectedCity:tempModel];
+        }
+    }];
 }
 //获取职称
 - (void)fetchTitles {
-//    [TitlesModel professionalTitles:^(id object, NSString *msg) {
-//        if (object) {
-//            self.professionalTitlesArray = [object copy];
-//            [self.titlesPickerView resetContents:self.professionalTitlesArray selected:self.selectedTitleModel];
-//        }
-//    }];
+    [TitlesModel professionalTitles:^(id object, NSString *msg) {
+        if (object) {
+            self.professionalTitlesArray = [object copy];
+            TitlesModel *tempModel = [[TitlesModel alloc] init];
+            tempModel.titleId = self.model.professionalTitleId;
+            tempModel.name = self.model.professionalTitle;
+            [self.titlesPickerView resetContents:self.professionalTitlesArray selected:tempModel];
+        }
+    }];
 }
 
 #pragma mark - IBAction
 - (IBAction)submitAction:(id)sender {
     if ([self checkIsCanUpload]) {
-        XLShowHUDWithMessage(@"正在提交...", self.view);
-        if (XLIsNullObject(self.selectedPersonalImage)) {
-            self.personalImageUrl = self.model.headPictureUrl;
-            [self uploadAuthenticationPictures];
-        } else {
-            //NSString *tempName = @(ceil([[NSDate date] timeIntervalSince1970])).stringValue;
-            NSData *tempData = UIImageJPEGRepresentation(self.selectedPersonalImage, 1.0);
-            if (tempData.length > 300 * 1024) {
-                CGFloat rate = 300.0 * 1024.0 / tempData.length;
-                tempData = UIImageJPEGRepresentation(self.selectedPersonalImage, rate);
-            }
+        [self uploadInformations];
+//        XLShowHUDWithMessage(@"正在提交...", self.view);
+//        if (XLIsNullObject(self.selectedPersonalImage)) {
+//            self.personalImageUrl = self.model.headPictureUrl;
+//            [self uploadAuthenticationPictures];
+//        } else {
+//            //NSString *tempName = @(ceil([[NSDate date] timeIntervalSince1970])).stringValue;
+//            NSData *tempData = UIImageJPEGRepresentation(self.selectedPersonalImage, 1.0);
+//            if (tempData.length > 300 * 1024) {
+//                CGFloat rate = 300.0 * 1024.0 / tempData.length;
+//                tempData = UIImageJPEGRepresentation(self.selectedPersonalImage, rate);
+//            }
 //            [InformationModel uploadCommonImage:tempName fileType:@1 data:tempData handler:^(id object, NSString *msg) {
 //                if (object) {
 //                    NSDictionary *tempDictionary = (NSDictionary *)object;
@@ -405,7 +285,7 @@
 //                }
 //                
 //            }];
-        }
+//        }
     }
     
 }
@@ -433,19 +313,19 @@
 #pragma mark - UITextField
 - (void)textChanged:(UITextField *)textField {
     if (textField.tag == 100) {
-        _nameString = textField.text;
+        self.model.realname = textField.text;
     } else {
         if (_isHospital) {
             if (textField.tag == 110) {
-                _hospitalString = textField.text;
+                self.model.hospital = textField.text;
             } else if (textField.tag == 111) {
-                _departmentString = textField.text;
+                self.model.department = textField.text;
             }
         } else {
             if (textField.tag == 110) {
-                _clinicString = textField.text;
+                self.model.hospital = textField.text;
             } else if (textField.tag == 111) {
-                _positionString = textField.text;
+                self.model.position = textField.text;
             }
         }
     }
@@ -453,7 +333,7 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 2;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return section == 0 ? 4 : 2;
@@ -469,7 +349,7 @@
                 cell.contentTextField.placeholder = @"必输";
                 cell.contentTextField.tag = 100;
                 [cell.contentTextField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
-                cell.contentTextField.text = self.nameString;
+                cell.contentTextField.text = self.model.realname;
                 cell.contentTextField.enabled = _editable ? YES : NO;
                 return cell;
             }
@@ -499,8 +379,8 @@
                 cell.headLabel.text = _headTitleArray[indexPath.row];
                 cell.contentTextField.enabled = NO;
                 cell.contentTextField.placeholder = @"必选";
-                if (!XLIsNullObject(self.selectedCityModel.code)) {
-                    cell.contentTextField.text = [NSString stringWithFormat:@"%@", self.selectedCityModel.fullName];
+                if (!XLIsNullObject(self.model.region)) {
+                    cell.contentTextField.text = [NSString stringWithFormat:@"%@", self.model.regionFullName];
                 }
                 return cell;
             }
@@ -512,8 +392,8 @@
                 cell.headLabel.text = _headTitleArray[indexPath.row];
                 cell.contentTextField.enabled = NO;
                 cell.contentTextField.placeholder = @"必选";
-                if (!XLIsNullObject(self.selectedTitleModel.titleId)) {
-                    cell.contentTextField.text = [NSString stringWithFormat:@"%@", self.selectedTitleModel.name];
+                if (!XLIsNullObject(self.model.professionalTitleId)) {
+                    cell.contentTextField.text = [NSString stringWithFormat:@"%@", self.model.professionalTitle];
                 }
                 return cell;
             }
@@ -522,7 +402,7 @@
                 return nil;
                 break;
         }
-    } else if (indexPath.section == 1) {
+    } else {
         AuthenticationContentCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
         cell.headLabel.text = _headTitleArray[indexPath.row + 4];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -531,80 +411,46 @@
         [cell.contentTextField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
         if (_isHospital) {
             if (indexPath.row == 0) {
-                cell.contentTextField.text = _hospitalString;
+                cell.contentTextField.text = self.model.hospital;
             } else {
-                cell.contentTextField.text = _departmentString;
+                cell.contentTextField.text = self.model.department;
             }
         } else {
             if (indexPath.row == 0) {
-                cell.contentTextField.text = _clinicString;
+                cell.contentTextField.text = self.model.hospital;
             } else {
-                cell.contentTextField.text = _positionString;
+                cell.contentTextField.text = self.model.position;
             }
         }
         cell.contentTextField.enabled = _editable ? YES : NO;
         return cell;
 
-    } else {
-        AuthenticationContentCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
-        cell.headLabel.text = _headTitleArray[indexPath.row + 6];
-        cell.contentTextField.enabled = NO;
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.contentTextField.placeholder = indexPath.row == 0 ? @"完善资料" : @"认证信息";
-        return cell;
     }
 }
-
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    if (indexPath.section == 2) {
-//        if (indexPath.row == 0) {
-//            EditInformationViewController *editViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"EditInformation"];
-//            editViewController.editable = _editable;
-//            editViewController.introductionString = self.introductionString;
-//            editViewController.selectedAvatarImage = self.selectedPersonalImage;
-//            editViewController.specialitsString = self.selectedSpecialits;
-//            editViewController.avatarUrl = self.model.headPictureUrl;
-//            editViewController.finishBlock = ^(UIImage *image, NSString *introduction, NSString *specialits) {
-//                if (!XLIsNullObject(image)) {
-//                    self.selectedPersonalImage = image;
-//                }
-//                self.introductionString = introduction;
-//                self.selectedSpecialits = specialits;
-//            };
-//            [self.navigationController pushViewController:editViewController animated:YES];
-//        } else {
-//            if (XLIsNullObject(self.selectedTitleModel)) {
-//                XLDismissHUD(self.view, YES, NO, @"请先选择您的职称");
-//                return;
-//            }
-//            AuthenticationPicturesViewController *picturesViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AuthenticationPicturesView"];
-//            picturesViewController.editable = _editable;
-//            picturesViewController.titleModel = self.selectedTitleModel;
-//            picturesViewController.array1 = [self.authenticationPicturesArray1 mutableCopy];
-//            picturesViewController.array2 = [self.authenticationPicturesArray2 mutableCopy];
-//            picturesViewController.block = ^(NSArray *array1, NSArray *array2) {
-//                self.authenticationPicturesArray1 = [array1 copy];
-//                self.authenticationPicturesArray2 = [array2 copy];
-//            };
-//            [self.navigationController pushViewController:picturesViewController animated:YES];
-//        }
-//    } else if (indexPath.section == 0) {
-//        if (indexPath.row == 2) {
-//            if (_editable) {
-//                [self.cityView resetContents:self.areasArray selectedCity:self.selectedCityModel];
-//                [UIView animateWithDuration:0.3 animations:^{
-//                    self.cityView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-//                }];
-//            }
-//        } else if (indexPath.row == 3) {
-//            if (_editable) {
-//                [self.titlesPickerView resetContents:self.professionalTitlesArray selected:self.selectedTitleModel];
-//                [self.titlesPickerView show];
-//            }
-//        }
-//    }
+    if (indexPath.section == 0) {
+        if (indexPath.row == 2) {
+            if (_editable) {
+                CitiesModel *tempModel = [[CitiesModel alloc] init];
+                tempModel.code = self.model.region;
+                tempModel.fullName = self.model.regionFullName;
+                [self.cityView resetContents:self.areasArray selectedCity:tempModel];
+                [UIView animateWithDuration:0.3 animations:^{
+                    self.cityView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+                }];
+            }
+        } else if (indexPath.row == 3) {
+            if (_editable) {
+                TitlesModel *tempModel = [[TitlesModel alloc] init];
+                tempModel.titleId = self.model.professionalTitleId;
+                tempModel.name = self.model.professionalTitle;
+                [self.titlesPickerView resetContents:self.professionalTitlesArray selected:tempModel];
+                [self.titlesPickerView show];
+            }
+        }
+    }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return section == 1 ? 45.f : 0;
@@ -658,6 +504,12 @@
 */
 
 #pragma mark - Getters
+- (InformationModel *)model {
+    if (!_model) {
+        _model = [[InformationModel alloc] init];
+    }
+    return _model;
+}
 - (UIButton *)hospitalButton {
     if (!_hospitalButton) {
         _hospitalButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -697,18 +549,6 @@
         _titlesPickerView = [[TitlesPickerView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     }
     return _titlesPickerView;
-}
-- (CitiesModel *)selectedCityModel {
-    if (!_selectedCityModel) {
-        _selectedCityModel = [[CitiesModel alloc] init];
-    }
-    return _selectedCityModel;
-}
-- (TitlesModel *)selectedTitleModel {
-    if (!_selectedTitleModel) {
-        _selectedTitleModel = [[TitlesModel alloc] init];
-    }
-    return _selectedTitleModel;
 }
 
 @end

@@ -7,21 +7,21 @@
 //
 
 #import "ProvincesModel.h"
-//#import "FetchCitiesRequest.h"
+#import "FetchCitiesRequest.h"
 
 @implementation ProvincesModel
 
-//+ (void)fetchAreas:(RequestResultHandler)handler {
-//    [[FetchCitiesRequest new] request:^BOOL(id request) {
-//        return YES;
-//    } result:^(id object, NSString *msg) {
-//        if (msg) {
-//            !handler ?: handler(nil, msg);
-//        } else {
-//            NSArray *tempArray = [ProvincesModel setupWithArray:object];
-//            !handler ?: handler(tempArray, nil);
-//        }
-//    }];
-//}
++ (void)fetchAreas:(RequestResultHandler)handler {
+    [[FetchCitiesRequest new] request:^BOOL(id request) {
+        return YES;
+    } result:^(id object, NSString *msg) {
+        if (msg) {
+            !handler ?: handler(nil, msg);
+        } else {
+            NSArray *tempArray = [ProvincesModel setupWithArray:object];
+            !handler ?: handler(tempArray, nil);
+        }
+    }];
+}
 
 @end

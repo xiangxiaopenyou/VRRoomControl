@@ -29,9 +29,10 @@
 @property (copy, nonatomic) NSString *doctorProfessionImageUrl;
 @property (copy, nonatomic) NSString *professionalQualificationImageUrl;
 
-//+ (void)uploadCommonImage:(NSString *)name fileType:(NSNumber *)type data:(NSData *)data handler:(RequestResultHandler)handler;
-//+ (void)uploadAuthenticationImages:(NSArray *)images fileType:(NSNumber *)type handler:(RequestResultHandler)handler;
-//+ (void)uploadInformations:(InformationModel *)model handler:(RequestResultHandler)handler;
-//+ (void)fetchInformations:(RequestResultHandler)handler;
++ (void)uploadCommonImage:(UIImage *)image fileType:(NSNumber *)type handler:(RequestResultHandler)handler;
++ (void)uploadAuthenticationImages:(NSArray *)images fileType:(NSNumber *)type handler:(RequestResultHandler)handler;
++ (void)uploadInformations:(InformationModel *)model handler:(RequestResultHandler)handler;
++ (void)fetchInformations:(RequestResultHandler)handler;
++ (void)authenticationStatus:(RequestResultHandler)handler;
 
 @end

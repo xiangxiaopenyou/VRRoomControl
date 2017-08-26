@@ -49,6 +49,13 @@ typedef NS_ENUM(NSInteger, XJPatientInformationTypes) {
     XJPatientInformationTypesNone
     
 };
+typedef NS_ENUM(NSInteger, XJAuthenticationStatus) {
+    XJAuthenticationStatusNot = 1,  //未认证
+    XJAuthenticationStatusWait = 2, //待认证
+    XJAuthenticationStatusFail = 3, //认证失败
+    XJAuthenticationStatusSuccess = 4, //正常
+    XJAuthenticationStatusStop = 9  //停诊
+};
 #define MAIN_TEXT_COLOR [UIColor blackColor]
 #define NAVIGATIONBAR_COLOR [UIColor colorWithRed:82/255.0 green:184/255.0 blue:255/255.0 alpha:1.0]
 #define TABBAR_TITLE_COLOR [UIColor colorWithRed:170/255.0 green:170/255.0 blue:170/255.0 alpha:1.0]
@@ -85,6 +92,7 @@ extern NSString * const SEARCHHISTORY;
 extern NSString * const USERNAME;
 extern NSString * const USERHOSPITAL;
 extern NSString * const REALNAME;
+extern NSString * const USERSTATUS;
 
 //常用数值
 extern CGFloat const TABBARHEIGHT;

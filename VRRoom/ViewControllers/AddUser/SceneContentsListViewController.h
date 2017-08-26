@@ -19,6 +19,7 @@
 @property (strong, nonatomic) NSMutableArray *selectedContents;
 
 @property (assign, nonatomic) BOOL isCollectionView;
+@property (assign, nonatomic) BOOL isAddPlan;
 
 @property (copy, nonatomic) void (^selectedBlock)(NSArray *array);
 

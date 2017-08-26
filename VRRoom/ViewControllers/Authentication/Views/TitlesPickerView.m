@@ -53,8 +53,10 @@
     if (titlesArray) {
         _array = titlesArray;
     }
-    if (model) {
+    if (model.titleId) {
         _selectedModel = model;
+    } else {
+        _selectedModel = _array[0];
     }
     [self.pickerView reloadAllComponents];
     [_array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {

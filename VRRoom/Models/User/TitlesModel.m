@@ -7,24 +7,24 @@
 //
 
 #import "TitlesModel.h"
-//#import "FetchProfessionalTitlesRequest.h"
+#import "FetchProfessionalTitlesRequest.h"
 
 @implementation TitlesModel
 + (NSDictionary<NSString *,id> *)modelCustomPropertyMapper {
     return @{@"titleId" : @"id"};
 }
-//+ (void)professionalTitles:(RequestResultHandler)handler {
-//    [[FetchProfessionalTitlesRequest new] request:^BOOL(id request) {
-//        return YES;
-//    } result:^(id object, NSString *msg) {
-//        if (msg) {
-//            !handler ?: handler(nil, msg);
-//        } else {
-//            NSArray *tempArray = [TitlesModel setupWithArray:object];
-//            !handler ?: handler(tempArray, nil);
-//        }
-//    }];
-//}
++ (void)professionalTitles:(RequestResultHandler)handler {
+    [[FetchProfessionalTitlesRequest new] request:^BOOL(id request) {
+        return YES;
+    } result:^(id object, NSString *msg) {
+        if (msg) {
+            !handler ?: handler(nil, msg);
+        } else {
+            NSArray *tempArray = [TitlesModel setupWithArray:object];
+            !handler ?: handler(tempArray, nil);
+        }
+    }];
+}
 
 
 @end

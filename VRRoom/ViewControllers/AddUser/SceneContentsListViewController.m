@@ -121,12 +121,17 @@
     if (self.selectedBlock) {
         self.selectedBlock(self.selectedContents);
     }
-    NSArray *viewControllers = self.navigationController.viewControllers;
-    for (UIViewController *viewController in viewControllers) {
-        if ([viewController isKindOfClass:[WritePrescriptionViewController class]]) {
-            [self.navigationController popToViewController:viewController animated:YES];
+    if (self.isAddPlan) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        NSArray *viewControllers = self.navigationController.viewControllers;
+        for (UIViewController *viewController in viewControllers) {
+            if ([viewController isKindOfClass:[WritePrescriptionViewController class]]) {
+                [self.navigationController popToViewController:viewController animated:YES];
+            }
         }
     }
+    
 }
 - (IBAction)clickNumberAction:(id)sender {
     _priceSort = XJSortTypesNone;
@@ -315,14 +320,14 @@
                 [self.selectedContents addObject:tempModel];
             }
         } else {
-            if (self.isCollectionView) {
-                [self.contentsArray removeObject:tempModel];
-                [self.tableView reloadData];
-            }
             if (self.viewType == 1) {
                 tempModel.isCollected = @(0);
                 [ContentModel cancelCollectContent:tempModel.id handler:nil];
                 XLDismissHUD(self.view, YES, YES, @"取消收藏成功");
+                if (self.isCollectionView) {
+                    [self.contentsArray removeObject:tempModel];
+                    [self.tableView reloadData];
+                }
             } else {
                 tempModel.isAdded = @(0);
                 [self.selectedContents removeObject:tempModel];

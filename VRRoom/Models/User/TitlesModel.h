@@ -12,6 +12,6 @@
 @property (copy, nonatomic) NSString *titleId;
 @property (copy, nonatomic) NSString *name;        //职称名
 
-//+ (void)professionalTitles:(RequestResultHandler)handler;
++ (void)professionalTitles:(RequestResultHandler)handler;
 
 @end

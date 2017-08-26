@@ -14,6 +14,6 @@
 @property (copy, nonatomic) NSString *fullName;
 @property (copy, nonatomic) NSArray *array;
 
-//+ (void)fetchAreas:(RequestResultHandler)handler;
++ (void)fetchAreas:(RequestResultHandler)handler;
 
 @end

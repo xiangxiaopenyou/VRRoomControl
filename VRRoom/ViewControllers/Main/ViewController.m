@@ -12,25 +12,25 @@
 #import "XJMyPatientsViewController.h"
 #import "SceneContentsViewController.h"
 #import "XJCommonWebViewController.h"
-#import "XJMainItemsCell.h"
+#import "AuthenticationInformationViewController.h"
+#import "XJNewsCell.h"
 #import "XLAlertControllerObject.h"
 
 #import "PatientModel.h"
 #import "PrescriptionModel.h"
 #import "UserModel.h"
+#import "InformationModel.h"
+#import "XJNewsModel.h"
+
+#import <UIImageView+WebCache.h>
 
 #define XLAppVersion [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"]
 
-@interface ViewController ()<UITableViewDelegate, UITableViewDataSource>
-@property (weak, nonatomic) IBOutlet UIView *contentView;
-
+@interface ViewController ()<UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-//@property (strong, nonatomic) UIView *titleView;
-//@property (strong, nonatomic) UIButton *searchButton;
-//@property (strong, nonatomic) UIButton *menuButton;
-
 @property (copy, nonatomic) NSArray *prescriptionsArray;
+@property (copy, nonatomic) NSArray *newsArray;
 @property (strong, nonatomic) PatientModel *patientModel;
 
 @end
@@ -40,32 +40,36 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    self.tableView.tableFooterView = [UIView new];
     self.tableView.userInteractionEnabled = YES;
-    [self.tableView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closeMemu)]];
-    //NSString *roomName = [[NSUserDefaults standardUserDefaults] stringForKey:VRROOMNAME];
-    //self.roomNameLabel.text = XLIsNullObject(roomName) ? nil : roomName;
-    
-    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(turnChangePassword) name:@"changePasswordDidClick" object:nil];
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closeMemu)];
+    recognizer.delegate = self;
+    [self.tableView addGestureRecognizer:recognizer];
+    //询问咨询请求
+    [self newsListRequest];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(leftMenuActions:) name:@"XJLeftMenuItemDidClick" object:nil];
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self versionInformationsRequest];
-    [self authenticationStatusRequest];
+    NSInteger status = [[NSUserDefaults standardUserDefaults] integerForKey:USERSTATUS];
+    if (status != 4) {
+        [self authenticationStatusRequest];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"XJLeftMenuItemDidClick" object:nil];
+}
 
 #pragma mark - Request
 - (void)versionInformationsRequest {
     [UserModel versionInformations:^(id object, NSString *msg) {
         if (object) {
-//            [[NSUserDefaults standardUserDefaults] removeObjectForKey:USERTOKEN];
-//            [[NSUserDefaults standardUserDefaults] synchronize];
-//            XLDismissHUD(self.view, YES, NO, @"登录失效，请重新登录");
-//            [self performSelector:@selector(turnLogin) withObject:nil afterDelay:1.0];
             NSString *localVersion = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
             NSString *currentVersion = object[@"versionName"];
             if (![localVersion isEqualToString:currentVersion]) {
@@ -91,18 +95,43 @@
     }];
 }
 - (void)authenticationStatusRequest {
-    [XLAlertControllerObject showWithTitle:@"医生认证" message:@"您需要进行医生资格认证" cancelTitle:@"以后再说" ensureTitle:@"现在认证" ensureBlock:^{
-        
+    [InformationModel authenticationStatus:^(id object, NSString *msg) {
+        if (object) {
+            NSInteger status = [object[@"status"] integerValue];
+            if (status == XJAuthenticationStatusNot
+                ) {
+                [XLAlertControllerObject showWithTitle:@"医生认证" message:@"您需要进行医生资格认证" cancelTitle:@"以后再说" ensureTitle:@"现在认证" ensureBlock:^{
+                    AuthenticationInformationViewController *authenticationController = [[UIStoryboard storyboardWithName:@"Authentication" bundle:nil] instantiateViewControllerWithIdentifier:@"AuthenticationInformation"];
+                    [self.navigationController pushViewController:authenticationController animated:YES];
+                }];
+            } else if (status == XJAuthenticationStatusFail) {
+                [XLAlertControllerObject showWithTitle:@"提示" message:@"您的认证申请被拒绝" cancelTitle:@"我知道了" ensureTitle:@"查看原因" ensureBlock:^{
+                    AuthenticationInformationViewController *authenticationController = [[UIStoryboard storyboardWithName:@"Authentication" bundle:nil] instantiateViewControllerWithIdentifier:@"AuthenticationInformation"];
+                    [self.navigationController pushViewController:authenticationController animated:YES];
+                }];
+            }
+            [[NSUserDefaults standardUserDefaults] setObject:@(status) forKey:USERSTATUS];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"XJUserStatusDidChange" object:nil];
+        }
+    }];
+}
+- (void)newsListRequest {
+    XLShowHUDWithMessage(nil, self.view);
+    [XJNewsModel newsList:^(id object, NSString *msg) {
+        if (object) {
+            XLDismissHUD(self.view, NO, YES, nil);
+            self.newsArray = [object copy];
+            GJCFAsyncMainQueue(^{
+                [self.tableView reloadData];
+            });
+        } else {
+            XLDismissHUD(self.view, YES, NO, msg);
+        }
     }];
 }
 
 #pragma mark - IBAction
-- (IBAction)addAction:(id)sender {
-    XJAddPatientViewController *addController = [[UIStoryboard storyboardWithName:@"AddUser" bundle:nil] instantiateViewControllerWithIdentifier:@"AddPatient"];
-    [self.navigationController pushViewController:addController animated:YES];
-}
-- (IBAction)searchPatientAction:(id)sender {
-}
 - (IBAction)myPatientsAction:(id)sender {
     XJMyPatientsViewController *myPatientsController = [[UIStoryboard storyboardWithName:@"Patients" bundle:nil] instantiateViewControllerWithIdentifier:@"MyPatientsController"];
     [self.navigationController pushViewController:myPatientsController animated:YES];
@@ -124,31 +153,31 @@
     webController.title = @"关于心景";
     [self.navigationController pushViewController:webController animated:YES];
 }
-//- (void)searchAction {
-//    SearchViewController *searchController = [self.storyboard instantiateViewControllerWithIdentifier:@"Search"];
-//    [self.navigationController pushViewController:searchController animated:YES];
-//}
+- (void)moreNewsAction {
+}
 - (void)closeMemu {
     if ([SlideNavigationController sharedInstance].isMenuOpen) {
         [[SlideNavigationController sharedInstance] closeMenuWithCompletion:nil];
     }
 }
+- (void)leftMenuActions:(NSNotification *)notification {
+    switch ([notification.object integerValue]) {
+        case 0:
+            break;
+        case 3: {
+            XJCommonWebViewController *webController = [[UIStoryboard storyboardWithName:@"More" bundle:nil] instantiateViewControllerWithIdentifier:@"CommonWeb"];
+            webController.urlString = ABOUTBASEURL;
+            webController.title = @"关于心景";
+            [self.navigationController pushViewController:webController animated:YES];
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
 
 #pragma mark - PrivateMethods
-//- (void)createNavigationTitleView {
-//    _titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
-//    _titleView.backgroundColor = [UIColor clearColor];
-//    
-//    [_titleView addSubview:self.searchButton];
-//    [self.searchButton mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.leading.equalTo(_titleView);
-//        make.trailing.equalTo(_titleView.mas_trailing).with.mas_offset(- 10);
-//        make.centerY.equalTo(_titleView);
-//        make.height.mas_offset(30);
-//    }];
-//    
-//    self.navigationItem.titleView = _titleView;
-//}
 - (void)turnLogin {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginStateDidChanged" object:nil];
 }
@@ -160,35 +189,65 @@
 
 #pragma mark - Table view datasource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return self.newsArray.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return SCREEN_WIDTH - 65.f;
+    return 108;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    XJMainItemsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MainCell" forIndexPath:indexPath];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    XJNewsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewsCell" forIndexPath:indexPath];
+    XJNewsModel *model = self.newsArray[indexPath.row];
+    [cell.coverImageView sd_setImageWithURL:[NSURL URLWithString:model.coverurl] placeholderImage:[UIImage imageNamed:@"default_image"]];
+    cell.newsThemeLabel.text = [NSString stringWithFormat:@"%@", model.name];
+    cell.timeLabel.text = model.releasetime;
+    cell.doctorInfoLabel.hidden = YES;
     return cell;
 }
 
+#pragma mark - Table view delegate
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 38.f;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 30.f)];
+    headerView.backgroundColor = MAIN_BACKGROUND_COLOR;
+    UILabel *headerLabel = [[UILabel alloc] init];
+    headerLabel.text = @"新闻资讯";
+    headerLabel.textColor = [UIColor blackColor];
+    headerLabel.font = XJSystemFont(15);
+    [headerView addSubview:headerLabel];
+    [headerLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(headerView.mas_leading).with.mas_offset(15);
+        make.centerY.equalTo(headerView);
+    }];
+    UIButton *moreButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [moreButton setTitle:@"更多" forState:UIControlStateNormal];
+    [moreButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    moreButton.titleLabel.font = XJSystemFont(14);
+    moreButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    [moreButton addTarget:self action:@selector(moreNewsAction) forControlEvents:UIControlEventTouchUpInside];
+    [headerView addSubview:moreButton];
+    [moreButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.trailing.equalTo(headerView.mas_trailing).with.mas_offset(- 15);
+        make.top.bottom.equalTo(headerView);
+        make.width.mas_offset(SCREEN_WIDTH / 2.0);
+    }];
+    
+    return headerView;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark - UIGestureRecognizerDelegate
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if ([NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"]) {
+        return NO;
+    }
+    return YES;
+}
+
 #pragma mark - Getters
-//- (UIButton *)searchButton {
-//    if (!_searchButton) {
-//        _searchButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [_searchButton setTitle:@"请输入手机号或姓名" forState:UIControlStateNormal];
-//        [_searchButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//        [_searchButton setImage:[UIImage imageNamed:@"content_search"] forState:UIControlStateNormal];
-//        [_searchButton setImage:[UIImage imageNamed:@"content_search"] forState:UIControlStateHighlighted];
-//        [_searchButton setImageEdgeInsets:UIEdgeInsetsMake(0, - SCREEN_WIDTH / 2.0 + 60, 0, 0)];
-//        [_searchButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -SCREEN_WIDTH / 2.0 + 70, 0, 0)];
-//        _searchButton.titleLabel.font = kSystemFont(14);
-//        _searchButton.layer.masksToBounds = YES;
-//        _searchButton.layer.cornerRadius = 4.0;
-//        _searchButton.backgroundColor = [UIColor colorWithWhite:1 alpha:0.4];
-//        [_searchButton addTarget:self action:@selector(searchAction) forControlEvents:UIControlEventTouchUpInside];
-//    }
-//    return _searchButton;
-//}
 
 
 @end

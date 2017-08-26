@@ -29,14 +29,16 @@
     self.serviceButton.layer.borderWidth = 0.5;
     self.serviceButton.layer.borderColor = [UIColor colorWithRed:229/255.0 green:229/255.0 blue:229/255.0 alpha:1].CGColor;
     [self.serviceButton setBackgroundImage:[UIImage imageWithColor:BREAK_LINE_COLOR] forState:UIControlStateHighlighted];
-    NSString *nameString = [[NSUserDefaults standardUserDefaults] stringForKey:REALNAME];
-    NSString *hospitalString = [[NSUserDefaults standardUserDefaults] stringForKey:USERHOSPITAL];
-    self.usernameLabel.text = nameString;
-    self.roomNameLabel.text = hospitalString;
+    [self refreshUserInformations];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess) name:@"LoginSuccess" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusChanged) name:@"XJUserStatusDidChange" object:nil];
+}
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
 }
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LoginSuccess" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"XJUserStatusDidChange" object:nil];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -52,10 +54,10 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginStateDidChanged" object:nil];
 }
 - (void)loginSuccess {
-    NSString *nameString = [[NSUserDefaults standardUserDefaults] stringForKey:REALNAME];
-    NSString *hospitalString = [[NSUserDefaults standardUserDefaults] stringForKey:USERHOSPITAL];
-    self.usernameLabel.text = nameString;
-    self.roomNameLabel.text = hospitalString;
+    [self refreshUserInformations];
+}
+- (void)statusChanged {
+    [self refreshUserInformations];
 }
 
 #pragma mark - Private methods
@@ -74,10 +76,29 @@
         }];
     }
 }
+- (void)refreshUserInformations {
+    NSString *nameString = [[NSUserDefaults standardUserDefaults] stringForKey:REALNAME];
+    NSString *hospitalString = [[NSUserDefaults standardUserDefaults] stringForKey:USERHOSPITAL];
+    self.usernameLabel.text = nameString;
+    if (!XLIsNullObject(hospitalString)) {
+        self.roomNameLabel.text = hospitalString;
+    } else {
+        NSInteger status = [[NSUserDefaults standardUserDefaults] integerForKey:USERSTATUS];
+        if (status == XJAuthenticationStatusNot) {
+            self.roomNameLabel.text = @"未认证";
+        } else if (status == XJAuthenticationStatusFail) {
+            self.roomNameLabel.text = @"认证失败";
+        } else if (status == XJAuthenticationStatusWait) {
+            self.roomNameLabel.text = @"等待认证";
+        } else {
+            self.roomNameLabel.text = nil;
+        }
+    }
+}
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return 5;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommonCell"];
@@ -85,12 +106,18 @@
     NSString *title;
     switch (indexPath.row) {
         case 0:
-            title = @"修改密码";
+            title = @"基本信息";
             break;
         case 1:
-            title = @"版本升级";
+            title = @"修改密码";
             break;
         case 2:
+            title = @"版本升级";
+            break;
+        case 3:
+            title = @"关于心景";
+            break;
+        case 4:
             title = @"注销";
             break;
         default:
@@ -114,12 +141,16 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.row) {
         case 0:{
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"XJLeftMenuItemDidClick" object:@0];
+        }
+            break;
+        case 1:{
             ChangePasswordTableViewController *changePasswordController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ChangePassword"];
             UINavigationController *tempNavigation = [[UINavigationController alloc] initWithRootViewController:changePasswordController];
             [ROOTCONTROLLER presentViewController:tempNavigation animated:YES completion:nil];
         }
             break;
-        case 1:{
+        case 2:{
             XLShowHUDWithMessage(@"正在检查版本...", XJKeyWindow);
             [UserModel versionInformations:^(id object, NSString *msg) {
                 if (object) {
@@ -131,7 +162,15 @@
             }];
         }
             break;
-        case 2:{
+        case 3:{
+//            XJCommonWebViewController *webController = [[UIStoryboard storyboardWithName:@"More" bundle:nil] instantiateViewControllerWithIdentifier:@"CommonWeb"];
+//            webController.urlString = ABOUTBASEURL;
+//            webController.title = @"关于心景";
+//            [self.navigationController pushViewController:webController animated:YES];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"XJLeftMenuItemDidClick" object:@3];
+        }
+            break;
+        case 4:{
             [XLAlertControllerObject showWithTitle:@"提示" message:@"确定要注销吗？" cancelTitle:@"取消" ensureTitle:@"注销" ensureBlock:^{
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:USERTOKEN];
                 [[NSUserDefaults standardUserDefaults] synchronize];
