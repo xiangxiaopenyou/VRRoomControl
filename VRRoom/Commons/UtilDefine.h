@@ -17,9 +17,6 @@
 #define kCollectionCellItemWidth (SCREEN_WIDTH - 5) / 2.0
 #define kCollectionCellItemHeight kCollectionCellItemWidth * 30.0 / 37.0
 
-//视频通话
-#define DEMO_CALL 1
-
 /**
  *  判空
  */
@@ -46,6 +43,9 @@
  *验证密码格式
  */
 #define XLCheckPassword(aString) [Util checkPassword:aString]
+
+//用户注销
+#define XLUserLogout [Util userLogout]
 
 
 

@@ -19,4 +19,5 @@
 + (BOOL)isMobileNumber:(NSString *)mobileNum;
 + (BOOL)stringContainsEmoji:(NSString *)string;
 + (BOOL)checkPassword:(NSString *)password;
++ (void)userLogout;
 @end

@@ -13,6 +13,7 @@
 #import "SceneContentsViewController.h"
 #import "XJCommonWebViewController.h"
 #import "AuthenticationInformationViewController.h"
+#import "XJBaseInformationsTableViewController.h"
 #import "XJNewsCell.h"
 #import "XLAlertControllerObject.h"
 
@@ -28,6 +29,7 @@
 
 @interface ViewController ()<UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *headerView;
 
 @property (copy, nonatomic) NSArray *prescriptionsArray;
 @property (copy, nonatomic) NSArray *newsArray;
@@ -40,21 +42,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    self.headerView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH * 36 / 75.0 + 92);
+    self.tableView.tableHeaderView = self.headerView;
+    
     self.tableView.tableFooterView = [UIView new];
     self.tableView.userInteractionEnabled = YES;
     UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closeMemu)];
     recognizer.delegate = self;
     [self.tableView addGestureRecognizer:recognizer];
-    //询问咨询请求
-    [self newsListRequest];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(leftMenuActions:) name:@"XJLeftMenuItemDidClick" object:nil];
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
+}
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self versionInformationsRequest];
     NSInteger status = [[NSUserDefaults standardUserDefaults] integerForKey:USERSTATUS];
     if (status != 4) {
         [self authenticationStatusRequest];
+    }
+    if (self.newsArray.count == 0) {
+        //询问咨询请求
+        [self newsListRequest];
     }
 }
 
@@ -83,8 +94,7 @@
             }
         } else {
             if ([msg integerValue] >= 95 && [msg integerValue] < 100) {
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:USERTOKEN];
-                [[NSUserDefaults standardUserDefaults] synchronize];
+                XLUserLogout;
                 XLDismissHUD(self.view, YES, NO, @"登录失效，请重新登录");
                 [self performSelector:@selector(turnLogin) withObject:nil afterDelay:1.0];
             } else {
@@ -98,8 +108,7 @@
     [InformationModel authenticationStatus:^(id object, NSString *msg) {
         if (object) {
             NSInteger status = [object[@"status"] integerValue];
-            if (status == XJAuthenticationStatusNot
-                ) {
+            if (status == XJAuthenticationStatusNot) {
                 [XLAlertControllerObject showWithTitle:@"医生认证" message:@"您需要进行医生资格认证" cancelTitle:@"以后再说" ensureTitle:@"现在认证" ensureBlock:^{
                     AuthenticationInformationViewController *authenticationController = [[UIStoryboard storyboardWithName:@"Authentication" bundle:nil] instantiateViewControllerWithIdentifier:@"AuthenticationInformation"];
                     [self.navigationController pushViewController:authenticationController animated:YES];
@@ -109,8 +118,23 @@
                     AuthenticationInformationViewController *authenticationController = [[UIStoryboard storyboardWithName:@"Authentication" bundle:nil] instantiateViewControllerWithIdentifier:@"AuthenticationInformation"];
                     [self.navigationController pushViewController:authenticationController animated:YES];
                 }];
+            } else if (status == XJAuthenticationStatusSuccess) {
+                [self fetchInformations];
             }
             [[NSUserDefaults standardUserDefaults] setObject:@(status) forKey:USERSTATUS];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"XJUserStatusDidChange" object:nil];
+        }
+    }];
+}
+//获取认证消息
+- (void)fetchInformations {
+    [InformationModel fetchInformations:^(id object, NSString *msg) {
+        if (object) {
+            InformationModel *tempModel = (InformationModel *)object;
+            [[NSUserDefaults standardUserDefaults] setObject:tempModel.headPictureUrl forKey:USER_PORTRAIT];
+            [[NSUserDefaults standardUserDefaults] setObject:tempModel.realname forKey:REALNAME];
+            [[NSUserDefaults standardUserDefaults] setObject:tempModel.hospital forKey:USERHOSPITAL];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"XJUserStatusDidChange" object:nil];
         }
@@ -133,8 +157,23 @@
 
 #pragma mark - IBAction
 - (IBAction)myPatientsAction:(id)sender {
-    XJMyPatientsViewController *myPatientsController = [[UIStoryboard storyboardWithName:@"Patients" bundle:nil] instantiateViewControllerWithIdentifier:@"MyPatientsController"];
-    [self.navigationController pushViewController:myPatientsController animated:YES];
+    NSInteger status = [[NSUserDefaults standardUserDefaults] integerForKey:USERSTATUS];
+    if (status == XJAuthenticationStatusNot) {
+        [XLAlertControllerObject showWithTitle:@"医生认证" message:@"您需要进行医生资格认证" cancelTitle:@"以后再说" ensureTitle:@"现在认证" ensureBlock:^{
+            AuthenticationInformationViewController *authenticationController = [[UIStoryboard storyboardWithName:@"Authentication" bundle:nil] instantiateViewControllerWithIdentifier:@"AuthenticationInformation"];
+            [self.navigationController pushViewController:authenticationController animated:YES];
+        }];
+    } else if (status == XJAuthenticationStatusFail) {
+        [XLAlertControllerObject showWithTitle:@"提示" message:@"您的认证申请被拒绝" cancelTitle:@"我知道了" ensureTitle:@"查看原因" ensureBlock:^{
+            AuthenticationInformationViewController *authenticationController = [[UIStoryboard storyboardWithName:@"Authentication" bundle:nil] instantiateViewControllerWithIdentifier:@"AuthenticationInformation"];
+            [self.navigationController pushViewController:authenticationController animated:YES];
+        }];
+    } else if (status == XJAuthenticationStatusWait) {
+        XLDismissHUD(self.view, YES, NO, @"请等待认证通过");
+    } else {
+        XJMyPatientsViewController *myPatientsController = [[UIStoryboard storyboardWithName:@"Patients" bundle:nil] instantiateViewControllerWithIdentifier:@"MyPatientsController"];
+        [self.navigationController pushViewController:myPatientsController animated:YES];
+    }
 }
 - (IBAction)vrContentsAction:(id)sender {
     SceneContentsViewController *contentsViewController = [[UIStoryboard storyboardWithName:@"AddUser" bundle:nil] instantiateViewControllerWithIdentifier:@"SceneContents"];
@@ -154,6 +193,10 @@
     [self.navigationController pushViewController:webController animated:YES];
 }
 - (void)moreNewsAction {
+    XJCommonWebViewController *webController = [[UIStoryboard storyboardWithName:@"More" bundle:nil] instantiateViewControllerWithIdentifier:@"CommonWeb"];
+    webController.urlString = MORE_NRES_URL;
+    webController.title = @"新闻资讯";
+    [self.navigationController pushViewController:webController animated:YES];
 }
 - (void)closeMemu {
     if ([SlideNavigationController sharedInstance].isMenuOpen) {
@@ -162,7 +205,10 @@
 }
 - (void)leftMenuActions:(NSNotification *)notification {
     switch ([notification.object integerValue]) {
-        case 0:
+        case 0: {
+            XJBaseInformationsTableViewController *informationsController = [[UIStoryboard storyboardWithName:@"Authentication" bundle:nil] instantiateViewControllerWithIdentifier:@"BaseInformations"];
+            [self.navigationController pushViewController:informationsController animated:YES];
+        }
             break;
         case 3: {
             XJCommonWebViewController *webController = [[UIStoryboard storyboardWithName:@"More" bundle:nil] instantiateViewControllerWithIdentifier:@"CommonWeb"];
@@ -236,7 +282,18 @@
     return headerView;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if ([SlideNavigationController sharedInstance].isMenuOpen) {
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+        [[SlideNavigationController sharedInstance] closeMenuWithCompletion:nil];
+    } else {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        XJCommonWebViewController *webController = [[UIStoryboard storyboardWithName:@"More" bundle:nil] instantiateViewControllerWithIdentifier:@"CommonWeb"];
+        XJNewsModel *model = self.newsArray[indexPath.row];
+        webController.urlString = model.linkurl;
+        webController.title = model.name;
+        [self.navigationController pushViewController:webController animated:YES];
+    }
+    
 }
 
 #pragma mark - UIGestureRecognizerDelegate

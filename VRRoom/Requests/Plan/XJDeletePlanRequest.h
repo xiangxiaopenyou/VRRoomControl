@@ -1,5 +1,5 @@
 //
-//  XJEditPlanRequest.h
+//  XJDeletePlanRequest.h
 //  VRRoom
 //
 //  Created by 项小盆友 on 2017/8/26.
@@ -8,9 +8,7 @@
 
 #import "BaseRequest.h"
 
-@interface XJEditPlanRequest : BaseRequest
+@interface XJDeletePlanRequest : BaseRequest
 @property (copy, nonatomic) NSString *planId;
-@property (copy, nonatomic) NSString *name;
-@property (copy, nonatomic) NSString *contentIdsString;
 
 @end

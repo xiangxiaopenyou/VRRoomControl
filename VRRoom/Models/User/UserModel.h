@@ -24,4 +24,5 @@
 + (void)versionInformations:(RequestResultHandler)handler;
 + (void)fetchCode:(NSString *)phoneNumber type:(NSNumber *)type handler:(RequestResultHandler)handler;
 + (void)userRegister:(NSString *)username password:(NSString *)password code:(NSString *)verificationCode handler:(RequestResultHandler)handler;
++ (void)findPassword:(NSString *)username password:(NSString *)password code:(NSString *)verificationCode handler:(RequestResultHandler)handler;
 @end

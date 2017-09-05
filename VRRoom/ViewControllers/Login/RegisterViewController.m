@@ -98,6 +98,7 @@
     }
     XLShowHUDWithMessage(nil, self.view);
     [UserModel userRegister:self.phoneNumberTextField.text password:self.passwordTextField.text code:self.codeTextField.text handler:^(id object, NSString *msg) {
+        XLDismissHUD(self.view, NO, YES, nil);
         if (object) {
             XLShowHUDWithMessage(@"正在登录...", self.view);
             [UserModel userLogin:self.phoneNumberTextField.text password:self.passwordTextField.text hanlder:^(id object, NSString *msg) {
@@ -148,16 +149,16 @@
     }];
 }
 
-//#pragma mark - UITextField Delegate
-//- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-//    if (textField == self.passwordTextField) {
-//        [self.validatePasswordTextField becomeFirstResponder];
-//    } else if (textField == self.validatePasswordTextField) {
-//        [self.validatePasswordTextField resignFirstResponder];
-//    }
-//    return YES;
-//}
-//
+#pragma mark - UITextField Delegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField == self.passwordTextField) {
+        [self.validatePasswordTextField becomeFirstResponder];
+    } else if (textField == self.validatePasswordTextField) {
+        [self.validatePasswordTextField resignFirstResponder];
+    }
+    return YES;
+}
+
 #pragma mark - UITableView Delegate DataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 4;

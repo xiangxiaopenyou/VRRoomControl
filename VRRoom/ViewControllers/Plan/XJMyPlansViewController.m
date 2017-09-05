@@ -8,15 +8,17 @@
 
 #import "XJMyPlansViewController.h"
 #import "XJPlanDetailViewController.h"
+#import "WritePrescriptionViewController.h"
 #import "XJPlanCell.h"
 
 #import "XJPlanModel.h"
+#import "ContentModel.h"
 
 @interface XJMyPlansViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *addItem;
 
-@property (copy, nonatomic) NSArray *plansArray;
+@property (strong, nonatomic) NSMutableArray *plansArray;
 
 @end
 
@@ -25,13 +27,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    if (self.viewType == 1) {
+        self.navigationItem.rightBarButtonItem = self.addItem;
+    } else {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
     self.tableView.tableFooterView = [UIView new];
     XLShowHUDWithMessage(nil, self.view);
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self myPlansRequest];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,7 +50,7 @@
     [XJPlanModel myPlans:^(id object, NSString *msg) {
         if (object) {
             XLDismissHUD(self.view, NO, YES, nil);
-            self.plansArray = [object copy];
+            self.plansArray = [object mutableCopy];
             GJCFAsyncMainQueue(^{
                 [self.tableView reloadData];
             });
@@ -52,6 +58,20 @@
             XLDismissHUD(self.view, YES, NO, msg);
         }
     }];
+}
+- (void)selectContents:(NSArray *)array {
+    for (ContentModel *tempModel in array) {
+        BOOL isContains = NO;
+        for (ContentModel *model in self.selectedContentsArray) {
+            if ([model.id isEqualToString:tempModel.id]) {
+                isContains = YES;
+            }
+        }
+        if (!isContains) {
+            tempModel.isAdded = @(1);
+            [self.selectedContentsArray addObject:tempModel];
+        }
+    }
 }
 
 #pragma mark - Table view data source
@@ -63,8 +83,22 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     XJPlanCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PlanCell" forIndexPath:indexPath];
+    cell.selectButton.hidden = self.viewType == 1 ? YES : NO;
     XJPlanModel *model = self.plansArray[indexPath.row];
-    cell.textLabel.text = model.name;
+    cell.nameLabel.text = model.name;
+    cell.selectBlock = ^{
+        NSArray *tempArray = model.contents;
+        [self selectContents:tempArray];
+        if (self.block) {
+            self.block(self.selectedContentsArray);
+        }
+        NSArray *viewControllers = self.navigationController.viewControllers;
+        for (UIViewController *viewController in viewControllers) {
+            if ([viewController isKindOfClass:[WritePrescriptionViewController class]]) {
+                [self.navigationController popToViewController:viewController animated:YES];
+            }
+        }
+    };
     return cell;
 }
 
@@ -75,6 +109,35 @@
     detailController.viewType = self.viewType;
     detailController.planModel = self.plansArray[indexPath.row];
     [self.navigationController pushViewController:detailController animated:YES];
+}
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return self.viewType == 1 ? YES : NO;
+}
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return @"删除";
+}
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        XJPlanModel *model = self.plansArray[indexPath.row];
+        XLShowHUDWithMessage(nil, XJKeyWindow);
+        [XJPlanModel deletePlan:model.id handler:^(id object, NSString *msg) {
+            if (object) {
+                XLDismissHUD(XJKeyWindow, YES, YES, @"删除成功");
+                [self.plansArray removeObjectAtIndex:indexPath.row];
+                [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
+            } else {
+                XLDismissHUD(XJKeyWindow, YES, NO, msg);
+            }
+        }];
+    }
+}
+
+#pragma mark - Getters
+- (NSMutableArray *)selectedContentsArray {
+    if (!_selectedContentsArray) {
+        _selectedContentsArray = [[NSMutableArray alloc] init];
+    }
+    return _selectedContentsArray;
 }
 
 /*

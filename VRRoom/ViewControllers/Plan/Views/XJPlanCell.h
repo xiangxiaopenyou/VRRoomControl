@@ -10,5 +10,8 @@
 
 @interface XJPlanCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIButton *selectButton;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+
+@property (copy, nonatomic) void (^selectBlock)();
 
 @end

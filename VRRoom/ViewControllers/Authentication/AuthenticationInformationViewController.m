@@ -36,22 +36,7 @@
 @property (assign, nonatomic) XJUserSex sex;
 @property (copy, nonatomic) NSArray *headTitleArray;
 @property (copy, nonatomic) NSArray *areasArray;
-//@property (copy, nonatomic) NSString *nameString;               //姓名
-//@property (strong, nonatomic) CitiesModel *selectedCityModel;   //已经选择的城市model
 @property (copy, nonatomic) NSArray *professionalTitlesArray;   //职称数组
-//@property (strong, nonatomic) TitlesModel *selectedTitleModel;  //已经选择的职称model
-//@property (copy, nonatomic) NSString *hospitalString;           //医院名称
-//@property (copy, nonatomic) NSString *departmentString;         //医院科室
-//@property (copy, nonatomic) NSString *clinicString;             //诊所名称
-//@property (copy, nonatomic) NSString *positionString;           //诊所职位
-//@property (strong, nonatomic) UIImage *selectedPersonalImage;   //个人照片
-//@property (copy, nonatomic) NSString *personalImageUrl;         //个人照片链接
-//@property (copy, nonatomic) NSString *introductionString;       //个人介绍
-//@property (copy, nonatomic) NSString *selectedSpecialits;        //个人擅长
-//@property (copy, nonatomic) NSArray *authenticationPicturesArray1;  //认证图片
-//@property (copy, nonatomic) NSArray *authenticationPicturesArray2;  //认证图片
-//@property (copy, nonatomic) NSArray *authenticationPicturesUrlArray1;   //认证图片Url
-//@property (copy, nonatomic) NSArray *authenticationPicturesUrlArray2;
 @property (strong, nonatomic) InformationModel *model;
 
 @property (nonatomic) BOOL editable;
@@ -217,8 +202,6 @@
         } else {
             self.model = (InformationModel *)object;
             [self checkEditable];
-//            _editable = YES;
-//            self.submitButton.hidden = NO;
             [self refreshInformations];
         }
     }];
@@ -262,30 +245,6 @@
 - (IBAction)submitAction:(id)sender {
     if ([self checkIsCanUpload]) {
         [self uploadInformations];
-//        XLShowHUDWithMessage(@"正在提交...", self.view);
-//        if (XLIsNullObject(self.selectedPersonalImage)) {
-//            self.personalImageUrl = self.model.headPictureUrl;
-//            [self uploadAuthenticationPictures];
-//        } else {
-//            //NSString *tempName = @(ceil([[NSDate date] timeIntervalSince1970])).stringValue;
-//            NSData *tempData = UIImageJPEGRepresentation(self.selectedPersonalImage, 1.0);
-//            if (tempData.length > 300 * 1024) {
-//                CGFloat rate = 300.0 * 1024.0 / tempData.length;
-//                tempData = UIImageJPEGRepresentation(self.selectedPersonalImage, rate);
-//            }
-//            [InformationModel uploadCommonImage:tempName fileType:@1 data:tempData handler:^(id object, NSString *msg) {
-//                if (object) {
-//                    NSDictionary *tempDictionary = (NSDictionary *)object;
-//                    self.personalImageUrl = tempDictionary[@"imageUrl"];
-//                    GJCFAsyncMainQueue(^{
-//                        [self uploadAuthenticationPictures];
-//                    });
-//                } else {
-//                    XLDismissHUD(self.view, YES, NO, msg);
-//                }
-//                
-//            }];
-//        }
     }
     
 }

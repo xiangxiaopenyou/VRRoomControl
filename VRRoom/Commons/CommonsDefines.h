@@ -93,6 +93,7 @@ extern NSString * const USERNAME;
 extern NSString * const USERHOSPITAL;
 extern NSString * const REALNAME;
 extern NSString * const USERSTATUS;
+extern NSString * const USER_PORTRAIT;
 
 //常用数值
 extern CGFloat const TABBARHEIGHT;
@@ -104,6 +105,7 @@ extern NSString * const BASEAPIURL;
 //extern NSString * const ADVICEBASEURL;
 extern NSString * const HELPBASEURL;
 extern NSString * const ABOUTBASEURL;
+extern NSString * const MORE_NRES_URL;
 
 extern NSString * const XJNetworkError;
 

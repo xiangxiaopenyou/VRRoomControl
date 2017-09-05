@@ -11,6 +11,8 @@
 #import "ContentModel.h"
 #import "XJFetchMyPlansRequest.h"
 #import "XJAddPlanRequest.h"
+#import "XJEditPlanRequest.h"
+#import "XJDeletePlanRequest.h"
 
 @implementation XJPlanModel
 + (void)myPlans:(RequestResultHandler)handler {
@@ -40,6 +42,23 @@
             !handler ?: handler(object, nil);
         }
     }];
+}
++ (void)editPlan:(NSString *)planId
+            name:(NSString *)name
+       contentId:(NSString *)contentIds
+         handler:(RequestResultHandler)handler {
+    [[XJEditPlanRequest new] request:^BOOL(XJEditPlanRequest *request) {
+        request.planId = planId;
+        request.name = name;
+        request.contentIdsString = contentIds;
+        return YES;
+    } result:handler];
+}
++ (void)deletePlan:(NSString *)planId handler:(RequestResultHandler)handler {
+    [[XJDeletePlanRequest new] request:^BOOL(XJDeletePlanRequest *request) {
+        request.planId = planId;
+        return YES;
+    } result:handler];
 }
 
 @end

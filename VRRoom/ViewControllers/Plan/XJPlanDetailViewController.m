@@ -64,8 +64,22 @@
     };
     [self.navigationController pushViewController:listViewController animated:YES];
 }
+
 - (void)submitAction {
-    
+    NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+    for (ContentModel *tempModel in self.selectedContents) {
+        [tempArray addObject:tempModel.id];
+    }
+    NSString *contentIdsString = [tempArray componentsJoinedByString:@","];
+    XLShowHUDWithMessage(nil, XJKeyWindow);
+    [XJPlanModel editPlan:self.planModel.id name:_currentNameString contentId:contentIdsString handler:^(id object, NSString *msg) {
+        if (object) {
+            XLDismissHUD(XJKeyWindow, YES, YES, @"保存成功");
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            XLDismissHUD(XJKeyWindow, YES, NO, msg);
+        }
+    }];
 }
 
 #pragma mark - Private methods
@@ -138,6 +152,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self.selectedContents removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
+        [self refreshSaveItem];
     }
 }
 

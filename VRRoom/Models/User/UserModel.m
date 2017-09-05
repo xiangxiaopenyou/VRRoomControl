@@ -15,6 +15,7 @@
 #import "XJCheckVersionRequest.h"
 #import "FetchVerificationCodeRequest.h"
 #import "RegisterRequest.h"
+#import "FindPasswordRequest.h"
 #import "PrescriptionModel.h"
 #import "PatientModel.h"
 
@@ -90,6 +91,20 @@
 }
 + (void)userRegister:(NSString *)username password:(NSString *)password code:(NSString *)verificationCode handler:(RequestResultHandler)handler {
     [[RegisterRequest new] request:^BOOL(RegisterRequest *request) {
+        request.username = username;
+        request.password = password;
+        request.captcha = verificationCode;
+        return YES;
+    } result:^(id object, NSString *msg) {
+        if (msg) {
+            !handler ?: handler(nil, msg);
+        } else {
+            !handler ?: handler(object, nil);
+        }
+    }];
+}
++ (void)findPassword:(NSString *)username password:(NSString *)password code:(NSString *)verificationCode handler:(RequestResultHandler)handler {
+    [[FindPasswordRequest new] request:^BOOL(FindPasswordRequest *request) {
         request.username = username;
         request.password = password;
         request.captcha = verificationCode;

@@ -43,7 +43,6 @@
 }
 
 - (IBAction)submitClick:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
     if (!GJCFStringIsMobilePhone(self.phoneNumberTextField.text)) {
         XLShowThenDismissHUD(NO, XJInputCorrectPhoneNumberTip, self.view);
         return;
@@ -64,15 +63,15 @@
         XLShowThenDismissHUD(NO, XJDifferentPasswordTip, self.view);
         return;
     }
-    XLShowHUDWithMessage(nil, self.view);
-//    [UsersModel findPassword:self.phoneNumberTextField.text password:self.passwordTextField.text code:self.codeTextField.text handler:^(id object, NSString *msg) {
-//        if (object) {
-//            XLDismissHUD(self.view, YES, YES, @"成功");
-//            [self.navigationController popViewControllerAnimated:YES];
-//        } else {
-//            XLDismissHUD(self.view, YES, NO, msg);
-//        }
-//    }];
+    XLShowHUDWithMessage(nil, XJKeyWindow);
+    [UserModel findPassword:self.phoneNumberTextField.text password:self.passwordTextField.text code:self.codeTextField.text handler:^(id object, NSString *msg) {
+        if (object) {
+            XLDismissHUD(XJKeyWindow, YES, YES, @"密码已重置，请登录");
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            XLDismissHUD(XJKeyWindow, YES, NO, msg);
+        }
+    }];
 }
 
 - (void)fetchCodeClick {
@@ -86,10 +85,18 @@
     [self.fetchCodeButton setTitleColor:BREAK_LINE_COLOR forState:UIControlStateNormal];
     if (!self.timer) {
         self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(countNumber) userInfo:nil repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
     }
-//    [UsersModel fetchCode:self.phoneNumberTextField.text handler:^(id object, NSString *msg) {
-//        
-//    }];
+    [UserModel fetchCode:self.phoneNumberTextField.text type:@2 handler:^(id object, NSString *msg) {
+        if (msg) {
+            XLDismissHUD(self.view, YES, NO, @"验证码发送失败");
+            [self.timer invalidate];
+            self.timer = nil;
+            self.fetchCodeButton.enabled = YES;
+            [self.fetchCodeButton setTitle:XJFetchVerificationCode forState:UIControlStateNormal];
+            [self.fetchCodeButton setTitleColor:NAVIGATIONBAR_COLOR forState:UIControlStateNormal];
+        }
+    }];
 }
 
 #pragma mark - Private methods

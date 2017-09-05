@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+typedef void (^PlanSelectBlock)(NSArray *array);
 
 @interface XJMyPlansViewController : UIViewController
 @property (assign, nonatomic) NSInteger viewType;
+@property (strong, nonatomic) NSMutableArray *selectedContentsArray;
+
+@property (copy, nonatomic) PlanSelectBlock block;
 
 @end

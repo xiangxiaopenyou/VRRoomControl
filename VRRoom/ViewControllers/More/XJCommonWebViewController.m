@@ -53,7 +53,8 @@
         UIBarButtonItem *closeItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"close_cycle"] style:UIBarButtonItemStylePlain target:self action:@selector(closeAction)];
         self.navigationItem.leftBarButtonItems = @[backItem, closeItem];
     } else {
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(backAction)];
+        UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(backAction)];
+        self.navigationItem.leftBarButtonItems = @[backItem];
     }
 }
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {

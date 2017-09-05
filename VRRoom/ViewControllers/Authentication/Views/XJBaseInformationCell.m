@@ -1,19 +1,14 @@
 //
-//  XJPlanCell.m
+//  XJBaseInformationCell.m
 //  VRRoom
 //
-//  Created by 项小盆友 on 2017/8/23.
+//  Created by 项小盆友 on 2017/8/28.
 //  Copyright © 2017年 InHeart. All rights reserved.
 //
 
-#import "XJPlanCell.h"
+#import "XJBaseInformationCell.h"
 
-@implementation XJPlanCell
-- (IBAction)selectAction:(id)sender {
-    if (self.selectBlock) {
-        self.selectBlock();
-    }
-}
+@implementation XJBaseInformationCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

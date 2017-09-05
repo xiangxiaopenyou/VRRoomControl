@@ -46,10 +46,10 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KT4-OV-xKq" id="xac-0v-v4i">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="58"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="57.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lt0-lJ-h9F">
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lt0-lJ-h9F">
                                                     <rect key="frame" x="282" y="12.5" width="55" height="32"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="55" id="Yc7-Uw-0fn"/>
@@ -60,13 +60,22 @@
                                                         <action selector="selectAction:" destination="KT4-OV-xKq" eventType="touchUpInside" id="dAf-32-gds"/>
                                                     </connections>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="---" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QMe-TQ-bZ3">
+                                                    <rect key="frame" x="15" y="19" width="23" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="QMe-TQ-bZ3" firstAttribute="centerY" secondItem="xac-0v-v4i" secondAttribute="centerY" id="HVu-7d-5zT"/>
+                                                <constraint firstItem="QMe-TQ-bZ3" firstAttribute="leading" secondItem="xac-0v-v4i" secondAttribute="leading" constant="15" id="LCz-Lo-jYt"/>
                                                 <constraint firstAttribute="trailing" secondItem="lt0-lJ-h9F" secondAttribute="trailing" constant="5" id="WsS-zC-t0w"/>
                                                 <constraint firstItem="lt0-lJ-h9F" firstAttribute="centerY" secondItem="xac-0v-v4i" secondAttribute="centerY" id="iiD-aT-4nT"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="nameLabel" destination="QMe-TQ-bZ3" id="HUI-2A-EX9"/>
                                             <outlet property="selectButton" destination="lt0-lJ-h9F" id="wh4-Cf-p8l"/>
                                         </connections>
                                     </tableViewCell>
@@ -284,7 +293,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="68"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8LB-d6-vIh" id="RJf-hL-3SD">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="68"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="67.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -293,7 +302,7 @@
                                         <rect key="frame" x="0.0" y="96" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="E9q-p8-hVx" id="anh-dK-f9P">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hyj-Fh-lIg">

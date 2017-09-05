@@ -9,15 +9,19 @@
 #import "MenuViewController.h"
 #import "ChangePasswordTableViewController.h"
 #import "UserModel.h"
+#import "InformationModel.h"
 #import "XLBlockAlertView.h"
 #import "XLAlertControllerObject.h"
 #import <UIImage-Helpers.h>
+#import <UIImageView+WebCache.h>
 
 @interface MenuViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *roomNameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *serviceButton;
+@property (weak, nonatomic) IBOutlet UIImageView *portrait;
+@property (strong, nonatomic) InformationModel *model;
 
 @end
 
@@ -32,9 +36,6 @@
     [self refreshUserInformations];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess) name:@"LoginSuccess" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusChanged) name:@"XJUserStatusDidChange" object:nil];
-}
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
 }
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LoginSuccess" object:nil];
@@ -79,7 +80,19 @@
 - (void)refreshUserInformations {
     NSString *nameString = [[NSUserDefaults standardUserDefaults] stringForKey:REALNAME];
     NSString *hospitalString = [[NSUserDefaults standardUserDefaults] stringForKey:USERHOSPITAL];
+    NSString *portraitString = [[NSUserDefaults standardUserDefaults] stringForKey:USER_PORTRAIT];
     self.usernameLabel.text = nameString;
+    if (portraitString) {
+        [self.portrait sd_setImageWithURL:[NSURL URLWithString:portraitString]];
+        self.portrait.clipsToBounds = YES;
+        self.portrait.layer.masksToBounds = YES;
+        self.portrait.layer.cornerRadius = 30.f;
+    } else {
+        self.portrait.image = [UIImage imageNamed:@"logo_small"];
+        self.portrait.clipsToBounds = NO;
+        self.portrait.layer.masksToBounds = NO;
+        self.portrait.layer.cornerRadius = 30.f;
+    }
     if (!XLIsNullObject(hospitalString)) {
         self.roomNameLabel.text = hospitalString;
     } else {
@@ -141,7 +154,14 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.row) {
         case 0:{
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"XJLeftMenuItemDidClick" object:@0];
+            NSInteger userStatus = [[NSUserDefaults standardUserDefaults] integerForKey:USERSTATUS];
+            if (userStatus == 1 || userStatus == 2) {
+                XLDismissHUD(XJKeyWindow, YES, NO, @"你还没通过认证哦");
+            } else if (userStatus == 3) {
+                XLDismissHUD(XJKeyWindow, YES, NO, @"你的认证请求被拒绝了");
+            } else{
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"XJLeftMenuItemDidClick" object:@0];
+            }
         }
             break;
         case 1:{
@@ -163,17 +183,12 @@
         }
             break;
         case 3:{
-//            XJCommonWebViewController *webController = [[UIStoryboard storyboardWithName:@"More" bundle:nil] instantiateViewControllerWithIdentifier:@"CommonWeb"];
-//            webController.urlString = ABOUTBASEURL;
-//            webController.title = @"关于心景";
-//            [self.navigationController pushViewController:webController animated:YES];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"XJLeftMenuItemDidClick" object:@3];
         }
             break;
         case 4:{
             [XLAlertControllerObject showWithTitle:@"提示" message:@"确定要注销吗？" cancelTitle:@"取消" ensureTitle:@"注销" ensureBlock:^{
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:USERTOKEN];
-                [[NSUserDefaults standardUserDefaults] synchronize];
+                XLUserLogout;
                 [self performSelector:@selector(turnLogin) withObject:nil afterDelay:0.1];
             }];
         }

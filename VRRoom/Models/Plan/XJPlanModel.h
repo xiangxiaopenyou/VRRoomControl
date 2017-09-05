@@ -15,5 +15,7 @@
 
 + (void)myPlans:(RequestResultHandler)handler;
 + (void)addPlan:(NSString *)name contentId:(NSString *)contentIds handler:(RequestResultHandler)handler;
++ (void)editPlan:(NSString *)planId name:(NSString *)name contentId:(NSString *)contentIds handler:(RequestResultHandler)handler;
++ (void)deletePlan:(NSString *)planId handler:(RequestResultHandler)handler;
 
 @end

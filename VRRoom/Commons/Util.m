@@ -131,5 +131,11 @@
     BOOL isMatch = [predicate evaluateWithObject:password];
     return isMatch;
 }
++ (void)userLogout {
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:USERTOKEN];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:USERSTATUS];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_PORTRAIT];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
 
 @end

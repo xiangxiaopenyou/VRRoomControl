@@ -243,6 +243,13 @@
     if (self.seletedDepartmentIndexPath.row == 0 && indexPath.row == 1) {
         XJMyPlansViewController *planController = [[UIStoryboard storyboardWithName:@"Plan" bundle:nil] instantiateViewControllerWithIdentifier:@"MyPlans"];
         planController.viewType = self.viewType;
+        planController.selectedContentsArray = [self.selectedArray mutableCopy];
+        planController.block = ^(NSArray *array) {
+            self.selectedArray = [array copy];
+            if (self.pickBlock) {
+                self.pickBlock(self.selectedArray);
+            }
+        };
         [self.navigationController pushViewController:planController animated:YES];
     } else {
         SceneContentsListViewController *listViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneContentsList"];

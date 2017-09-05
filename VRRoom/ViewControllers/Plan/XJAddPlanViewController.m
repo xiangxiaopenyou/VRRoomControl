@@ -47,7 +47,7 @@
     listViewController.isCollectionView = YES;
     listViewController.isAddPlan = YES;
     listViewController.selectedBlock = ^(NSArray *array) {
-        self.contentsArray = [array copy];
+        self.contentsArray = [array mutableCopy];
         GJCFAsyncMainQueue(^{
             [self checkIsCanSubmit];
             [self.tableView reloadData];
@@ -99,6 +99,18 @@
 }
 
 #pragma mark - Table view delegate
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return @"删除";
+}
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (UITableViewCellEditingStyleDelete == editingStyle) {
+        [self.contentsArray removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
+    }
+}
 
 #pragma mark - Getters
 - (NSMutableArray *)contentsArray {
