@@ -44,6 +44,7 @@ typedef NS_ENUM(NSInteger, XJPatientInformationTypes) {
     XJPatientInformationTypesPhone,
     XJPatientInformationTypesSex,
     XJPatientInformationTypesBirthday,
+    XJPatientInformationTypesAge,
     XJPatientInformationTypesEducationDegree,
     XJPatientInformationTypesMaritalStatus,
     XJPatientInformationTypesNone
@@ -106,6 +107,7 @@ extern NSString * const BASEAPIURL;
 extern NSString * const HELPBASEURL;
 extern NSString * const ABOUTBASEURL;
 extern NSString * const MORE_NRES_URL;
+extern NSString * const PROTOCOL_URL;
 
 extern NSString * const XJNetworkError;
 

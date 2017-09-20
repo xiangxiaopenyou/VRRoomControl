@@ -38,6 +38,8 @@
 @property (copy, nonatomic) NSArray *areasArray;
 @property (copy, nonatomic) NSArray *professionalTitlesArray;   //职称数组
 @property (strong, nonatomic) InformationModel *model;
+@property (copy, nonatomic) NSString *hospitalString;
+@property (copy, nonatomic) NSString *clinicString;
 
 @property (nonatomic) BOOL editable;
 
@@ -184,7 +186,13 @@
     if (XLIsNullObject(self.model.workplaceType)) {
         _isHospital = YES;
     } else {
-        _isHospital = [self.model.workplaceType integerValue] == 1 ? YES : NO;
+        if (self.model.workplaceType.integerValue == 1) {
+            _isHospital = YES;
+            _hospitalString = self.model.hospital;
+        } else {
+            _isHospital = NO;
+            _clinicString = self.model.hospital;
+        }
     }
     [self checkTitleArray:_isHospital];
     [self.tableView reloadData];
@@ -254,6 +262,7 @@
             self.hospitalButton.selected = YES;
             self.clinicButton.selected = NO;
             _isHospital = YES;
+            self.model.hospital = _hospitalString;
             [self refreshData];
         }
     }
@@ -264,6 +273,7 @@
             self.hospitalButton.selected = NO;
             self.clinicButton.selected = YES;
             _isHospital = NO;
+            self.model.hospital = _clinicString;
             [self refreshData];
         }
     }
@@ -276,13 +286,15 @@
     } else {
         if (_isHospital) {
             if (textField.tag == 110) {
-                self.model.hospital = textField.text;
+                _hospitalString = textField.text;
+                self.model.hospital = _hospitalString;
             } else if (textField.tag == 111) {
                 self.model.department = textField.text;
             }
         } else {
             if (textField.tag == 110) {
-                self.model.hospital = textField.text;
+                _clinicString = textField.text;
+                self.model.hospital = _clinicString;
             } else if (textField.tag == 111) {
                 self.model.position = textField.text;
             }
@@ -370,13 +382,13 @@
         [cell.contentTextField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
         if (_isHospital) {
             if (indexPath.row == 0) {
-                cell.contentTextField.text = self.model.hospital;
+                cell.contentTextField.text = _hospitalString;
             } else {
                 cell.contentTextField.text = self.model.department;
             }
         } else {
             if (indexPath.row == 0) {
-                cell.contentTextField.text = self.model.hospital;
+                cell.contentTextField.text = _clinicString;
             } else {
                 cell.contentTextField.text = self.model.position;
             }

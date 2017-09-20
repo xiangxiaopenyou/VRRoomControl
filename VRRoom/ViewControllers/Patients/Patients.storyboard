@@ -578,14 +578,22 @@
                                                     <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fnp-uV-uGl">
+                                                    <rect key="frame" x="329" y="60" width="31" height="30"/>
+                                                    <state key="normal" title="中止">
+                                                        <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="TUk-Ld-FjX" secondAttribute="trailing" constant="15" id="0FG-ko-uRA"/>
                                                 <constraint firstItem="cRH-nD-daY" firstAttribute="top" secondItem="ELr-QV-K6H" secondAttribute="top" constant="12" id="0Hf-AT-51M"/>
                                                 <constraint firstItem="yfw-vG-IwN" firstAttribute="top" secondItem="BDI-An-Jlw" secondAttribute="bottom" constant="10" id="Fi0-y0-1Lv"/>
+                                                <constraint firstAttribute="trailing" secondItem="Fnp-uV-uGl" secondAttribute="trailing" constant="15" id="GbW-BP-Oow"/>
                                                 <constraint firstAttribute="trailing" secondItem="fat-zw-yg4" secondAttribute="trailing" constant="15" id="I2U-qH-GZ0"/>
                                                 <constraint firstItem="TUk-Ld-FjX" firstAttribute="top" secondItem="ELr-QV-K6H" secondAttribute="top" constant="12" id="JiJ-b9-x1r"/>
                                                 <constraint firstItem="BDI-An-Jlw" firstAttribute="top" secondItem="cRH-nD-daY" secondAttribute="bottom" constant="10" id="OaK-sl-qxR"/>
+                                                <constraint firstAttribute="bottom" secondItem="Fnp-uV-uGl" secondAttribute="bottom" constant="10" id="QG7-pR-4i4"/>
                                                 <constraint firstItem="cRH-nD-daY" firstAttribute="leading" secondItem="ELr-QV-K6H" secondAttribute="leading" constant="15" id="Slc-d1-0CT"/>
                                                 <constraint firstItem="fat-zw-yg4" firstAttribute="top" secondItem="TUk-Ld-FjX" secondAttribute="bottom" constant="10" id="ZMc-OB-2ue"/>
                                                 <constraint firstItem="BDI-An-Jlw" firstAttribute="leading" secondItem="ELr-QV-K6H" secondAttribute="leading" constant="15" id="wAc-IM-3u8"/>

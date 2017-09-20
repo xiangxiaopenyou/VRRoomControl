@@ -74,22 +74,26 @@
             [self initSexPicker];
         }
             break;
-        case XJPatientInformationTypesBirthday: {
-            titleString = @"出生日期";
-            _birthdayString = self.model.birthday;
-            [XJKeyWindow addSubview:self.datePickerView];
-            [self.datePickerView selectDate:[_birthdayString substringToIndex:10]];
-            GJCFWeakSelf weakSelf = self;
-            self.datePickerView.selectBlock = ^(NSString *dateString) {
-                GJCFStrongSelf strongSelf = weakSelf;
-                strongSelf.birthdayString = dateString;
-                if ([strongSelf.birthdayString isEqualToString:[strongSelf.model.birthday substringToIndex:10]]) {
-                    strongSelf.navigationItem.rightBarButtonItem.enabled = NO;
-                } else {
-                    strongSelf.navigationItem.rightBarButtonItem.enabled = YES;
-                }
-                [strongSelf.tableView reloadData];
-            };
+//        case XJPatientInformationTypesBirthday: {
+//            titleString = @"出生日期";
+//            _birthdayString = self.model.birthday;
+//            [XJKeyWindow addSubview:self.datePickerView];
+//            [self.datePickerView selectDate:[_birthdayString substringToIndex:10]];
+//            GJCFWeakSelf weakSelf = self;
+//            self.datePickerView.selectBlock = ^(NSString *dateString) {
+//                GJCFStrongSelf strongSelf = weakSelf;
+//                strongSelf.birthdayString = dateString;
+//                if ([strongSelf.birthdayString isEqualToString:[strongSelf.model.birthday substringToIndex:10]]) {
+//                    strongSelf.navigationItem.rightBarButtonItem.enabled = NO;
+//                } else {
+//                    strongSelf.navigationItem.rightBarButtonItem.enabled = YES;
+//                }
+//                [strongSelf.tableView reloadData];
+//            };
+//        }
+//            break;
+        case XJPatientInformationTypesAge: {
+            titleString = @"年龄";
         }
             break;
         case XJPatientInformationTypesEducationDegree: {
@@ -111,9 +115,9 @@
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if (self.type == XJPatientInformationTypesBirthday) {
-        [self.datePickerView show];
-    }
+//    if (self.type == XJPatientInformationTypesBirthday) {
+//        [self.datePickerView show];
+//    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -169,8 +173,12 @@
             self.model.sex = @(_sex);
         }
             break;
-        case XJPatientInformationTypesBirthday: {
-            self.model.birthday = [self.birthdayString stringByAppendingString:@" 00:00:00"];
+//        case XJPatientInformationTypesBirthday: {
+//            self.model.birthday = [self.birthdayString stringByAppendingString:@" 00:00:00"];
+//        }
+//            break;
+        case XJPatientInformationTypesAge: {
+            self.model.age = @(cell.modifyTextField.text.integerValue);
         }
             break;
         case XJPatientInformationTypesEducationDegree: {
@@ -312,6 +320,14 @@
             }
         }
             break;
+        case XJPatientInformationTypesAge: {
+            if (textField.text.integerValue == self.model.age.integerValue || textField.text.integerValue < 1 || textField.text.integerValue > 150) {
+                self.navigationItem.rightBarButtonItem.enabled = NO;
+            } else {
+                self.navigationItem.rightBarButtonItem.enabled = YES;
+            }
+        }
+            break;
         case XJPatientInformationTypesClinichistoryNo: {
             if ([textField.text isEqualToString:self.model.clinichistoryNo] || XLIsNullObject(textField.text) || XLIsMobileNumber(textField.text)) {
                 self.navigationItem.rightBarButtonItem.enabled = NO;
@@ -415,10 +431,18 @@
             cell.selectionStyle = UITableViewCellSelectionStyleDefault;
         }
             break;
-        case XJPatientInformationTypesBirthday: {
-            cell.modifyTextField.enabled = NO;
-            cell.modifyTextField.text = [_birthdayString substringToIndex:10];
-            cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+//        case XJPatientInformationTypesBirthday: {
+//            cell.modifyTextField.enabled = NO;
+//            cell.modifyTextField.text = [_birthdayString substringToIndex:10];
+//            cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+//        }
+//            break;
+        case XJPatientInformationTypesAge: {
+            cell.modifyTextField.enabled = YES;
+            cell.modifyTextField.keyboardType = UIKeyboardTypeNumberPad;
+            cell.modifyTextField.text = [NSString stringWithFormat:@"%@", self.model.age];
+            [cell.modifyTextField becomeFirstResponder];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
             break;
         case XJPatientInformationTypesEducationDegree: {
@@ -486,10 +510,10 @@
             [self initSexPicker];
         }
             break;
-        case XJPatientInformationTypesBirthday: {
-            [self.datePickerView show];
-        }
-            break;
+//        case XJPatientInformationTypesBirthday: {
+//            [self.datePickerView show];
+//        }
+//            break;
         case XJPatientInformationTypesEducationDegree: {
             [self initEducationDegreePicker];
         }

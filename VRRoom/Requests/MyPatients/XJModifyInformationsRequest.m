@@ -17,7 +17,8 @@
     [self.params setObject:self.patientId forKey:@"patientId"];
     [self.params setObject:self.model.clinichistoryNo forKey:@"clinichistoryNo"];
     [self.params setObject:self.model.name forKey:@"name"];
-    [self.params setObject:self.model.birthday forKey:@"birthday"];
+    //[self.params setObject:self.model.birthday forKey:@"birthday"];
+    [self.params setObject:self.model.age forKey:@"age"];
     [self.params setObject:self.model.sex forKey:@"sex"];
     [self.params setObject:self.model.diseaseId forKey:@"diseaseId"];
     [self.params setObject:self.model.maritalStatus forKey:@"maritalStatus"];

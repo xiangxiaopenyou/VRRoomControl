@@ -15,7 +15,8 @@
     }
     [self.params setObject:self.informations[@"clinichistoryNo"] forKey:@"clinichistoryNo"];
     [self.params setObject:self.informations[@"name"] forKey:@"name"];
-    [self.params setObject:self.informations[@"birthday"] forKey:@"birthday"];
+    //[self.params setObject:self.informations[@"birthday"] forKey:@"birthday"];
+    [self.params setObject:self.informations[@"age"] forKey:@"age"];
     [self.params setObject:self.informations[@"sex"] forKey:@"sex"];
     [self.params setObject:self.informations[@"diseaseId"] forKey:@"diseaseId"];
     if (self.informations[@"phone"]) {

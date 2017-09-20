@@ -908,7 +908,7 @@
                                     </constraints>
                                 </view>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="stM-7u-MuA">
-                                    <rect key="frame" x="0.0" y="256" width="375" height="85"/>
+                                    <rect key="frame" x="0.0" y="256" width="375" height="106"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1wu-0O-2Uh">
@@ -931,12 +931,20 @@
                                                 <action selector="registerClick:" destination="S6w-vA-WS4" eventType="touchUpInside" id="iZY-3Y-FuA"/>
                                             </connections>
                                         </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="点击注册表示同意" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GV9-xj-TDS">
+                                            <rect key="frame" x="20" y="80" width="122.5" height="18"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
+                                        <constraint firstItem="GV9-xj-TDS" firstAttribute="leading" secondItem="stM-7u-MuA" secondAttribute="leading" constant="20" id="4fu-cd-QXA"/>
                                         <constraint firstItem="1wu-0O-2Uh" firstAttribute="top" secondItem="stM-7u-MuA" secondAttribute="top" constant="20" id="Hur-fr-Gce"/>
                                         <constraint firstAttribute="trailing" secondItem="1wu-0O-2Uh" secondAttribute="trailing" constant="22" id="QNd-xm-XhI"/>
                                         <constraint firstItem="1wu-0O-2Uh" firstAttribute="leading" secondItem="stM-7u-MuA" secondAttribute="leading" constant="22" id="T7J-fr-pWW"/>
+                                        <constraint firstItem="GV9-xj-TDS" firstAttribute="top" secondItem="stM-7u-MuA" secondAttribute="top" constant="80" id="jcq-Jd-lyu"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
@@ -1058,10 +1066,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="注册" id="qBj-fs-hM8"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="footerView" destination="stM-7u-MuA" id="xuI-m3-5ox"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MJW-jL-kSH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1929" y="202"/>
+            <point key="canvasLocation" x="-1930.4000000000001" y="201.94902548725639"/>
         </scene>
         <!--登录-->
         <scene sceneID="bft-7K-ay0">

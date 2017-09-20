@@ -130,7 +130,7 @@
                     cell.detailTextLabel.text = @"女";
                 }
             } else if (indexPath.row == 2) {
-                cell.detailTextLabel.text = XLIsNullObject(self.patientModel.birthday) ? @"" : [self.patientModel.birthday substringToIndex:10];
+                cell.detailTextLabel.text = XLIsNullObject(self.patientModel.age) ? @"" : [NSString stringWithFormat:@"%@", self.patientModel.age];
             } else {
                 cell.detailTextLabel.text = XLIsNullObject(self.patientModel.phone) ? @"未设置" : self.patientModel.phone;
             }
@@ -241,7 +241,7 @@
                 } else if (indexPath.row == 1) {
                     type = XJPatientInformationTypesSex;
                 } else if (indexPath.row == 2) {
-                    type = XJPatientInformationTypesBirthday;
+                    type = XJPatientInformationTypesAge;
                 } else {
                     type = XJPatientInformationTypesPhone;
                 }
@@ -293,7 +293,7 @@
 #pragma mark - Getters
 - (NSArray *)titlesArray {
     if (!_titlesArray) {
-        _titlesArray = @[@"姓　　名", @"性　　别", @"出生日期", @"手　　机", @"备　　注", @"医　　院", @"病历号", @"病　　症", @"文化程度", @"婚姻状况", @"历史处方"];
+        _titlesArray = @[@"姓　　名", @"性　　别", /*@"出生日期",*/ @"年龄", @"手　　机", @"备　　注", @"医　　院", @"病历号", @"病　　症", @"文化程度", @"婚姻状况", @"历史处方"];
     }
     return _titlesArray;
 }

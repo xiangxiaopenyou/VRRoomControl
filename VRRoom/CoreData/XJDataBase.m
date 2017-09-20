@@ -75,6 +75,7 @@
     userInfo.remark = user.remark;
     userInfo.clinichistoryNo = user.clinichistoryNo;
     userInfo.birthday = user.birthday;
+    userInfo.age = user.age.integerValue;
     userInfo.sex = user.sex.integerValue;
     userInfo.phone = user.phone;
     userInfo.maritalStatus = user.maritalStatus.integerValue;
@@ -109,6 +110,7 @@
         userInfo.remark = user.remark;
         userInfo.clinichistoryNo = user.clinichistoryNo;
         userInfo.birthday = user.birthday;
+        userInfo.age = @(user.age);
         userInfo.sex = @(user.sex);
         userInfo.phone = user.phone;
         userInfo.maritalStatus = @(user.maritalStatus);
@@ -137,6 +139,7 @@
         userInfo.remark = user.remark;
         userInfo.clinichistoryNo = user.clinichistoryNo;
         userInfo.birthday = user.birthday;
+        userInfo.age = user.age.integerValue;
         userInfo.sex = user.sex.integerValue;
         userInfo.phone = user.phone;
         userInfo.maritalStatus = user.maritalStatus.integerValue;

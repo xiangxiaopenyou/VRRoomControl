@@ -9,7 +9,7 @@
 #import "XJAddPatientViewController.h"
 #import "XJPatientDetailViewController.h"
 #import "XJPatientsInformationCell.h"
-#import "XJDatePickerView.h"
+//#import "XJDatePickerView.h"
 #import "XJDiseasePickerView.h"
 #import "XLBlockActionSheet.h"
 
@@ -20,11 +20,12 @@
 
 @interface XJAddPatientViewController ()<UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) XJDatePickerView *datePickerView;
+//@property (strong, nonatomic) XJDatePickerView *datePickerView;
 @property (strong, nonatomic) XJDiseasePickerView *diseasePickerView;
 
 @property (copy, nonatomic) NSArray *titlesArray;
-@property (copy, nonatomic) NSString *birthdayString;
+//@property (copy, nonatomic) NSString *birthdayString;
+//@property (copy, nonatomic) NSString *ageString;
 @property (strong, nonatomic) DiseaseModel *selectedDisease;
 @property (nonatomic) XJUserSex sex;
 @property (nonatomic) XJMaritalStatus maritalStatus;
@@ -39,13 +40,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.tableView.tableFooterView = [UIView new];
-    [XJKeyWindow addSubview:self.datePickerView];
+//    [XJKeyWindow addSubview:self.datePickerView];
     GJCFWeakSelf weakSelf = self;
-    self.datePickerView.selectBlock = ^(NSString *dateString) {
-        GJCFStrongSelf strongSelf = weakSelf;
-        _birthdayString = dateString;
-        [strongSelf.tableView reloadData];
-    };
+//    self.datePickerView.selectBlock = ^(NSString *dateString) {
+//        GJCFStrongSelf strongSelf = weakSelf;
+//        _birthdayString = dateString;
+//        [strongSelf.tableView reloadData];
+//    };
     [XJKeyWindow addSubview:self.diseasePickerView];
     self.diseasePickerView.selectBlock = ^(DiseaseModel *model) {
         GJCFStrongSelf strongSelf = weakSelf;
@@ -70,10 +71,12 @@
         UITextField *textField1 = (UITextField *)[self.tableView viewWithTag:100];
         UITextField *textField2 = (UITextField *)[self.tableView viewWithTag:101];
         UITextField *textField5 = (UITextField *)[self.tableView viewWithTag:102];  //备注
+        UITextField *textField4 = (UITextField *)[self.tableView viewWithTag:103];
         UITextField *textField3 = (UITextField *)[self.tableView viewWithTag:106];  //手机号
         NSMutableDictionary *informations = [@{@"clinichistoryNo" : textField1.text,
                                                @"name" : textField2.text,
-                                               @"birthday" : [_birthdayString stringByAppendingString:@" 00:00:00"],
+                                               //@"birthday" : [_birthdayString stringByAppendingString:@" 00:00:00"],
+                                               @"age" : textField4.text,
                                                @"diseaseId" : _selectedDisease.diseaseId,
                                                @"sex" : @(_sex) } mutableCopy];
         if (!XLIsNullObject(textField3.text)) {
@@ -104,6 +107,7 @@
     UITextField *textField1 = (UITextField *)[self.tableView viewWithTag:100];
     UITextField *textField2 = (UITextField *)[self.tableView viewWithTag:101];
     UITextField *textField5 = (UITextField *)[self.tableView viewWithTag:102];  //备注
+    UITextField *textField4 = (UITextField *)[self.tableView viewWithTag:103];
     UITextField *textField3 = (UITextField *)[self.tableView viewWithTag:106];  //手机号
     [textField1 resignFirstResponder];
     [textField2 resignFirstResponder];
@@ -121,8 +125,12 @@
         XLDismissHUD(self.view, YES, NO, @"请先输入患者姓名");
         return NO;
     }
-    if (XLIsNullObject(_birthdayString)) {
-        XLDismissHUD(self.view, YES, NO, @"请先选择患者出生日期");
+//    if (XLIsNullObject(_birthdayString)) {
+//        XLDismissHUD(self.view, YES, NO, @"请先选择患者出生日期");
+//        return NO;
+//    }
+    if (textField4.text.integerValue < 1 || textField4.text.integerValue > 150) {
+        XLDismissHUD(self.view, YES, NO, @"请输入正确的患者年龄");
         return NO;
     }
     if (!_selectedDisease) {
@@ -178,8 +186,11 @@
     cell.headerLabel.text = self.titlesArray[indexPath.row];
     cell.textField.tag = 100 + indexPath.row;
     cell.textField.delegate = self;
-    if (indexPath.row == 0 || indexPath.row == 1 || indexPath.row == 2 || indexPath.row == 6) {
+    if (indexPath.row == 0 || indexPath.row == 1 || indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 6) {
         cell.textField.enabled = YES;
+        if (indexPath.row == 3) {
+            cell.textField.keyboardType = UIKeyboardTypeNumberPad;
+        }
     } else {
         cell.textField.enabled = NO;
     }
@@ -194,10 +205,10 @@
         cell.textField.keyboardType = UIKeyboardTypeNumberPad;
     }
     switch (indexPath.row) {
-        case 3: {
-            cell.textField.text = _birthdayString;
-        }
-            break;
+//        case 3: {
+//            cell.textField.text = _birthdayString;
+//        }
+//            break;
         case 4: {
             if (_selectedDisease) {
                 cell.textField.text = _selectedDisease.diseaseName;
@@ -262,10 +273,10 @@
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
-        case 3: {
-            [self.datePickerView show];
-        }
-            break;
+//        case 3: {
+//            [self.datePickerView show];
+//        }
+//            break;
         case 4: {
             [self.diseasePickerView show];
         }
@@ -348,16 +359,16 @@
 #pragma mark - Getters
 - (NSArray *)titlesArray {
     if (!_titlesArray) {
-        _titlesArray = @[@"病历号", @"姓　　名", @"备　　注", @"出生日期", @"病　　症", @"性　　别", @"手　　机", @"文化程度", @"婚姻状况"];
+        _titlesArray = @[@"病历号", @"姓　　名", @"备　　注", /*@"出生日期",*/@"年　　龄", @"病　　症", @"性　　别", @"手　　机", @"文化程度", @"婚姻状况"];
     }
     return _titlesArray;
 }
-- (XJDatePickerView *)datePickerView {
-    if (!_datePickerView) {
-        _datePickerView = [[XJDatePickerView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    }
-    return _datePickerView;
-}
+//- (XJDatePickerView *)datePickerView {
+//    if (!_datePickerView) {
+//        _datePickerView = [[XJDatePickerView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+//    }
+//    return _datePickerView;
+//}
 - (XJDiseasePickerView *)diseasePickerView {
     if (!_diseasePickerView) {
         _diseasePickerView = [[XJDiseasePickerView alloc] initWithFrame:[UIScreen mainScreen].bounds];

@@ -7,16 +7,17 @@
 //
 
 #import "RegisterViewController.h"
+#import "XJCommonWebViewController.h"
 
 #import "LoginContentCell.h"
 #import "RegisterPhoneCell.h"
-//#import "XLHyperLinkButton.h"
+#import "XLHyperLinkButton.h"
 
 #import "UserModel.h"
 
 @interface RegisterViewController ()<UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
-//@property (weak, nonatomic) IBOutlet UIView *footerView;
-//@property (strong, nonatomic) XLHyperLinkButton *linkButton;
+@property (weak, nonatomic) IBOutlet UIView *footerView;
+@property (strong, nonatomic) XLHyperLinkButton *linkButton;
 @property (strong, nonatomic) UITextField *phoneNumberTextField;
 @property (strong, nonatomic) UITextField *codeTextField;
 @property (strong, nonatomic) UITextField *passwordTextField;
@@ -34,12 +35,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//    [self.footerView addSubview:self.linkButton];
-//    [self.linkButton sizeToFit];
-//    [self.linkButton mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.leading.equalTo(self.footerView.mas_leading).with.mas_offset(144);
-//        make.top.equalTo(self.footerView.mas_top).with.mas_offset(74);
-//    }];
+    [self.footerView addSubview:self.linkButton];
+    [self.linkButton sizeToFit];
+    [self.linkButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.footerView.mas_leading).with.mas_offset(142);
+        make.top.equalTo(self.footerView.mas_top).with.mas_offset(74);
+    }];
 }
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -128,25 +129,34 @@
         XLShowThenDismissHUD(NO, XJInputCorrectPhoneNumberTip, self.view);
         return;
     }
+    XLShowHUDWithMessage(nil, self.view);
     self.fetchCodeButton.enabled = NO;
-    self.countInt = 60;
-    [self.fetchCodeButton setTitle:[NSString stringWithFormat:@"%@", @(self.countInt)] forState:UIControlStateNormal];
-    [self.fetchCodeButton setTitleColor:BREAK_LINE_COLOR forState:UIControlStateNormal];
-    if (!self.timer) {
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(countNumber) userInfo:nil repeats:YES];
-        [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
-    }
     [UserModel fetchCode:self.phoneNumberTextField.text type:@1 handler:^(id object, NSString *msg) {
         if (msg) {
-            XLDismissHUD(self.view, YES, NO, @"验证码发送失败");
+            XLDismissHUD(self.view, YES, NO, msg);
             [self.timer invalidate];
             self.timer = nil;
             self.fetchCodeButton.enabled = YES;
             [self.fetchCodeButton setTitle:XJFetchVerificationCode forState:UIControlStateNormal];
             [self.fetchCodeButton setTitleColor:NAVIGATIONBAR_COLOR forState:UIControlStateNormal];
+        } else {
+            XLDismissHUD(self.view, YES, YES, @"验证码已发送");
+            self.countInt = 60;
+            [self.fetchCodeButton setTitle:[NSString stringWithFormat:@"%@", @(self.countInt)] forState:UIControlStateNormal];
+            [self.fetchCodeButton setTitleColor:BREAK_LINE_COLOR forState:UIControlStateNormal];
+            if (!self.timer) {
+                self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(countNumber) userInfo:nil repeats:YES];
+                [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+            }
         }
 
     }];
+}
+- (void)protocolAction {
+    XJCommonWebViewController *webController = [[UIStoryboard storyboardWithName:@"More" bundle:nil] instantiateViewControllerWithIdentifier:@"CommonWeb"];
+    webController.urlString = PROTOCOL_URL;
+    webController.title = @"用户协议";
+    [self.navigationController pushViewController:webController animated:YES];
 }
 
 #pragma mark - UITextField Delegate
@@ -248,16 +258,17 @@
 
 
 #pragma mark - Getters
-//- (XLHyperLinkButton *)linkButton {
-//    if (!_linkButton) {
-//        _linkButton = [XLHyperLinkButton buttonWithType:UIButtonTypeCustom];
-//        [_linkButton setColor:TABBAR_TITLE_COLOR];
-//        [_linkButton setTitle:XJUserAgreement forState:UIControlStateNormal];
-//        [_linkButton setTitleColor:TABBAR_TITLE_COLOR forState:UIControlStateNormal];
-//        _linkButton.titleLabel.font = XJSystemFont(15);
-//    }
-//    return _linkButton;
-//}
+- (XLHyperLinkButton *)linkButton {
+    if (!_linkButton) {
+        _linkButton = [XLHyperLinkButton buttonWithType:UIButtonTypeCustom];
+        [_linkButton setColor:NAVIGATIONBAR_COLOR];
+        [_linkButton setTitle:XJUserAgreement forState:UIControlStateNormal];
+        [_linkButton setTitleColor:NAVIGATIONBAR_COLOR forState:UIControlStateNormal];
+        _linkButton.titleLabel.font = XJSystemFont(15);
+        [_linkButton addTarget:self action:@selector(protocolAction) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _linkButton;
+}
 - (UITextField *)phoneNumberTextField {
     if (!_phoneNumberTextField) {
         _phoneNumberTextField = [[UITextField alloc] init];
