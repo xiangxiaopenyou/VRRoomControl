@@ -10,6 +10,6 @@
 
 @interface PrescriptionDetailContentCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UITableView *contentTableView;
-- (void)resetContents:(NSArray *)contents;
+- (void)resetContents:(NSArray *)contents status:(NSInteger)status;
 
 @end

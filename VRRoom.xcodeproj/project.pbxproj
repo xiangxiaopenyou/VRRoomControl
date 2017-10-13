@@ -32,6 +32,8 @@
 		3D28EC801F1C8E7500FAA61F /* Patients.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3D28EC7E1F1C8E7500FAA61F /* Patients.xcdatamodeld */; };
 		3D28EC831F1C8F7E00FAA61F /* XJDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D28EC821F1C8F7E00FAA61F /* XJDataBase.m */; };
 		3D28EC861F1C942A00FAA61F /* XJPatientInformationsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D28EC851F1C942A00FAA61F /* XJPatientInformationsRequest.m */; };
+		3D3201C81F908B470031F721 /* XJSearchTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3201C71F908B460031F721 /* XJSearchTitleView.m */; };
+		3D35733A1F7257AD00246C9F /* XJEndPrescriptionRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3573391F7257AD00246C9F /* XJEndPrescriptionRequest.m */; };
 		3D48485B1F4563CC006DF00C /* AuthenticationPicturesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D48485A1F4563CC006DF00C /* AuthenticationPicturesCell.m */; };
 		3D4848621F46BAC8006DF00C /* UploadImageRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D48485D1F46BAC8006DF00C /* UploadImageRequest.m */; };
 		3D4848631F46BAC8006DF00C /* UploadImagesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D48485F1F46BAC8006DF00C /* UploadImagesRequest.m */; };
@@ -223,6 +225,10 @@
 		3D28EC821F1C8F7E00FAA61F /* XJDataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XJDataBase.m; sourceTree = "<group>"; };
 		3D28EC841F1C942A00FAA61F /* XJPatientInformationsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XJPatientInformationsRequest.h; sourceTree = "<group>"; };
 		3D28EC851F1C942A00FAA61F /* XJPatientInformationsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XJPatientInformationsRequest.m; sourceTree = "<group>"; };
+		3D3201C61F908B460031F721 /* XJSearchTitleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XJSearchTitleView.h; sourceTree = "<group>"; };
+		3D3201C71F908B460031F721 /* XJSearchTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XJSearchTitleView.m; sourceTree = "<group>"; };
+		3D3573381F7257AD00246C9F /* XJEndPrescriptionRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XJEndPrescriptionRequest.h; sourceTree = "<group>"; };
+		3D3573391F7257AD00246C9F /* XJEndPrescriptionRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XJEndPrescriptionRequest.m; sourceTree = "<group>"; };
 		3D4848591F4563CC006DF00C /* AuthenticationPicturesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationPicturesCell.h; sourceTree = "<group>"; };
 		3D48485A1F4563CC006DF00C /* AuthenticationPicturesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationPicturesCell.m; sourceTree = "<group>"; };
 		3D48485C1F46BAC8006DF00C /* UploadImageRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadImageRequest.h; sourceTree = "<group>"; };
@@ -706,7 +712,7 @@
 				3D22B4691F10B39200C9D459 /* Login */,
 				3DA56ED81F452AC4002D29E8 /* Prescription */,
 				3D28EC691F18B44E00FAA61F /* Patients */,
-				3D7C41541F14634B0072083C /* AddUser */,
+				3D7C41541F14634B0072083C /* Scenes */,
 				3DA56EF51F452B34002D29E8 /* Authentication */,
 				3DCD390C1F4D1E4E003EEC87 /* Plan */,
 				3DE4E48C1F346C1900EADEDC /* More */,
@@ -768,7 +774,7 @@
 			path = ../Commons/MBProgressHUD;
 			sourceTree = "<group>";
 		};
-		3D7C41541F14634B0072083C /* AddUser */ = {
+		3D7C41541F14634B0072083C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
 				3D7C415A1F1464360072083C /* Views */,
@@ -790,7 +796,7 @@
 				3D238C3D1F208E07000A6AD5 /* XJContentWebViewController.h */,
 				3D238C3E1F208E07000A6AD5 /* XJContentWebViewController.m */,
 			);
-			path = AddUser;
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		3D7C415A1F1464360072083C /* Views */ = {
@@ -822,6 +828,8 @@
 				3D7C41B11F14CC390072083C /* XJDiseasePickerView.m */,
 				3DE07E1F1F300FDB004B703D /* XJAddContentCell.h */,
 				3DE07E201F300FDB004B703D /* XJAddContentCell.m */,
+				3D3201C61F908B460031F721 /* XJSearchTitleView.h */,
+				3D3201C71F908B460031F721 /* XJSearchTitleView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1085,6 +1093,8 @@
 				3DFB2CD11F1EEEF400C2CE26 /* FetchPrescriptionsRequest.m */,
 				3DFB2CD21F1EEEF400C2CE26 /* XJFetchPatientsContentsRequest.h */,
 				3DFB2CD31F1EEEF400C2CE26 /* XJFetchPatientsContentsRequest.m */,
+				3D3573381F7257AD00246C9F /* XJEndPrescriptionRequest.h */,
+				3D3573391F7257AD00246C9F /* XJEndPrescriptionRequest.m */,
 			);
 			path = Prescription;
 			sourceTree = "<group>";
@@ -1222,7 +1232,7 @@
 		3D4FC1C11EA0629C00E9CE5E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = InHeart;
 				TargetAttributes = {
 					3D4FC1C81EA0629C00E9CE5E = {
@@ -1443,6 +1453,7 @@
 				3D22B4701F10B47800C9D459 /* ChangePasswordTableViewController.m in Sources */,
 				3DCD39591F51490C003EEC87 /* XJPlanDetailViewController.m in Sources */,
 				3DA56ED41F442F1D002D29E8 /* FetchVerificationCodeRequest.m in Sources */,
+				3D35733A1F7257AD00246C9F /* XJEndPrescriptionRequest.m in Sources */,
 				3D7C41941F14A2170072083C /* TherapyCollectionCell.m in Sources */,
 				3D4FC2111EA06AC200E9CE5E /* CommonsDefines.m in Sources */,
 				3D4FC1CE1EA0629C00E9CE5E /* main.m in Sources */,
@@ -1455,6 +1466,7 @@
 				3D48485B1F4563CC006DF00C /* AuthenticationPicturesCell.m in Sources */,
 				3DC6D6AF1F1EFC7D00441171 /* ContentDetailViewController.m in Sources */,
 				3DC6D6AE1F1EFC7D00441171 /* DetailNavigationController.m in Sources */,
+				3D3201C81F908B470031F721 /* XJSearchTitleView.m in Sources */,
 				3D7C41881F14990C0072083C /* XLHyperLinkButton.m in Sources */,
 				3DA56ED11F442449002D29E8 /* FindPasswordTableViewController.m in Sources */,
 				3D7C41A41F14A8B30072083C /* XJAddPatientViewController.m in Sources */,
@@ -1548,7 +1560,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -1556,7 +1570,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1597,7 +1615,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -1605,7 +1625,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1635,6 +1659,7 @@
 			baseConfigurationReference = 5CAD686E8BACBEBDD597818B /* Pods-VRRoom.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = NU4X48R8LQ;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1655,6 +1680,7 @@
 			baseConfigurationReference = 2C315177F6B265873C3DEF94 /* Pods-VRRoom.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = NU4X48R8LQ;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

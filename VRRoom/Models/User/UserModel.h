@@ -19,10 +19,13 @@
 + (void)userLogin:(NSString *)username password:(NSString *)password hanlder:(RequestResultHandler)handler;
 + (void)changePassword:(NSString *)oldPassword password:(NSString *)password hanlder:(RequestResultHandler)hanlder;
 + (void)addPatient:(NSDictionary *)informations handler:(RequestResultHandler)handler;
+//开处方
 + (void)sendPrescription:(PrescriptionModel *)model handler:(RequestResultHandler)handler;
 + (void)myPatients:(RequestResultHandler)hanlder;
 + (void)versionInformations:(RequestResultHandler)handler;
 + (void)fetchCode:(NSString *)phoneNumber type:(NSNumber *)type handler:(RequestResultHandler)handler;
 + (void)userRegister:(NSString *)username password:(NSString *)password code:(NSString *)verificationCode handler:(RequestResultHandler)handler;
 + (void)findPassword:(NSString *)username password:(NSString *)password code:(NSString *)verificationCode handler:(RequestResultHandler)handler;
+//中止处方
++ (void)endPrescription:(NSString *)prescriptionId handler:(RequestResultHandler)handler;
 @end

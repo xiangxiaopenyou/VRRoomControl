@@ -49,9 +49,9 @@
             XLDismissHUD(XJKeyWindow, NO, YES, nil);
             self.model = (InformationModel *)object;
             if (self.model.workplaceType.integerValue == 1) {
-                self.headTitleArray = @[@"头像", @"姓  名", @"性  别", @"医  院", @"科  室", @"职  称", @"城  市"];
+                self.headTitleArray = @[@"头  像", @"姓  名", @"性  别", @"医  院", @"科  室", @"职  称", @"城  市"];
             } else {
-                self.headTitleArray = @[@"头像", @"姓  名", @"性  别", @"诊  所", @"职  位", @"职  称", @"城  市"];
+                self.headTitleArray = @[@"头  像", @"姓  名", @"性  别", @"诊  所", @"职  位", @"职  称", @"城  市"];
             }
             if (![[NSUserDefaults standardUserDefaults] stringForKey:USER_PORTRAIT]) {
                 [[NSUserDefaults standardUserDefaults] setObject:self.model.headPictureUrl forKey:USER_PORTRAIT];

@@ -321,7 +321,7 @@
         }
             break;
         case XJPatientInformationTypesAge: {
-            if (textField.text.integerValue == self.model.age.integerValue || textField.text.integerValue < 1 || textField.text.integerValue > 150) {
+            if (textField.text.integerValue == self.model.age.integerValue || textField.text.integerValue < 1 || textField.text.integerValue > 200) {
                 self.navigationItem.rightBarButtonItem.enabled = NO;
             } else {
                 self.navigationItem.rightBarButtonItem.enabled = YES;

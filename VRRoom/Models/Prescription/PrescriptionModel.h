@@ -28,4 +28,5 @@
 + (void)fetchPrescriptionsList:(NSString *)patientId handler:(RequestResultHandler)handler;
 + (void)historicalPrescriptions:(NSString *)patientId paging:(NSNumber *)paging handler:(RequestResultHandler)handler;
 + (void)prescriptionDetail:(NSString *)prescriptionId handler:(RequestResultHandler)handler;
+
 @end

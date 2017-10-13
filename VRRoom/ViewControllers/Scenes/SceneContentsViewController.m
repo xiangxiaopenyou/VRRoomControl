@@ -14,6 +14,7 @@
 #import "DepartmentSelectCell.h"
 #import "TherapyItemCell.h"
 #import "TherapyCollectionCell.h"
+#import "XJSearchTitleView.h"
 
 #import "DiseaseModel.h"
 #import "TherapyModel.h"
@@ -93,7 +94,7 @@
 
 #pragma mark - PrivateMethods
 - (void)createNavigationTitleView {
-    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 70, 30)];
+    XJSearchTitleView *titleView = [[XJSearchTitleView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 70, 30)];
     titleView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
     titleView.layer.masksToBounds = YES;
     titleView.layer.cornerRadius = 4.0;

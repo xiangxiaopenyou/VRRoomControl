@@ -130,7 +130,7 @@
             PrescriptionDetailContentCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             NSArray *tempArray = [ContentModel setupWithArray:self.model.prescriptionContentList];
-            [cell resetContents:tempArray];
+            [cell resetContents:tempArray status:self.model.status.integerValue];
             return cell;
         }
             break;

@@ -16,6 +16,7 @@
 #import "FetchVerificationCodeRequest.h"
 #import "RegisterRequest.h"
 #import "FindPasswordRequest.h"
+#import "XJEndPrescriptionRequest.h"
 #import "PrescriptionModel.h"
 #import "PatientModel.h"
 
@@ -116,6 +117,12 @@
             !handler ?: handler(object, nil);
         }
     }];
+}
++ (void)endPrescription:(NSString *)prescriptionId handler:(RequestResultHandler)handler {
+    [[XJEndPrescriptionRequest new] request:^BOOL(XJEndPrescriptionRequest *request) {
+        request.prescriptionId = prescriptionId;
+        return YES;
+    } result:handler];
 }
 
 @end

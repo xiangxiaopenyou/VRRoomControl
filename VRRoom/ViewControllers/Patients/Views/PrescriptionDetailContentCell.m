@@ -13,11 +13,13 @@
 
 @interface PrescriptionDetailContentCell ()<UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSMutableArray *selectedContents;
+@property (assign, nonatomic) NSInteger status;
 @end
 
 @implementation PrescriptionDetailContentCell
-- (void)resetContents:(NSArray *)contents {
+- (void)resetContents:(NSArray *)contents status:(NSInteger)status {
     self.selectedContents = [contents mutableCopy];
+    _status = status;
     [self.contentTableView reloadData];
 }
 
@@ -68,10 +70,19 @@
     } else {
         cell.contentCycleLabel.hidden = YES;
     }
-    if ([tempModel.useTimes integerValue] > 0) {
-        cell.usedTimesLabel.text = [NSString stringWithFormat:@"已使用%@次", tempModel.useTimes];
+    if (_status == 9) {
+        cell.usedTimesLabel.text = @"已中止";
     } else {
-        cell.usedTimesLabel.text = @"未使用";
+        if ([tempModel.useTimes integerValue] > 0) {
+            NSInteger count = tempModel.frequency.integerValue * tempModel.period.integerValue;
+            if (tempModel.useTimes.integerValue == count) {
+                cell.usedTimesLabel.text = @"已完成";
+            } else {
+                cell.usedTimesLabel.text = [NSString stringWithFormat:@"已使用%@次", tempModel.useTimes];
+            }
+        } else {
+            cell.usedTimesLabel.text = @"未使用";
+        }
     }
     return cell;
 }

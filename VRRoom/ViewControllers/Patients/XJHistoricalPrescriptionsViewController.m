@@ -9,9 +9,11 @@
 #import "XJHistoricalPrescriptionsViewController.h"
 #import "PrescriptionDetailViewController.h"
 #import "PrescriptionCell.h"
+#import "XLAlertControllerObject.h"
 
 #import "PrescriptionModel.h"
 #import "PatientModel.h"
+#import "UserModel.h"
 
 #import <MJRefresh.h>
 
@@ -110,6 +112,7 @@
     cell.typeLabel.text = [model.payStatus integerValue] == 4 ? @"类型：院内" : @"类型：线上";
     cell.diseaseLabel.text = [NSString stringWithFormat:@"病症：%@", model.disease ? model.disease : @""];
     cell.dateLabel.text = [NSString stringWithFormat:@"日期：%@", model.createdAt ? model.createdAt : @""];
+    cell.endButton.hidden = NO;
     NSString *stateString = @" ";
     switch ([model.status integerValue]) {
         case 1:
@@ -121,13 +124,34 @@
         case 3:
             stateString = @"已完成";
             break;
-        case 9:
+        case 4:
+            stateString = @"线下支付";
+            break;
+        case 9: {
             stateString = @"已中止";
+            cell.endButton.hidden = YES;
+        }
             break;
         default:
             break;
     }
     cell.stateLabel.text = stateString;
+    cell.block = ^{
+        [XLAlertControllerObject showWithTitle:@"提示" message:@"确定要中止该处方吗？" cancelTitle:@"取消" ensureTitle:@"中止" ensureBlock:^{
+            XLShowHUDWithMessage(@"正在中止", XJKeyWindow);
+            [UserModel endPrescription:model.id handler:^(id object, NSString *msg) {
+                if (object) {
+                    XLDismissHUD(XJKeyWindow, YES, YES, @"已中止");
+                    model.status = @9;
+                    GJCFAsyncMainQueue(^{
+                        [self.tableView reloadData];
+                    });
+                } else {
+                    XLDismissHUD(XJKeyWindow, YES, NO, msg);
+                }
+            }];
+        }];
+    };
     return cell;
 }
 

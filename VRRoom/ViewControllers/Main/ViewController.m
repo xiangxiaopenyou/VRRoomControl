@@ -51,10 +51,17 @@
     recognizer.delegate = self;
     [self.tableView addGestureRecognizer:recognizer];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(leftMenuActions:) name:@"XJLeftMenuItemDidClick" object:nil];
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        dispatch_group_t group = dispatch_group_create();
+        dispatch_group_async(group, queue, ^{
+            
+        });
+    });
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];

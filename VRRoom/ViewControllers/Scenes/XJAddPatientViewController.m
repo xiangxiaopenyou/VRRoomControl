@@ -129,7 +129,7 @@
 //        XLDismissHUD(self.view, YES, NO, @"请先选择患者出生日期");
 //        return NO;
 //    }
-    if (textField4.text.integerValue < 1 || textField4.text.integerValue > 150) {
+    if (textField4.text.integerValue < 1 || textField4.text.integerValue > 200) {
         XLDismissHUD(self.view, YES, NO, @"请输入正确的患者年龄");
         return NO;
     }
