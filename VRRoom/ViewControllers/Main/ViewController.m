@@ -10,10 +10,12 @@
 #import "ChangePasswordTableViewController.h"
 #import "XJAddPatientViewController.h"
 #import "XJMyPatientsViewController.h"
-#import "SceneContentsViewController.h"
+//#import "SceneContentsViewController.h"
+#import "XJScenesListViewController.h"
 #import "XJCommonWebViewController.h"
 #import "AuthenticationInformationViewController.h"
 #import "XJBaseInformationsTableViewController.h"
+#import "XJPlansListViewController.h"
 #import "XJNewsCell.h"
 #import "XLAlertControllerObject.h"
 
@@ -52,13 +54,6 @@
     [self.tableView addGestureRecognizer:recognizer];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(leftMenuActions:) name:@"XJLeftMenuItemDidClick" object:nil];
     
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(queue, ^{
-        dispatch_group_t group = dispatch_group_create();
-        dispatch_group_async(group, queue, ^{
-            
-        });
-    });
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -183,15 +178,20 @@
     }
 }
 - (IBAction)vrContentsAction:(id)sender {
-    SceneContentsViewController *contentsViewController = [[UIStoryboard storyboardWithName:@"AddUser" bundle:nil] instantiateViewControllerWithIdentifier:@"SceneContents"];
+//    SceneContentsViewController *contentsViewController = [[UIStoryboard storyboardWithName:@"AddUser" bundle:nil] instantiateViewControllerWithIdentifier:@"SceneContents"];
+//    contentsViewController.viewType = 1;
+//    [self.navigationController pushViewController:contentsViewController animated:YES];
+    XJScenesListViewController *contentsViewController = [[UIStoryboard storyboardWithName:@"AddUser" bundle:nil] instantiateViewControllerWithIdentifier:@"ScenesList"];
     contentsViewController.viewType = 1;
     [self.navigationController pushViewController:contentsViewController animated:YES];
 }
 - (IBAction)directionAction:(id)sender {
-    XJCommonWebViewController *webController = [[UIStoryboard storyboardWithName:@"More" bundle:nil] instantiateViewControllerWithIdentifier:@"CommonWeb"];
-    webController.urlString = HELPBASEURL;
-    webController.title = @"康复综述";
-    [self.navigationController pushViewController:webController animated:YES];
+//    XJCommonWebViewController *webController = [[UIStoryboard storyboardWithName:@"More" bundle:nil] instantiateViewControllerWithIdentifier:@"CommonWeb"];
+//    webController.urlString = HELPBASEURL;
+//    webController.title = @"康复综述";
+//    [self.navigationController pushViewController:webController animated:YES];
+    XJPlansListViewController *plansViewController = [[UIStoryboard storyboardWithName:@"Plan" bundle:nil] instantiateViewControllerWithIdentifier:@"PlansList"];
+    [self.navigationController pushViewController:plansViewController animated:YES];
 }
 - (IBAction)aboutAction:(id)sender {
     XJCommonWebViewController *webController = [[UIStoryboard storyboardWithName:@"More" bundle:nil] instantiateViewControllerWithIdentifier:@"CommonWeb"];
@@ -218,6 +218,13 @@
         }
             break;
         case 3: {
+            XJCommonWebViewController *webController = [[UIStoryboard storyboardWithName:@"More" bundle:nil] instantiateViewControllerWithIdentifier:@"CommonWeb"];
+            webController.urlString = HELPBASEURL;
+            webController.title = @"康复综述";
+            [self.navigationController pushViewController:webController animated:YES];
+        }
+            break;
+        case 4: {
             XJCommonWebViewController *webController = [[UIStoryboard storyboardWithName:@"More" bundle:nil] instantiateViewControllerWithIdentifier:@"CommonWeb"];
             webController.urlString = ABOUTBASEURL;
             webController.title = @"关于心景";

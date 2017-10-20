@@ -111,7 +111,7 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return 6;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommonCell"];
@@ -128,9 +128,12 @@
             title = @"版本升级";
             break;
         case 3:
-            title = @"关于心景";
+            title = @"康复综述";
             break;
         case 4:
+            title = @"关于心景";
+            break;
+        case 5:
             title = @"注销";
             break;
         default:
@@ -182,11 +185,15 @@
             }];
         }
             break;
-        case 3:{
+        case 3: {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"XJLeftMenuItemDidClick" object:@3];
         }
             break;
         case 4:{
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"XJLeftMenuItemDidClick" object:@4];
+        }
+            break;
+        case 5:{
             [XLAlertControllerObject showWithTitle:@"提示" message:@"确定要注销吗？" cancelTitle:@"取消" ensureTitle:@"注销" ensureBlock:^{
                 XLUserLogout;
                 [self performSelector:@selector(turnLogin) withObject:nil afterDelay:0.1];

@@ -228,9 +228,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ETf-Ww-UES">
                                                     <rect key="frame" x="250" y="0.0" width="125" height="82"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
-                                                    <inset key="titleEdgeInsets" minX="-44" minY="0.0" maxX="0.0" maxY="-35"/>
-                                                    <inset key="imageEdgeInsets" minX="0.0" minY="-20" maxX="-38" maxY="0.0"/>
-                                                    <state key="normal" title=" 手册" image="homepage_help">
+                                                    <state key="normal" title="VR方案">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
@@ -1492,7 +1490,6 @@
         <image name="delete_history" width="20" height="20"/>
         <image name="homepage_add" width="45" height="32"/>
         <image name="homepage_content" width="45" height="32"/>
-        <image name="homepage_help" width="45" height="32"/>
         <image name="login_logo" width="92" height="69"/>
         <image name="logo_small" width="92" height="69"/>
         <image name="phone" width="21" height="21"/>
