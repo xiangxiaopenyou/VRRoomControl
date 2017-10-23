@@ -8,9 +8,10 @@
 
 #import "XJPatientDetailViewController.h"
 #import "XJModifyInformationsViewController.h"
-#import "WritePrescriptionViewController.h"
+//#import "WritePrescriptionViewController.h"
 #import "XJAddPatientViewController.h"
 #import "XJHistoricalPrescriptionsViewController.h"
+#import "XJPlansListViewController.h"
 #import "PatientModel.h"
 #import "XJDataBase.h"
 
@@ -56,9 +57,11 @@
 
 #pragma mark - Action
 - (IBAction)addPrescriptionAction:(id)sender {
-    WritePrescriptionViewController *writePrescriptionController = [[UIStoryboard storyboardWithName:@"AddUser" bundle:nil] instantiateViewControllerWithIdentifier:@"WritePrescription"];
-    writePrescriptionController.patientId = self.patientId;
-    [self.navigationController pushViewController:writePrescriptionController animated:YES];
+//    WritePrescriptionViewController *writePrescriptionController = [[UIStoryboard storyboardWithName:@"AddUser" bundle:nil] instantiateViewControllerWithIdentifier:@"WritePrescription"];
+//    writePrescriptionController.patientId = self.patientId;
+//    [self.navigationController pushViewController:writePrescriptionController animated:YES];
+    XJPlansListViewController *planListController = [[UIStoryboard storyboardWithName:@"Plan" bundle:nil] instantiateViewControllerWithIdentifier:@"PlansList"];
+    [self.navigationController pushViewController:planListController animated:YES];
 }
 #pragma mark - Request
 - (void)fetchInformations {
