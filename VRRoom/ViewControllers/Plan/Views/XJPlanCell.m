@@ -7,11 +7,28 @@
 //
 
 #import "XJPlanCell.h"
+#import "XJPlanModel.h"
 
 @implementation XJPlanCell
 - (IBAction)selectAction:(id)sender {
+    self.selectButton.selected = !self.selectButton.selected;
     if (self.selectBlock) {
-        self.selectBlock();
+        self.selectBlock(self.selectButton.selected);
+    }
+}
+- (void)setupContents:(XJPlanModel *)model isView:(NSInteger)isView {
+    if (isView) {
+        [self.selectButton setImage:[UIImage imageNamed:@"content_collect"] forState:UIControlStateNormal];
+        [self.selectButton setImage:[UIImage imageNamed:@"content_collected"] forState:UIControlStateSelected];
+        if ([model.isCollected integerValue] == 0) {
+            self.selectButton.selected = NO;
+        } else {
+            self.selectButton.selected = YES;
+        }
+    } else {
+        [self.selectButton setImage:[UIImage imageNamed:@"content_select"] forState:UIControlStateNormal];
+        [self.selectButton setImage:[UIImage imageNamed:@"content_isselect"] forState:UIControlStateSelected];
+        self.selectButton.selected = NO;
     }
 }
 

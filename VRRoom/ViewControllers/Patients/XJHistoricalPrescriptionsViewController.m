@@ -36,7 +36,7 @@
     [self.tableView setMj_footer:[MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         [self prescriptionsListRequest];
     }]];
-    self.tableView.mj_footer.hidden = YES;
+    self.tableView.mj_footer.automaticallyHidden = YES;
     _paging = 1;
     XLShowHUDWithMessage(nil, self.view);
     [self prescriptionsListRequest];
@@ -80,7 +80,6 @@
                     [self.tableView.mj_footer endRefreshingWithNoMoreData];
                     self.tableView.mj_footer.hidden = YES;
                 } else {
-                    self.tableView.mj_footer.hidden = NO;
                     _paging += 1;
                 }
             });

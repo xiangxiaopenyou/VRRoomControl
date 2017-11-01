@@ -86,7 +86,7 @@
     cell.selectButton.hidden = self.viewType == 1 ? YES : NO;
     XJPlanModel *model = self.plansArray[indexPath.row];
     cell.nameLabel.text = model.name;
-    cell.selectBlock = ^{
+    cell.selectBlock = ^(BOOL isSelected) {
         NSArray *tempArray = model.contents;
         [self selectContents:tempArray];
         if (self.block) {

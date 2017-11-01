@@ -11,6 +11,7 @@
 @property (assign, nonatomic) NSInteger times;
 @property (assign, nonatomic) NSInteger scenesNumber;
 @property (copy, nonatomic) NSArray *contentsArray;
+@property (assign, nonatomic) BOOL canEdit;
 @end
 
 @implementation XJPlanGridView
@@ -21,10 +22,11 @@
     }
     return self;
 }
-- (void)setupContents:(NSInteger)times scenes:(NSInteger)scenesNumber contents:(NSArray *)contentsArray {
+- (void)setupContents:(NSInteger)times scenes:(NSInteger)scenesNumber contents:(NSArray *)contentsArray canEdit:(BOOL)canEdit {
     _times = times;
     _scenesNumber = scenesNumber;
     _contentsArray = [contentsArray copy];
+    _canEdit = canEdit;
     [self setupViews];
 }
 - (void)setupViews {
@@ -40,17 +42,18 @@
         if (i == 0) {
             width = 50.f;
         }
-        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(offsetX, 0, width, 50.f * (_times + 1)) style:UITableViewStylePlain];
+        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(offsetX, 0, width, 60.f * (_times + 1)) style:UITableViewStylePlain];
         tableView.layer.borderWidth = 0.5;
-        tableView.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
+        tableView.layer.borderColor = BREAK_LINE_COLOR.CGColor;
         tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
-        tableView.separatorColor = [UIColor groupTableViewBackgroundColor];
+        tableView.separatorColor = BREAK_LINE_COLOR;
         tableView.scrollEnabled = NO;
         tableView.tag = i;
         tableView.delegate = self;
         tableView.dataSource = self;
         [self addSubview:tableView];
     }
+    self.frame = CGRectMake(0, 60, SCREEN_WIDTH, 60 * _times);
 }
 
 #pragma mark - Table view data source
@@ -58,14 +61,16 @@
     return _times + 1;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 50.f;
+    return 60.f;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *identifier = @"GridTableViewCell";
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-//    if (!cell) {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-//    }
+    if (tableView.tag == 0) {
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    } else {
+        cell.selectionStyle = self.canEdit ? UITableViewCellSelectionStyleDefault : UITableViewCellSelectionStyleNone;
+    }
     UILabel *label = [[UILabel alloc] init];
     label.font = XJSystemFont(12);
     label.textAlignment = NSTextAlignmentCenter;

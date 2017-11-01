@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class XJPlanModel;
 @interface XJPlanInformationsViewController : UIViewController
+@property (strong, nonatomic) XJPlanModel *planModel;
 
 @end

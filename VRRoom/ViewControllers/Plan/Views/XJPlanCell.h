@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+@class XJPlanModel;
 
 @interface XJPlanCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIButton *selectButton;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
-@property (copy, nonatomic) void (^selectBlock)();
+@property (copy, nonatomic) void (^selectBlock)(BOOL isSelected);
+
+- (void)setupContents:(XJPlanModel *)model isView:(NSInteger)isView;
 
 @end

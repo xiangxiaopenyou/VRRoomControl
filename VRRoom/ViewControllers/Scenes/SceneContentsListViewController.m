@@ -90,7 +90,7 @@
             [self fetchContents];
         }
     }]];
-    self.tableView.mj_footer.hidden = YES;
+    self.tableView.mj_footer.automaticallyHidden = YES;
     _paging = 1;
     if (self.isCollectionView) {
         [self fetchMyCollections];
@@ -252,7 +252,6 @@
                      self.tableView.mj_footer.hidden = YES;
                  } else {
                      _paging += 1;
-                     self.tableView.mj_footer.hidden = NO;
                  }
              });
          } else {
@@ -283,7 +282,6 @@
                     self.tableView.mj_footer.hidden = YES;
                 } else {
                     _paging += 1;
-                    self.tableView.mj_footer.hidden = NO;
                 }
             });
             
@@ -350,7 +348,7 @@
         if (self.isCollectionView) {
             if (model.isCollected.integerValue == 0) {
                 [self.contentsArray removeObject:model];
-                [self.tableView reloadData];
+                //[self.tableView reloadData];
             }
         }
         if (self.viewType == 2) {

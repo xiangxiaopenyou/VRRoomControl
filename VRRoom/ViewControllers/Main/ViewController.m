@@ -191,6 +191,7 @@
 //    webController.title = @"康复综述";
 //    [self.navigationController pushViewController:webController animated:YES];
     XJPlansListViewController *plansViewController = [[UIStoryboard storyboardWithName:@"Plan" bundle:nil] instantiateViewControllerWithIdentifier:@"PlansList"];
+    plansViewController.isView = YES;
     [self.navigationController pushViewController:plansViewController animated:YES];
 }
 - (IBAction)aboutAction:(id)sender {

@@ -10,6 +10,8 @@
 #import "XJPlanItemCell.h"
 #import "XJPlanGridView.h"
 
+#import "XJPlanModel.h"
+
 @interface XJPlanInformationsViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) XJPlanGridView *gridView;
@@ -21,6 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = self.planModel.name;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -30,7 +33,7 @@
 
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 4;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
@@ -42,10 +45,20 @@
             height = 50.f;
             break;
         case 1:
-            height = 100.f;
+            height = 50.f;
             break;
-        case 2:
-            height = 300.f;
+        case 2: {
+            NSString *instructionString = @"暂无";
+            if (!XLIsNullObject(self.planModel.instruction)) {
+                instructionString = self.planModel.instruction;
+            }
+            CGSize size = XLSizeOfText(instructionString, SCREEN_WIDTH - 115, XJSystemFont(14));
+            height = size.height + 40.f;
+        }
+            break;
+        case 3: {
+            height = (self.planModel.times.integerValue + 1) * 60.f;
+        }
             break;
         default:
             break;
@@ -53,16 +66,54 @@
     return height;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 2) {
-        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+    if (indexPath.section == 3) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PlanGridCell" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell.contentView addSubview:self.gridView];
-        [self.gridView setupContents:5 scenes:3 contents:@[@"1", @"2", @"3", @"1", @"5", @"7", @"1", @"8", @"9", @"11", @"12啊是的了疯狂打扫房间啊", @"13", @"15", @"16", @"18"]];
+        [self.gridView setupContents:self.planModel.times.integerValue scenes:self.planModel.scenes.integerValue contents:self.planModel.contents canEdit:NO];
         return cell;
     } else {
         XJPlanItemCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PlanItemCell" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        NSString *leftString = nil;
+        NSString *rightString = nil;
+        switch (indexPath.section) {
+            case 0: {
+                leftString = @"方案名";
+                rightString = self.planModel.name;
+            }
+                break;
+            case 1: {
+                leftString = @"病症";
+                rightString = self.planModel.diseaseName;
+            }
+                break;
+            case 2: {
+                leftString = @"说明";
+                if (XLIsNullObject(self.planModel.instruction)) {
+                    rightString = @"暂无";
+                } else {
+                    rightString = self.planModel.instruction;
+                }
+            }
+            default:
+                break;
+        }
+        cell.leftLabel.text = leftString;
+        cell.rightLabel.text = rightString;
         return cell;
     }
 }
+#pragma mark - Table view delegate
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 20.f;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *headerView = [UIView new];
+    headerView.backgroundColor = [UIColor clearColor];
+    return headerView;
+}
+
 /*
 #pragma mark - Navigation
 
@@ -75,7 +126,7 @@
 #pragma mark - Getters
 - (XJPlanGridView *)gridView {
     if (!_gridView) {
-        _gridView = [[XJPlanGridView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 300)];
+        _gridView = [[XJPlanGridView alloc] initWithFrame:CGRectZero];
     }
     return _gridView;
 }

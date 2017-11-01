@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface XJPlansListViewController : UIViewController
+@property (assign, nonatomic) BOOL isView;
 
 @end

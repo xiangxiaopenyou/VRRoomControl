@@ -7,6 +7,8 @@
 //
 
 #import "XJScenesListViewController.h"
+#import "ContentDetailViewController.h"
+#import "DetailNavigationController.h"
 
 #import "XJSearchTitleView.h"
 #import "XJTopTherapyCell.h"
@@ -81,7 +83,7 @@
             [self fetchContents];
         }
     }]];
-    self.tableView.mj_footer.hidden = YES;
+    self.tableView.mj_footer.automaticallyHidden = YES;
     
     //搜索列表
     self.searchTableView.tableFooterView = [UIView new];
@@ -174,7 +176,6 @@
                     self.tableView.mj_footer.hidden = YES;
                 } else {
                     _paging += 1;
-                    self.tableView.mj_footer.hidden = NO;
                 }
             });
             
@@ -224,7 +225,6 @@
                                              self.tableView.mj_footer.hidden = YES;
                                          } else {
                                              _paging += 1;
-                                             self.tableView.mj_footer.hidden = NO;
                                          }
                                      });
                                  } else {
@@ -443,14 +443,44 @@
                     //疗法列表滑动到最前面
                     [self.therapyTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
                 }
+                if (self.contentsArray.count > 0) {
+                    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+                }
+                [self.tableView.mj_header beginRefreshing];
             }
-            [self.tableView.mj_header beginRefreshing];
+            
         }
     } else if (tableView == self.therapyTableView) {
         if (indexPath != _selectedTherapyIndexPath) {
             _selectedTherapyIndexPath = indexPath;
         }
+        if (self.contentsArray.count > 0) {
+            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }
         [self.tableView.mj_header beginRefreshing];
+        
+    } else {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        __block ContentModel *tempModel = self.contentsArray[indexPath.row];
+        ContentDetailViewController *detailViewController = [[UIStoryboard storyboardWithName:@"AddUser" bundle:nil] instantiateViewControllerWithIdentifier:@"ContentDetail"];
+        detailViewController.viewType = self.viewType;
+        detailViewController.contentModel = tempModel;
+        detailViewController.collectBlock = ^(ContentModel *model) {
+            [self.contentsArray replaceObjectAtIndex:indexPath.row withObject:model];
+            if (_selectedDiseaseIndexPath.row == 0) {
+                if (model.isCollected.integerValue == 0) {
+                    [self.contentsArray removeObject:model];
+                } else {
+                    [self.tableView.mj_header beginRefreshing];
+                }
+                GJCFAsyncMainQueue(^{
+                    [self.tableView reloadData];
+                });
+            }
+        };
+        DetailNavigationController *navigationController = [[DetailNavigationController alloc] initWithRootViewController:detailViewController];
+        navigationController.contentModel = tempModel;
+        [self presentViewController:navigationController animated:YES completion:nil];
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

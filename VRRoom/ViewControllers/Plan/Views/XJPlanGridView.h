@@ -10,6 +10,6 @@
 
 @interface XJPlanGridView : UIView
 
-- (void)setupContents:(NSInteger)times scenes:(NSInteger)scenesNumber contents:(NSArray *)contentsArray;
+- (void)setupContents:(NSInteger)times scenes:(NSInteger)scenesNumber contents:(NSArray *)contentsArray canEdit:(BOOL)canEdit;
 
 @end
