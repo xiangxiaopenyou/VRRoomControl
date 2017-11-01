@@ -130,16 +130,13 @@
 		3DCC8A9E1FA85A730099F296 /* XJCollectOparetionRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCC8A9D1FA85A730099F296 /* XJCollectOparetionRequest.m */; };
 		3DCD390B1F4C2AE6003EEC87 /* XJNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCD390A1F4C2AE6003EEC87 /* XJNewsCell.m */; };
 		3DCD390E1F4D1E63003EEC87 /* Plan.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DCD390D1F4D1E63003EEC87 /* Plan.storyboard */; };
-		3DCD39141F4D20DC003EEC87 /* XJMyPlansViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCD39131F4D20DC003EEC87 /* XJMyPlansViewController.m */; };
 		3DCD391B1F4D510B003EEC87 /* XJNewsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCD391A1F4D510B003EEC87 /* XJNewsModel.m */; };
 		3DCD391F1F4D5464003EEC87 /* XJFetchNewsListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCD391E1F4D5464003EEC87 /* XJFetchNewsListRequest.m */; };
 		3DCD39231F4D5F7F003EEC87 /* XJPlanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCD39221F4D5F7F003EEC87 /* XJPlanCell.m */; };
-		3DCD39261F4D606F003EEC87 /* XJAddPlanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCD39251F4D606F003EEC87 /* XJAddPlanViewController.m */; };
 		3DCD39461F4FF1B2003EEC87 /* XJFetchMyPlansRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCD39451F4FF1B2003EEC87 /* XJFetchMyPlansRequest.m */; };
 		3DCD394D1F4FF24F003EEC87 /* XJPlanModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCD394C1F4FF24F003EEC87 /* XJPlanModel.m */; };
 		3DCD39501F4FF29E003EEC87 /* XJAddPlanRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCD394F1F4FF29E003EEC87 /* XJAddPlanRequest.m */; };
 		3DCD39531F4FF68D003EEC87 /* XJAddContentItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCD39521F4FF68D003EEC87 /* XJAddContentItemCell.m */; };
-		3DCD39591F51490C003EEC87 /* XJPlanDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCD39581F51490C003EEC87 /* XJPlanDetailViewController.m */; };
 		3DCD395C1F5162EA003EEC87 /* XJEditPlanRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCD395B1F5162EA003EEC87 /* XJEditPlanRequest.m */; };
 		3DE07E211F300FDB004B703D /* XJAddContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE07E201F300FDB004B703D /* XJAddContentCell.m */; };
 		3DE4E48E1F346C3000EADEDC /* More.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DE4E48D1F346C3000EADEDC /* More.storyboard */; };
@@ -430,16 +427,12 @@
 		3DCD39091F4C2AE6003EEC87 /* XJNewsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XJNewsCell.h; sourceTree = "<group>"; };
 		3DCD390A1F4C2AE6003EEC87 /* XJNewsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XJNewsCell.m; sourceTree = "<group>"; };
 		3DCD390D1F4D1E63003EEC87 /* Plan.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Plan.storyboard; sourceTree = "<group>"; };
-		3DCD39121F4D20DC003EEC87 /* XJMyPlansViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XJMyPlansViewController.h; sourceTree = "<group>"; };
-		3DCD39131F4D20DC003EEC87 /* XJMyPlansViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XJMyPlansViewController.m; sourceTree = "<group>"; };
 		3DCD39191F4D510B003EEC87 /* XJNewsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XJNewsModel.h; sourceTree = "<group>"; };
 		3DCD391A1F4D510B003EEC87 /* XJNewsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XJNewsModel.m; sourceTree = "<group>"; };
 		3DCD391D1F4D5464003EEC87 /* XJFetchNewsListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XJFetchNewsListRequest.h; sourceTree = "<group>"; };
 		3DCD391E1F4D5464003EEC87 /* XJFetchNewsListRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XJFetchNewsListRequest.m; sourceTree = "<group>"; };
 		3DCD39211F4D5F7F003EEC87 /* XJPlanCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XJPlanCell.h; sourceTree = "<group>"; };
 		3DCD39221F4D5F7F003EEC87 /* XJPlanCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XJPlanCell.m; sourceTree = "<group>"; };
-		3DCD39241F4D606F003EEC87 /* XJAddPlanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XJAddPlanViewController.h; sourceTree = "<group>"; };
-		3DCD39251F4D606F003EEC87 /* XJAddPlanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XJAddPlanViewController.m; sourceTree = "<group>"; };
 		3DCD39441F4FF1B2003EEC87 /* XJFetchMyPlansRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XJFetchMyPlansRequest.h; sourceTree = "<group>"; };
 		3DCD39451F4FF1B2003EEC87 /* XJFetchMyPlansRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XJFetchMyPlansRequest.m; sourceTree = "<group>"; };
 		3DCD394B1F4FF24F003EEC87 /* XJPlanModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XJPlanModel.h; sourceTree = "<group>"; };
@@ -448,8 +441,6 @@
 		3DCD394F1F4FF29E003EEC87 /* XJAddPlanRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XJAddPlanRequest.m; sourceTree = "<group>"; };
 		3DCD39511F4FF68D003EEC87 /* XJAddContentItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XJAddContentItemCell.h; sourceTree = "<group>"; };
 		3DCD39521F4FF68D003EEC87 /* XJAddContentItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XJAddContentItemCell.m; sourceTree = "<group>"; };
-		3DCD39571F51490C003EEC87 /* XJPlanDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XJPlanDetailViewController.h; sourceTree = "<group>"; };
-		3DCD39581F51490C003EEC87 /* XJPlanDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XJPlanDetailViewController.m; sourceTree = "<group>"; };
 		3DCD395A1F5162EA003EEC87 /* XJEditPlanRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XJEditPlanRequest.h; sourceTree = "<group>"; };
 		3DCD395B1F5162EA003EEC87 /* XJEditPlanRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XJEditPlanRequest.m; sourceTree = "<group>"; };
 		3DE07E1F1F300FDB004B703D /* XJAddContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XJAddContentCell.h; sourceTree = "<group>"; };
@@ -1029,12 +1020,6 @@
 			children = (
 				3DCD39201F4D5F31003EEC87 /* Views */,
 				3DCD390D1F4D1E63003EEC87 /* Plan.storyboard */,
-				3DCD39121F4D20DC003EEC87 /* XJMyPlansViewController.h */,
-				3DCD39131F4D20DC003EEC87 /* XJMyPlansViewController.m */,
-				3DCD39241F4D606F003EEC87 /* XJAddPlanViewController.h */,
-				3DCD39251F4D606F003EEC87 /* XJAddPlanViewController.m */,
-				3DCD39571F51490C003EEC87 /* XJPlanDetailViewController.h */,
-				3DCD39581F51490C003EEC87 /* XJPlanDetailViewController.m */,
 				3D0DD22D1F90B36D006D20A6 /* XJPlansListViewController.h */,
 				3D0DD22E1F90B36D006D20A6 /* XJPlansListViewController.m */,
 				3D7AC6011F9729FB001FD85D /* XJPlanInformationsViewController.h */,
@@ -1465,7 +1450,6 @@
 				3DA56F041F452DF9002D29E8 /* SelectCityView.m in Sources */,
 				3D1572C51F540A4200656D44 /* XJBaseInformationCell.m in Sources */,
 				3DC6D6CA1F2052B000441171 /* PrescriptionDetailViewController.m in Sources */,
-				3DCD39141F4D20DC003EEC87 /* XJMyPlansViewController.m in Sources */,
 				3DFB2CE41F1EEFC500C2CE26 /* PrescriptionContentModel.m in Sources */,
 				3DA56F211F455F5F002D29E8 /* AuthenticationPicturesViewController.m in Sources */,
 				3DFB2CE51F1EEFC500C2CE26 /* PrescriptionModel.m in Sources */,
@@ -1482,7 +1466,6 @@
 				3D7C418E1F14A1E00072083C /* DepartmentSelectCell.m in Sources */,
 				3D28EC831F1C8F7E00FAA61F /* XJDataBase.m in Sources */,
 				3D7AC6001F972751001FD85D /* XJPlanItemCell.m in Sources */,
-				3DCD39261F4D606F003EEC87 /* XJAddPlanViewController.m in Sources */,
 				3DFB2CC01F1EEED100C2CE26 /* LoginRequest.m in Sources */,
 				3D4FC1D11EA0629C00E9CE5E /* AppDelegate.m in Sources */,
 				3DCD39531F4FF68D003EEC87 /* XJAddContentItemCell.m in Sources */,
@@ -1508,7 +1491,6 @@
 				3DC6D6D31F20537F00441171 /* DetailContentItemCell.m in Sources */,
 				3DCD391B1F4D510B003EEC87 /* XJNewsModel.m in Sources */,
 				3D22B4701F10B47800C9D459 /* ChangePasswordTableViewController.m in Sources */,
-				3DCD39591F51490C003EEC87 /* XJPlanDetailViewController.m in Sources */,
 				3DA56ED41F442F1D002D29E8 /* FetchVerificationCodeRequest.m in Sources */,
 				3D35733A1F7257AD00246C9F /* XJEndPrescriptionRequest.m in Sources */,
 				3D7C41941F14A2170072083C /* TherapyCollectionCell.m in Sources */,

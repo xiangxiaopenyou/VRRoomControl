@@ -9,7 +9,6 @@
 #import "SceneContentsViewController.h"
 #import "SceneContentsListViewController.h"
 #import "AdviceWebViewController.h"
-#import "XJMyPlansViewController.h"
 
 #import "DepartmentSelectCell.h"
 #import "TherapyItemCell.h"
@@ -242,16 +241,7 @@
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (self.seletedDepartmentIndexPath.row == 0 && indexPath.row == 1) {
-        XJMyPlansViewController *planController = [[UIStoryboard storyboardWithName:@"Plan" bundle:nil] instantiateViewControllerWithIdentifier:@"MyPlans"];
-        planController.viewType = self.viewType;
-        planController.selectedContentsArray = [self.selectedArray mutableCopy];
-        planController.block = ^(NSArray *array) {
-            self.selectedArray = [array copy];
-            if (self.pickBlock) {
-                self.pickBlock(self.selectedArray);
-            }
-        };
-        [self.navigationController pushViewController:planController animated:YES];
+        
     } else {
         SceneContentsListViewController *listViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SceneContentsList"];
         if (self.seletedDepartmentIndexPath.row > 1) {
