@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+typedef void (^CollectBlock)(BOOL isCollected);
+
 @class XJPlanModel;
 @interface XJPlanInformationsViewController : UIViewController
+@property (assign, nonatomic) BOOL isView;
 @property (strong, nonatomic) XJPlanModel *planModel;
+@property (copy, nonatomic) NSString *patientId;
+@property (copy, nonatomic) CollectBlock block;
 
 @end

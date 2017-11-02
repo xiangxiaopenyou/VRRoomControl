@@ -15,6 +15,6 @@
 
 @property (copy, nonatomic) void (^selectBlock)(BOOL isSelected);
 
-- (void)setupContents:(XJPlanModel *)model isView:(NSInteger)isView;
+- (void)setupContents:(XJPlanModel *)model isView:(BOOL)isView;
 
 @end

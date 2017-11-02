@@ -161,7 +161,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="患者详情" id="wrJ-J7-nFW">
-                        <barButtonItem key="rightBarButtonItem" title="开处方" id="mkw-3r-QG0">
+                        <barButtonItem key="rightBarButtonItem" title="发送方案" id="mkw-3r-QG0">
                             <connections>
                                 <action selector="addPrescriptionAction:" destination="WDY-4t-IAq" id="VtP-Dy-5HO"/>
                             </connections>
@@ -528,7 +528,7 @@
             </objects>
             <point key="canvasLocation" x="1855" y="564"/>
         </scene>
-        <!--历史处方-->
+        <!--历史方案-->
         <scene sceneID="YRe-Js-Nm6">
             <objects>
                 <viewController storyboardIdentifier="HistoricalPrescriptions" automaticallyAdjustsScrollViewInsets="NO" id="E4x-fa-3tn" customClass="XJHistoricalPrescriptionsViewController" sceneMemberID="viewController">
@@ -632,7 +632,7 @@
                             <constraint firstItem="a4R-Ee-eK1" firstAttribute="leading" secondItem="Yjd-TY-aIu" secondAttribute="leading" id="sav-4H-Rnd"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="历史处方" id="Mha-hF-qMX"/>
+                    <navigationItem key="navigationItem" title="历史方案" id="Mha-hF-qMX"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="tableView" destination="a4R-Ee-eK1" id="weA-Dy-LHR"/>

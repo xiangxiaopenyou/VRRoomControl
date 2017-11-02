@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@protocol XJPlanGridViewDelegate <NSObject>
+- (void)gridViewDidClickCell:(NSInteger)index;
+@end
 @interface XJPlanGridView : UIView
-
+@property (weak, nonatomic) id<XJPlanGridViewDelegate> delegate;
 - (void)setupContents:(NSInteger)times scenes:(NSInteger)scenesNumber contents:(NSArray *)contentsArray canEdit:(BOOL)canEdit;
 
 @end

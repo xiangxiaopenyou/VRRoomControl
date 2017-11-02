@@ -39,12 +39,11 @@
         }
     } else {
         [self.operationButton setImage:[UIImage imageNamed:@"content_select"] forState:UIControlStateNormal];
-        [self.operationButton setImage:[UIImage imageNamed:@"content_isselect"] forState:UIControlStateSelected];
-        if ([model.isAdded integerValue] == 0) {
-            self.operationButton.selected = NO;
-        } else {
-            self.operationButton.selected = YES;
-        }
+//        if ([model.isAdded integerValue] == 0) {
+//            self.operationButton.selected = NO;
+//        } else {
+//            self.operationButton.selected = YES;
+//        }
     }
     [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:model.coverPic] placeholderImage:[UIImage imageNamed:@"default_image"]];
     self.contentNameLabel.text = [NSString stringWithFormat:@"%@", model.name];
@@ -58,17 +57,24 @@
     self.priceLabel.text = [NSString stringWithFormat:@"￥%.2f", [model.price floatValue]];
 }
 - (IBAction)operationAction:(id)sender {
-    if (self.operationButton.selected) {
-        self.operationButton.selected = NO;
-        if (self.block) {
-            self.block(NO);
+    if (_viewType == 1) {
+        if (self.operationButton.selected) {
+            self.operationButton.selected = NO;
+            if (self.block) {
+                self.block(NO);
+            }
+        } else {
+            self.operationButton.selected = YES;
+            if (self.block) {
+                self.block(YES);
+            }
         }
     } else {
-        self.operationButton.selected = YES;
         if (self.block) {
             self.block(YES);
         }
     }
+    
 }
 
 @end

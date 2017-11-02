@@ -8,6 +8,7 @@
 
 #import "XJPlansListViewController.h"
 #import "XJPlanInformationsViewController.h"
+#import "XJPlanEditViewController.h"
 
 #import "XJTopDiseasesCell.h"
 #import "XJPlanCell.h"
@@ -224,6 +225,11 @@
                         }
                     }];
                 }
+            } else {
+                XJPlanEditViewController *editController = [self.storyboard instantiateViewControllerWithIdentifier:@"PlanEdit"];
+                editController.planModel = model;
+                editController.patientId = self.patientId;
+                [self.navigationController pushViewController:editController animated:YES];
             }
         };
         
@@ -247,6 +253,22 @@
         XJPlanInformationsViewController *informationsController = [self.storyboard instantiateViewControllerWithIdentifier:@"PlanInformations"];
         XJPlanModel *model = self.plansArray[indexPath.row];
         informationsController.planModel = model;
+        informationsController.isView = self.isView;
+        informationsController.patientId = self.patientId;
+        informationsController.block = ^(BOOL isCollected) {
+            if (isCollected) {
+                model.isCollected = @1;
+            } else{
+                model.isCollected = @0;
+            }
+            GJCFAsyncMainQueue(^{
+                if (_selectedPlanIndexPath.row == 0) {
+                    [self.contentTableView.mj_header beginRefreshing];
+                } else {
+                    [self.contentTableView reloadData];
+                }
+            });
+        };
         [self.navigationController pushViewController:informationsController animated:YES];
     }
     

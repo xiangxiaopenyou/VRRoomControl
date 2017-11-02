@@ -10,5 +10,6 @@
 
 @interface XJPlansListViewController : UIViewController
 @property (assign, nonatomic) BOOL isView;
+@property (copy, nonatomic) NSString *patientId;
 
 @end

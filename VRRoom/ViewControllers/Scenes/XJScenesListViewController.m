@@ -423,6 +423,19 @@
                         }];
                     }
                 }
+            } else {
+                ContentModel *tempModel = [[ContentModel alloc] init];
+                if (tableView == self.tableView) {
+                    tempModel = self.contentsArray[indexPath.row];
+                } else {
+                    tempModel = self.searchResultArray[indexPath.row];
+                }
+                if (self.chooseSceneBlock) {
+                    self.chooseSceneBlock(tempModel);
+                }
+                GJCFAsyncMainQueue(^{
+                    [self.navigationController popViewControllerAnimated:YES];
+                });
             }
         };
         return cell;
@@ -446,8 +459,8 @@
                 if (self.contentsArray.count > 0) {
                     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
                 }
-                [self.tableView.mj_header beginRefreshing];
             }
+            [self.tableView.mj_header beginRefreshing];
             
         }
     } else if (tableView == self.therapyTableView) {

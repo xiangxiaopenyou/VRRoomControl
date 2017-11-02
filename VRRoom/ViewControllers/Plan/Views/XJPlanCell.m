@@ -8,15 +8,21 @@
 
 #import "XJPlanCell.h"
 #import "XJPlanModel.h"
+@interface XJPlanCell ()
+@property (assign, nonatomic) BOOL isView;
+@end
 
 @implementation XJPlanCell
 - (IBAction)selectAction:(id)sender {
-    self.selectButton.selected = !self.selectButton.selected;
+    if (_isView) {
+        self.selectButton.selected = !self.selectButton.selected;
+    }
     if (self.selectBlock) {
         self.selectBlock(self.selectButton.selected);
     }
 }
-- (void)setupContents:(XJPlanModel *)model isView:(NSInteger)isView {
+- (void)setupContents:(XJPlanModel *)model isView:(BOOL)isView {
+    _isView = isView;
     if (isView) {
         [self.selectButton setImage:[UIImage imageNamed:@"content_collect"] forState:UIControlStateNormal];
         [self.selectButton setImage:[UIImage imageNamed:@"content_collected"] forState:UIControlStateSelected];

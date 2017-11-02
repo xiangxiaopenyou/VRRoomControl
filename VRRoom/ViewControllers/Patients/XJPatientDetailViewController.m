@@ -8,7 +8,6 @@
 
 #import "XJPatientDetailViewController.h"
 #import "XJModifyInformationsViewController.h"
-//#import "WritePrescriptionViewController.h"
 #import "XJAddPatientViewController.h"
 #import "XJHistoricalPrescriptionsViewController.h"
 #import "XJPlansListViewController.h"
@@ -57,10 +56,9 @@
 
 #pragma mark - Action
 - (IBAction)addPrescriptionAction:(id)sender {
-//    WritePrescriptionViewController *writePrescriptionController = [[UIStoryboard storyboardWithName:@"AddUser" bundle:nil] instantiateViewControllerWithIdentifier:@"WritePrescription"];
-//    writePrescriptionController.patientId = self.patientId;
-//    [self.navigationController pushViewController:writePrescriptionController animated:YES];
     XJPlansListViewController *planListController = [[UIStoryboard storyboardWithName:@"Plan" bundle:nil] instantiateViewControllerWithIdentifier:@"PlansList"];
+    planListController.isView = NO;
+    planListController.patientId = self.patientId;
     [self.navigationController pushViewController:planListController animated:YES];
 }
 #pragma mark - Request
@@ -296,7 +294,7 @@
 #pragma mark - Getters
 - (NSArray *)titlesArray {
     if (!_titlesArray) {
-        _titlesArray = @[@"姓　　名", @"性　　别", /*@"出生日期",*/ @"年　　龄", @"手　　机", @"备　　注", @"医　　院", @"病历号", @"病　　症", @"文化程度", @"婚姻状况", @"历史处方"];
+        _titlesArray = @[@"姓　　名", @"性　　别", /*@"出生日期",*/ @"年　　龄", @"手　　机", @"备　　注", @"医　　院", @"病历号", @"病　　症", @"文化程度", @"婚姻状况", @"历史方案"];
     }
     return _titlesArray;
 }

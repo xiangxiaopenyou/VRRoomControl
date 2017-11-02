@@ -7,6 +7,8 @@
 //
 
 #import "XJPlanGridView.h"
+#import "ContentModel.h"
+
 @interface XJPlanGridView ()<UITableViewDataSource, UITableViewDelegate>
 @property (assign, nonatomic) NSInteger times;
 @property (assign, nonatomic) NSInteger scenesNumber;
@@ -58,7 +60,7 @@
 
 #pragma mark - Table view data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _times + 1;
+    return _times;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 60.f;
@@ -75,28 +77,33 @@
     label.font = XJSystemFont(12);
     label.textAlignment = NSTextAlignmentCenter;
     label.numberOfLines = 0;
-    label.lineBreakMode = NSLineBreakByCharWrapping;
+    label.lineBreakMode = NSLineBreakByTruncatingTail;
     label.textColor = [UIColor blackColor];
     [cell.contentView addSubview:label];
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_offset(UIEdgeInsetsMake(5, 5, 5, 5));
     }];
     if (tableView.tag == 0) {
-        if (indexPath.row == 0) {
-            label.text = @"次数";
-        } else {
-            label.text = [NSString stringWithFormat:@"%@", @(indexPath.row)];
-        }
+        label.text = [NSString stringWithFormat:@"%@", @(indexPath.row + 1)];
     } else {
-        if (indexPath.row == 0) {
-            label.text = nil;
-        } else {
-            NSInteger index = (indexPath.row - 1) * _scenesNumber + tableView.tag - 1;
-            NSString *textString = [NSString stringWithFormat:@"%@", _contentsArray[index]];
-            label.text = textString;
-        }
+        NSInteger index =  indexPath.row * _scenesNumber + tableView.tag - 1;
+//        NSDictionary *tempDictionary = _contentsArray[index];
+        ContentModel *tempModel = _contentsArray[index];
+        NSString *textString = [NSString stringWithFormat:@"%@", tempModel.name];
+        label.text = textString;
     }
     return cell;
+}
+
+#pragma mark - Table view delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (_canEdit) {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        NSInteger index =  indexPath.row * _scenesNumber + tableView.tag - 1;
+        if (self.delegate && [self.delegate respondsToSelector:@selector(gridViewDidClickCell:)]) {
+            [self.delegate gridViewDidClickCell:index];
+        }
+    }
 }
 
 /*

@@ -7,13 +7,18 @@
 //
 
 #import "XJPlanInformationsViewController.h"
+#import "XJPlanEditViewController.h"
 #import "XJPlanItemCell.h"
 #import "XJPlanGridView.h"
 
 #import "XJPlanModel.h"
 
+#import <UIImage+ImageWithColor.h>
+
 @interface XJPlanInformationsViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIButton *chooseButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightOfChooseButton;
 @property (strong, nonatomic) XJPlanGridView *gridView;
 
 @end
@@ -24,11 +29,65 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = self.planModel.name;
+    [self createRightBarItem];
+    [self.chooseButton setBackgroundImage:[UIImage imageWithColor:NAVIGATIONBAR_COLOR] forState:UIControlStateNormal];
+    [self.chooseButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithWhite:0.9 alpha:1]] forState:UIControlStateHighlighted];
+    if (self.isView) {
+        self.heightOfChooseButton.constant = 0;
+    } else {
+        self.heightOfChooseButton.constant = 45.f;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Private method
+- (void)createRightBarItem {
+    UIButton *collectButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    collectButton.frame = CGRectMake(0, 0, 40, 40);
+    [collectButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    [collectButton setImage:[UIImage imageNamed:@""] forState:UIControlStateSelected];
+    [collectButton addTarget:self action:@selector(collectAction:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:collectButton];
+    self.navigationItem.rightBarButtonItem = rightItem;
+    collectButton.selected = self.planModel.isCollected.integerValue == 0 ? NO : YES;
+}
+
+#pragma mark - Action
+- (void)collectAction:(UIButton *)button {
+    XLShowHUDWithMessage(nil, self.view);
+    if (self.planModel.isCollected.integerValue == 0) {
+        [XJPlanModel collectPlan:self.planModel.id handler:^(id object, NSString *msg) {
+            if (object) {
+                XLDismissHUD(self.view, YES, YES, @"收藏成功");
+                if (self.block) {
+                    self.block(YES);
+                }
+            } else {
+                XLDismissHUD(self.view, YES, NO, msg);
+            }
+        }];
+    } else {
+        [XJPlanModel cancelCollectPlan:self.planModel.id handler:^(id object, NSString *msg) {
+            if (object) {
+                XLDismissHUD(self.view, YES, YES, @"取消收藏成功");
+                if (self.block) {
+                    self.block(NO);
+                }
+            } else {
+                XLDismissHUD(self.view, YES, NO, msg);
+            }
+        }];
+    }
+}
+- (IBAction)chooseAction:(id)sender {
+    XJPlanEditViewController *editController = [self.storyboard instantiateViewControllerWithIdentifier:@"PlanEdit"];
+    editController.planModel = self.planModel;
+    editController.patientId = self.patientId;
+    [self.navigationController pushViewController:editController animated:YES];
 }
 
 #pragma mark - Table view data source

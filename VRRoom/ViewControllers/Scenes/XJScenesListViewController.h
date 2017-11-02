@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class ContentModel;
 
 @interface XJScenesListViewController : UIViewController
 @property (assign, nonatomic) NSInteger viewType;
+@property (copy, nonatomic) void (^chooseSceneBlock)(ContentModel *model);
 
 @end
