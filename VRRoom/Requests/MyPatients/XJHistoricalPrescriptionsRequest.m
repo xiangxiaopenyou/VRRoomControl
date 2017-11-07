@@ -15,7 +15,7 @@
     }
     [self.params setObject:self.patientId forKey:@"patientId"];
     [self.params setObject:self.paging forKey:@"paging"];
-    [[RequestManager sharedInstance] POST:@"historicalPrescriptions" parameters:self.params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [[RequestManager sharedInstance] POST:@"patientPlanPage" parameters:self.params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject[@"success"] boolValue]) {
             !resultHandler ?: resultHandler(responseObject[@"data"], nil);
         } else {

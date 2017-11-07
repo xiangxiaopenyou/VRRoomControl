@@ -7,13 +7,15 @@
 //
 
 #import "XJHistoricalPrescriptionsViewController.h"
-#import "PrescriptionDetailViewController.h"
-#import "PrescriptionCell.h"
+#import "XJPlanInformationsViewController.h"
+//#import "PrescriptionCell.h"
+#import "XJHistoricalPlanCell.h"
 #import "XLAlertControllerObject.h"
 
 #import "PrescriptionModel.h"
 #import "PatientModel.h"
 #import "UserModel.h"
+#import "XJPlanModel.h"
 
 #import <MJRefresh.h>
 
@@ -29,6 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.tableView.tableFooterView = [UIView new];
     [self.tableView setMj_header:[MJRefreshNormalHeader headerWithRefreshingBlock:^{
         _paging = 1;
         [self prescriptionsListRequest];
@@ -91,76 +94,31 @@
 
 #pragma mark - Table view data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataArray.count * 2;
+    return self.dataArray.count;
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return indexPath.row % 2 == 0 ? 10.f : 100.f;
+    return 88.f;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row % 2 == 0) {
-        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SeparatorCell"];
-        cell.backgroundColor = [UIColor clearColor];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        return cell;
-    }
-    static NSString *identifier = @"PrescriptionCell";
-    PrescriptionCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
-    PrescriptionModel *model = self.dataArray[indexPath.row / 2];
-    cell.doctorLabel.text = [NSString stringWithFormat:@"患者：%@", self.patientModel.name ? self.patientModel.name : @""];
-    cell.typeLabel.text = [model.payStatus integerValue] == 4 ? @"类型：院内" : @"类型：线上";
-    cell.diseaseLabel.text = [NSString stringWithFormat:@"病症：%@", model.disease ? model.disease : @""];
-    cell.dateLabel.text = [NSString stringWithFormat:@"日期：%@", model.createdAt ? model.createdAt : @""];
-    cell.endButton.hidden = NO;
-    NSString *stateString = @" ";
-    switch ([model.status integerValue]) {
-        case 1:
-            stateString = @"未开始";
-            break;
-        case 2:
-            stateString = @"进行中";
-            break;
-        case 3:
-            stateString = @"已完成";
-            break;
-        case 4:
-            stateString = @"线下支付";
-            break;
-        case 9: {
-            stateString = @"已中止";
-            cell.endButton.hidden = YES;
-        }
-            break;
-        default:
-            break;
-    }
-    cell.stateLabel.text = stateString;
-    cell.block = ^{
-        [XLAlertControllerObject showWithTitle:@"提示" message:@"确定要中止该处方吗？" cancelTitle:@"取消" ensureTitle:@"中止" ensureBlock:^{
-            XLShowHUDWithMessage(@"正在中止", XJKeyWindow);
-            [UserModel endPrescription:model.id handler:^(id object, NSString *msg) {
-                if (object) {
-                    XLDismissHUD(XJKeyWindow, YES, YES, @"已中止");
-                    model.status = @9;
-                    GJCFAsyncMainQueue(^{
-                        [self.tableView reloadData];
-                    });
-                } else {
-                    XLDismissHUD(XJKeyWindow, YES, NO, msg);
-                }
-            }];
-        }];
-    };
+    static NSString *identifier = @"HistoricalPlanCell";
+    XJHistoricalPlanCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+    XJPlanModel *model = self.dataArray[indexPath.row];
+    cell.nameLabel.text = [NSString stringWithFormat:@"%@", model.name];
+    cell.diseaseLabel.text = [NSString stringWithFormat:@"%@", model.diseaseName];
+    cell.timeLabel.text = [NSString stringWithFormat:@"%@", [model.createdAt substringToIndex:16]];
     return cell;
 }
 
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    PrescriptionModel *model = self.dataArray[indexPath.row / 2];
-    PrescriptionDetailViewController *contentsViewController = [[UIStoryboard storyboardWithName:@"Patients" bundle:nil]  instantiateViewControllerWithIdentifier:@"PrescriptionDetail"];
-    contentsViewController.prescriptionId = model.id;
-    [self.navigationController pushViewController:contentsViewController animated:YES];
+    XJPlanModel *model = self.dataArray[indexPath.row];
+    XJPlanInformationsViewController *informationsController = [[UIStoryboard storyboardWithName:@"Plan" bundle:nil] instantiateViewControllerWithIdentifier:@"PlanInformations"];
+    informationsController.isView = YES;
+    informationsController.isPatientsPlan = YES;
+    informationsController.planModel = model;
+    [self.navigationController pushViewController:informationsController animated:YES];
 }
 
 #pragma mark - Getters

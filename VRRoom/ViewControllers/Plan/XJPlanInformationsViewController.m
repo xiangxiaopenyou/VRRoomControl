@@ -46,14 +46,31 @@
 
 #pragma mark - Private method
 - (void)createRightBarItem {
-    UIButton *collectButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    collectButton.frame = CGRectMake(0, 0, 40, 40);
-    [collectButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-    [collectButton setImage:[UIImage imageNamed:@""] forState:UIControlStateSelected];
-    [collectButton addTarget:self action:@selector(collectAction:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:collectButton];
-    self.navigationItem.rightBarButtonItem = rightItem;
-    collectButton.selected = self.planModel.isCollected.integerValue == 0 ? NO : YES;
+    if (!self.isPatientsPlan) {
+        //收藏按钮
+        UIButton *collectButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        collectButton.frame = CGRectMake(0, 0, 40, 40);
+        [collectButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+        [collectButton setImage:[UIImage imageNamed:@""] forState:UIControlStateSelected];
+        [collectButton addTarget:self action:@selector(collectAction:) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:collectButton];
+        self.navigationItem.rightBarButtonItem = rightItem;
+        collectButton.selected = self.planModel.isCollected.integerValue == 0 ? NO : YES;
+    } else {
+        //方案发送时间
+        UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
+        headView.backgroundColor = [UIColor clearColor];
+        UILabel *timeLabel = [[UILabel alloc] init];
+        timeLabel.font = XJSystemFont(12);
+        timeLabel.textColor = NAVIGATIONBAR_COLOR;
+        timeLabel.text = [NSString stringWithFormat:@"%@", [self.planModel.createdAt substringToIndex:16]];
+        [headView addSubview:timeLabel];
+        [timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.trailing.equalTo(headView.mas_trailing).with.mas_offset(- 15);
+            make.centerY.equalTo(headView);
+        }];
+        self.tableView.tableHeaderView = headView;
+    }
 }
 
 #pragma mark - Action
@@ -165,7 +182,11 @@
 }
 #pragma mark - Table view delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 20.f;
+    if (self.isPatientsPlan && section == 0) {
+        return 0;
+    } else {
+        return 20.f;
+    }
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *headerView = [UIView new];

@@ -19,6 +19,7 @@
 @property (strong, nonatomic) NSNumber *times;
 @property (strong, nonatomic) NSNumber *scenes;
 @property (strong, nonatomic) NSNumber *isCollected;
+@property (copy, nonatomic) NSString *createdAt;
 
 + (void)plansList:(NSString *)diseaseId paging:(NSNumber *)paging handler:(RequestResultHandler)handler;
 + (void)collectedPlansList:(NSNumber *)paging handler:(RequestResultHandler)handler;

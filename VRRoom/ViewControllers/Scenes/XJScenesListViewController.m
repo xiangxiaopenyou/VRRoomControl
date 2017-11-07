@@ -9,6 +9,7 @@
 #import "XJScenesListViewController.h"
 #import "ContentDetailViewController.h"
 #import "DetailNavigationController.h"
+#import "AdviceWebViewController.h"
 
 #import "XJSearchTitleView.h"
 #import "XJTopTherapyCell.h"
@@ -27,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraintOfTherapy;
 @property (weak, nonatomic) IBOutlet UITableView *searchTableView;
+@property (weak, nonatomic) IBOutlet UIButton *helpButton;
 
 @property (strong, nonatomic) UITableView *diseaseTableView;
 @property (strong, nonatomic) UITableView *therapyTableView;
@@ -83,7 +85,7 @@
             [self fetchContents];
         }
     }]];
-    self.tableView.mj_footer.automaticallyHidden = YES;
+    self.tableView.mj_footer.hidden = YES;
     
     //搜索列表
     self.searchTableView.tableFooterView = [UIView new];
@@ -106,6 +108,17 @@
     } else {
         [self.navigationController popViewControllerAnimated:YES];
     }
+}
+- (IBAction)helpAction:(id)sender {
+    AdviceWebViewController *adviceController = [self.storyboard instantiateViewControllerWithIdentifier:@"AdviceWeb"];
+    if (self.selectedDiseaseIndexPath.row == 1) {
+        adviceController.adviceType = XJAdviceTypeAll;
+    } else {
+        DiseaseModel *tempModel = self.diseasesArray[self.selectedDiseaseIndexPath.row - 1];
+        adviceController.adviceType = XJAdviceTypeDisease;
+        adviceController.resultId = tempModel.diseaseId;
+    }
+    [self.navigationController pushViewController:adviceController animated:YES];
 }
 
 #pragma mark - PrivateMethods
@@ -377,7 +390,7 @@
                         ContentModel *tempModel = self.contentsArray[indexPath.row];
                         [ContentModel collectContent:tempModel.id handler:^(id object, NSString *msg) {
                             if (object) {
-                                tempModel.isCollected = @(1);
+                                tempModel.isCollected = @1;
                                 XLDismissHUD(self.view, YES, YES, @"收藏成功");
                             } else {
                                 XLDismissHUD(self.view, YES, NO, @"收藏失败");
@@ -387,8 +400,23 @@
                         ContentModel *tempModel = self.searchResultArray[indexPath.row];
                         [ContentModel collectContent:tempModel.id handler:^(id object, NSString *msg) {
                             if (object) {
-                                tempModel.isCollected = @(1);
+                                tempModel.isCollected = @1;
                                 XLDismissHUD(self.view, YES, YES, @"收藏成功");
+                                if (_selectedDiseaseIndexPath.row == 0) {
+                                    //如果是收藏，则刷新收藏列表
+                                    [self.tableView.mj_header beginRefreshing];
+                                } else {
+                                    //如果是其他，则手动处理
+                                    if (self.contentsArray.count > 0) {
+                                        [self.contentsArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                                            ContentModel *contentModel = (ContentModel *)obj;
+                                            if ([contentModel.id isEqualToString:tempModel.id]) {
+                                                contentModel.isCollected = @1;
+                                                [self.tableView reloadData];
+                                            }
+                                        }];
+                                    }
+                                }
                             } else {
                                 XLDismissHUD(self.view, YES, NO, @"收藏失败");
                             }
@@ -399,7 +427,7 @@
                         ContentModel *tempModel = self.contentsArray[indexPath.row];
                         [ContentModel cancelCollectContent:tempModel.id handler:^(id object, NSString *msg) {
                             if (object) {
-                                tempModel.isCollected = @(0);
+                                tempModel.isCollected = @0;
                                 XLDismissHUD(self.view, YES, YES, @"取消收藏成功");
                                 if (_selectedDiseaseIndexPath.row == 0) {
                                     [self.contentsArray removeObjectAtIndex:indexPath.row];
@@ -415,8 +443,23 @@
                         ContentModel *tempModel = self.searchResultArray[indexPath.row];
                         [ContentModel cancelCollectContent:tempModel.id handler:^(id object, NSString *msg) {
                             if (object) {
-                                tempModel.isCollected = @(0);
+                                tempModel.isCollected = @0;
                                 XLDismissHUD(self.view, YES, YES, @"取消收藏成功");
+                                if (_selectedDiseaseIndexPath.row == 0) {
+                                    //如果是收藏，则刷新收藏列表
+                                    [self.tableView.mj_header beginRefreshing];
+                                } else {
+                                    //如果是其他，则手动处理
+                                    if (self.contentsArray.count > 0) {
+                                        [self.contentsArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                                            ContentModel *contentModel = (ContentModel *)obj;
+                                            if ([contentModel.id isEqualToString:tempModel.id]) {
+                                                contentModel.isCollected = @0;
+                                                [self.tableView reloadData];
+                                            }
+                                        }];
+                                    }
+                                }
                             } else {
                                 XLDismissHUD(self.view, YES, NO, @"取消收藏失败");
                             }
@@ -446,6 +489,7 @@
     if (tableView == self.diseaseTableView) {
         if (indexPath != _selectedDiseaseIndexPath) {
             self.heightConstraintOfTherapy.constant = indexPath.row == 0 ? 0 : 45.f;
+            self.helpButton.hidden = indexPath.row == 0 ? YES : NO;
             _selectedDiseaseIndexPath = indexPath;
             _selectedTherapyIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];        //选中的疗法清空
             [self.therapyTableView reloadData];
@@ -474,20 +518,35 @@
         
     } else {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        __block ContentModel *tempModel = self.contentsArray[indexPath.row];
+        
+        __block ContentModel *tempModel  = [[ContentModel alloc] init];
+        if (tableView == self.tableView) {
+            tempModel = self.contentsArray[indexPath.row];
+        } else {
+            tempModel = self.searchResultArray[indexPath.row];
+        }
         ContentDetailViewController *detailViewController = [[UIStoryboard storyboardWithName:@"AddUser" bundle:nil] instantiateViewControllerWithIdentifier:@"ContentDetail"];
         detailViewController.viewType = self.viewType;
         detailViewController.contentModel = tempModel;
         detailViewController.collectBlock = ^(ContentModel *model) {
-            [self.contentsArray replaceObjectAtIndex:indexPath.row withObject:model];
-            if (_selectedDiseaseIndexPath.row == 0) {
-                if (model.isCollected.integerValue == 0) {
-                    [self.contentsArray removeObject:model];
-                } else {
-                    [self.tableView.mj_header beginRefreshing];
+            if (self.viewType == 1) {
+                [self.contentsArray replaceObjectAtIndex:indexPath.row withObject:model];
+                if (_selectedDiseaseIndexPath.row == 0) {
+                    if (model.isCollected.integerValue == 0) {
+                        [self.contentsArray removeObject:model];
+                    } else {
+                        [self.tableView.mj_header beginRefreshing];
+                    }
                 }
                 GJCFAsyncMainQueue(^{
                     [self.tableView reloadData];
+                });
+            } else {
+                if (self.chooseSceneBlock) {
+                    self.chooseSceneBlock(tempModel);
+                }
+                GJCFAsyncMainQueue(^{
+                    [self.navigationController popViewControllerAnimated:YES];
                 });
             }
         };

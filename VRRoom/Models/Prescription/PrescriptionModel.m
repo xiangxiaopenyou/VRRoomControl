@@ -10,6 +10,8 @@
 #import "FetchPrescriptionsRequest.h"
 #import "XJHistoricalPrescriptionsRequest.h"
 #import "PrescriptionDetailRequest.h"
+#import "XJPlanModel.h"
+#import "ContentModel.h"
 
 @implementation PrescriptionModel
 + (NSDictionary<NSString *,id> *)modelCustomPropertyMapper {
@@ -37,7 +39,11 @@
         if (msg) {
             !handler ?: handler(nil, msg);
         } else {
-            NSArray *tempArray = [PrescriptionModel setupWithArray:(NSArray *)object];
+            NSArray *tempArray = [XJPlanModel setupWithArray:(NSArray *)object];
+            [tempArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                XJPlanModel *tempModel = obj;
+                tempModel.contents = [ContentModel setupWithArray:tempModel.contents];
+            }];
             !handler ?: handler(tempArray, nil);
         }
     }];

@@ -88,6 +88,7 @@
 		3D7C41AF1F14CB430072083C /* XJAddPatientRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C41AE1F14CB430072083C /* XJAddPatientRequest.m */; };
 		3D7C41B21F14CC390072083C /* XJDiseasePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C41B11F14CC390072083C /* XJDiseasePickerView.m */; };
 		3D7E8D821FAAF74600408A5C /* XJSendPlanRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7E8D811FAAF74600408A5C /* XJSendPlanRequest.m */; };
+		3D7E8D851FAC1EAC00408A5C /* XJHistoricalPlanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7E8D841FAC1EAC00408A5C /* XJHistoricalPlanCell.m */; };
 		3DA56EB51F43F275002D29E8 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA56EB41F43F275002D29E8 /* RegisterViewController.m */; };
 		3DA56ECE1F43F50C002D29E8 /* RegisterPhoneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA56ECC1F43F50C002D29E8 /* RegisterPhoneCell.m */; };
 		3DA56ED11F442449002D29E8 /* FindPasswordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA56ED01F442449002D29E8 /* FindPasswordTableViewController.m */; };
@@ -345,6 +346,8 @@
 		3D7C41B11F14CC390072083C /* XJDiseasePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XJDiseasePickerView.m; sourceTree = "<group>"; };
 		3D7E8D801FAAF74600408A5C /* XJSendPlanRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XJSendPlanRequest.h; sourceTree = "<group>"; };
 		3D7E8D811FAAF74600408A5C /* XJSendPlanRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XJSendPlanRequest.m; sourceTree = "<group>"; };
+		3D7E8D831FAC1EAC00408A5C /* XJHistoricalPlanCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XJHistoricalPlanCell.h; sourceTree = "<group>"; };
+		3D7E8D841FAC1EAC00408A5C /* XJHistoricalPlanCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XJHistoricalPlanCell.m; sourceTree = "<group>"; };
 		3DA56EB31F43F275002D29E8 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		3DA56EB41F43F275002D29E8 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		3DA56ECB1F43F50C002D29E8 /* RegisterPhoneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterPhoneCell.h; sourceTree = "<group>"; };
@@ -627,6 +630,8 @@
 				3D28EC741F19FA6F00FAA61F /* XJPatientCell.m */,
 				3DFB2CB21F1DACFC00C2CE26 /* XJModifyInformationCell.h */,
 				3DFB2CB31F1DACFC00C2CE26 /* XJModifyInformationCell.m */,
+				3D7E8D831FAC1EAC00408A5C /* XJHistoricalPlanCell.h */,
+				3D7E8D841FAC1EAC00408A5C /* XJHistoricalPlanCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1490,6 +1495,7 @@
 				3D7AC5FA1F94507D001FD85D /* XJScenesListViewController.m in Sources */,
 				3DC6D6D31F20537F00441171 /* DetailContentItemCell.m in Sources */,
 				3DCD391B1F4D510B003EEC87 /* XJNewsModel.m in Sources */,
+				3D7E8D851FAC1EAC00408A5C /* XJHistoricalPlanCell.m in Sources */,
 				3D22B4701F10B47800C9D459 /* ChangePasswordTableViewController.m in Sources */,
 				3DA56ED41F442F1D002D29E8 /* FetchVerificationCodeRequest.m in Sources */,
 				3D35733A1F7257AD00246C9F /* XJEndPrescriptionRequest.m in Sources */,

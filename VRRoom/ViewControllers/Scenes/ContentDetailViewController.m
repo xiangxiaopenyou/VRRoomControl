@@ -143,8 +143,8 @@ static NSString * const XJContentUrl = @"http://support.med-vision.cn/";
         self.collectButton.selected = [self.contentModel.isCollected integerValue] == 0 ? NO : YES;
     } else {
         [self.collectButton setTitle:@"选择" forState:UIControlStateNormal];
-        [self.collectButton setTitle:@"已选择" forState:UIControlStateSelected];
-        self.collectButton.selected = [self.contentModel.isAdded integerValue] == 0 ? NO : YES;
+//        [self.collectButton setTitle:@"已选择" forState:UIControlStateSelected];
+//        self.collectButton.selected = [self.contentModel.isAdded integerValue] == 0 ? NO : YES;
     }
 }
 
@@ -154,7 +154,7 @@ static NSString * const XJContentUrl = @"http://support.med-vision.cn/";
         if (object) {
             XLDismissHUD(self.view, NO, YES, nil);
             self.contentModel = object;
-            self.contentModel.isAdded = @(_isAdded);
+            //self.contentModel.isAdded = @(_isAdded);
             GJCFAsyncMainQueue((^{
                 //                if (self.contentModel.ext) {
                 //                    self.mediaModel = [ContentsMediaModel yy_modelWithDictionary:self.contentModel.ext];
@@ -192,10 +192,11 @@ static NSString * const XJContentUrl = @"http://support.med-vision.cn/";
             [ContentModel cancelCollectContent:self.contentModel.id handler:nil];
             XLDismissHUD(self.view, YES, YES, @"取消收藏成功");
         }
+        [self refreshBottomButtonState];
     } else {
-        self.contentModel.isAdded = self.contentModel.isAdded.integerValue == 0 ? @(1) : @(0);
+        //self.contentModel.isAdded = self.contentModel.isAdded.integerValue == 0 ? @(1) : @(0);
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
-    [self refreshBottomButtonState];
     if (self.collectBlock) {
         self.collectBlock(self.contentModel);
     }

@@ -1101,6 +1101,18 @@
                                     <outlet property="delegate" destination="zKx-gZ-44t" id="PLO-eT-ovv"/>
                                 </connections>
                             </tableView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="TBe-qU-wXe">
+                                <rect key="frame" x="15" y="602" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="YuC-sR-VN6"/>
+                                    <constraint firstAttribute="height" constant="50" id="v8u-HX-SHm"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="建议指导"/>
+                                <connections>
+                                    <action selector="helpAction:" destination="zKx-gZ-44t" eventType="touchUpInside" id="fls-4l-eew"/>
+                                </connections>
+                            </button>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SZE-B5-Yhs">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
@@ -1190,6 +1202,7 @@
                         <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="stC-0S-n8T" firstAttribute="top" secondItem="Lle-1d-0vc" secondAttribute="bottom" id="2li-pB-0M6"/>
+                            <constraint firstItem="TBe-qU-wXe" firstAttribute="leading" secondItem="z0S-yG-ehB" secondAttribute="leading" constant="15" id="5DM-MZ-24S"/>
                             <constraint firstItem="GFX-5D-Ayx" firstAttribute="leading" secondItem="z0S-yG-ehB" secondAttribute="leading" id="7Az-Nh-8ZY"/>
                             <constraint firstAttribute="trailing" secondItem="SZE-B5-Yhs" secondAttribute="trailing" id="92V-FY-taT"/>
                             <constraint firstItem="GFX-5D-Ayx" firstAttribute="top" secondItem="VEm-B2-fBf" secondAttribute="bottom" id="Gog-sx-e3a"/>
@@ -1197,6 +1210,7 @@
                             <constraint firstItem="Lle-1d-0vc" firstAttribute="leading" secondItem="z0S-yG-ehB" secondAttribute="leading" id="Jos-IB-wh0"/>
                             <constraint firstItem="SZE-B5-Yhs" firstAttribute="top" secondItem="txX-I2-ukw" secondAttribute="bottom" id="UEl-xI-M1u"/>
                             <constraint firstAttribute="trailing" secondItem="GFX-5D-Ayx" secondAttribute="trailing" id="V6J-a9-pqL"/>
+                            <constraint firstItem="stC-0S-n8T" firstAttribute="top" secondItem="TBe-qU-wXe" secondAttribute="bottom" constant="15" id="VjX-hp-u5N"/>
                             <constraint firstAttribute="trailing" secondItem="Lle-1d-0vc" secondAttribute="trailing" id="YaG-Is-7SM"/>
                             <constraint firstItem="VEm-B2-fBf" firstAttribute="top" secondItem="z0S-yG-ehB" secondAttribute="top" id="exs-pZ-myH"/>
                             <constraint firstItem="SZE-B5-Yhs" firstAttribute="leading" secondItem="z0S-yG-ehB" secondAttribute="leading" id="gid-pJ-y4D"/>
@@ -1208,6 +1222,7 @@
                     <connections>
                         <outlet property="diseaseView" destination="VEm-B2-fBf" id="7rI-eA-dNS"/>
                         <outlet property="heightConstraintOfTherapy" destination="GUw-dz-Ule" id="LTS-b2-GWr"/>
+                        <outlet property="helpButton" destination="TBe-qU-wXe" id="WUp-mh-X6k"/>
                         <outlet property="searchTableView" destination="SZE-B5-Yhs" id="0GJ-nA-yEp"/>
                         <outlet property="tableView" destination="Lle-1d-0vc" id="w46-D1-sBH"/>
                         <outlet property="therapyView" destination="GFX-5D-Ayx" id="Kl7-It-F5W"/>
