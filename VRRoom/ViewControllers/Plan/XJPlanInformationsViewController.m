@@ -50,8 +50,9 @@
         //收藏按钮
         UIButton *collectButton = [UIButton buttonWithType:UIButtonTypeCustom];
         collectButton.frame = CGRectMake(0, 0, 40, 40);
-        [collectButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-        [collectButton setImage:[UIImage imageNamed:@""] forState:UIControlStateSelected];
+        [collectButton setImage:[UIImage imageNamed:@"plan_collect"] forState:UIControlStateNormal];
+        [collectButton setImage:[UIImage imageNamed:@"plan_collected"] forState:UIControlStateSelected];
+        collectButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, - 25);
         [collectButton addTarget:self action:@selector(collectAction:) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:collectButton];
         self.navigationItem.rightBarButtonItem = rightItem;
@@ -80,6 +81,8 @@
         [XJPlanModel collectPlan:self.planModel.id handler:^(id object, NSString *msg) {
             if (object) {
                 XLDismissHUD(self.view, YES, YES, @"收藏成功");
+                self.planModel.isCollected = @1;
+                button.selected = YES;
                 if (self.block) {
                     self.block(YES);
                 }
@@ -91,6 +94,8 @@
         [XJPlanModel cancelCollectPlan:self.planModel.id handler:^(id object, NSString *msg) {
             if (object) {
                 XLDismissHUD(self.view, YES, YES, @"取消收藏成功");
+                self.planModel.isCollected = @0;
+                button.selected = NO;
                 if (self.block) {
                     self.block(NO);
                 }

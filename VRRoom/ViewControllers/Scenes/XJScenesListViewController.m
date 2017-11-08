@@ -85,7 +85,7 @@
             [self fetchContents];
         }
     }]];
-    self.tableView.mj_footer.hidden = YES;
+    self.tableView.mj_footer.automaticallyHidden = YES;
     
     //搜索列表
     self.searchTableView.tableFooterView = [UIView new];

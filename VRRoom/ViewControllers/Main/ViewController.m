@@ -281,11 +281,26 @@
         make.leading.equalTo(headerView.mas_leading).with.mas_offset(15);
         make.centerY.equalTo(headerView);
     }];
+    UIImageView *arrowImageView = [[UIImageView alloc] init];
+    arrowImageView.image = [UIImage imageNamed:@"more_news"];
+    [headerView addSubview:arrowImageView];
+    [arrowImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.trailing.equalTo(headerView.mas_trailing).with.mas_offset(- 10);
+        make.size.mas_offset(CGSizeMake(18, 18));
+        make.centerY.equalTo(headerView);
+    }];
+    
+    UILabel *moreLabel = [[UILabel alloc] init];
+    moreLabel.font = XJSystemFont(15);
+    moreLabel.textColor = [UIColor blackColor];
+    moreLabel.text = @"更多";
+    [headerView addSubview:moreLabel];
+    [moreLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.trailing.equalTo(arrowImageView.mas_leading);
+        make.centerY.equalTo(headerView);
+    }];
+    
     UIButton *moreButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [moreButton setTitle:@"更多" forState:UIControlStateNormal];
-    [moreButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    moreButton.titleLabel.font = XJSystemFont(14);
-    moreButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [moreButton addTarget:self action:@selector(moreNewsAction) forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:moreButton];
     [moreButton mas_makeConstraints:^(MASConstraintMaker *make) {
