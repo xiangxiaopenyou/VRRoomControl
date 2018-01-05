@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="w53-Xd-plj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="w53-Xd-plj">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -76,7 +76,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="---" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="56o-wk-Mmf">
-                                                    <rect key="frame" x="15" y="19" width="23" height="21"/>
+                                                    <rect key="frame" x="15" y="19" width="237" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -86,6 +86,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="aC0-jf-UD1" secondAttribute="trailing" constant="5" id="PSO-mr-3L3"/>
                                                 <constraint firstItem="aC0-jf-UD1" firstAttribute="centerY" secondItem="xGN-AC-TCm" secondAttribute="centerY" id="RNW-ug-rvp"/>
                                                 <constraint firstItem="56o-wk-Mmf" firstAttribute="leading" secondItem="xGN-AC-TCm" secondAttribute="leading" constant="15" id="SEP-1Y-tea"/>
+                                                <constraint firstItem="aC0-jf-UD1" firstAttribute="leading" secondItem="56o-wk-Mmf" secondAttribute="trailing" constant="30" id="atO-KO-p77"/>
                                                 <constraint firstItem="56o-wk-Mmf" firstAttribute="centerY" secondItem="xGN-AC-TCm" secondAttribute="centerY" id="png-kQ-Azn"/>
                                             </constraints>
                                         </tableViewCellContentView>

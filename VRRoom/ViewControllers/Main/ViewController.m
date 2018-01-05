@@ -178,18 +178,11 @@
     }
 }
 - (IBAction)vrContentsAction:(id)sender {
-//    SceneContentsViewController *contentsViewController = [[UIStoryboard storyboardWithName:@"AddUser" bundle:nil] instantiateViewControllerWithIdentifier:@"SceneContents"];
-//    contentsViewController.viewType = 1;
-//    [self.navigationController pushViewController:contentsViewController animated:YES];
     XJScenesListViewController *contentsViewController = [[UIStoryboard storyboardWithName:@"AddUser" bundle:nil] instantiateViewControllerWithIdentifier:@"ScenesList"];
     contentsViewController.viewType = 1;
     [self.navigationController pushViewController:contentsViewController animated:YES];
 }
 - (IBAction)directionAction:(id)sender {
-//    XJCommonWebViewController *webController = [[UIStoryboard storyboardWithName:@"More" bundle:nil] instantiateViewControllerWithIdentifier:@"CommonWeb"];
-//    webController.urlString = HELPBASEURL;
-//    webController.title = @"康复综述";
-//    [self.navigationController pushViewController:webController animated:YES];
     XJPlansListViewController *plansViewController = [[UIStoryboard storyboardWithName:@"Plan" bundle:nil] instantiateViewControllerWithIdentifier:@"PlansList"];
     plansViewController.isView = YES;
     [self.navigationController pushViewController:plansViewController animated:YES];

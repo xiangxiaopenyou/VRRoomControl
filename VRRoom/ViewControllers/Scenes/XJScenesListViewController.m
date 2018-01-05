@@ -149,7 +149,6 @@
     XLShowHUDWithMessage(nil, self.view);
     [DiseaseModel fetchDiseasesAndTherapies:^(id object, NSString *msg) {
         if (object) {
-            //XLDismissHUD(self.view, NO, YES, nil);
             self.diseasesArray = [object copy];
             GJCFAsyncMainQueue(^{
                 [self.diseaseTableView reloadData];
@@ -263,7 +262,6 @@
                                  } else {
                                      XLDismissHUD(self.view, YES, NO, msg);
                                  }
-                                 
                              }];
     }
     

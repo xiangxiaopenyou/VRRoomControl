@@ -22,15 +22,15 @@ NSString * const USER_PORTRAIT = @"UserPortrait";
 CGFloat const TABBARHEIGHT = 49.0;
 CGFloat const NAVIGATIONBARHEIGHT = 64.0;
 
-//NSString * const BASEAPIURL = @"http://support.med-vision.cn/api/v1/appControlDoctor/";
+NSString * const BASEAPIURL = @"http://support.med-vision.cn/api/v1/appControlDoctor/";
 //NSString * const BASEAPIURL = @"http://test.med-vision.cn/api/v1/appControlDoctor/";
-NSString * const BASEAPIURL = @"http://10.12.254.34:8080/api/v1/appControlDoctor/";
-//NSString * const HELPBASEURL = @"http://support.med-vision.cn/h5/help/";
-NSString * const HELPBASEURL = @"http://test.med-vision.cn/h5/help/";
+//NSString * const BASEAPIURL = @"http://10.12.254.34:8080/api/v1/appControlDoctor/";
+NSString * const HELPBASEURL = @"http://support.med-vision.cn/h5/help/";
+//NSString * const HELPBASEURL = @"http://test.med-vision.cn/h5/help/";
 NSString * const ABOUTBASEURL = @"http://mp.weixin.qq.com/s/QLJzUbgHek3ZB0flLqzbAg";
 NSString * const MORE_NRES_URL = @"https://mp.weixin.qq.com/mp/homepage?__biz=MzU0NjAzNTQ1NQ==&hid=1&sn=32afc5db2f705f7fcb9241211c515b46#wechat_redirect";
-NSString * const PROTOCOL_URL = @"http://test.med-vision.cn/h5/agreement/info";
-//NSString * const PROTOCOL_URL = @"http://support.med-vision.cn/h5/agreement/info";
+//NSString * const PROTOCOL_URL = @"http://test.med-vision.cn/h5/agreement/info";
+NSString * const PROTOCOL_URL = @"http://support.med-vision.cn/h5/agreement/info";
 
 NSString * const XJNetworkError = @"请检查网络";
 
